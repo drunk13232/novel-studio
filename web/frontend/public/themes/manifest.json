@@ -1,0 +1,156 @@
+{
+  "version": "2.18.1",
+  "assets": [
+    {
+      "file": "manuscript.webp",
+      "sha256": "f942daa069e285fec9dcf9c3ef4e6c4c827ee804ee1b5711eb9c788ec4ae6881",
+      "bytes": 116236,
+      "width": 1440,
+      "height": 480,
+      "source": "docs/visual-renaissance/art-source/manuscript.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "9a2aff676cc67e061b1a0fe4fbbc69ea75ab6f6e1a16a5a28208e7d89af53451"
+    },
+    {
+      "file": "ink.webp",
+      "sha256": "52cb650e4241d6631bca7ba6a1992d3335cdf2a4f478ef50e09ca71d4c0263a2",
+      "bytes": 77918,
+      "width": 1440,
+      "height": 480,
+      "source": "docs/visual-renaissance/art-source/ink.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "15fc96612111fbdbe3ca47977f449eef9ecd82fb9f2a561ba99b36db89fc654e"
+    },
+    {
+      "file": "observatory.webp",
+      "sha256": "b6722f6a7b35c6d6f70f8acefdd56ac4984555a2f87b97d7d9f3b3157395e36f",
+      "bytes": 84850,
+      "width": 1440,
+      "height": 480,
+      "source": "docs/visual-renaissance/art-source/observatory.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "13875d44bd260f99312e43ff8732ae47766b8b5d67dd41bfe46957575bbf8d99"
+    },
+    {
+      "file": "gothic.webp",
+      "sha256": "00a5c63e722044bc1a33ac2b0a0ee247ac3a4107865fc357cd9361d1381b2b2a",
+      "bytes": 75774,
+      "width": 1440,
+      "height": 480,
+      "source": "docs/visual-renaissance/art-source/gothic.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "620c50b6107fe6df21b3b44541cffc9e493a0739573abc1279be4bb1d3cb8f1a"
+    },
+    {
+      "file": "cyber.webp",
+      "sha256": "219987cb95ad0d97df862fd1f16715c3a736c54c4d65e7188d4187b58dafac0a",
+      "bytes": 69610,
+      "width": 1440,
+      "height": 480,
+      "source": "docs/visual-renaissance/art-source/cyber.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "b66d9b96af1e492b1f32dca9772711c134fe45d27eec42b7f7bd9236904c71a3"
+    },
+    {
+      "file": "greenhouse.webp",
+      "sha256": "5afbfc8dd1bc3f7cbea5377c5be75cad712deeaebf899735f6e5e002209c97ef",
+      "bytes": 166030,
+      "width": 1440,
+      "height": 486,
+      "source": "docs/visual-renaissance/art-source/greenhouse.png",
+      "provenance": "Original built-in image_gen artwork. Prompt: docs/visual-renaissance/generation.json. No character or private-work assets.",
+      "source_sha256": "645405fd6557e34b58dde4f385fe27d97721d4ff95f0aed76cddc4ff1a35be19"
+    },
+    {
+      "file": "arch.svg",
+      "sha256": "e3ecaa91af90e8215b7812e2ddebf3caf1afd7c21e326e1f8747416561f73338",
+      "bytes": 528,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "circuit.svg",
+      "sha256": "a1fde32d028c8f56cb98c84454de6a5b5afe72860ab4526d4c78873d4d194e57",
+      "bytes": 616,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "fern.svg",
+      "sha256": "5ae045d8aac8dd345f89b30ffec9ae4d7ca58506c81eb441f896492cb73f45ce",
+      "bytes": 516,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "folio.svg",
+      "sha256": "bda75aada86f1e6f82b9380ebcd39fbed757c62450b4d6e336a75b69dd59c3d6",
+      "bytes": 494,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "grid.svg",
+      "sha256": "b4360ab8480b467e5395ea8a23e0672a2ea2d851ce101ec3deed815d4092a667",
+      "bytes": 248,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "lace.svg",
+      "sha256": "4a5f1d3e3929251eaeeecced4a6b14279ecba83b74772771d185b335ab42b4a2",
+      "bytes": 533,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "mountains.svg",
+      "sha256": "e28c5b1b27ac1c9a3b624ce3e405ad6385b69fa7f124302b92a0fc5122242794",
+      "bytes": 446,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "orbits.svg",
+      "sha256": "fbdcea226416191f3f4b6cc7221a29ef5a41b15278a1dda6dca7b6d99ba624b3",
+      "bytes": 613,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "paper-grain.svg",
+      "sha256": "8e942e6ca9b95da8903af76bd55cd9f5ae6ef3b724f9fa34b2a760f45526a3a4",
+      "bytes": 704,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "petals.svg",
+      "sha256": "8e15eb29b98fb62ca4882c01f58afc4ea6e003dc590a6d9d5a344ecdcc55c743",
+      "bytes": 583,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "typeset.svg",
+      "sha256": "a204e8647fff31c6692b0d0fd2452531108d389ce0f697614dad46734572e776",
+      "bytes": 384,
+      "editable": true,
+      "provenance": "Original editable Novel Studio vector. No external font, script, image or character resources."
+    },
+    {
+      "file": "desk-signet.svg",
+      "sha256": "5028fb146c6b86fae1c25bb2daf253c813aa1db71883ab523188e9571413d2a8",
+      "bytes": 507,
+      "provenance": "Original editable SVG drawn for the bookshelf writing-return card. No external assets or author material."
+    },
+    {
+      "file": "quiet-pages.svg",
+      "sha256": "2192c073e83a07adc0afd5b07be762402899d4c5446748763716492e554506a3",
+      "bytes": 1034,
+      "width": 240,
+      "height": 180,
+      "provenance": "Original editable SVG drawn for quiet shelf and empty-state surfaces. No external, character or author material."
+    }
+  ]
+}

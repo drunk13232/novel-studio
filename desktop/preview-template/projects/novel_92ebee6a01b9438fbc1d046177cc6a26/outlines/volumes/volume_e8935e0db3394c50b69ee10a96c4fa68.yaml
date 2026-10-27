@@ -1,0 +1,28 @@
+schema_version: "0.5"
+id: "volume_e8935e0db3394c50b69ee10a96c4fa68"
+number: 1
+title: "迟到的回信"
+status: "ACTIVE"
+purpose: "演示软件功能，不作为真实连载"
+premise: null
+start_state: null
+end_state: null
+main_conflict: null
+character_arcs: []
+relationship_arcs: []
+plot_threads:
+  advance: []
+  open: []
+  close: []
+foreshadowing:
+  introduce: []
+  advance: []
+  resolve: []
+major_beats: []
+climax: null
+aftermath: null
+target:
+  chapters: 3
+  words: null
+constraints: []
+open_questions: []

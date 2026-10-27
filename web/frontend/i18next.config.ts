@@ -1,0 +1,2 @@
+import {defineConfig} from 'i18next-cli';
+export default defineConfig({locales:["zh-CN", "zh-TW", "en", "ja", "ko", "es", "fr", "de", "ru", "pt-BR", "pt-PT", "it", "nl", "pl", "uk", "tr", "id", "vi", "th", "ms", "hi", "bn", "ur", "ar", "fa", "he"],extract:{primaryLanguage:'zh-CN',input:['src/**/*.{ts,tsx}'],output:'public/locales/{{language}}/{{namespace}}.json',defaultNS:'common',functions:['t','translateUI'],removeUnusedKeys:false}});

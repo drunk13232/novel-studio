@@ -1,0 +1,17 @@
+import {initializeI18n} from './i18n';
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import Studio from './studio';
+import './style.css';
+import './studio.css';
+import './library.css';
+import './night-studio.css';
+import './professional-studio.css';
+import './typography.css';
+import './visual-upgrade.css';
+import './study-design.css';
+import './visual-renaissance.css';
+import './product-evolution.css';
+import './soft-ui.css';
+import './interaction.css';
+void initializeI18n().finally(()=>createRoot(document.getElementById('root')!).render(<React.StrictMode><Studio/></React.StrictMode>));

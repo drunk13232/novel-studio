@@ -1,0 +1,21 @@
+{
+  "version": "2.20.0",
+  "candidate_includes": [
+    "app/automation Python service and WASI worker",
+    "python/novel_studio_api typed SDK",
+    "public documentation and Action schemas",
+    "pinned runtime metadata and verified download installer",
+    "Wasmtime and CPython redistribution notices"
+  ],
+  "candidate_excludes": [
+    "all private-checks",
+    "private Live2D and voice assets",
+    "project Python scripts and run history",
+    "task ownership and handoff records",
+    "temporary SDK grants",
+    "user database and Codex configuration",
+    "Git history"
+  ],
+  "project_license": "Pending author decision; no new blanket license or invented copyright owner",
+  "runtime": "CPython maintainer WASI build; PSF notices and Wasmtime Apache-2.0 WITH LLVM-exception retained"
+}

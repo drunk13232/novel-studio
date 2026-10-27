@@ -1,0 +1,3912 @@
+{
+  "version": "2.20.0",
+  "actions": [
+    {
+      "name": "list_projects",
+      "description": "只返回书架名称与 ID，不读取其他小说内容",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_active_project",
+      "description": "查看当前小说",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_available_models",
+      "description": "查看已配置模型，不读凭据",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_project_status",
+      "description": "查看当前小说的状态摘要",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_backup_status",
+      "description": "查看当前小说的状态摘要",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "show_project_storage",
+      "description": "查看当前小说的状态摘要",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_chapters",
+      "description": "查找当前小说章节",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "Query",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_characters",
+      "description": "查找当前小说人物与草稿",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "Query",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_world_bible",
+      "description": "查找当前小说世界设定",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "Query",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_references",
+      "description": "按现有资料库索引检索明确授权的文献",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "Query",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_entities",
+      "description": "按现有知识中心查找实体",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "Query",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_project",
+      "description": "打开指定书架小说；切换项目须用户确认",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 3,
+      "scope": "application",
+      "permission": "confirmation",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": true,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "navigate_to_page",
+      "description": "跳转软件现有页面",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "pattern": "^(write|characters|world|references|styles|knowledge|timeline|data|book|search|notes|outline|gallery|images|history|worldlogic|roleplay|literary|python)$",
+            "title": "Page",
+            "type": "string"
+          },
+          "report_id": {
+            "anyOf": [
+              {
+                "pattern": "^review_[0-9a-f]{32}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Report Id"
+          }
+        },
+        "required": [
+          "page"
+        ],
+        "title": "Page",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_chapter",
+      "description": "按全书章号打开真实正文；不存在或歧义时不能猜测",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "maximum": 99999,
+            "minimum": 0,
+            "title": "Number",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "Chapter",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_character",
+      "description": "打开当前小说人物卡或人物候选",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_entity",
+      "description": "打开当前小说设定卡",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_document",
+      "description": "打开当前小说文献",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "show_character_reference",
+      "description": "将人物资料放入当前正文参考分栏",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_character_draft",
+      "description": "创建人物 Proposal 草稿，不提交 Canon/State",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Summary",
+            "type": "string"
+          },
+          "occupation": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Occupation",
+            "type": "string"
+          },
+          "age": {
+            "anyOf": [
+              {
+                "maximum": 300,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Age"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CharacterDraft",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_chapter_draft",
+      "description": "创建空白章节草稿；不能覆盖已有正文",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "maximum": 99999,
+            "minimum": 1,
+            "title": "Number",
+            "type": "integer"
+          },
+          "title": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Title",
+            "type": "string"
+          },
+          "volume_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Volume Id"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "ChapterDraft",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_world_entry_draft",
+      "description": "创建 PENDING 世界设定候选",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "category": {
+            "default": "term",
+            "maxLength": 64,
+            "title": "Category",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "maxLength": 4000,
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "WorldDraft",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_inspiration_note",
+      "description": "保存可恢复灵感或当前章节待办；不是 Canon",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Note",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_chapter_todo",
+      "description": "保存可恢复灵感或当前章节待办；不是 Canon",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Note",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "propose_character_edit",
+      "description": "产生人物修改 Proposal，绝不直接覆盖人物 Canon",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "default": "",
+            "maxLength": 64,
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Name"
+          },
+          "age": {
+            "anyOf": [
+              {
+                "maximum": 300,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Age"
+          },
+          "occupation": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Occupation"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Summary"
+          }
+        },
+        "title": "CharacterEdit",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "propose_world_edit",
+      "description": "另存 PENDING 设定候选，保留原设定",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "summary": {
+            "maxLength": 4000,
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "summary"
+        ],
+        "title": "WorldEdit",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "propose_entity_link",
+      "description": "创建 AI_PROPOSED 关联，不视为作者确认事实",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "source_type": {
+            "title": "Source Type",
+            "type": "string"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "target_type": {
+            "title": "Target Type",
+            "type": "string"
+          },
+          "target_id": {
+            "title": "Target Id",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Description",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_type",
+          "source_id",
+          "target_type",
+          "target_id"
+        ],
+        "title": "Link",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "propose_chapter_revision",
+      "description": "当前选段调用既有润色与 Monaco Diff；Final 始终人工确认",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "instruction": {
+            "default": "保留事实与人物声音，改善自然度",
+            "maxLength": 2000,
+            "title": "Instruction",
+            "type": "string"
+          }
+        },
+        "title": "Revision",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "set_theme",
+      "description": "修改文学主题",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "theme": {
+            "enum": [
+              "moon",
+              "mist",
+              "night",
+              "amber",
+              "sky",
+              "plum",
+              "yoshino",
+              "rem",
+              "rem-night",
+              "manuscript",
+              "ink",
+              "observatory",
+              "gothic",
+              "cyber",
+              "greenhouse",
+              "minimal"
+            ],
+            "title": "Theme",
+            "type": "string"
+          }
+        },
+        "required": [
+          "theme"
+        ],
+        "title": "Theme",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "set_editor_font_size",
+      "description": "修改正文字号",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "size": {
+            "maximum": 32,
+            "minimum": 14,
+            "title": "Size",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "size"
+        ],
+        "title": "Font",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "set_editor_line_height",
+      "description": "修改正文行距",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "height": {
+            "maximum": 2.8,
+            "minimum": 1.3,
+            "title": "Height",
+            "type": "number"
+          }
+        },
+        "required": [
+          "height"
+        ],
+        "title": "Leading",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "toggle_focus_mode",
+      "description": "切换正文专注显示",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_settings_section",
+      "description": "打开指定设置分类",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "section": {
+            "enum": [
+              "general",
+              "appearance",
+              "writing",
+              "api",
+              "models",
+              "assistant",
+              "images",
+              "storage",
+              "backup",
+              "keys",
+              "help"
+            ],
+            "title": "Section",
+            "type": "string"
+          }
+        },
+        "required": [
+          "section"
+        ],
+        "title": "Section",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": false,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "start_existing_ai_task",
+      "description": "提交现有只读 Codex 审查工作流，不接受 Shell/State Commit",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "contract_check",
+              "continuity_check",
+              "story_knowledge_check",
+              "character_consistency_check",
+              "chapter_plan_review",
+              "chapter_review",
+              "final_check"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "chapter": {
+            "anyOf": [
+              {
+                "maximum": 99999,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Chapter"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AITask",
+        "type": "object"
+      },
+      "level": 3,
+      "scope": "project",
+      "permission": "confirmation",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": true,
+      "undo": null,
+      "cancellable": true,
+      "availability": "CONFIG_DEPENDENT",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_task_status",
+      "description": "查看或停止当前项目的任务",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "cancel_task",
+      "description": "查看或停止当前项目的任务",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_project_backup",
+      "description": "通过 Data Center 创建新备份，不覆盖旧备份",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "note": {
+            "default": "AI 助手手动备份",
+            "maxLength": 200,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "title": "Backup",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_world_experiments",
+      "description": "查看当前小说实验和模板摘要，不读取私人报告全文",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_experiment_draft",
+      "description": "复制可运行模板为实验草稿；不确认验收，不改 Canon",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "template_id": {
+            "pattern": "^exp_[0-9a-f]{32}$",
+            "title": "Template Id",
+            "type": "string"
+          },
+          "name": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "template_id"
+        ],
+        "title": "ExperimentTemplate",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "check_experiment_configuration",
+      "description": "校验现有实验的 Schema 和受限表达式，不运行、不改设定",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^exp_[0-9a-f]{32}$",
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ExperimentTarget",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "request_experiment_design",
+      "description": "通过现有 AI 路由提出变量、验收或对抗方案；仅 Proposal，需作者接受",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "instruction": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Instruction",
+            "type": "string"
+          },
+          "mode": {
+            "default": "design",
+            "enum": [
+              "design",
+              "acceptance",
+              "adversarial",
+              "explain",
+              "rebuild",
+              "rebuttal"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "strength": {
+            "default": "explore",
+            "enum": [
+              "explore",
+              "strict",
+              "extreme"
+            ],
+            "title": "Strength",
+            "type": "string"
+          },
+          "experiment_id": {
+            "anyOf": [
+              {
+                "pattern": "^exp_[0-9a-f]{32}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Experiment Id"
+          },
+          "report_id": {
+            "anyOf": [
+              {
+                "pattern": "^run_[0-9a-f]{32}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Report Id"
+          }
+        },
+        "required": [
+          "instruction"
+        ],
+        "title": "ExperimentDesign",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": true,
+      "availability": "CONFIG_DEPENDENT",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "request_experiment_run",
+      "description": "仅请求运行已有作者确认版本；指纹不一致时拒绝",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^exp_[0-9a-f]{32}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "fingerprint": {
+            "maxLength": 64,
+            "minLength": 64,
+            "title": "Fingerprint",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "fingerprint"
+        ],
+        "title": "ExperimentRun",
+        "type": "object"
+      },
+      "level": 3,
+      "scope": "project",
+      "permission": "confirmation",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": true,
+      "undo": null,
+      "cancellable": true,
+      "availability": "CONFIG_DEPENDENT",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_experiment_report",
+      "description": "打开当前小说真实实验报告；不存在则失败",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^run_[0-9a-f]{32}$",
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ExperimentReport",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_roleplay_sessions",
+      "description": "只列当前小说角色扮演会话摘要，不读取私人对话",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_roleplay_session",
+      "description": "用当前小说已确认人物创建模拟会话；不写 Canon，打开角色扮演页",
+      "parameters": {
+        "$defs": {
+          "Actor": {
+            "additionalProperties": false,
+            "properties": {
+              "source_type": {
+                "default": "character",
+                "enum": [
+                  "character",
+                  "card"
+                ],
+                "title": "Source Type",
+                "type": "string"
+              },
+              "source_id": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Source Id",
+                "type": "string"
+              },
+              "model": {
+                "anyOf": [
+                  {
+                    "maxLength": 250,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Model"
+              }
+            },
+            "required": [
+              "source_id"
+            ],
+            "title": "Actor",
+            "type": "object"
+          },
+          "Lore": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "default": "",
+                "maxLength": 80,
+                "title": "Id",
+                "type": "string"
+              },
+              "name": {
+                "maxLength": 150,
+                "minLength": 1,
+                "title": "Name",
+                "type": "string"
+              },
+              "text": {
+                "maxLength": 3000,
+                "minLength": 1,
+                "title": "Text",
+                "type": "string"
+              },
+              "keys": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 20,
+                "title": "Keys",
+                "type": "array"
+              },
+              "secondary_keys": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 20,
+                "title": "Secondary Keys",
+                "type": "array"
+              },
+              "match": {
+                "default": "ANY",
+                "enum": [
+                  "ANY",
+                  "ALL"
+                ],
+                "title": "Match",
+                "type": "string"
+              },
+              "constant": {
+                "default": false,
+                "title": "Constant",
+                "type": "boolean"
+              },
+              "enabled": {
+                "default": true,
+                "title": "Enabled",
+                "type": "boolean"
+              },
+              "priority": {
+                "default": 0,
+                "maximum": 100,
+                "minimum": -100,
+                "title": "Priority",
+                "type": "integer"
+              },
+              "audiences": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "title": "Audiences",
+                "type": "array"
+              },
+              "source_type": {
+                "default": "AUTHOR_SCENARIO",
+                "enum": [
+                  "AUTHOR_SCENARIO",
+                  "IMPORTED_DATA",
+                  "CONFIRMED_SOURCE"
+                ],
+                "title": "Source Type",
+                "type": "string"
+              },
+              "source_id": {
+                "default": "",
+                "maxLength": 100,
+                "title": "Source Id",
+                "type": "string"
+              },
+              "shareable": {
+                "default": false,
+                "title": "Shareable",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "text"
+            ],
+            "title": "Lore",
+            "type": "object"
+          },
+          "Persona": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "maxLength": 100,
+                "minLength": 1,
+                "title": "Name",
+                "type": "string"
+              },
+              "description": {
+                "default": "",
+                "maxLength": 3000,
+                "title": "Description",
+                "type": "string"
+              },
+              "character_id": {
+                "anyOf": [
+                  {
+                    "maxLength": 64,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Character Id"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "title": "Persona",
+            "type": "object"
+          },
+          "Scene": {
+            "additionalProperties": false,
+            "properties": {
+              "time": {
+                "default": "",
+                "maxLength": 200,
+                "title": "Time",
+                "type": "string"
+              },
+              "location": {
+                "default": "",
+                "maxLength": 200,
+                "title": "Location",
+                "type": "string"
+              },
+              "background": {
+                "default": "",
+                "maxLength": 5000,
+                "title": "Background",
+                "type": "string"
+              },
+              "chapter": {
+                "anyOf": [
+                  {
+                    "maximum": 99999,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Chapter"
+              },
+              "author_notes": {
+                "default": "",
+                "maxLength": 5000,
+                "title": "Author Notes",
+                "type": "string"
+              },
+              "reader_known_fact_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 40,
+                "title": "Reader Known Fact Ids",
+                "type": "array"
+              },
+              "dialogue_language": {
+                "default": "",
+                "maxLength": 40,
+                "title": "Dialogue Language",
+                "type": "string"
+              },
+              "temporary_facts": {
+                "items": {
+                  "$ref": "#/$defs/SceneFact"
+                },
+                "maxItems": 40,
+                "title": "Temporary Facts",
+                "type": "array"
+              },
+              "disclosure_fact_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 40,
+                "title": "Disclosure Fact Ids",
+                "type": "array"
+              }
+            },
+            "title": "Scene",
+            "type": "object"
+          },
+          "SceneFact": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "default": "",
+                "maxLength": 80,
+                "title": "Id",
+                "type": "string"
+              },
+              "text": {
+                "maxLength": 1800,
+                "minLength": 1,
+                "title": "Text",
+                "type": "string"
+              },
+              "audiences": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "title": "Audiences",
+                "type": "array"
+              },
+              "shareable": {
+                "default": false,
+                "title": "Shareable",
+                "type": "boolean"
+              },
+              "basis": {
+                "default": "AUTHOR_SCENARIO",
+                "enum": [
+                  "AUTHOR_SCENARIO",
+                  "SOURCE_QUOTE"
+                ],
+                "title": "Basis",
+                "type": "string"
+              }
+            },
+            "required": [
+              "text"
+            ],
+            "title": "SceneFact",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "persona": {
+            "$ref": "#/$defs/Persona"
+          },
+          "actors": {
+            "items": {
+              "$ref": "#/$defs/Actor"
+            },
+            "maxItems": 8,
+            "minItems": 1,
+            "title": "Actors",
+            "type": "array"
+          },
+          "scene": {
+            "$ref": "#/$defs/Scene"
+          },
+          "lore": {
+            "items": {
+              "$ref": "#/$defs/Lore"
+            },
+            "maxItems": 60,
+            "title": "Lore",
+            "type": "array"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "maxLength": 250,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Model"
+          }
+        },
+        "required": [
+          "title",
+          "persona",
+          "actors"
+        ],
+        "title": "Create",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "start_literary_review",
+      "description": "复用原校审中心：proofread 中文错字病句、chapter_logic 章节逻辑、cross_chapter 检索两章原文（指定 related_paths 或 queries）、其余十二维文学评审；engine=local 只支持标点，ai 使用所选模型。只读报告，不改正文",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "reader_focus": {
+            "default": "general",
+            "enum": [
+              "general",
+              "suspense",
+              "character",
+              "pacing",
+              "editor"
+            ],
+            "title": "Reader Focus",
+            "type": "string"
+          },
+          "reader_paths": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8,
+            "title": "Reader Paths",
+            "type": "array"
+          },
+          "reader_positioning": {
+            "default": "",
+            "maxLength": 1500,
+            "title": "Reader Positioning",
+            "type": "string"
+          },
+          "include_statistics": {
+            "default": false,
+            "title": "Include Statistics",
+            "type": "boolean"
+          },
+          "timeout_seconds": {
+            "default": 300,
+            "maximum": 300,
+            "minimum": 30,
+            "title": "Timeout Seconds",
+            "type": "integer"
+          },
+          "candidate_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Candidate Id"
+          },
+          "writer_context_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Writer Context Id"
+          },
+          "selection": {
+            "default": "",
+            "maxLength": 16000,
+            "title": "Selection",
+            "type": "string"
+          },
+          "selection_start": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Selection Start",
+            "type": "integer"
+          },
+          "selection_end": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Selection End",
+            "type": "integer"
+          },
+          "source_revision": {
+            "default": "",
+            "maxLength": 64,
+            "title": "Source Revision",
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "mode": {
+            "default": "structure",
+            "enum": [
+              "structure",
+              "character",
+              "dialogue",
+              "pacing",
+              "suspense",
+              "motivation",
+              "causality",
+              "world",
+              "pov",
+              "style",
+              "repetition",
+              "reader",
+              "proofread",
+              "chapter_logic",
+              "cross_chapter",
+              "literary_style",
+              "literary_thought",
+              "literary_clue",
+              "literary_logic"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "engine": {
+            "default": "ai",
+            "enum": [
+              "local",
+              "ai"
+            ],
+            "title": "Engine",
+            "type": "string"
+          },
+          "related_paths": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 12,
+            "title": "Related Paths",
+            "type": "array"
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8,
+            "title": "Queries",
+            "type": "array"
+          },
+          "criteria": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 12,
+            "title": "Criteria",
+            "type": "array"
+          },
+          "character_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8,
+            "title": "Character Ids",
+            "type": "array"
+          },
+          "reference_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Reference Ids",
+            "type": "array"
+          },
+          "profile_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Profile Ids",
+            "type": "array"
+          },
+          "literary_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 12,
+            "title": "Literary Ids",
+            "type": "array"
+          },
+          "lens": {
+            "default": "",
+            "maxLength": 1500,
+            "title": "Lens",
+            "type": "string"
+          },
+          "include_canon": {
+            "default": false,
+            "title": "Include Canon",
+            "type": "boolean"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "maxLength": 250,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Model"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "Start",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "existing_application",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": true,
+      "availability": "CONFIG_DEPENDENT",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_application_actions",
+      "description": "发现真实动作 Schema、风险、权限和可用状态；不是任意函数调用",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": false,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_chapters",
+      "description": "分页列出当前作品真实章节与稳定 ID、路径；不读取正文",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "offset": {
+            "default": 0,
+            "maximum": 100000,
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 100,
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "PageRange",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "read_chapter",
+      "description": "读取明确授权的指定章节片段，返回实际原文、哈希与覆盖范围；需开启正文权限",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "maximum": 99999,
+            "minimum": 0,
+            "title": "Number",
+            "type": "integer"
+          },
+          "start": {
+            "default": 0,
+            "maximum": 10000000,
+            "minimum": 0,
+            "title": "Start",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 8000,
+            "maximum": 16000,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "ChapterRead",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_character_details",
+      "description": "读取指定人物身份摘要及实际来源；需设定权限，不返回秘密",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_world_details",
+      "description": "读取指定非秘密设定的原始摘要与来源；需设定权限",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_editor_state",
+      "description": "查询当前界面的真实章节、布局、保存状态与已获授权选区",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "open_reference",
+      "description": "把指定章节、人物、世界条目或文献放入正文旁只读参考，等待真实前端回执",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "chapter",
+              "character",
+              "world",
+              "document"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "maximum": 99999,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Number"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Id"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "title": "Reference",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "set_workspace_layout",
+      "description": "调用已有工作区布局预设或保存/恢复个人布局；不启动 AI",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "preset": {
+            "enum": [
+              "writing",
+              "reference",
+              "ai",
+              "focus",
+              "personal",
+              "save",
+              "reset"
+            ],
+            "title": "Preset",
+            "type": "string"
+          }
+        },
+        "required": [
+          "preset"
+        ],
+        "title": "Layout",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_author_entries",
+      "description": "读取当前作品的灵感、待办或修订事项；需设定资料权限",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "default": "inspiration",
+            "enum": [
+              "inspiration",
+              "todo",
+              "revision"
+            ],
+            "title": "Kind",
+            "type": "string"
+          }
+        },
+        "title": "Entries",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "run_python_plan",
+      "description": "在独立 WASI 子进程运行 Python 编排，通过 novel_studio_api 调用同一动作目录；无主机文件/网络；不要自我递归或自动重试",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "maxLength": 64000,
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "title": {
+            "default": "Python 操作计划",
+            "maxLength": 120,
+            "title": "Title",
+            "type": "string"
+          },
+          "timeout": {
+            "default": 90,
+            "maximum": 180,
+            "minimum": 10,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "PythonPlan",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": true,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_python_run",
+      "description": "查看当前作品 Python 运行记录和实际输出；任务 ID 取运行回执",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "start_text_task",
+      "description": "按当前明确选定模型启动只读 AI/Codex 文本检查任务。chapters 必须获正文权限；需要作者确认，绝不改正文",
+      "parameters": {
+        "$defs": {
+          "ContextPolicy": {
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "default": "hybrid",
+                "enum": [
+                  "auto",
+                  "manual",
+                  "hybrid"
+                ],
+                "title": "Mode",
+                "type": "string"
+              },
+              "budget": {
+                "default": 32768,
+                "maximum": 2000000,
+                "minimum": 1024,
+                "title": "Budget",
+                "type": "integer"
+              },
+              "output_reserve": {
+                "default": 4096,
+                "maximum": 1000000,
+                "minimum": 0,
+                "title": "Output Reserve",
+                "type": "integer"
+              },
+              "reasoning_reserve": {
+                "default": 0,
+                "maximum": 1000000,
+                "minimum": 0,
+                "title": "Reasoning Reserve",
+                "type": "integer"
+              },
+              "history": {
+                "default": "auto",
+                "enum": [
+                  "auto",
+                  "messages",
+                  "turns",
+                  "tokens",
+                  "all",
+                  "manual",
+                  "off"
+                ],
+                "title": "History",
+                "type": "string"
+              },
+              "history_limit": {
+                "default": 12,
+                "maximum": 1000,
+                "minimum": 1,
+                "title": "History Limit",
+                "type": "integer"
+              },
+              "history_tokens": {
+                "default": 8192,
+                "maximum": 1000000,
+                "minimum": 0,
+                "title": "History Tokens",
+                "type": "integer"
+              },
+              "include": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2000,
+                "title": "Include",
+                "type": "array"
+              },
+              "exclude": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2000,
+                "title": "Exclude",
+                "type": "array"
+              },
+              "pins": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2000,
+                "title": "Pins",
+                "type": "array"
+              },
+              "priorities": {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "maxProperties": 2000,
+                "title": "Priorities",
+                "type": "object"
+              },
+              "category_budgets": {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "maxProperties": 20,
+                "title": "Category Budgets",
+                "type": "object"
+              }
+            },
+            "title": "ContextPolicy",
+            "type": "object"
+          },
+          "RequestControls": {
+            "additionalProperties": false,
+            "properties": {
+              "model": {
+                "anyOf": [
+                  {
+                    "maxLength": 300,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Model"
+              },
+              "parameters": {
+                "additionalProperties": true,
+                "maxProperties": 14,
+                "title": "Parameters",
+                "type": "object"
+              },
+              "context": {
+                "$ref": "#/$defs/ContextPolicy"
+              },
+              "max_cost": {
+                "anyOf": [
+                  {
+                    "exclusiveMinimum": 0,
+                    "maximum": 100000,
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Max Cost"
+              },
+              "max_turns": {
+                "default": 1,
+                "maximum": 20,
+                "minimum": 1,
+                "title": "Max Turns",
+                "type": "integer"
+              },
+              "retries": {
+                "const": 0,
+                "default": 0,
+                "title": "Retries",
+                "type": "integer"
+              }
+            },
+            "title": "RequestControls",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "instruction": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Instruction",
+            "type": "string"
+          },
+          "chapters": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 10,
+            "title": "Chapters",
+            "type": "array"
+          },
+          "controls": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/RequestControls"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "instruction"
+        ],
+        "title": "TextTask",
+        "type": "object"
+      },
+      "level": 3,
+      "scope": "project",
+      "permission": "confirmation",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": true,
+      "undo": null,
+      "cancellable": true,
+      "availability": "CONFIG_DEPENDENT",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "read_task_result",
+      "description": "查询本会话创建的真实任务、文本结果、用量与错误，不读取其他会话私有结果",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "read_task_events",
+      "description": "增量查询本会话创建任务的真实事件与流式片段",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "after": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TaskEvents",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "wait_controlled_task",
+      "description": "等待本会话实际任务，等待期间可取消；超时不重启任务",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "timeout": {
+            "default": 30,
+            "maximum": 150,
+            "minimum": 1,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TaskWait",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": true,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "stop_controlled_task",
+      "description": "停止本会话实际创建的子任务，不影响其他任务",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Target",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "steer_controlled_task",
+      "description": "向当前仍在运行的同一 Codex Turn 追加说明；不改模型/权限，不重启、不重试；普通 API 不支持时如实失败",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "instruction": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Instruction",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "instruction"
+        ],
+        "title": "TaskSteer",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_codex_status",
+      "description": "读取已有 Codex 连接状态，不触发模型、不修改登录",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "application",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": false,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "share_task_result",
+      "description": "把本角色已完成的指定任务结果只读交接给当前作品另一助手；必须作者确认，不交接聊天、控制权或其他资料",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "persona": {
+            "enum": [
+              "yoshino",
+              "rem",
+              "assistant"
+            ],
+            "title": "Persona",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "persona"
+        ],
+        "title": "TaskShare",
+        "type": "object"
+      },
+      "level": 3,
+      "scope": "project",
+      "permission": "confirmation",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": false,
+      "requires_confirmation": true,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "list_shared_results",
+      "description": "查看作者已确认交接给本角色的固定结果及来源；需作品资料权限，不自动读取全部聊天",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "level": 1,
+      "scope": "project",
+      "permission": "browse",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": true,
+      "modifies_draft": false,
+      "requires_confirmation": false,
+      "undo": null,
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "name": "inspirations_to_todos",
+      "description": "将明确选定灵感转为指定章待办，保留来源、列出精确重复、跳过已转条目，不删除原记录",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Ids",
+            "type": "array"
+          },
+          "chapter": {
+            "maximum": 99999,
+            "minimum": 0,
+            "title": "Chapter",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ids",
+          "chapter"
+        ],
+        "title": "InspirationTodos",
+        "type": "object"
+      },
+      "level": 2,
+      "scope": "project",
+      "permission": "draft",
+      "workbench": "automation",
+      "requires_project": true,
+      "read_only": false,
+      "modifies_draft": true,
+      "requires_confirmation": false,
+      "undo": "existing_proposal_revision_or_trash",
+      "cancellable": false,
+      "availability": "AVAILABLE",
+      "result_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "object"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

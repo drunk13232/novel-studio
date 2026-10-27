@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "無法連線至本機服務，請檢查軟體是否仍在執行後重試。目前的編輯內容已保留，尚未確認儲存或執行成功。",
+  "remoteDataSendingCanceled": "已取消向遠端傳送資料",
+  "sessionValidationFailed": "工作階段驗證失敗，請重新開啟頁面",
+  "dismiss": "關閉錯誤提示"
+}

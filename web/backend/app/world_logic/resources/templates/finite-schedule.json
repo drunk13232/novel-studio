@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_77777777777777777777777777777777",
+  "name": "有限资源生产排程",
+  "description": "有限资源生产排程：仅检验作者明确给出的参数，不更新 Canon。",
+  "experiment_type": "resources",
+  "solver": "schedule",
+  "inputs": [
+    {
+      "id": "machines",
+      "name": "并行设备容量",
+      "kind": "real",
+      "role": "input",
+      "value": 1.0,
+      "unit": "dimensionless",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "duration_A",
+      "name": "订单 A 工时",
+      "kind": "real",
+      "role": "input",
+      "value": 4.0,
+      "unit": "hour",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "duration_B",
+      "name": "订单 B 工时",
+      "kind": "real",
+      "role": "input",
+      "value": 3.0,
+      "unit": "hour",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    }
+  ],
+  "assumptions": [],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "deadline",
+      "name": "六小时内完成",
+      "type": "RANGE",
+      "expression": "",
+      "target": "finish",
+      "minimum": null,
+      "maximum": 6.0,
+      "unit": "hour",
+      "condition": "",
+      "basis": "作者为此演示确认的工期上限；不是普遍经济标准。",
+      "applicability": "",
+      "origin": "AUTHOR",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "finish",
+      "name": "全部订单完成时间",
+      "expression": "schedule_makespan",
+      "unit": "hour"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [],
+  "events": [],
+  "schedule": {
+    "tick_unit": "hour",
+    "horizon": 12,
+    "resources": [
+      {
+        "id": "machine",
+        "name": "加工设备",
+        "capacity": "machines",
+        "source_ids": []
+      }
+    ],
+    "operations": [
+      {
+        "id": "order_A",
+        "name": "订单 A",
+        "duration": "duration_A",
+        "resource": "machine",
+        "demand": "1",
+        "predecessors": [],
+        "release": 0,
+        "deadline": null,
+        "source_ids": []
+      },
+      {
+        "id": "order_B",
+        "name": "订单 B",
+        "duration": "duration_B",
+        "resource": "machine",
+        "demand": "1",
+        "predecessors": [],
+        "release": 0,
+        "deadline": null,
+        "source_ids": []
+      }
+    ]
+  },
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "baseline_fingerprint": "",
+  "baseline_acceptance_fingerprint": "",
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "演示值不是作品事实；自然常数和能力规则由作者确认。"
+  ],
+  "steps": [
+    "核对来源和输入",
+    "确认验收规则",
+    "执行本地求解",
+    "检查结果和未知事项"
+  ]
+}

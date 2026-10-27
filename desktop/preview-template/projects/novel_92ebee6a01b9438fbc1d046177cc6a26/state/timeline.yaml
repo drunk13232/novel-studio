@@ -1,0 +1,18 @@
+events:
+  -
+    id: "DEMO_E01"
+    chapter: 1
+    story_time: "2041-10-03T19:20:00+08:00"
+    location: "entity_5e8491185cf44889b1da5f8a365f94d7"
+    characters:
+      - "character_3c063eadd8f04fd5ab660ff97f286130"
+      - "character_d0b524ced5324e2f86521f5b6ea0f4b4"
+    summary: "江予留下修复旧信，周栖前往码头询问。"
+    writer_view:
+      -
+        text: "江予留下修复旧信，周栖前往码头询问。"
+        visibility: "PUBLIC"
+        known_by: []
+        since_chapter: 1
+        story_time: "2041-10-03T19:20:00+08:00"
+    evidence: "原创演示初始化；chapters/chapter-1/final.md"

@@ -1,0 +1,16 @@
+Novel Studio
+Copyright 2026 drunk13232
+Licensed under the Apache License, Version 2.0.
+
+This product includes NovelForge components under the MIT License.
+Copyright (c) 2025 NovelForge AI Contributors See .novelforge/LICENSE.
+
+PDF.js is licensed under Apache-2.0. Its bundled fonts, codecs and WASM
+components have separate notices. Retain desktop/third-party and licenses/.
+Liberation font source is supplied in desktop/third-party/font-source,
+and in the Windows distribution under _internal/resources/third-party.
+
+Further dependency, asset and runtime attributions are recorded in
+THIRD_PARTY_NOTICES.md and the accompanying individual notices.
+Private character models, proprietary Cubism Core and private voices are
+not distributed. This notice does not grant rights to user-created works.

@@ -1,0 +1,29 @@
+id: "character_d0b524ced5324e2f86521f5b6ea0f4b4"
+name: "周栖"
+aliases: []
+status:
+  alive: true
+  location: "entity_5e8491185cf44889b1da5f8a365f94d7"
+  physical_condition: null
+  mental_condition: null
+  age: null
+  limitations: []
+relationships: {}
+knowledge:
+  knows: []
+  suspects: []
+  does_not_know: []
+goals:
+  short_term: []
+  long_term: []
+secrets:
+  personal: []
+inventory: []
+abilities: []
+recent_changes: []
+last_updated_chapter: 1
+writer_view: []
+characterization:
+  values: []
+  voice: []
+  established_goals: []

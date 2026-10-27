@@ -1,0 +1,18 @@
+schema_version: "0.1"
+language_density: null
+dialogue_ratio: null
+description_preferences:
+  - "通过动作和留白表达人物，不反复解释。"
+  - "整体基调：克制、温暖，保留悬念"
+interiority: null
+pacing: null
+pov:
+  person: null
+  tense: null
+  distance: null
+allow_internet_slang: null
+allow_author_summary: null
+metaphor_density: null
+banned_expressions: []
+ai_high_risk_expressions: []
+hemingway_opt_in: false

@@ -1,0 +1,36 @@
+{
+  "tool": "built-in image_gen",
+  "version": "2.17.0",
+  "assets": [
+    {
+      "id": "manuscript",
+      "prompt": "A wide horizontal original editorial illustration for a classical manuscript writing-software theme. An antique writer's folio, worn leather bindings, a brass nib, and a quiet vaulted archive, composed mostly on the RIGHT HALF; the LEFT HALF is very quiet warm parchment negative space for live UI text. Fine copperplate engraving and delicate sepia watercolor, sophisticated printmaking, warm ivory and walnut, muted gold. No letters, numbers, logos, UI, text, people, characters, watermark. Standalone artwork, not a UI mockup. Landscape panoramic 3:1 composition, calm and highly crafted.",
+      "source": "art-source/manuscript.png"
+    },
+    {
+      "id": "ink",
+      "prompt": "A wide horizontal original East Asian ink landscape illustration for a literary writing app. Misty mountain layers, a river bending toward distant pines, a tiny unoccupied pavilion on the RIGHT, subtle expressive sumi ink on real white xuan paper. Large luminous ivory negative space on the LEFT for live interface text. Sophisticated restrained brushwork, pale blue gray ink washes, a single faded vermilion accent with NO lettering. Avoid kitsch, gradients, text, logos, UI, people, famous paintings, watermark. Standalone panoramic 3:1 artwork.",
+      "source": "art-source/ink.png"
+    },
+    {
+      "id": "observatory",
+      "prompt": "An original panoramic 3:1 illustration for a quiet nocturnal science-fantasy writing studio. A delicate brass armillary sphere and a tall observatory window on the RIGHT looking into a spacious indigo star field with precise subtle astronomical arcs, distant luminous nebula, tiny sparse stars. LEFT half nearly empty matte deep navy for interface copy. Fine ink lines, elegant restrained astronomical engraving mixed with painterly night atmosphere, sapphire and lavender with antique silver details. No text, numbers, letters, logos, UI, people or watermark. Beautiful standalone environment art.",
+      "source": "art-source/observatory.png"
+    },
+    {
+      "id": "gothic",
+      "prompt": "Original panoramic 3:1 art for a gothic literary archive theme: a vaulted dark walnut library, a narrow pointed stained glass window with ruby and smoky rose panes, stacked unmarked books and a small brass candle holder clustered on the RIGHT. LEFT half deep quiet warm charcoal negative space. Romantic oil-paint and intricate architectural linework, rich restrained oxblood, burgundy, copper gold, sepia illumination. Lush and artisanal, dignified, not horror, no skulls. No text, symbols with letters, UI, logos, people or watermark. Standalone software background illustration.",
+      "source": "art-source/gothic.png"
+    },
+    {
+      "id": "cyber",
+      "prompt": "Original panoramic 3:1 editorial illustration for a restrained futuristic writing-software theme. A sculptural digital archive pavilion and precise illuminated vertical data filaments on the RIGHT, abstract shelves and a small distant futuristic skyline, subdued cyan and violet edge light. LEFT half quiet extremely dark blue negative space. Crisp architectural ink drawing with sophisticated 3D material shading, controlled neon, hard geometric edges, refined futuristic instruments. Avoid busy HUDs, excessive glow, bright noise, text, letters, numbers, UI, logos, recognizable characters and watermark. Standalone art asset.",
+      "source": "art-source/cyber.png"
+    },
+    {
+      "id": "greenhouse",
+      "prompt": "Original panoramic 3:1 illustration for a botanical writing sanctuary theme. On the RIGHT an elegant sunlit Victorian glasshouse arch, layered ferns and climbing leaves, an empty oak writing table with a closed unlabeled journal and a ceramic cup. LEFT half softly lit warm cream negative space, not cluttered. Gouache botanical editorial illustration with intricate natural leaf shapes, sage green, moss, warm flax, honey sunlight, sophisticated softly printed textures. No people, text, lettering, logos, UI or watermark. Standalone beautifully finished artwork.",
+      "source": "art-source/greenhouse.png"
+    }
+  ]
+}

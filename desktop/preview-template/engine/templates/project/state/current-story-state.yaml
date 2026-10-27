@@ -1,0 +1,21 @@
+schema_version: "0.1"
+revision: 0
+project:
+  title: null
+  genre: null
+  current_volume: null
+  current_scene: null
+  story_date: null
+  current_chapter: 0
+pov:
+  current_character: null
+  tense: null
+  person: null
+location:
+  current: null
+active_characters: []
+active_threads: []
+recent_events: []
+open_foreshadowing: []
+hard_constraints: []
+warnings: []

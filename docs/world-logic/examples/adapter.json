@@ -1,0 +1,19 @@
+{
+  "extension_id": "builtin.z3",
+  "name": "Z3 约束验证",
+  "version": "1.0",
+  "experiment_types": [
+    "logic",
+    "time_space",
+    "world_rules",
+    "custom"
+  ],
+  "input_schema": "world-experiment-1.0.json",
+  "output_schema": "world-report-1.0.json",
+  "engine_type": "z3",
+  "requirements": [
+    "z3-solver"
+  ],
+  "license": "MIT",
+  "enabled": true
+}

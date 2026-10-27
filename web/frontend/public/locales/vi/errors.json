@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Không thể kết nối dịch vụ cục bộ. Hãy kiểm tra phần mềm còn đang chạy rồi thử lại. Các chỉnh sửa hiện tại được giữ lại; chưa xác nhận việc lưu hoặc thực thi thành công.",
+  "remoteDataSendingCanceled": "Đã hủy gửi dữ liệu tới dịch vụ từ xa",
+  "sessionValidationFailed": "Xác minh phiên thất bại, vui lòng mở lại trang",
+  "dismiss": "Đóng thông báo lỗi"
+}

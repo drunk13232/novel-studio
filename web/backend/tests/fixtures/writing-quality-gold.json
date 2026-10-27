@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "note": "Synthetic labelled detection set; not publishing accuracy. Expected labels are not sent to the model.",
+  "language": [
+    {
+      "id": "T01",
+      "category": "typo",
+      "text": "他因该把信送回去。",
+      "positive": true,
+      "quote": "因该",
+      "replacement": "应该"
+    },
+    {
+      "id": "T02",
+      "category": "homophone",
+      "text": "看到朋友回来，她十分高心。",
+      "positive": true,
+      "quote": "高心",
+      "replacement": "高兴"
+    },
+    {
+      "id": "T03",
+      "category": "shape",
+      "text": "他己经把门锁好了。",
+      "positive": true,
+      "quote": "己经",
+      "replacement": "已经"
+    },
+    {
+      "id": "T04",
+      "category": "extra",
+      "text": "他推开开了那扇门。",
+      "positive": true,
+      "quote": "推开开",
+      "replacement": "推开"
+    },
+    {
+      "id": "T05",
+      "category": "missing",
+      "text": "这件事让他感到不思议。",
+      "positive": true,
+      "quote": "不思议",
+      "replacement": "不可思议"
+    },
+    {
+      "id": "T06",
+      "category": "punctuation",
+      "text": "她放下信，，转身走了。",
+      "positive": true,
+      "quote": "，，",
+      "replacement": "，"
+    },
+    {
+      "id": "T07",
+      "category": "quotes",
+      "text": "“别走。",
+      "positive": true,
+      "quote": "“",
+      "replacement": null
+    },
+    {
+      "id": "T08",
+      "category": "grammar",
+      "text": "通过这次经历，使他明白了沉默的代价。",
+      "positive": true,
+      "quote": "通过这次经历，使他明白了沉默的代价。",
+      "replacement": null
+    },
+    {
+      "id": "T09",
+      "category": "grammar",
+      "text": "他能否按时抵达，取决于他一定准时出发。",
+      "positive": true,
+      "quote": "他能否按时抵达，取决于他一定准时出发。",
+      "replacement": null
+    },
+    {
+      "id": "N01",
+      "category": "colloquial",
+      "text": "“咋了？没咋，甭管我。”",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N02",
+      "category": "fragment",
+      "text": "门外。脚步。又停了。",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N03",
+      "category": "rhetoric",
+      "text": "山沉默着，月亮替她回答。",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N04",
+      "category": "repetition",
+      "text": "“走，走，走！别回头！”",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N05",
+      "category": "proper_name",
+      "text": "岑雾绫穿过栖星港，收起星烬术。",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N06",
+      "category": "unreliable",
+      "text": "她口口声声说没见过钥匙。他怀疑她在撒谎，尚无证据。",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N07",
+      "category": "exception",
+      "text": "世界规则允许一次短距传送。她从港口瞬间来到钟楼，消耗唯一的符石。",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    },
+    {
+      "id": "N08",
+      "category": "ellipsis",
+      "text": "“我……我只是，想回家。”",
+      "positive": false,
+      "quote": null,
+      "replacement": null
+    }
+  ],
+  "logic_categories": [
+    "chapter_knowledge",
+    "cross_item_injury",
+    "time_location",
+    "intentional_clue",
+    "fictional_exception",
+    "stale_anchor"
+  ],
+  "logic": [
+    {
+      "id": "K01",
+      "category": "chapter_knowledge",
+      "positive": true,
+      "kind": "KNOWLEDGE",
+      "text": "她从未听说密码，无人传话，没有读心或预知能力，却在同一时刻准确说出陌生人的密码；叙述明确不是猜测或谎言。"
+    },
+    {
+      "id": "L01",
+      "category": "time_location",
+      "positive": true,
+      "kind": "TIME_LOCATION",
+      "text": "唯一路程三十公里，最高步行速度五公里每小时，无例外，十分钟抵达。",
+      "formal_model": "existing World Logic Lab travel template"
+    },
+    {
+      "id": "NK01",
+      "category": "intentional_clue",
+      "positive": false,
+      "text": "她先说不知道地址，随后拿出地址条；作者明确她先前是在隐瞒。"
+    },
+    {
+      "id": "NK02",
+      "category": "fictional_exception",
+      "positive": false,
+      "text": "规则允许一次传送，支付规定代价后跨越三十公里。"
+    },
+    {
+      "id": "C01",
+      "category": "cross_item",
+      "positive": true,
+      "kind": "CONTINUITY",
+      "earlier": "唯一银钥匙已在熔炉彻底熔化。",
+      "later": "又用这把唯一银钥匙开门，没有修复或重铸。",
+      "expected": "Potential conflict with both literal sources; chronological uncertainty retained."
+    },
+    {
+      "id": "C02",
+      "category": "cross_injury",
+      "positive": true,
+      "kind": "CONTINUITY",
+      "earlier": "左臂骨折，至少六周不能拆石膏。",
+      "later": "拆掉石膏，以左臂举起重物，无治疗；时间锚点未明。",
+      "expected": "Potential conflict, not certain error."
+    }
+  ],
+  "version_case": {
+    "id": "V01",
+    "category": "stale_anchor",
+    "steps": [
+      "save report",
+      "change body or related source",
+      "request correction"
+    ],
+    "expected": "409/no overwrite; original decision history persists"
+  }
+}

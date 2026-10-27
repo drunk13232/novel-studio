@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "로컬 서비스에 연결할 수 없습니다. 소프트웨어가 계속 실행 중인지 확인한 뒤 다시 시도하세요. 현재 편집 내용은 유지되며, 저장 또는 실행 성공 여부는 확인되지 않았습니다.",
+  "remoteDataSendingCanceled": "원격 자료 전송을 취소했습니다",
+  "sessionValidationFailed": "세션 검증에 실패했습니다. 페이지를 다시 여세요",
+  "dismiss": "오류 알림 닫기"
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_66666666666666666666666666666666",
+  "name": "虚构能力消耗与恢复",
+  "description": "虚构能力消耗与恢复：仅检验作者明确给出的参数，不更新 Canon。",
+  "experiment_type": "world_rules",
+  "solver": "formula",
+  "inputs": [
+    {
+      "id": "reserve",
+      "name": "初始能力储备",
+      "kind": "real",
+      "role": "input",
+      "value": 100.0,
+      "unit": "dimensionless",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "cost",
+      "name": "每次使用消耗",
+      "kind": "real",
+      "role": "input",
+      "value": 25.0,
+      "unit": "dimensionless",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "uses",
+      "name": "使用次数",
+      "kind": "real",
+      "role": "input",
+      "value": 4.0,
+      "unit": "dimensionless",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "recovery_rate",
+      "name": "恢复速率",
+      "kind": "real",
+      "role": "input",
+      "value": 10.0,
+      "unit": "1/hour",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "elapsed",
+      "name": "恢复时间",
+      "kind": "real",
+      "role": "input",
+      "value": 2.0,
+      "unit": "hour",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "magic_enabled",
+      "name": "此情景是否存在魔法",
+      "kind": "boolean",
+      "role": "input",
+      "value": true,
+      "unit": "dimensionless",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "只修改实验情景，不修改世界规则",
+      "basis": "DEMO"
+    }
+  ],
+  "assumptions": [],
+  "constraints": [
+    {
+      "id": "magic_required",
+      "name": "使用此能力需要魔法存在",
+      "expression": "magic_enabled or uses == 0",
+      "meaning": "作者声明的能力前提",
+      "condition": "",
+      "source_ids": []
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "id": "reserve_nonnegative",
+      "name": "能力储备不能透支",
+      "type": "HARD",
+      "expression": "remaining >= 0",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "dimensionless",
+      "condition": "",
+      "basis": "作者定义的能力消耗规则；不引用地球物理来否定魔法。",
+      "applicability": "",
+      "origin": "AUTHOR",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "remaining",
+      "name": "剩余能力储备",
+      "expression": "reserve + recovery_rate * elapsed - cost * uses",
+      "unit": "dimensionless"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [
+    {
+      "id": "magic_dependency",
+      "before": "magic_enabled",
+      "after": "ability_system",
+      "kind": "causal",
+      "condition": "",
+      "meaning": "作者明确声明此能力体系依赖魔法",
+      "source_ids": []
+    }
+  ],
+  "events": [],
+  "schedule": null,
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "baseline_fingerprint": "",
+  "baseline_acceptance_fingerprint": "",
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "演示值不是作品事实；自然常数和能力规则由作者确认。"
+  ],
+  "steps": [
+    "核对来源和输入",
+    "确认验收规则",
+    "执行本地求解",
+    "检查结果和未知事项"
+  ]
+}

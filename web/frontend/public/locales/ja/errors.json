@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "ローカルサービスに接続できません。ソフトウェアが動作していることを確認してから再試行してください。現在の編集内容は保持されていますが、保存または実行の成功は確認できていません。",
+  "remoteDataSendingCanceled": "リモートへの資料送信をキャンセルしました",
+  "sessionValidationFailed": "セッションの検証に失敗しました。ページを開き直してください",
+  "dismiss": "エラー通知を閉じる"
+}

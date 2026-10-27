@@ -1,0 +1,75 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  windows-checks:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      PYTHONNOUSERSITE: '1'
+      PYTHONPATH: ${{ github.workspace }}/web/backend
+      NOVEL_WORKSPACE: ${{ runner.temp }}/novel-ci-workspace
+      NOVEL_STUDIO_HOME: ${{ runner.temp }}/novel-ci-home
+      NOVEL_STUDIO_DATA: ${{ runner.temp }}/novel-ci-data
+      CODEX_HOME: ${{ runner.temp }}/novel-ci-codex
+      NOVEL_DEMO: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            web/backend/requirements.txt
+            desktop/requirements.txt
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Install Python dependencies in an isolated venv
+        run: |
+          python -m venv web/backend/.venv
+          & ./web/backend/.venv/Scripts/python.exe -m pip install -r web/backend/requirements.txt -r desktop/requirements.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & ./web/backend/.venv/Scripts/python.exe -m pip check
+          exit $LASTEXITCODE
+      - name: Install locked frontend dependencies
+        id: npm
+        working-directory: web/frontend
+        run: npm.cmd ci
+      - name: Verify the pinned local Python WASI runtime and prepare demo data
+        run: |
+          & ./web/backend/.venv/Scripts/python.exe desktop/fetch_python_runtime.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          New-Item -ItemType Directory -Force -Path $env:NOVEL_STUDIO_HOME,$env:NOVEL_STUDIO_DATA,$env:CODEX_HOME | Out-Null
+          Copy-Item -LiteralPath desktop/preview-template -Destination $env:NOVEL_WORKSPACE -Recurse
+      - name: Backend pytest (no cloud AI or paid services)
+        run: |
+          # The local SAPI synthesis test requires a usable installed Windows voice.
+          # Hosted runner images do not guarantee that hardware/COM capability.
+          # Existing explicit-opt-in headless print tests also report SKIPPED.
+          # Real Codex, native IME, DPI and desktop GUI acceptance are not this job.
+          # Five existing integration cases require separately installed Screenwriting
+          # Skills, which are not redistributed or silently downloaded in public CI.
+          # Only those exact cases are deselected; other failures stay failures.
+          & ./web/backend/.venv/Scripts/python.exe -m pytest web/backend/tests -q -ra -k 'not real_local_sapi_through_application_audio_routes' --basetemp "$env:RUNNER_TEMP/novel-ci-pytest" --junitxml "$env:RUNNER_TEMP/novel-ci-pytest.xml" --deselect web/backend/tests/test_characters.py::test_partial_freeze_lock_and_review_commit --deselect web/backend/tests/test_planning.py::test_real_skill_prompt_and_ai_candidate_scope --deselect web/backend/tests/test_projects.py::test_partial_merge_preserves_frozen_sections_and_stale_result --deselect web/backend/tests/test_projects.py::test_candidate_review_commit_conflicts_and_archived_readonly --deselect web/backend/tests/test_projects.py::test_candidate_commit_keeps_original_crlf_and_bom
+          exit $LASTEXITCODE
+      - name: Frontend TypeScript and Vite production build
+        if: ${{ !cancelled() && steps.npm.outcome == 'success' }}
+        working-directory: web/frontend
+        # npm run build executes fixed PDF resource checks, tsc -b, and vite build.
+        run: npm.cmd run build

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-studio.local/schemas/theme-1",
+  "title": "Novel Studio theme customization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "theme_id",
+    "customization"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "theme_id": {
+      "enum": [
+        "moon",
+        "mist",
+        "night",
+        "amber",
+        "sky",
+        "plum",
+        "yoshino",
+        "rem",
+        "rem-night",
+        "manuscript",
+        "ink",
+        "observatory",
+        "gothic",
+        "cyber",
+        "greenhouse",
+        "minimal"
+      ]
+    },
+    "customization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 60,
+          "pattern": "^[^\\u0000-\\u001f]*$"
+        },
+        "accent": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "ink": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "background": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "radius": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 20
+        },
+        "decoration": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "motion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "density": {
+          "enum": [
+            "comfortable",
+            "compact"
+          ]
+        }
+      }
+    }
+  }
+}

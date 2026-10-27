@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_00000000000000000000000000000001",
+  "name": "旅行时间检查",
+  "description": "可修改的虚构演示参数，不属于任何小说 Canon。",
+  "experiment_type": "time_space",
+  "solver": "formula",
+  "inputs": [
+    {
+      "id": "distance",
+      "name": "道路距离",
+      "kind": "real",
+      "role": "input",
+      "value": 120.0,
+      "unit": "km",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "speed",
+      "name": "允许平均速度",
+      "kind": "real",
+      "role": "input",
+      "value": 40.0,
+      "unit": "km/hour",
+      "minimum": 1.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "available",
+      "name": "可用时间",
+      "kind": "real",
+      "role": "input",
+      "value": 4.0,
+      "unit": "hour",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "demo",
+      "text": "以下仅为虚构演示输入；复制后请由作者重新确认。",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "arrival",
+      "name": "能否按时抵达",
+      "type": "HARD",
+      "expression": "duration <= available",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "dimensionless",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    },
+    {
+      "id": "units",
+      "name": "行程时间量纲",
+      "type": "DIMENSIONAL",
+      "expression": "distance / speed",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "hour",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "duration",
+      "name": "所需时间",
+      "expression": "distance / speed",
+      "unit": "hour"
+    },
+    {
+      "id": "minimum_speed",
+      "name": "最低平均速度",
+      "expression": "distance / available",
+      "unit": "km/hour"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [],
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "模板仅验证明确数学关系，不替代语义审查。"
+  ],
+  "steps": []
+}

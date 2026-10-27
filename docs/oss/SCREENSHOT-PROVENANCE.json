@@ -1,0 +1,16 @@
+[
+  {
+    "path": "screenshots/bookshelf.png",
+    "sha256": "15d954974c26b718c507cec7afa7949d0dfa3a77f4270081618355759363201b",
+    "capture": "Native Windows candidate EXE, isolated original demo only",
+    "project": "潮汐邮局",
+    "private_content": false
+  },
+  {
+    "path": "screenshots/editor.png",
+    "sha256": "c150f8555525fa57a34e49e3f6938b40b71773ddd5d4e61869cad4c6356d8491",
+    "capture": "Native Windows candidate EXE, isolated original demo only",
+    "project": "潮汐邮局",
+    "private_content": false
+  }
+]

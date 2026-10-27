@@ -1,0 +1,57 @@
+{
+  "units": [
+    {
+      "id": "1",
+      "number": 1,
+      "label": "第 1 行",
+      "text": "# 纸湾镇生活笔记",
+      "heading": true
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "label": "第 2 行",
+      "text": "",
+      "heading": false
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "label": "第 3 行",
+      "text": "原创演示参考，非真实文献。",
+      "heading": false
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "label": "第 4 行",
+      "text": "邮局夜班用绿色台灯。",
+      "heading": false
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "label": "第 5 行",
+      "text": "旧海堤有一道低矮的石栏。",
+      "heading": false
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "label": "第 6 行",
+      "text": "潮水退去时，街上的人开始准备第二天的货。",
+      "heading": false
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "label": "第 7 行",
+      "text": "人物可以记错时间；记录不能替代亲眼所见。",
+      "heading": false
+    }
+  ],
+  "status": "READY",
+  "error": "",
+  "encoding": "utf-8-sig",
+  "warnings": []
+}

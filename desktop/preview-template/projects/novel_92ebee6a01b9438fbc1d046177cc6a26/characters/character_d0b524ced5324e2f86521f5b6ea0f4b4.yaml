@@ -1,0 +1,84 @@
+schema_version: "0.4"
+id: "character_d0b524ced5324e2f86521f5b6ea0f4b4"
+name: "周栖"
+aliases: []
+role: "SECONDARY"
+importance: "SUPPORTING"
+identity:
+  summary: "纸湾镇的值班信差"
+  gender: "男"
+  age_at_start: 30.0
+  birthday: null
+  occupation: "信差"
+  affiliation: null
+  family_background: null
+appearance:
+  summary: null
+  height: null
+  build: null
+  features: []
+  clothing_preferences: []
+  facial_features: null
+  hairstyle: null
+  eye_color: null
+  age_changes: null
+personality:
+  core_traits:
+    - "务实"
+    - "嘴硬"
+    - "记挂同事"
+  strengths: []
+  flaws: []
+  contradictions: []
+psychology:
+  core_desire: null
+  core_need: null
+  fear: null
+  wound: null
+  values: []
+  boundaries: []
+behavior:
+  default_patterns: []
+  stress_patterns: []
+  habits: []
+  tells: []
+speech:
+  tone: null
+  vocabulary: null
+  sentence_style: null
+  habits: []
+  avoids: []
+  catchphrases: []
+  forms_of_address: []
+biography:
+  origin: null
+  education: null
+  important_events: []
+  trauma: null
+  turning_points: []
+  first_appearance: null
+abilities:
+  skills: []
+  knowledge: []
+  combat: null
+  professional: null
+  weaknesses: []
+  growth_limits: []
+periods: []
+goals:
+  initial_short_term: []
+  initial_long_term: []
+relationships:
+  initial: {}
+story:
+  function: null
+  arc_start: null
+  arc_direction: null
+  possible_end: null
+secrets:
+  author_only: []
+canon:
+  hard: []
+  strong: []
+  soft: []
+tags: []

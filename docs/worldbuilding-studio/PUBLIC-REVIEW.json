@@ -1,0 +1,30 @@
+{
+  "release": "2.15.0 Preview",
+  "status": "SOURCE_CANDIDATE_REVIEW_REQUIRED_NO_PUBLICATION",
+  "license_decision": "USER_PENDING",
+  "included_via_existing_source_allowlist": [
+    "web/backend/app/library/world_studio.py",
+    "web/backend/app/library/world_templates.py",
+    "web/backend/app/library/bible.py",
+    "web/frontend/src/world-studio.tsx",
+    "web/frontend/src/world-studio.css",
+    "web/frontend/src/world-bible.tsx",
+    "web/frontend/public/locales/zh-CN/world-studio.json",
+    "web/frontend/public/locales/en/world-studio.json"
+  ],
+  "explicit_developer_package_documents": [
+    "docs/worldbuilding-studio/README.md",
+    "docs/worldbuilding-studio/TEMPLATE-FORMAT.md",
+    "docs/worldbuilding-studio/TECHNICAL-SELECTION.md",
+    "web/backend/tests/test_world_studio.py"
+  ],
+  "exclude": [
+    "docs/worldbuilding-studio/private-checks/**",
+    "projects/**/bible/designs/**",
+    "projects/**/bible/entities/**",
+    "user_world_data",
+    "credentials",
+    "private_character_assets",
+    "parent_git_history"
+  ]
+}

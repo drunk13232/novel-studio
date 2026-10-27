@@ -1,0 +1,4 @@
+# Packaging only; application/SDK dependencies remain in web/backend/requirements.txt.
+pyinstaller==6.22.3
+pywebview==6.2.1
+pywin32==312; sys_platform == "win32"

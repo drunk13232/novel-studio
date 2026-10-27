@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#302b63"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="50%" style="stop-color:#f5576c"/>
+      <stop offset="100%" style="stop-color:#fda085"/>
+    </linearGradient>
+    <linearGradient id="subtitleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a8edea"/>
+      <stop offset="100%" style="stop-color:#fed6e3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" fill="url(#bg)" rx="12"/>
+
+  <!-- Decorative elements -->
+  <circle cx="50" cy="30" r="2" fill="#f093fb" opacity="0.6"/>
+  <circle cx="120" cy="60" r="1.5" fill="#fda085" opacity="0.4"/>
+  <circle cx="680" cy="40" r="2" fill="#a8edea" opacity="0.5"/>
+  <circle cx="750" cy="80" r="1.5" fill="#f5576c" opacity="0.3"/>
+  <circle cx="200" cy="170" r="1" fill="#fed6e3" opacity="0.4"/>
+  <circle cx="600" cy="160" r="2" fill="#f093fb" opacity="0.3"/>
+  <circle cx="350" cy="20" r="1.5" fill="#fda085" opacity="0.5"/>
+  <circle cx="500" cy="180" r="1" fill="#a8edea" opacity="0.4"/>
+
+  <!-- Book icon -->
+  <g transform="translate(70, 65)" filter="url(#softGlow)">
+    <text font-size="52" fill="url(#textGrad)" font-family="serif">📖</text>
+  </g>
+
+  <!-- Main title -->
+  <text x="150" y="100" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="bold" fill="url(#textGrad)" filter="url(#glow)">
+    Web Novel Writing Skill
+  </text>
+
+  <!-- Subtitle -->
+  <text x="150" y="135" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="url(#subtitleGrad)" opacity="0.9">
+    AI-Powered Chinese Web Novel Writing Skill
+  </text>
+
+  <!-- Chinese subtitle -->
+  <text x="150" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#a8edea" opacity="0.7">
+    AI 驱动的中文网络小说创作技能框架
+  </text>
+
+  <!-- Feature badges -->
+  <g transform="translate(520, 75)">
+    <rect x="0" y="0" width="90" height="22" rx="11" fill="#f093fb" opacity="0.2" stroke="#f093fb" stroke-width="0.5"/>
+    <text x="45" y="15" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#f093fb" text-anchor="middle">10 Phases</text>
+  </g>
+  <g transform="translate(620, 75)">
+    <rect x="0" y="0" width="90" height="22" rx="11" fill="#fda085" opacity="0.2" stroke="#fda085" stroke-width="0.5"/>
+    <text x="45" y="15" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#fda085" text-anchor="middle">7 Agents</text>
+  </g>
+  <g transform="translate(520, 105)">
+    <rect x="0" y="0" width="90" height="22" rx="11" fill="#a8edea" opacity="0.2" stroke="#a8edea" stroke-width="0.5"/>
+    <text x="45" y="15" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#a8edea" text-anchor="middle">4 Safeguards</text>
+  </g>
+  <g transform="translate(620, 105)">
+    <rect x="0" y="0" width="90" height="22" rx="11" fill="#fed6e3" opacity="0.2" stroke="#fed6e3" stroke-width="0.5"/>
+    <text x="45" y="15" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#fed6e3" text-anchor="middle">4 Genres</text>
+  </g>
+
+  <!-- Bottom line decoration -->
+  <line x1="100" y1="185" x2="700" y2="185" stroke="url(#textGrad)" stroke-width="0.5" opacity="0.3"/>
+</svg>

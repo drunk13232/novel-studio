@@ -1,0 +1,29 @@
+id: null
+name: null
+aliases: []
+status:
+  alive: true
+  location: null
+  physical_condition: null
+  mental_condition: null
+  age: null
+  limitations: []
+relationships: {}
+knowledge:
+  knows: []
+  suspects: []
+  does_not_know: []
+goals:
+  short_term: []
+  long_term: []
+secrets:
+  personal: []
+inventory: []
+abilities: []
+recent_changes: []
+last_updated_chapter: null
+writer_view: []
+characterization:
+  values: []
+  voice: []
+  established_goals: []

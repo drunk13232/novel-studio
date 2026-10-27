@@ -1,0 +1,22 @@
+{
+  "LOCAL_SERVICE_UNAVAILABLE": "Cannot reach the local service. Your edits are retained. Check that the application is running.",
+  "SESSION_INVALID": "The local session could not be verified. Reopen this page.",
+  "FILE_ALREADY_MODIFIED": "The file has changed outside the app. Review the differences before saving.",
+  "STORAGE_FULL": "Storage is full. Free space and retry. Saving has not completed.",
+  "STORAGE_PERMISSION": "The data directory is not writable or the file is in use. Check permissions and retry.",
+  "FILE_NOT_FOUND": "The requested file was not found. Refresh or restore from a backup.",
+  "INDEX_UNAVAILABLE": "The local index is temporarily unavailable. Try again later.",
+  "INVALID_REQUEST": "Some request parameters are invalid. Check the input; technical details are available separately.",
+  "REQUEST_REJECTED": "The operation did not complete. Check the diagnostic details.",
+  "SERVICE_UNAVAILABLE": "The service is temporarily unavailable. You can continue writing manually.",
+  "REMOTE_SEND_CANCELLED": "Sending data to the remote provider was cancelled.",
+  "AI_AUTH_FAILED": "Authentication failed. Check your API key or Codex login.",
+  "AI_RATE_LIMIT": "The request is rate or quota limited. Check your provider account and try again later.",
+  "AI_TIMEOUT": "The AI request timed out. Execution is unconfirmed. Check the operation history before retrying.",
+  "TECHNICAL_DETAILS": "Technical diagnostics",
+  "dismiss": "Dismiss error",
+  "connectingLocalService": "Connecting to the local service",
+  "localServiceConnectionFailed": "Unable to connect to the local service. Check that the application is still running, then try again. Your current edits have been preserved, but saving or execution has not been confirmed as successful.",
+  "remoteDataSendingCanceled": "Sending data to the remote service has been canceled.",
+  "sessionValidationFailed": "Session validation failed. Please reopen the page."
+}

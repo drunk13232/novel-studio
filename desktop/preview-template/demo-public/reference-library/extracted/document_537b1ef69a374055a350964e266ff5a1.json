@@ -1,0 +1,57 @@
+{
+  "units": [
+    {
+      "id": "1",
+      "number": 1,
+      "label": "第 1 行",
+      "text": "# 克制对白参考",
+      "heading": true
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "label": "第 2 行",
+      "text": "",
+      "heading": false
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "label": "第 3 行",
+      "text": "原创演示样本，允许录屏。",
+      "heading": false
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "label": "第 4 行",
+      "text": "“你等多久了？”",
+      "heading": false
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "label": "第 5 行",
+      "text": "“水刚烧开。”",
+      "heading": false
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "label": "第 6 行",
+      "text": "她把多余的杯子往他那边推了一点。窗外的车开走，屋里没有人追出去。",
+      "heading": false
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "label": "第 7 行",
+      "text": "避免在对白之后复述已传达的情绪；通过动作保留留白。",
+      "heading": false
+    }
+  ],
+  "status": "READY",
+  "error": "",
+  "encoding": "utf-8-sig",
+  "warnings": []
+}

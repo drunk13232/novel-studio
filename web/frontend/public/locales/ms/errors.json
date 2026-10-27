@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Tidak dapat menyambung ke perkhidmatan setempat. Semak sama ada perisian masih berjalan, kemudian cuba semula. Suntingan semasa dikekalkan; kejayaan penyimpanan atau pelaksanaan belum disahkan.",
+  "remoteDataSendingCanceled": "Penghantaran bahan ke perkhidmatan jauh dibatalkan",
+  "sessionValidationFailed": "Pengesahan sesi gagal, sila buka semula halaman",
+  "dismiss": "Tutup mesej ralat"
+}

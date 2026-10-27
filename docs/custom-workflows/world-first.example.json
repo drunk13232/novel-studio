@@ -1,0 +1,22 @@
+{
+  "format": "novel-studio-workflow/1",
+  "name": "只创建世界观 / World first",
+  "scope": "world",
+  "description": "A data-only example; no characters or plot required.",
+  "steps": [
+    {
+      "id": "step_world",
+      "kind": "world_overview",
+      "title": "世界概览 / World overview",
+      "model": "codex",
+      "instruction": "先生成可编辑世界概览，不要求人物或剧情。",
+      "pause_after": true
+    },
+    {
+      "id": "step_author",
+      "kind": "manual",
+      "title": "作者审阅 / Author review",
+      "instruction": "检查未知参数后，再决定是否采用。"
+    }
+  ]
+}

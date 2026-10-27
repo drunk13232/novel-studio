@@ -1,0 +1,39 @@
+{
+  "version": "2.19.0",
+  "license": "OWNER_DECISION_PENDING",
+  "direct_dependency_declaration": {
+    "@radix-ui/react-context-menu": {
+      "version": "2.3.8",
+      "license": "MIT",
+      "already_installed": true,
+      "new_framework": false
+    }
+  },
+  "private_checks": "EXCLUDED",
+  "data_format": "Existing notebook and application workspace preferences; optional additive UI fields only",
+  "assets": "No new private assets",
+  "files": {
+    "web/frontend/src/object-actions.tsx": "1e62553f989b0cd4de0a9e8d7ee59bef459c086b9680e999717f7ecadffe7cee",
+    "web/frontend/src/desk-tabs.tsx": "0e695977d83a1e7f6519a91e847d4cb15009224bfa1f3a49b55cb369eb385509",
+    "web/frontend/src/desk-reference.tsx": "e97f76366475a3ae536caa31f6bac5f0146670cec5249f1e6c20d96d316237b2",
+    "web/frontend/src/workspace-layout.tsx": "caf3e9a442fb33bd64ecf8a9b350334a9da6b7e4651a5dd6c188f4257bf61563",
+    "web/frontend/src/author-entries.tsx": "b203d2f388d7df6359b69643c6ff9459b49ce0e326abb7a24811742be1b0e6f5",
+    "web/frontend/src/author-workbench.tsx": "ced61e1b901b7db68841c732e34ba8d8581470b120eeaa0a80127be38c8afbf8",
+    "web/frontend/src/ai-center.tsx": "026e4a16f52317b564c366b90dd459240add5a7057ce53c7d1b3cb13463f8bab",
+    "web/frontend/src/command-palette.tsx": "4a44dcfc066350da2add14012e0f32db280c9bd9cd59cae7f0e8a32fca5b00a0",
+    "web/frontend/src/studio.tsx": "6789bb736f9f78f9cf7c1abcd5d004a12a72a53dabf2956cb42197563074992a",
+    "web/frontend/src/interaction.css": "f393beb73c22c58bfde3c30f6ad1d80ea5dadbe8b02b015605e55cd6a6f6387c",
+    "web/frontend/src/main.tsx": "5424f0aeba04ae7dcceecd981830d7a40bf1fcc10b616a6918e9c5cc8c959208",
+    "web/frontend/public/locales/zh-CN/interaction.json": "c7195214c4a8a4587cafd3a859a28b71a1f4e1658e8941e5a1509a57264e2e3a",
+    "web/frontend/public/locales/en/interaction.json": "30b1389a5ac265e5ea931deedd0ebec4b992fb2f0414de9432310eab56a87814",
+    "web/backend/app/author_workbench.py": "c714cae3ce048a755da784cd7f1a441fe35e302e3a1af42cbe7b59f4f27e3cee",
+    "web/backend/app/studio.py": "9bdede21e30c9f428eaeafffd25e429c54c2b2855c1f11295b1fc5fd9bb131e5",
+    "web/backend/tests/test_interaction_freedom.py": "fde98a2ab50e4d74dd4a93f6eb08121dd23c71cb41b2c3b16e845efde52c3655",
+    "web/frontend/package.json": "035cda7140d5f00f7816f66749c5b5d5c6eea3676407098d9d9c74ca571950b6",
+    "web/frontend/package-lock.json": "dbf751bad91c8b0a124c195d86438de715a2f9b2e00a2292d39ffdb6c22e445a",
+    "desktop/version.json": "ad3b25044eb9f6e2f8d63963e8dcc0125337bf74de6b83ce2115bce5b426a9d7",
+    "desktop/build.ps1": "52637b31aeff1d8925b2ab18decfa2c1ed019d6dacb4fe9271f88cae05d5cd1b",
+    "desktop/package_source.py": "6704fa2bfc179e14f0961d427383e782c76522d2199ddee553e14d4423dbe22c",
+    "docs/interaction-freedom/README.md": "171d68162f960c075f034c2bc679d6a828482a84be10d616c492c10662490040"
+  }
+}

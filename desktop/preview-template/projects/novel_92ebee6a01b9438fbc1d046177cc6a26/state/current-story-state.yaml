@@ -1,0 +1,24 @@
+schema_version: "0.1"
+revision: 1
+project:
+  title: "潮汐邮局"
+  genre: "现实幻想"
+  current_volume: 1
+  current_scene: null
+  story_date: "2041-10-03T19:20:00+08:00"
+  current_chapter: 1
+pov:
+  current_character: null
+  tense: null
+  person: null
+location:
+  current: "entity_5e8491185cf44889b1da5f8a365f94d7"
+active_characters:
+  - "character_3c063eadd8f04fd5ab660ff97f286130"
+  - "character_d0b524ced5324e2f86521f5b6ea0f4b4"
+active_threads: []
+recent_events:
+  - "DEMO_E01"
+open_foreshadowing: []
+hard_constraints: []
+warnings: []

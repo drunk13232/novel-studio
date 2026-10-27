@@ -1,0 +1,32 @@
+{
+  "schema_version": "novel-studio-plugin/1",
+  "id": "example.chapter-summary",
+  "name": "章节目录速览 / Chapter summary",
+  "version": "1.0.0",
+  "min_app_version": "2.20.0",
+  "description": "真实 Python 汇总当前作品目录，不读取正文，不调用模型。",
+  "author": "Novel Studio examples",
+  "license": "Local demonstration; project license pending",
+  "actions": [
+    "get_active_project",
+    "list_chapters"
+  ],
+  "commands": [
+    {
+      "id": "summarize",
+      "title": "生成目录速览",
+      "description": "",
+      "kind": "python",
+      "action": null,
+      "arguments": {},
+      "script": "scripts/summary.py",
+      "target": null
+    }
+  ],
+  "settings": [],
+  "resources": [],
+  "files": {
+    "scripts/summary.py": "cc66bdc00995a2011d82f9571db96f49f37fe215247a41cf81b28ca1987fc53f",
+    "README.md": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13"
+  }
+}

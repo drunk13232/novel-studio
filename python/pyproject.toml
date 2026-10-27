@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "novel-studio-api"
+version = "2.20.0"
+description = "Typed, author-scoped Action Registry client for Novel Studio"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["novel_studio_api*"]
+
+[tool.setuptools.package-data]
+novel_studio_api = ["py.typed"]

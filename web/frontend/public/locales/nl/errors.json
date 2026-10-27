@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Kan geen verbinding maken met de lokale service. Controleer of de software nog draait en probeer het opnieuw. Je huidige wijzigingen blijven behouden; succesvol opslaan of uitvoeren is niet bevestigd.",
+  "remoteDataSendingCanceled": "Verzending van gegevens naar externe service geannuleerd",
+  "sessionValidationFailed": "Sessievalidatie mislukt; open de pagina opnieuw",
+  "dismiss": "Foutmelding sluiten"
+}

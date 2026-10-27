@@ -1,0 +1,42 @@
+{
+  "documents": [
+    {
+      "source_scope": "novel_92ebee6a01b9438fbc1d046177cc6a26",
+      "id": "document_248b8e55e7d841d28405373ec0b6eeec",
+      "role": "auxiliary",
+      "confirmed_at": "2026-10-10T05:20:12.638046+00:00",
+      "purpose": ""
+    },
+    {
+      "source_scope": "public",
+      "id": "document_537b1ef69a374055a350964e266ff5a1",
+      "role": "auxiliary",
+      "confirmed_at": "2026-10-10T05:20:12.744543+00:00",
+      "purpose": ""
+    }
+  ],
+  "profiles": [
+    {
+      "source_scope": "public",
+      "id": "profile_5d5de56f0e644774b20b533b8da17aa1",
+      "role": "main",
+      "confirmed_at": "2026-10-10T05:20:12.850845+00:00",
+      "purpose": "",
+      "profile_snapshot": {
+        "id": "profile_5d5de56f0e644774b20b533b8da17aa1",
+        "title": "海边留白",
+        "directives": [
+          "克制写作，用动作承载情绪。",
+          "不在对白后重复解释动机。"
+        ],
+        "sources": [
+          {
+            "scope": "public",
+            "document_id": "document_537b1ef69a374055a350964e266ff5a1"
+          }
+        ],
+        "status": "USER_CONFIRMED"
+      }
+    }
+  ]
+}

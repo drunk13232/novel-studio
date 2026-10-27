@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Nie można połączyć się z usługą lokalną. Sprawdź, czy program nadal działa, i spróbuj ponownie. Bieżące zmiany są zachowane, ale zapis lub wykonanie nie zostały potwierdzone.",
+  "remoteDataSendingCanceled": "Anulowano wysyłanie materiałów do usługi zdalnej",
+  "sessionValidationFailed": "Weryfikacja sesji nie powiodła się. Otwórz stronę ponownie.",
+  "dismiss": "Zamknij komunikat błędu"
+}

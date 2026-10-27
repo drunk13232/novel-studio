@@ -1,0 +1,56 @@
+{
+  "version": "2.17.0",
+  "license": "OWNER_DECISION_PENDING",
+  "private_data_included": false,
+  "requires_existing_release_audit": true,
+  "files": [
+    {
+      "path": "web/frontend/src/themes.ts",
+      "sha256": "5fc0f09917ee329a0c594ff9308206ad921b0d1d8250e2d92712d5c5e0dbb02d",
+      "bytes": 11633
+    },
+    {
+      "path": "web/frontend/src/theme-gallery.tsx",
+      "sha256": "07fcf60e2aba06e8074ee1bc2303e7ed5e70621eb6aad0e3576091d3366d0fe2",
+      "bytes": 11884
+    },
+    {
+      "path": "web/frontend/src/visual-renaissance.css",
+      "sha256": "5ca0405e194329e9fb054f948aec41922e49816f05f58109ea66efe3500c4544",
+      "bytes": 33444
+    },
+    {
+      "path": "web/frontend/src/font-settings.tsx",
+      "sha256": "f7111cf8c69110cedda45d22b75cc26d0a2eb526305728e647788f4b926139bc",
+      "bytes": 7670
+    },
+    {
+      "path": "web/frontend/src/literary-art.tsx",
+      "sha256": "86de43dbf8038a7f3357a21cbb160689599936edeeebe9be5eed7f88d2a61214",
+      "bytes": 1060
+    },
+    {
+      "path": "web/frontend/src/study-components.tsx",
+      "sha256": "100913021670e114bdd18b00498f022afa284a713e3312e4e27d56ea0b0b1324",
+      "bytes": 1852
+    },
+    {
+      "path": "web/backend/app/appearance.py",
+      "sha256": "5d8490c24dddacf359a7174cfc2057597f2c168cbe8805247ba34d69e7ae0ae4",
+      "bytes": 1050
+    },
+    {
+      "path": "web/backend/tests/test_appearance.py",
+      "sha256": "b255a2115651b4fa8ebea41e4bedbde3a2d473a068c0d6e3096022ef75172d5d",
+      "bytes": 3749
+    }
+  ],
+  "assets_manifest": "web/frontend/public/themes/manifest.json",
+  "excluded": [
+    "private-checks/**",
+    "user data",
+    "private character resources",
+    "credentials",
+    "parent Git history"
+  ]
+}

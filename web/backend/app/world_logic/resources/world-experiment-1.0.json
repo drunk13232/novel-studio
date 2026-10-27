@@ -1,0 +1,1040 @@
+{
+  "$defs": {
+    "Acceptance": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "default": "HARD",
+          "enum": [
+            "HARD",
+            "RANGE",
+            "RELATIONAL",
+            "DIMENSIONAL",
+            "CONDITIONAL",
+            "QUALITATIVE"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "expression": {
+          "default": "",
+          "maxLength": 800,
+          "title": "Expression",
+          "type": "string"
+        },
+        "target": {
+          "default": "",
+          "maxLength": 48,
+          "title": "Target",
+          "type": "string"
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "maxLength": 80,
+          "title": "Unit",
+          "type": "string"
+        },
+        "condition": {
+          "default": "",
+          "maxLength": 800,
+          "title": "Condition",
+          "type": "string"
+        },
+        "basis": {
+          "default": "",
+          "maxLength": 1200,
+          "title": "Basis",
+          "type": "string"
+        },
+        "applicability": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Applicability",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "AUTHOR",
+            "CANON",
+            "REFERENCE",
+            "AI_PROPOSED",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "severity": {
+          "default": "HARD",
+          "enum": [
+            "HARD",
+            "WARNING",
+            "INFO"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "automatic": {
+          "default": true,
+          "title": "Automatic",
+          "type": "boolean"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Acceptance",
+      "type": "object"
+    },
+    "Assumption": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 1200,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "AUTHOR",
+            "DEMO",
+            "AI_PROPOSED",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "Assumption",
+      "type": "object"
+    },
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "expression": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Expression",
+          "type": "string"
+        },
+        "meaning": {
+          "default": "",
+          "maxLength": 1200,
+          "title": "Meaning",
+          "type": "string"
+        },
+        "condition": {
+          "default": "",
+          "maxLength": 800,
+          "title": "Condition",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "expression"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "Dependency": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "before": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "After",
+          "type": "string"
+        },
+        "meaning": {
+          "default": "",
+          "maxLength": 300,
+          "title": "Meaning",
+          "type": "string"
+        },
+        "kind": {
+          "default": "strict_order",
+          "enum": [
+            "strict_order",
+            "availability",
+            "causal",
+            "association"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "condition": {
+          "default": "",
+          "maxLength": 800,
+          "title": "Condition",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "before",
+        "after"
+      ],
+      "title": "Dependency",
+      "type": "object"
+    },
+    "EventTime": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "clock": {
+          "default": "gregorian",
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Clock",
+          "type": "string"
+        },
+        "time": {
+          "default": "",
+          "maxLength": 80,
+          "title": "Time",
+          "type": "string"
+        },
+        "earliest": {
+          "default": "",
+          "maxLength": 80,
+          "title": "Earliest",
+          "type": "string"
+        },
+        "latest": {
+          "default": "",
+          "maxLength": 80,
+          "title": "Latest",
+          "type": "string"
+        },
+        "coordinate": {
+          "anyOf": [
+            {
+              "maximum": 1000000000000000.0,
+              "minimum": -1000000000000000.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coordinate"
+        },
+        "narrative_order": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Narrative Order"
+        },
+        "basis": {
+          "default": "UNKNOWN",
+          "enum": [
+            "AUTHOR_CONFIRMED",
+            "COMMITTED",
+            "REFERENCE",
+            "ASSUMPTION",
+            "UNKNOWN"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "EventTime",
+      "type": "object"
+    },
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "default": "real",
+          "enum": [
+            "real",
+            "integer",
+            "boolean"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "role": {
+          "default": "input",
+          "enum": [
+            "input",
+            "decision"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "maxLength": 80,
+          "title": "Unit",
+          "type": "string"
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "note": {
+          "default": "",
+          "maxLength": 400,
+          "title": "Note",
+          "type": "string"
+        },
+        "basis": {
+          "default": "UNKNOWN",
+          "enum": [
+            "AUTHOR",
+            "CANON",
+            "REFERENCE",
+            "DEMO",
+            "AI_PROPOSED",
+            "SCENARIO",
+            "UNKNOWN"
+          ],
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Input",
+      "type": "object"
+    },
+    "Output": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "expression": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Expression",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "maxLength": 80,
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "expression"
+      ],
+      "title": "Output",
+      "type": "object"
+    },
+    "ResourceCapacity": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "capacity": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Capacity",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "capacity"
+      ],
+      "title": "ResourceCapacity",
+      "type": "object"
+    },
+    "Schedule": {
+      "additionalProperties": false,
+      "properties": {
+        "tick_unit": {
+          "default": "hour",
+          "maxLength": 80,
+          "title": "Tick Unit",
+          "type": "string"
+        },
+        "horizon": {
+          "default": 48,
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Horizon",
+          "type": "integer"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/$defs/ResourceCapacity"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Resources",
+          "type": "array"
+        },
+        "operations": {
+          "items": {
+            "$ref": "#/$defs/ScheduledOperation"
+          },
+          "maxItems": 48,
+          "minItems": 1,
+          "title": "Operations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "resources",
+        "operations"
+      ],
+      "title": "Schedule",
+      "type": "object"
+    },
+    "ScheduledOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "duration": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Duration",
+          "type": "string"
+        },
+        "resource": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Resource",
+          "type": "string"
+        },
+        "demand": {
+          "default": "1",
+          "maxLength": 800,
+          "title": "Demand",
+          "type": "string"
+        },
+        "predecessors": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "title": "Predecessors",
+          "type": "array"
+        },
+        "release": {
+          "default": 0,
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Release",
+          "type": "integer"
+        },
+        "deadline": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deadline"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "duration",
+        "resource"
+      ],
+      "title": "ScheduledOperation",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "default": "manual",
+          "enum": [
+            "entity",
+            "character",
+            "event",
+            "chapter",
+            "clue",
+            "reference",
+            "manual"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "target_id": {
+          "default": "",
+          "maxLength": 100,
+          "title": "Target Id",
+          "type": "string"
+        },
+        "name": {
+          "default": "",
+          "maxLength": 200,
+          "title": "Name",
+          "type": "string"
+        },
+        "basis": {
+          "default": "UNKNOWN",
+          "enum": [
+            "AUTHOR_CONFIRMED",
+            "COMMITTED",
+            "REFERENCE",
+            "ASSUMPTION",
+            "UNKNOWN"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "sha256": {
+          "default": "",
+          "pattern": "^(?:[a-f0-9]{64})?$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "excerpt": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/SourceFact"
+          },
+          "maxItems": 32,
+          "title": "Facts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "SourceFact": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 80,
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "unit": {
+          "default": "",
+          "maxLength": 80,
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "SourceFact",
+      "type": "object"
+    },
+    "Sweep": {
+      "additionalProperties": false,
+      "properties": {
+        "variable": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+          "title": "Variable",
+          "type": "string"
+        },
+        "minimum": {
+          "title": "Minimum",
+          "type": "number"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "number"
+        },
+        "samples": {
+          "default": 8,
+          "maximum": 32,
+          "minimum": 2,
+          "title": "Samples",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "variable",
+        "minimum",
+        "maximum"
+      ],
+      "title": "Sweep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "experiment_id": {
+      "pattern": "^exp_[0-9a-f]{32}$",
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "maxLength": 4000,
+      "title": "Description",
+      "type": "string"
+    },
+    "experiment_type": {
+      "default": "custom",
+      "enum": [
+        "logic",
+        "time_space",
+        "physics",
+        "resources",
+        "world_rules",
+        "counterfactual",
+        "custom"
+      ],
+      "title": "Experiment Type",
+      "type": "string"
+    },
+    "solver": {
+      "default": "formula",
+      "enum": [
+        "z3",
+        "graph",
+        "formula",
+        "schedule"
+      ],
+      "title": "Solver",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "maxItems": 48,
+      "title": "Inputs",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "$ref": "#/$defs/Assumption"
+      },
+      "maxItems": 32,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "constraints": {
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "maxItems": 64,
+      "title": "Constraints",
+      "type": "array"
+    },
+    "acceptance_rules": {
+      "items": {
+        "$ref": "#/$defs/Acceptance"
+      },
+      "maxItems": 48,
+      "title": "Acceptance Rules",
+      "type": "array"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/Output"
+      },
+      "maxItems": 32,
+      "title": "Outputs",
+      "type": "array"
+    },
+    "source_references": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 24,
+      "title": "Source References",
+      "type": "array"
+    },
+    "dependencies": {
+      "items": {
+        "$ref": "#/$defs/Dependency"
+      },
+      "maxItems": 100,
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/EventTime"
+      },
+      "maxItems": 64,
+      "title": "Events",
+      "type": "array"
+    },
+    "schedule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Schedule"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "sensitivity": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Sweep"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "baseline_id": {
+      "default": "",
+      "pattern": "^(?:exp_[0-9a-f]{32})?$",
+      "title": "Baseline Id",
+      "type": "string"
+    },
+    "baseline_version": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baseline Version"
+    },
+    "baseline_fingerprint": {
+      "default": "",
+      "pattern": "^(?:[a-f0-9]{64})?$",
+      "title": "Baseline Fingerprint",
+      "type": "string"
+    },
+    "baseline_acceptance_fingerprint": {
+      "default": "",
+      "pattern": "^(?:[a-f0-9]{64})?$",
+      "title": "Baseline Acceptance Fingerprint",
+      "type": "string"
+    },
+    "scenario_note": {
+      "default": "",
+      "maxLength": 1200,
+      "title": "Scenario Note",
+      "type": "string"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 24,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "steps": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 16,
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "name"
+  ],
+  "title": "Experiment",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-studio.example/schemas/world-experiment-1.0.json"
+}

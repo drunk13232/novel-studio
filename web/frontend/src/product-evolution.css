@@ -1,0 +1,200 @@
+/* 2.18 / An editorial desk: typography and useful space before ornament. */
+.studio{--evo-rule:color-mix(in srgb,var(--line) 72%,transparent);--evo-soft:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+.studio .library-title{min-block-size:178px;gap:24px;padding:24px 30px;margin-block-end:18px}
+.studio .library-title h1{font-size:clamp(26px,2.3vw,35px);margin-block:8px}
+.studio .library-title>.library-welcome-actions{flex:0 1 370px;min-inline-size:260px;display:grid;gap:10px;position:relative;z-index:1}
+.studio .library-welcome-actions>div{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.studio .library-welcome-actions>div>button{font-size:12px;min-block-size:31px;padding:6px 10px}
+.studio .bookshelf-return{display:flex;align-items:center;gap:13px;text-align:start;inline-size:100%;padding:14px 16px;min-block-size:94px;background:color-mix(in srgb,var(--surface) 91%,transparent);border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line));box-shadow:0 5px 18px color-mix(in srgb,var(--ink) 5%,transparent);position:relative;overflow:hidden}
+.studio .bookshelf-return::after{content:"";position:absolute;inset-block:0;inset-inline-end:0;inline-size:90px;pointer-events:none;background:url('/themes/desk-signet.svg') no-repeat center/80px;opacity:.08}
+.studio .bookshelf-return:hover{background:var(--surface);border-color:var(--accent)}
+.studio .return-bookmark{display:grid;place-items:center;inline-size:40px;block-size:54px;flex-shrink:0;align-self:flex-start;background:var(--wash);color:var(--accent);border:1px solid var(--line);border-block-start:3px solid var(--accent);border-radius:2px 2px 9px 9px}
+.studio .return-copy{display:grid;gap:4px;min-inline-size:0;flex:1}
+.studio .return-copy small{font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.studio .return-copy strong{font-family:var(--study-title);font-size:19px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.studio .return-copy>span{display:flex;gap:5px;align-items:center;color:var(--muted);font-size:11px;line-height:1.5}
+.studio .return-open{color:var(--accent);align-self:center}
+.studio .library-filter{margin-block-end:18px;padding-block:8px 14px;gap:10px}
+.studio .library-filter input{max-inline-size:520px}
+.studio .book-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:20px}
+.studio .book-card{display:grid;grid-template-columns:104px minmax(0,1fr);padding:16px;gap:18px;max-inline-size:none;min-block-size:238px;align-items:start;isolation:isolate}
+.studio .book-card .book-cover{inline-size:104px;block-size:192px;min-block-size:0;max-block-size:none;margin:0;border-radius:3px;overflow:hidden;align-self:center;box-shadow:4px 3px 0 var(--canvas),5px 3px 0 var(--line)}
+.studio .book-card .book-cover>img{object-fit:contain;background:color-mix(in srgb,var(--paper) 60%,var(--canvas))}
+.studio .book-card .book-cover>span{font-size:8px;letter-spacing:.06em;padding:8px}
+.studio .book-card .book-cover>div{font-size:20px;padding-inline:8px}
+.studio .book-card .book-cover>small{font-size:8px;letter-spacing:.08em}
+.studio .book-info{padding:4px 0 0;min-inline-size:0;display:flex;flex-direction:column;gap:4px}
+.studio .book-info>h2{font-size:22px;line-height:1.4;margin:3px 24px 0 0;overflow-wrap:anywhere}
+.studio .book-info>p{font-size:12px;margin:5px 0;line-height:1.6;color:var(--muted)}
+.studio .book-info>small{font-size:10px;line-height:1.6}
+.studio .book-info>.overline{font-size:9px;margin-block:3px 0;letter-spacing:.08em}
+.studio .book-info .form-badge{align-self:flex-start;font-size:10px;min-block-size:0;padding:0 6px}
+.studio .book-info .book-metrics{gap:16px;flex-wrap:wrap;padding:8px 0;border-block:1px solid var(--evo-rule);margin:2px 0 3px;font-size:11px}
+.studio .book-info .book-metrics b{font-size:16px;font-family:var(--study-title);font-weight:600}
+.studio .book-info .continue-writing{margin-block-start:7px;inline-size:100%;min-block-size:32px;font-size:12px;padding:5px 10px}
+.studio .book-card .book-more{inset-block-start:12px;inset-inline-end:12px}
+.studio .book-card .book-more>summary{font-size:19px;line-height:1;padding:3px 7px}
+.studio .library-no-results{border:1px dashed var(--line);border-radius:var(--radius-card);display:grid;justify-items:center;gap:10px;padding:34px 20px;text-align:center;color:var(--muted)}
+.studio .library-no-results svg{color:var(--accent)}
+.studio .library-no-results h2{font:600 23px/1.5 var(--study-title);color:var(--ink);margin:0}
+.studio .library-no-results p{margin:0;max-inline-size:55ch}
+.studio details.creation-drafts{margin-block:24px 20px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);padding:0}
+.studio .creation-drafts>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:14px 18px;font-size:13px;color:var(--muted)}
+.studio .creation-drafts>summary::before{content:"›";font-size:18px;transition:transform .12s}
+.studio .creation-drafts[open]>summary::before{transform:rotate(90deg)}
+.studio .creation-drafts>summary>h2{font:600 15px/1.5 var(--ui-font);margin:0;color:var(--ink)}
+.studio .creation-drafts>summary>span{font-size:11px;padding:1px 7px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.studio .creation-drafts>summary>small{margin-inline-start:auto;font-size:11px}
+.studio .creation-drafts-grid{padding:0 16px 16px}
+.studio .creation-draft-card{padding:16px;border:1px solid var(--line);box-shadow:none}
+
+/* Navigation retains the guarded destinations, with chapter space kept visible. */
+.studio .studio-nav{padding-block:14px 8px}
+.studio .studio-nav>h2{font-size:18px;margin-block:5px 8px;padding-block:2px 8px;line-height:1.45}
+.studio .studio-nav .back-library{font-size:11px;min-block-size:27px;padding-block:3px}
+.studio .navigation-mode{display:flex;gap:3px;padding:3px;margin-block-end:9px;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--canvas);flex-shrink:0}
+.studio .navigation-mode>button{flex:1;min-inline-size:0;border:0;background:transparent;color:var(--muted);font-size:11px;min-block-size:27px;padding:3px 5px}
+.studio .navigation-mode>button[aria-pressed=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 3px color-mix(in srgb,var(--ink) 8%,transparent)}
+.studio .studio-nav nav.project-navigation{display:flex;flex-direction:column;gap:4px;max-block-size:clamp(160px,28vh,240px);overflow:auto;padding-inline-end:2px;scrollbar-gutter:stable}
+.studio .navigation-primary{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.studio .studio-nav .project-navigation button{display:flex;align-items:center;gap:7px;min-inline-size:0;inline-size:100%;text-align:start;padding:7px 8px;min-block-size:32px;line-height:1.5;font-size:12px;border:1px solid transparent;border-radius:var(--radius-control)}
+.studio .project-navigation button>svg{flex-shrink:0;color:var(--muted)}
+.studio .studio-nav .project-navigation button>span{display:block;flex:1;inline-size:auto;width:auto;min-inline-size:0;overflow-wrap:anywhere}
+.studio .project-navigation button[aria-current=page]{background:var(--wash);color:var(--accent);border-color:color-mix(in srgb,var(--accent) 24%,var(--line));box-shadow:inset 2px 0 var(--accent)}
+.studio .project-navigation button[aria-current=page]>svg{color:var(--accent)}
+.studio .project-navigation .navigation-index{background:var(--evo-soft);border-color:var(--line);margin-block-start:4px;color:var(--accent)}
+.studio .navigation-index>small{margin-inline-start:auto;font-variant-numeric:tabular-nums;border:1px solid var(--line);padding:0 5px;border-radius:3px;font-size:10px}
+.studio .navigation-current{border-block-start:1px solid var(--line);padding-block-start:5px}
+.studio .navigation-current>small{font-size:9px;padding-inline:8px;color:var(--muted)}
+.studio .navigation-groups{border-block-start:1px solid var(--line);padding-block-start:4px}
+.studio .project-navigation button.navigation-group-title{font-size:10px;letter-spacing:.04em;color:var(--muted);min-block-size:28px;padding-block:4px}
+.studio .navigation-group-title>small{margin-inline-start:auto;font-size:9px}
+.studio .navigation-group-title[aria-expanded=true]>svg{transform:rotate(180deg)}
+.studio .navigation-group>div{display:grid;grid-template-columns:1fr 1fr;padding-block-end:5px}
+.studio .nav-divider{margin-block:8px}
+.studio .chapter-nav-heading{padding-block:3px;gap:8px}
+.studio .chapter-nav-heading>button{min-block-size:24px;padding:0 6px}
+.studio .chapter-nav-heading>small{font-size:10px;letter-spacing:.08em;font-weight:600}
+.studio .chapter-search{min-block-size:32px;padding:6px 9px;font-size:11px;margin-block:4px 8px}
+.studio .chapter-tree{scrollbar-gutter:stable;padding-block:4px;min-height:70px;min-block-size:70px}
+.studio .chapter-link{position:relative;min-block-size:35px;padding-block:7px;line-height:1.5;gap:8px;border:1px solid transparent;border-radius:var(--radius-control)}
+.studio .chapter-link .chapter-number{font:500 10px/1.6 var(--ui-font);font-variant-numeric:tabular-nums;color:var(--muted);min-inline-size:25px}
+.studio .chapter-link.selected{background:var(--wash);border-color:color-mix(in srgb,var(--accent) 22%,var(--line));box-shadow:inset 2px 0 var(--accent)}
+.studio .chapter-link.selected .chapter-number{font-weight:700;color:var(--accent)}
+.studio .chapter-label{font-size:12px;line-height:1.6}
+.studio .volume-heading{font-weight:600;font-size:11px;letter-spacing:.02em;line-height:1.6;padding-block:9px}
+.studio .chapter-search-empty{padding:14px 8px;font-size:11px;line-height:1.8;color:var(--muted);text-align:center}
+.studio .chapter-search-empty button{font-size:11px;display:block;margin:8px auto 0;min-block-size:28px}
+.studio .nav-bottom{font-size:10px;padding-block:8px}
+.studio .nav-bottom>button{min-block-size:27px;font-size:11px}
+
+.studio .tool-index-dialog{inline-size:min(820px,calc(100vw / var(--ui-scale,1) - 48px));padding:24px;max-block-size:calc(100dvh / var(--ui-scale,1) - 48px)}
+.studio .tool-index-dialog>.muted{font-size:12px;margin-block:0 16px}
+.studio .studio-dialog label.tool-index-search{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--paper);border-radius:var(--radius-control);padding-inline:12px;margin-block-end:18px;color:var(--muted)}
+.studio .studio-dialog .tool-index-search input{border:0;background:transparent;inline-size:100%;font-size:13px;min-block-size:40px;padding-inline:0;margin:0}
+.studio .tool-index-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.studio .tool-index-grid section{min-inline-size:0}
+.studio .tool-index-grid h3{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.04em;border-block-end:1px solid var(--line);padding-block-end:8px;margin:0 0 7px;color:var(--muted)}
+.studio .tool-index-grid h3 small{font-size:10px;margin-inline-start:auto}
+.studio .tool-index-grid section>button{display:flex;align-items:center;gap:8px;inline-size:100%;background:transparent;border-color:transparent;text-align:start;padding:8px;min-inline-size:0;font-size:12px}
+.studio .tool-index-grid section>button>svg{flex-shrink:0;color:var(--accent)}
+.studio .tool-index-grid section>button>svg:last-child{margin-inline-start:auto;color:var(--muted);opacity:.5}
+.studio .tool-index-grid section>button>span{overflow-wrap:anywhere}
+.studio .tool-index-grid section>button:hover,.studio .tool-index-grid section>button[aria-current=page]{background:var(--wash);border-color:var(--line)}
+.studio .tool-index-empty{padding:25px;text-align:center;color:var(--muted)}
+.studio .tool-index-footnote{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin-block:22px 0;border-block-start:1px solid var(--line);padding-block-start:12px}
+.studio .tool-index-footnote kbd{border:1px solid var(--line);border-radius:3px;padding:2px 6px;background:var(--paper);font:10px/1.4 var(--ui-font)}
+.studio .tool-index-footnote>button{display:flex;align-items:center;gap:5px;font-size:11px;margin-inline-start:auto}
+
+/* The title is a slim folio header, never an overlay on CodeMirror. */
+.studio .writing-surface .manuscript-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:20px;row-gap:2px;padding:14px max(24px,calc((100% - var(--writing-width)) / 2));margin:0;border-block-end:1px solid var(--line);min-block-size:0;background:var(--surface)}
+.studio .manuscript-heading>.overline{grid-column:1;grid-row:1;font-size:9px;line-height:1.3;letter-spacing:.14em;margin:0}
+.studio .manuscript-heading>h1{grid-column:1;grid-row:2;font-family:var(--study-title);font-size:clamp(23px,2.1vw,29px);font-weight:600;line-height:1.35;margin:0;overflow-wrap:anywhere}
+.studio .manuscript-heading>.manuscript-meta{grid-column:2;grid-row:1 / 3;display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap;max-inline-size:270px;margin:0;font-size:10px}
+.studio .manuscript-meta>button{font-size:10px;min-block-size:27px;padding:3px 7px;border-color:var(--line);background:var(--paper)}
+.studio .manuscript-meta>span{font-size:10px;line-height:1.5;color:var(--muted)}
+.studio .manuscript-meta>select{font-size:10px;min-block-size:26px;padding:3px 6px;max-inline-size:150px}
+.studio .writing-surface>.writing-ai{border-block-end:1px solid var(--line);background:var(--paper)}
+.studio .writing-ai>.wa-toolbar{padding-block:5px;gap:5px;min-block-size:0}
+.studio .wa-toolbar>button{min-block-size:27px;padding:3px 8px;font-size:10px}
+.studio .wa-scope-status{font-size:10px}
+.studio .speech-panel{padding-block:4px}
+.studio .writing-toolbar{padding-block:7px;min-block-size:45px}
+.studio .desk-tabs{min-block-size:40px;padding-block:6px}
+.studio .desk-tab{border-radius:var(--radius-control) var(--radius-control) 0 0;min-inline-size:0}
+.studio .desk-tab.active{border-block-start:2px solid var(--accent);background:var(--surface);box-shadow:none}
+.studio .desk-tab>button{font-size:11px;min-block-size:26px;padding-block:3px}
+.studio .is-focused .manuscript-heading,.studio.is-focused .manuscript-heading{padding-block:10px}
+
+/* Dossiers use fine labels and calm grouping; no theme fabric behind prose. */
+.studio :is(.detail-page,.studio-page)>.page-title{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:18px;row-gap:7px;padding-block:8px 18px;margin-block-end:20px;border-block-end:1px solid var(--line)}
+.studio :is(.detail-page,.studio-page)>.page-title>h1{font-size:28px;line-height:1.4;margin:0;grid-column:1}
+.studio :is(.detail-page,.studio-page)>.page-title>p{font-size:12px;line-height:1.7;margin:0;grid-column:1;color:var(--muted)}
+.studio :is(.detail-page,.studio-page)>.page-title>button{grid-column:2;grid-row:1 / 3;align-self:center;font-size:12px}
+.studio .character-layout{gap:20px;align-items:start}
+.studio .character-list{position:relative;min-inline-size:0}
+.studio .character-list>input{font-size:12px;inline-size:100%;padding:8px 10px}
+.studio .character-list>label{font-size:10px;color:var(--muted);display:grid;gap:4px;margin-block:10px}
+.studio .character-list>label>select{font-size:11px;padding:6px 9px}
+.studio .character-list section>h3{font-size:11px;font-weight:600;color:var(--muted);border-block-end:1px solid var(--line);padding-block:8px;margin:8px 0;display:flex;align-items:center;gap:6px}
+.studio .character-list-row{position:relative;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);margin-block:9px;overflow:hidden;padding:0}
+.studio .character-list-row:has(button[aria-pressed=true]){border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:inset 3px 0 var(--accent)}
+.studio .character-list-row>.check{position:absolute;inset-block-start:9px;inset-inline-end:9px;z-index:1;font-size:9px;color:var(--muted);gap:3px;background:var(--surface);padding-inline:3px;border-radius:3px}
+.studio .character-list-row>.check input{inline-size:12px;block-size:12px;margin:0}
+.studio .character-list-row>button{border:0;background:transparent;padding:15px 13px 12px;inline-size:100%;text-align:start;border-radius:inherit;min-block-size:126px;font-size:11px}
+.studio .character-list-row>button[aria-pressed=true]{background:var(--evo-soft)}
+.studio .character-list-row>button>strong{display:block;font-family:var(--study-title);font-size:17px;line-height:1.5;padding-inline-end:42px}
+.studio .character-list-row>button>small{display:block;line-height:1.7;color:var(--muted);font-size:10px}
+.studio .character-list-row .default-character-avatar{inline-size:35px;block-size:35px;font:18px/35px var(--study-title);border:1px solid var(--line);margin-block-start:2px}
+.studio .character-detail>.card{border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);padding:20px}
+.studio .character-heading{padding-block-end:16px;border-block-end:1px solid var(--line);margin-block-end:15px}
+.studio .character-heading h2{font-family:var(--study-title);font-size:26px;margin-block:0 6px}
+.studio .character-detail .character-heading{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:18px;position:relative}
+.studio .character-heading>h2{flex:1 0 100%;line-height:1.4;margin:0 0 4px}
+.studio .character-heading>button{font-size:10px;padding:4px 7px;min-block-size:27px}
+.studio .character-heading>p{flex-basis:100%;font-size:11px;color:var(--muted);margin:2px 0 0;line-height:1.8}
+.studio .character-heading .character-tabs{display:flex;gap:3px;flex-wrap:wrap;inline-size:100%;margin-block:7px 0;padding-block-start:10px;border-block-start:1px solid var(--line)}
+.studio .character-tabs>button{min-block-size:28px;font-size:11px;padding:4px 8px;border-color:transparent;background:transparent;border-radius:var(--radius-control)}
+.studio .character-tabs>button.active{border-color:color-mix(in srgb,var(--accent) 30%,var(--line));background:var(--wash);color:var(--accent)}
+.studio .character-tabs>select{font-size:10px;padding:4px 7px;min-block-size:28px;margin-inline-start:auto;max-inline-size:140px}
+.studio .character-heading .character-portrait{inline-size:64px;block-size:82px;object-fit:contain;border-radius:var(--radius-control);border:1px solid var(--line)}
+.studio .character-heading:has(.character-portrait)>h2{flex:1 1 60%;min-inline-size:120px}
+.studio .character-detail>.card:not(.character-heading){padding:18px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-card)}
+.studio .character-detail h3{font-size:12px;line-height:1.6;border-block-end:1px solid var(--evo-rule);padding-block-end:7px;margin-block:16px 8px;color:var(--muted)}
+.studio .character-detail dl{row-gap:12px;column-gap:14px}
+.studio .character-detail dt{font-size:10px;color:var(--muted);letter-spacing:.03em}
+.studio .character-detail dd{font-size:12px;line-height:1.8;margin-inline-start:0}
+.studio :is(.ws-card,.ws-entity-card,.wb-entity-card,.evaluation-card,.lc-card){border-color:var(--line);box-shadow:0 2px 8px color-mix(in srgb,var(--ink) 3%,transparent)}
+.studio :is(.ws-card,.ws-entity-card,.wb-entity-card,.evaluation-card,.lc-card):hover{border-color:color-mix(in srgb,var(--accent) 32%,var(--line))}
+.studio .evaluation-card h3{font-family:var(--study-title);font-size:19px;line-height:1.5}
+.studio .score-medallion{font-variant-numeric:tabular-nums}
+.studio .score-medallion strong{font-family:var(--study-title);font-weight:600;letter-spacing:-.02em}
+.studio .evaluation-card :is(.muted,small){font-size:11px;line-height:1.8}
+.studio :is(.assistant-message,.assistant-confirmation,.assistant-result){border-radius:var(--radius-card);border-color:var(--line);line-height:1.8}
+.studio :is(.assistant-message,.assistant-result) pre{font-family:var(--ui-font);white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.studio .project-appearance{display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px 13px;padding:18px;border:1px solid var(--line);border-radius:var(--radius-card);margin-block-end:22px;background:var(--evo-soft)}
+.studio .project-appearance-icon{grid-row:1 / 3;inline-size:39px;block-size:45px;display:grid;place-items:center;border:1px solid var(--line);border-block-start:3px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:2px 2px 8px 8px}
+.studio .project-appearance h3{font-size:16px;margin:0 0 5px}
+.studio .project-appearance p{font-size:11px;line-height:1.7;color:var(--muted);margin:0}
+.studio .project-appearance-options{display:flex;gap:7px;flex-wrap:wrap;grid-column:2}
+.studio .project-appearance-options>button{display:flex;align-items:center;gap:6px;font-size:11px;min-block-size:31px;background:var(--surface)}
+.studio .project-appearance-options>button[aria-pressed=true]{border-color:var(--accent);color:var(--accent);background:var(--wash)}
+.studio .project-appearance .project-appearance-receipt{grid-column:2;font-size:10px}
+
+/* Family-specific finishing, rather than a universal glow or photograph. */
+:root[data-visual-family=archive] .studio .return-bookmark{border-style:double;border-width:3px;border-radius:0}
+:root[data-visual-family=ink] .studio :is(.bookshelf-return,.character-list-row,.project-appearance){box-shadow:none;border-inline:0;border-radius:0;border-block-start:1px solid var(--ink)}
+:root[data-visual-family=ink] .studio .manuscript-heading{border-block-end-style:double;border-block-end-width:3px}
+:root[data-visual-family=astral] .studio .return-bookmark{border-radius:18px 18px 4px 4px}
+:root[data-visual-family=gothic] .studio .return-bookmark{border-radius:22px 22px 0 0;border-color:var(--gold);color:var(--gold)}
+:root[data-visual-family=technical] .studio .bookshelf-return{box-shadow:none;border-inline-start:3px solid var(--accent)}
+:root[data-visual-family=technical] .studio .return-bookmark{border-radius:0;border-style:dashed}
+:root[data-visual-family=botanical] .studio .return-bookmark{border-radius:20px 20px 7px 7px}
+:root[data-visual-family=companion] .studio .return-bookmark{background:var(--wash);border-block-end:3px double var(--gold)}
+:root[data-visual-family=minimal] .studio :is(.bookshelf-return,.book-card,.character-list-row,.project-appearance){box-shadow:none;border-radius:2px}
+:root[data-visual-family=minimal] .studio .bookshelf-return::after{display:none}
+.studio[data-decorations=false] .bookshelf-return::after,.studio.is-focused .bookshelf-return::after{display:none}
+:root[dir=rtl] .studio .project-navigation button[aria-current=page],:root[dir=rtl] .studio .chapter-link.selected{box-shadow:inset -2px 0 var(--accent)}
+@media(max-width:1100px){.studio .writing-surface .manuscript-heading{padding-inline:25px}.studio .manuscript-heading>.manuscript-meta{max-inline-size:210px}.studio .wa-scope-status{display:none}.studio .book-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,375px),1fr))}}
+@media(max-width:850px){.studio .library-title{padding:20px;gap:15px}.studio .library-title>.library-welcome-actions{flex:1 1 300px}.studio .library-title>div:first-of-type{min-inline-size:230px}.studio .manuscript-heading>.manuscript-meta{grid-column:1 / 3;grid-row:3;justify-content:flex-start;max-inline-size:none;gap:4px;margin-block-start:5px}.studio .tool-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.studio .book-card{grid-template-columns:85px minmax(0,1fr);gap:13px;padding:13px}.studio .book-card .book-cover{inline-size:85px;block-size:166px}.studio .book-info>h2{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.studio .creation-drafts>summary::before{transition:none}}

@@ -1,0 +1,23 @@
+chapter:
+  number: null
+  title: null
+  volume: null
+pov:
+  character: null
+setting:
+  location: null
+  story_time: null
+chapter_goal: null
+character_goals: {}
+scenes: []
+must_include: []
+must_not_include: []
+foreshadowing:
+  advance: []
+  introduce: []
+  resolve: []
+knowledge_changes: []
+state_changes_expected: []
+ending_hook: null
+writer_view: []
+approved_disclosures: []

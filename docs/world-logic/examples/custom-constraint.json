@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_00000000000000000000000000000005",
+  "name": "自定义逻辑约束",
+  "description": "可修改的虚构演示参数，不属于任何小说 Canon。",
+  "experiment_type": "logic",
+  "solver": "z3",
+  "inputs": [
+    {
+      "id": "energy",
+      "name": "可用魔法能量",
+      "kind": "real",
+      "role": "decision",
+      "value": null,
+      "unit": "joule",
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "cost",
+      "name": "作者确认的最低消耗",
+      "kind": "real",
+      "role": "input",
+      "value": 20.0,
+      "unit": "joule",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "demo",
+      "text": "以下仅为虚构演示输入；复制后请由作者重新确认。",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "magic_cost",
+      "name": "魔法消耗约束",
+      "expression": "energy >= cost",
+      "meaning": "能量至少足够一次施法；未采用现实物理的默认规则。",
+      "source_ids": []
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "id": "possible",
+      "name": "可行解满足最低消耗",
+      "type": "HARD",
+      "expression": "energy >= cost",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "dimensionless",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [],
+  "source_references": [],
+  "dependencies": [],
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "模板仅验证明确数学关系，不替代语义审查。"
+  ],
+  "steps": []
+}

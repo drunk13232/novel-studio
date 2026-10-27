@@ -1,0 +1,349 @@
+{
+  "application_version": "2.22.2",
+  "history_is_not_verification": true,
+  "sources": [
+    {
+      "path": "release/v2.10.0/NovelStudio/version.json",
+      "sha256": "de7546f041ce655d4b8ee9ca790fad6c9549e83459e81294feea12d7f69e41a4",
+      "declared_version": "2.10.0",
+      "release_date": "2026-10-13",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.1/NovelStudio/version.json",
+      "sha256": "0ed7f2ddbf66229573199e3ffed142422225d74dac47316e1a6240615395bea5",
+      "declared_version": "2.10.1",
+      "release_date": "2026-10-13",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.2/NovelStudio/version.json",
+      "sha256": "d13de69030ca1bec984eb3a4f3af632832f6b488d9bb016418b80c8135067140",
+      "declared_version": "2.10.2",
+      "release_date": "2026-10-13",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3/NovelStudio/version.json",
+      "sha256": "173c73b93f19b0d755f79d7d3689ce807d88f720a826a77e254ec2a521878be6",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-14",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-ai-writing/NovelStudio/version.json",
+      "sha256": "cf58f1bea6eac889f1758a81d2f81d4d2331367843f89a0c2947a5a46f96e197",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-assistant/NovelStudio/version.json",
+      "sha256": "77191d8f360452a5fd6ff4f7a08fe0cd103b617fa8c297d78239c0d12ca3bd04",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-author-workflow/NovelStudio/version.json",
+      "sha256": "9430b051e4b8d9aa0bd3371575aa238e77ad7e8e018f149d109b7fb8adab11a3",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-autonomous/NovelStudio/version.json",
+      "sha256": "9430b051e4b8d9aa0bd3371575aa238e77ad7e8e018f149d109b7fb8adab11a3",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-autonomous-final/NovelStudio/version.json",
+      "sha256": "e443f2e8a864e0dd7340bf8c24f470743165d478d9c072cbd7aeefbd608825c5",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-coherent/NovelStudio/version.json",
+      "sha256": "1d5224b3feca535d0390de60ad70ab07ccbd53828515a700ccdfff68eed61d00",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-14",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-companion/NovelStudio/version.json",
+      "sha256": "173c73b93f19b0d755f79d7d3689ce807d88f720a826a77e254ec2a521878be6",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-14",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-creative-director/NovelStudio/version.json",
+      "sha256": "d2f3710da12352f72e1cd464cf746e5be7242290b00bbc516680d36f00a6a119",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-16",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-creative-workspace/NovelStudio/version.json",
+      "sha256": "b570f0ab930fbbda7c505ffe76a1da69a9a844bc13650e5c925b07dff7faf326",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-16",
+      "edition": "Creative Workspace Preview"
+    },
+    {
+      "path": "release/v2.10.3-daily/NovelStudio/version.json",
+      "sha256": "5d9898bc9e6678f7fa6b38cf04fa83357a9f9fbd6308d42c27b88916ba2625f4",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-embodied/NovelStudio/version.json",
+      "sha256": "77191d8f360452a5fd6ff4f7a08fe0cd103b617fa8c297d78239c0d12ca3bd04",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-input-fix/NovelStudio/version.json",
+      "sha256": "fd479af074f0fe62f94ebe895fd6bb7896bbabf249eb2bc3d9d15b1a526e6734",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-pet/NovelStudio/version.json",
+      "sha256": "35fd7dce2ce08c48a428a2ca537ce60e8a96f22fce2cf4280032048aab9bfca7",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-14",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-stability/NovelStudio/version.json",
+      "sha256": "5d9898bc9e6678f7fa6b38cf04fa83357a9f9fbd6308d42c27b88916ba2625f4",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-visible/NovelStudio/version.json",
+      "sha256": "f33aaa0fdea36e358921a8406511370045f7ecefdd6def5db94f567fb0b725c2",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-14",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.10.3-writing-quality/NovelStudio/version.json",
+      "sha256": "e69b0e03db7d9131a9cb706b3ad4191fd54842bee28307112f8db28cfe711c30",
+      "declared_version": "2.10.3",
+      "release_date": "2026-10-15",
+      "edition": ""
+    },
+    {
+      "path": "release/v2.11/NovelStudio/version.json",
+      "sha256": "36129cc8e6db8b01cec367050410125d1c512453c5ff5b56abcb024517987364",
+      "declared_version": "2.11",
+      "release_date": "2026-10-16",
+      "edition": "Professional Writing Preview"
+    },
+    {
+      "path": "release/v2.11.1/NovelStudio/version.json",
+      "sha256": "d7e8e53af5ec499c9d22eac7a4815ddcae15a875f363ca2fdadfc0cf8febdeef",
+      "declared_version": "2.11.1",
+      "release_date": "2026-10-16",
+      "edition": "Creative Workflow Reliability Preview"
+    },
+    {
+      "path": "release/v2.11.2/NovelStudio/version.json",
+      "sha256": "57fd44abb4d098e230ce68ade2b26b187cc739c39eae59ae1d45f4d0e33a24c7",
+      "declared_version": "2.11.2",
+      "release_date": "2026-10-16",
+      "edition": "Core Reliability Preview"
+    },
+    {
+      "path": "release/v2.12.0/NovelStudio/version.json",
+      "sha256": "a3f6c6a133d618fccb1b35b5c47effbda151176a6d457215afeb5848a61bab1f",
+      "declared_version": "2.12.0",
+      "release_date": "2026-10-16",
+      "edition": "Literary Core Preview"
+    },
+    {
+      "path": "release/v2.12.1/NovelStudio/version.json",
+      "sha256": "f83c25e42773ea8bc21d5eb46fbda14e4bcdef5375dca8ef4e69f4749388fcfa",
+      "declared_version": "2.12.1",
+      "release_date": "2026-10-16",
+      "edition": "Literary Evaluation Preview"
+    },
+    {
+      "path": "release/v2.12.2/NovelStudio/version.json",
+      "sha256": "3ea5d590b77584f8c5fa08ceac76bc7a0a4636cf768b6c05376837d2428e838a",
+      "declared_version": "2.12.2",
+      "release_date": "2026-10-17",
+      "edition": "Visual Design Upgrade Preview"
+    },
+    {
+      "path": "release/v2.13.0/NovelStudio/version.json",
+      "sha256": "1d2693e9663d3421069059399a05d591ca72c448712d3dd936073fdb0bcc641d",
+      "declared_version": "2.13.0",
+      "release_date": "2026-10-17",
+      "edition": "AI Writing Quality Preview"
+    },
+    {
+      "path": "release/v2.14.0/NovelStudio/version.json",
+      "sha256": "a84629f6038c4a4b31709936f64d764885f38257fff7fd779f19af9aaa822758",
+      "declared_version": "2.14.0",
+      "release_date": "2026-10-17",
+      "edition": "Long-Form Narrative Intelligence Preview"
+    },
+    {
+      "path": "release/v2.15.0/NovelStudio/version.json",
+      "sha256": "e287e049238310bd03e7b3785f6a80625eaf2a53d33cb3e0c2801a69f8a07d65",
+      "declared_version": "2.15.0",
+      "release_date": "2026-10-17",
+      "edition": "Long-Form Narrative Intelligence Preview"
+    },
+    {
+      "path": "release/v2.16.0/NovelStudio/version.json",
+      "sha256": "5a54c4c399109db3510b8f76eb5d00d97b87c49718ca8be4a3895ccc1adce116",
+      "declared_version": "2.16.0",
+      "release_date": "2026-10-17",
+      "edition": "World Model & Memory Preview"
+    },
+    {
+      "path": "release/v2.16.1/NovelStudio/version.json",
+      "sha256": "c23d294ca395c774fa8b24a7d6d86e0f51f107acd4107545ead0fc08615eccf9",
+      "declared_version": "2.16.1",
+      "release_date": "2026-10-17",
+      "edition": "Advanced AI Controls Preview"
+    },
+    {
+      "path": "release/v2.16.2/NovelStudio/version.json",
+      "sha256": "fa9f045bab7e14d009f7494f5d766b5e007b0d5ff94c57407b0043a1e6174dfc",
+      "declared_version": "2.16.2",
+      "release_date": "2026-10-17",
+      "edition": "Daily Experience Preview"
+    },
+    {
+      "path": "release/v2.17.0/NovelStudio/version.json",
+      "sha256": "efc78d82e941ead048e2f36191a0a1bd1634b5bbce75bb3415f74b212b249db5",
+      "declared_version": "2.17.0",
+      "release_date": "2026-10-18",
+      "edition": "Visual Renaissance & Theme Expansion Preview"
+    },
+    {
+      "path": "release/v2.18.0/NovelStudio/version.json",
+      "sha256": "049600a13af260c0c1041d529b137cf7b6ff44ffe241ae2008efe9bfc5eec456",
+      "declared_version": "2.18.0",
+      "release_date": "2026-10-18",
+      "edition": "Autonomous Product & Art Evolution Preview"
+    },
+    {
+      "path": "release/v2.18.1/NovelStudio/version.json",
+      "sha256": "ebeceb89f8bebdaaed306c7a2fef2b9634b72b20613ed649b157e7707f89e578",
+      "declared_version": "2.18.1",
+      "release_date": "2026-10-18",
+      "edition": "Soft UI & Visual Refinement Preview"
+    },
+    {
+      "path": "release/v2.19.0/NovelStudio/version.json",
+      "sha256": "ad3b25044eb9f6e2f8d63963e8dcc0125337bf74de6b83ce2115bce5b426a9d7",
+      "declared_version": "2.19.0",
+      "release_date": "2026-10-18",
+      "edition": "Interaction & Creative Freedom Preview"
+    },
+    {
+      "path": "release/v2.20.0/NovelStudio/version.json",
+      "sha256": "c7678ec3eb58dcf4dbad0b6c8ad78b95d55412742da029ace4525227a0f9727f",
+      "declared_version": "2.20.0",
+      "release_date": "2026-10-21",
+      "edition": "Character Agents & Python Control Preview"
+    },
+    {
+      "path": "release/v2.21.0/NovelStudio/version.json",
+      "sha256": "b93490a15b6e06787f14e5fab90db9d0ce91d708850aa530888e738b2584223c",
+      "declared_version": "2.21.0",
+      "release_date": "2026-10-21",
+      "edition": "Plugin Hub Preview"
+    },
+    {
+      "path": "release/v2.21.1/NovelStudio/version.json",
+      "sha256": "a41ac557bb662af70994db1fd3896b06903cacee2fc95c9b530fdc7eee75a27e",
+      "declared_version": "2.21.1",
+      "release_date": "2026-10-21",
+      "edition": "Plugin Hub Preview"
+    },
+    {
+      "path": "release/v2.21.2/NovelStudio/version.json",
+      "sha256": "4b17f46bfa7c00b22775a5f6acb60da26ad1f448f55ee6f44700dbb565b6e8cb",
+      "declared_version": "2.21.2",
+      "release_date": "2026-10-21",
+      "edition": "Art Refinement Preview"
+    },
+    {
+      "path": "release/v2.21.3/NovelStudio/version.json",
+      "sha256": "e971f7561698e326fb8bac4f76bead8c1ff638d6622c8f75f699676f9abc24d9",
+      "declared_version": "2.21.3",
+      "release_date": "2026-10-24",
+      "edition": "Model Control and MCP Preview"
+    },
+    {
+      "path": "release/v2.21.4/NovelStudio/version.json",
+      "sha256": "15533518ee8983e7d2f9a315857b5bc749ba225b510d50e420dbb2d37b8a1573",
+      "declared_version": "2.21.4",
+      "release_date": "2026-10-24",
+      "edition": "Model Control and MCP Preview"
+    },
+    {
+      "path": "release/v2.21.5/NovelStudio/version.json",
+      "sha256": "509681b2334fc7b032a429ee0bc9352e6bb7a71bcd911b7a0eb4db70f23d31f8",
+      "declared_version": "2.21.5",
+      "release_date": "2026-10-24",
+      "edition": "Daily Writing Tools Preview"
+    },
+    {
+      "path": "release/v2.21.6/NovelStudio/version.json",
+      "sha256": "fc7febf694513a6108680fcf552a0da5c3103501c547b804410ace9becc76740",
+      "declared_version": "2.21.6",
+      "release_date": "2026-10-24",
+      "edition": "Daily Writing Tools Refined Preview"
+    },
+    {
+      "path": "release/v2.21.7/NovelStudio/version.json",
+      "sha256": "d8d78872e5c039f03fa5b00c0464aba26951f3115ba07871bd662a71ee21c729",
+      "declared_version": "2.21.7",
+      "release_date": "2026-10-24",
+      "edition": "Daily Writing Controls Preview"
+    },
+    {
+      "path": "release/v2.21.8/NovelStudio/version.json",
+      "sha256": "42b1c588221ab44b6ab03d9ed73d0c6c2ee1f6ac79e1ed96b176615bf4106f8b",
+      "declared_version": "2.21.8",
+      "release_date": "2026-10-24",
+      "edition": "Daily Writing Tools Final Preview"
+    },
+    {
+      "path": "release/v2.22.0/NovelStudio/version.json",
+      "sha256": "8c3339ea0d5b6134b8709159f33346ab307a0f476e853a4159a12c9ecf4eb24a",
+      "declared_version": "2.22.0",
+      "release_date": "2026-10-25",
+      "edition": "Creative Workflow Preview"
+    },
+    {
+      "path": "release/v2.22.1/NovelStudio/version.json",
+      "sha256": "5f465a4576cee224a875fdfbe0343fd7de39d40b9548fcb866d0338408118f8c",
+      "declared_version": "2.22.1",
+      "release_date": "2026-10-25",
+      "edition": "Creative Workflow Reliability Preview"
+    },
+    {
+      "path": "release/v2.22.2/NovelStudio/version.json",
+      "sha256": "7db38c9f0325251f18535ed027c3900a0b179cfaddab9389508d36851cdb7464",
+      "declared_version": "2.22.2",
+      "release_date": "2026-10-25",
+      "edition": "Narrative Insights Preview"
+    }
+  ]
+}

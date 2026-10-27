@@ -1,0 +1,32 @@
+id: null
+slug: null
+title: null
+status:
+  phase: FOUNDATION
+  created_at: null
+  updated_at: null
+genre:
+  primary: null
+  secondary: []
+language: zh-CN
+target:
+  total_words: null
+  estimated_chapters: null
+  estimated_volumes: null
+current:
+  volume: null
+  chapter: 0
+  scene: null
+creative_direction:
+  premise: null
+  themes: []
+  tone: []
+  audience: null
+  pacing: null
+workflow:
+  auto_review: true
+  auto_revise: false
+  auto_memory_extract: true
+  auto_state_commit: false
+codex:
+  project_thread_id: null

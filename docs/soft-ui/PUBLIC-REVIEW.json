@@ -1,0 +1,22 @@
+{
+  "version": "2.18.1",
+  "license": "OWNER_DECISION_PENDING",
+  "new_dependencies": [],
+  "private_checks": "EXCLUDED",
+  "assets": "One original editable SVG. Existing theme artwork retained; no private character assets.",
+  "files": {
+    "web/frontend/src/soft-ui.css": "5034016b8cfb0913e6fbcb74e2667019e0761bf4bf4998dc990fb1e55f39cc45",
+    "web/frontend/src/themes.ts": "8bc06242df54652439256e9e37b005d8c467fa1c551c0347ae996cd8f2498291",
+    "web/frontend/src/main.tsx": "3365dd742876eebea87dfacf259aaa982071830e7938dad831da6991057922e8",
+    "web/frontend/src/literary-evaluation.tsx": "2cf360246af6d8e3e9e4253fda84a44d4340ef0e9f5475027159a3b6d40a9e78",
+    "web/frontend/src/theme-gallery.tsx": "8c7a85bd818dacf322640db43f021b09443de8280ddd2dbe720e7651e21fd035",
+    "web/frontend/public/themes/quiet-pages.svg": "2192c073e83a07adc0afd5b07be762402899d4c5446748763716492e554506a3",
+    "web/frontend/public/themes/manifest.json": "3ef4280fafa68a5fca683e8436cd56d7117f7f180c7fc25116b34afb4632b68c",
+    "web/frontend/package.json": "cd28a0e88bda7f9595c5ff2b5d1a5f986fd4500bbe6a5806a6b4684693be7882",
+    "web/frontend/package-lock.json": "536441de4734d2fcc21f52ceb73d28157097f2c6d22c76b8fd92d03d8f9313d5",
+    "desktop/version.json": "ebeceb89f8bebdaaed306c7a2fef2b9634b72b20613ed649b157e7707f89e578",
+    "desktop/build.ps1": "60c988e00ef04b0c32d36edbd2c54636eac45f2a381ef2a9264f1db9f31320d3",
+    "desktop/package_source.py": "7e82960909ffd7e7ce03db271903beab8b77a3322f9da1c31f49a5d7bffcdb16",
+    "docs/soft-ui/README.md": "7d700951f2d78446d647d2ee0e4d40809921d12bf2124bd14393f3d9bbacc8bb"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "entity_5e8491185cf44889b1da5f8a365f94d7",
+  "name": "潮汐邮局",
+  "aliases": [],
+  "category": "building",
+  "summary": "面朝旧海堤的邮局，夜班仍保留一盏绿色台灯。",
+  "details": "",
+  "tags": [],
+  "first_appearance": "",
+  "source": "USER",
+  "canon_level": "REFERENCE",
+  "status": "FORMAL",
+  "locked_fields": [],
+  "valid_from": "",
+  "valid_to": "",
+  "periods": [],
+  "fields": {
+    "parent": "entity_8291e5e2d5cd4d15916fdae44efa3efe",
+    "environment": "木柜、晾信绳与有盐霜的玻璃窗"
+  },
+  "favorite": false,
+  "version": 1,
+  "created_at": "2026-10-10T05:20:11.748970+00:00",
+  "updated_at": "2026-10-10T05:20:11.748970+00:00"
+}

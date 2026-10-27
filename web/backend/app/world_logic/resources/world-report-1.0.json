@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "World Logic Report 1.0",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE",
+        "ERROR",
+        "NOT RUN"
+      ]
+    },
+    "acceptance_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "INCONCLUSIVE",
+              "ERROR",
+              "NOT RUN"
+            ]
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array"
+    },
+    "solver_versions": {
+      "type": "object"
+    },
+    "error": {
+      "type": "string"
+    }
+  }
+}

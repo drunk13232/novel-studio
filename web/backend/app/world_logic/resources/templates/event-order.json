@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_00000000000000000000000000000002",
+  "name": "事件顺序检查",
+  "description": "可修改的虚构演示参数，不属于任何小说 Canon。",
+  "experiment_type": "time_space",
+  "solver": "graph",
+  "inputs": [],
+  "assumptions": [
+    {
+      "id": "demo",
+      "text": "以下仅为虚构演示输入；复制后请由作者重新确认。",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "order",
+      "name": "事件依赖不形成有向环",
+      "type": "RELATIONAL",
+      "expression": "",
+      "target": "dependencies",
+      "minimum": null,
+      "maximum": null,
+      "unit": "dimensionless",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [],
+  "source_references": [],
+  "dependencies": [
+    {
+      "id": "dep1",
+      "before": "departure",
+      "after": "arrival",
+      "meaning": "出发必须先于抵达",
+      "source_ids": []
+    },
+    {
+      "id": "dep2",
+      "before": "arrival",
+      "after": "meeting",
+      "meaning": "抵达之后才能会面",
+      "source_ids": []
+    }
+  ],
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "模板仅验证明确数学关系，不替代语义审查。"
+  ],
+  "steps": []
+}

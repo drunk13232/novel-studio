@@ -1,0 +1,10 @@
+{
+  "module": "world-model-memory",
+  "version": "2.16.0",
+  "status": "REVIEW_REQUIRED_BEFORE_PUBLICATION",
+  "source": ["web/backend/app/library/world_rules.py", "web/backend/app/library/world_model.py", "web/backend/app/library/document_formats.py", "web/frontend/src/world-model.tsx", "web/frontend/src/world-model.css", "docs/world-model/README.md", "docs/world-model/RULES-AND-EVIDENCE.md", "web/backend/tests/test_world_model.py"],
+  "excluded": ["docs/world-model/private-checks", "user rules and history", "private references", "credentials", "personal character assets"],
+  "new_dependencies": [],
+  "license_decision": "USER_PENDING",
+  "public_upload": false
+}

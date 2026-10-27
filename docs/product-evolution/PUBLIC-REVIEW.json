@@ -1,0 +1,23 @@
+{
+  "version": "2.18.0",
+  "license": "OWNER_DECISION_PENDING",
+  "new_dependencies": [],
+  "private_checks": "EXCLUDED",
+  "assets": "Original editable SVG. Existing original illustrations retained. No private character assets.",
+  "files": {
+    "web/frontend/src/studio-navigation.tsx": "143e14ddc76086f284d105cda7901bf32c9aae5292445cd6020a5592fd7e591d",
+    "web/frontend/src/bookshelf-return.tsx": "f796de088b42cc99cc1b68c9876a90da5cddf15a15b73e3d55ff1e199a30d1d5",
+    "web/frontend/src/project-appearance.tsx": "3054b75f193cf312c6f4ee1f9a64b018c1f1d4d3fa240d6a9d476d0daeb88507",
+    "web/frontend/src/navigation-query.ts": "15f21a6fa032f578eefe8e8ecb3178087a05ba0c8aec18779dbbfc1d8075ce95",
+    "web/frontend/src/product-evolution.css": "896f0c8dd18bbbc38aaf5d0a5716bd7b38b3c76189f97c91ee1b6cee0efebaa0",
+    "web/frontend/public/themes/desk-signet.svg": "5028fb146c6b86fae1c25bb2daf253c813aa1db71883ab523188e9571413d2a8",
+    "docs/product-evolution/README.md": "6396469dde41d8068ae324f7b105abeccc29ce4109eb239bfde0f9c3f83b257a",
+    "web/frontend/src/ui-language-switch.ts": "2cb0de0d115db9734ed0cc0393434350d481f7da39d0e4e418eebfa1b9e7eb05",
+    "web/frontend/src/i18n.tsx": "ca66c379288ecc6f5740452906745b0b084c3bed7f67a09c3f3933865660a8f4",
+    "web/frontend/src/studio.tsx": "13d97bd7af2cc8952e8d7f2bf0dfe29ddfcff7480c6fed5a721326d4fb9e5d28",
+    "web/frontend/src/command-palette.tsx": "99e215500d13adb0d37b5650ea1234b1ee3712f736c04435e4ddee8cda2436ea",
+    "web/frontend/src/domain.tsx": "c2df3eb76adb1d6eeb4b4870921433858b46039dadaafa8051a444364e9a1fdf",
+    "web/backend/app/studio.py": "995bd3b26c75dbef9e1f9e152d11017dfb9173fb5898202ed650828bf244c8bb",
+    "web/backend/tests/test_appearance.py": "e82e6800738c701baf836045bda6ae84db877040c4292971f0e7bda9bf6beda1"
+  }
+}

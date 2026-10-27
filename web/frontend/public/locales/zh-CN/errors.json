@@ -1,0 +1,22 @@
+{
+  "LOCAL_SERVICE_UNAVAILABLE": "无法连接本地服务。当前编辑保留，请检查软件是否仍在运行。",
+  "SESSION_INVALID": "本机会话校验失败，请重新打开页面。",
+  "FILE_ALREADY_MODIFIED": "文件已被外部修改。请审阅差异后再保存。",
+  "STORAGE_FULL": "磁盘空间不足。请释放空间后重试；保存尚未完成。",
+  "STORAGE_PERMISSION": "数据目录不可写或文件被占用。请检查权限后重试。",
+  "FILE_NOT_FOUND": "所需文件不存在。请刷新或从备份恢复。",
+  "INDEX_UNAVAILABLE": "本地索引暂时不可用，请稍后重试。",
+  "INVALID_REQUEST": "请求参数无效。请检查输入；技术详情可展开查看。",
+  "REQUEST_REJECTED": "操作未完成，请查看诊断信息。",
+  "SERVICE_UNAVAILABLE": "服务暂时不可用。手动写作仍可继续。",
+  "REMOTE_SEND_CANCELLED": "已取消远端资料发送。",
+  "AI_AUTH_FAILED": "认证失败，请检查 API Key 或 Codex 登录。",
+  "AI_RATE_LIMIT": "请求频率或配额受限，请检查服务商账单后稍后重试。",
+  "AI_TIMEOUT": "AI 请求超时。未确认执行成功，请检查操作记录再重试。",
+  "TECHNICAL_DETAILS": "技术诊断",
+  "dismiss": "关闭错误提示",
+  "connectingLocalService": "正在连接本地服务",
+  "localServiceConnectionFailed": "无法连接本地服务，请检查软件是否仍在运行后重试。当前编辑保留，未确认保存或执行成功。",
+  "remoteDataSendingCanceled": "已取消远端资料发送",
+  "sessionValidationFailed": "会话校验失败，请重新打开页面"
+}

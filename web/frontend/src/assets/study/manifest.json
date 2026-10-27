@@ -1,0 +1,82 @@
+{
+  "version": "2.12.2",
+  "assets": [
+    {
+      "file": "study-banner.webp",
+      "width": 1600,
+      "height": 533,
+      "alpha": false,
+      "bytes": 106224,
+      "sha256": "05b4b4a568f36fede4150bfee4b850c6e7f255fb0550438cdb8b97038bc6869e",
+      "source": "study-banner.png",
+      "provenance": "Generated with built-in image_gen for this task; see generation.json for prompt. Not extracted from reference UI."
+    },
+    {
+      "file": "empty-library.webp",
+      "width": 640,
+      "height": 533,
+      "alpha": true,
+      "bytes": 72860,
+      "sha256": "1b5911798f1f754dff99587d62c6b9976a93ce617049dc7163aebf5dd7baa1be",
+      "source": "empty-library.png",
+      "provenance": "Generated with built-in image_gen for this task; see generation.json for prompt. Not extracted from reference UI."
+    },
+    {
+      "file": "cover-tide.webp",
+      "width": 480,
+      "height": 720,
+      "alpha": false,
+      "bytes": 78586,
+      "sha256": "a7488d09462ba34a32d5025848bc09ad8debfb68f4e0e6e1f117b82b66857d0f",
+      "source": "cover-tide.png",
+      "provenance": "Generated with built-in image_gen for this task; see generation.json for prompt. Not extracted from reference UI."
+    },
+    {
+      "file": "cover-garden.webp",
+      "width": 480,
+      "height": 720,
+      "alpha": false,
+      "bytes": 159938,
+      "sha256": "d89a7d5b1b50068f075c1ae9d42d78bed1a017a62e023465522ee8f188553a7c",
+      "source": "cover-garden.png",
+      "provenance": "Generated with built-in image_gen for this task; see generation.json for prompt. Not extracted from reference UI."
+    },
+    {
+      "file": "analysis-seal.svg",
+      "bytes": 472,
+      "sha256": "1af99a342d04e3c3bac5f7570ec91da90a26aea594c8b2cc97f96769d04bdd21",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    },
+    {
+      "file": "bookmark.svg",
+      "bytes": 302,
+      "sha256": "18e130c89f84bb82e17c26c9a54568bc45aea74c537695cfca58015e7703b465",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    },
+    {
+      "file": "botanical.svg",
+      "bytes": 542,
+      "sha256": "3a655616cf049cbafdd210ddb56a64b92b2a75c2dd19f949e0331a01185f22fb",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    },
+    {
+      "file": "brand-seal.svg",
+      "bytes": 425,
+      "sha256": "6ea131fca9b6df49d7eab4ad50eefd6b7eafe0ca63b5e21447194c7c6f708263",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    },
+    {
+      "file": "folio-divider.svg",
+      "bytes": 236,
+      "sha256": "9be5d756410203b35f50f74e8d46df1ae99754dd944a5825110200ae8e19eee6",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    },
+    {
+      "file": "paper-fiber.svg",
+      "bytes": 292,
+      "sha256": "191b30962003a10ba9c3170181b8be69a5a3836a6864c7c6cecc1ba92bd3b567",
+      "provenance": "Original editable SVG artwork for Novel Studio 2.12.2. No external fonts or pictures."
+    }
+  ],
+  "license_note": "Project license remains subject to owner decision. No third-party character art included."
+}

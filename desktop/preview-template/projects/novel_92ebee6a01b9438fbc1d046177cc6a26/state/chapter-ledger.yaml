@@ -1,0 +1,9 @@
+last_commit: null
+entries:
+  -
+    chapter: 1
+    body_sha256: "94daaba3590deea15c77a3bb1105d87e74517f5855aaf6e564d1868f80394eb2"
+    proposal_id: "DEMO_INITIALIZATION_NOT_PRODUCTION_COMMIT"
+    proposal_sha256: "0d0faff5c724d4526ea8bbf98bd1ce215cc977199a873b91586b85b313aa22f7"
+    committed_at: "2041-10-03T19:20:00+08:00"
+    revision: 1

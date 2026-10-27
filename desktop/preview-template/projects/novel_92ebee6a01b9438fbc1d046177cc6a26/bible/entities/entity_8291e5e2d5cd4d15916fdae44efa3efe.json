@@ -1,0 +1,25 @@
+{
+  "id": "entity_8291e5e2d5cd4d15916fdae44efa3efe",
+  "name": "纸湾镇",
+  "aliases": [],
+  "category": "town",
+  "summary": "靠海的小镇。居民用潮汐安排出航，却不愿用潮汐解释一切。",
+  "details": "所有名称与生活细节均为原创演示设定，非现实资料。",
+  "tags": [],
+  "first_appearance": "",
+  "source": "USER",
+  "canon_level": "REFERENCE",
+  "status": "FORMAL",
+  "locked_fields": [],
+  "valid_from": "",
+  "valid_to": "",
+  "periods": [],
+  "fields": {
+    "climate": "多雾，秋季常有阵雨",
+    "environment": "低矮石屋与通往海堤的窄街"
+  },
+  "favorite": false,
+  "version": 1,
+  "created_at": "2026-10-10T05:20:11.596906+00:00",
+  "updated_at": "2026-10-10T05:20:11.596906+00:00"
+}

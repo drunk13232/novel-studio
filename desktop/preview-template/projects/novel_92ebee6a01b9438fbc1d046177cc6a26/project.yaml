@@ -1,0 +1,33 @@
+id: "novel_92ebee6a01b9438fbc1d046177cc6a26"
+slug: "novel_92ebee6a01b9438fbc1d046177cc6a26"
+title: "潮汐邮局"
+status:
+  phase: "FOUNDATION"
+  created_at: "2026-10-10T05:20:11.343962+00:00"
+  updated_at: "2026-10-10T05:20:11.343962+00:00"
+genre:
+  primary: "现实幻想"
+  secondary: []
+language: "zh-CN"
+target:
+  total_words: null
+  estimated_chapters: "3"
+  estimated_volumes: "1"
+current:
+  volume: null
+  chapter: 0
+  scene: null
+creative_direction:
+  premise: "一封被潮水送回的小镇旧信，迫使夜班修复员重新面对未完成的告别。"
+  themes: []
+  tone:
+    - "克制、温暖，保留悬念"
+  audience: null
+  pacing: null
+workflow:
+  auto_review: true
+  auto_revise: false
+  auto_memory_extract: true
+  auto_state_commit: false
+codex:
+  project_thread_id: null

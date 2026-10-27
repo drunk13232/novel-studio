@@ -1,0 +1,24 @@
+/* No mirroring of source text, images, PDFs or machine identifiers. */
+.language-settings{grid-column:1/-1;max-inline-size:760px;display:grid;gap:10px}.language-settings select,.language-settings input{max-inline-size:100%;min-inline-size:0}.language-settings small{color:var(--muted)}
+html[dir=rtl] .settings-nav,html[dir=rtl] .studio-nav,html[dir=rtl] .software-assistant,html[dir=rtl] .settings-content{text-align:start}
+.settings-nav{border-inline-end:1px solid var(--line)}.settings-nav button{text-align:start}.settings-content{min-inline-size:0}.studio button{white-space:normal;overflow-wrap:anywhere}.studio input,.studio select{min-inline-size:0}
+html[dir=rtl] .studio-nav button,html[dir=rtl] .settings-nav button{justify-content:flex-start}html[dir=rtl] .settings-search{direction:rtl}
+.studio [type=url],.studio [type=password],.studio [type=email],.studio code,.studio pre,.studio .cm-search input{direction:ltr;unicode-bidi:plaintext;text-align:start}
+.studio .cm-editor,.studio .reader-prose,.studio .rl-document,.studio .rl-document article{direction:ltr;unicode-bidi:plaintext;text-align:start}
+html:not([lang^=zh]) .studio{--locale-font-fallback:'Segoe UI','Noto Sans','Noto Sans Arabic','Noto Sans Devanagari','Noto Sans Bengali','Noto Sans Thai','Nirmala UI','Leelawadee UI','Yu Gothic UI','Malgun Gothic',Tahoma,Arial,sans-serif;letter-spacing:normal}
+html[lang=ar] .studio,html[lang=fa] .studio,html[lang=ur] .studio{--locale-font-fallback:'Segoe UI',Tahoma,'Noto Naskh Arabic',sans-serif;font-variant-ligatures:normal;line-height:1.85}
+html[lang=hi] .studio,html[lang=bn] .studio,html[lang=th] .studio{line-height:1.85;letter-spacing:normal}
+html[dir=rtl] .studio-dialog-header{direction:rtl}.studio-dialog{max-inline-size:calc(100vw - 28px)}.settings-nav{inline-size:220px;flex-shrink:0}.settings-content{overflow:auto;overflow-wrap:anywhere}.settings-grid{max-inline-size:920px}.studio .settings-center{min-inline-size:0}
+@media(max-width:950px){.settings-nav{inline-size:184px}.settings-content{padding-inline:16px}}@media(max-width:700px){.settings-nav{inline-size:68px}.settings-nav button span,.settings-search input{display:none}.settings-content{padding-inline:12px}}
+
+.studio{font-family:var(--ui-font),var(--locale-font-fallback,"Segoe UI",Tahoma,sans-serif)}
+
+.studio .cm-content{font-variant-ligatures:normal}
+
+.i18n-error-diagnostic{max-inline-size:100%;max-block-size:50vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+
+.react-flow,.vis-timeline{direction:ltr}.react-flow__node,.vis-item-content{unicode-bidi:plaintext}
+
+/* Longer localized navigation uses the existing scrollable rail. */
+html:not([lang^=zh]) .studio-nav nav{grid-template-columns:minmax(0,1fr)}
+html:not([lang^=zh]) .studio-nav nav button{word-break:normal;overflow-wrap:break-word;text-align:start;hyphens:auto}

@@ -1,0 +1,54 @@
+{
+  "purpose": "Exact original notices absent from the installed distribution. Preserve source copyright and license text; fail review on version or byte changes.",
+  "entries": [
+    {
+      "name": "jieba",
+      "version": "0.42.1",
+      "license": "MIT",
+      "source": "official corresponding-version upstream tag",
+      "files": [
+        {
+          "path": "desktop/third-party/python/jieba/LICENSE",
+          "sha256": "18ba0984839f85853b29fadaf992f7dba8fd0ca0fbeae34de2b8735222dc7a37",
+          "source": "https://raw.githubusercontent.com/fxsjy/jieba/v0.42.1/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "openai-codex",
+      "version": "0.160.1",
+      "license": "Apache-2.0",
+      "source": "official corresponding-version upstream tag",
+      "files": [
+        {
+          "path": "desktop/third-party/python/openai-codex/LICENSE",
+          "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
+          "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.160.1/LICENSE"
+        },
+        {
+          "path": "desktop/third-party/python/openai-codex/NOTICE",
+          "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915",
+          "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.160.1/NOTICE"
+        }
+      ]
+    },
+    {
+      "name": "openai-codex-cli-bin",
+      "version": "0.160.1",
+      "license": "Apache-2.0",
+      "source": "official corresponding-version upstream tag",
+      "files": [
+        {
+          "path": "desktop/third-party/python/openai-codex-cli-bin/LICENSE",
+          "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
+          "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.160.1/LICENSE"
+        },
+        {
+          "path": "desktop/third-party/python/openai-codex-cli-bin/NOTICE",
+          "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915",
+          "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.160.1/NOTICE"
+        }
+      ]
+    }
+  ]
+}

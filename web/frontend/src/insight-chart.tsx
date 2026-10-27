@@ -1,0 +1,7 @@
+import {CartesianGrid,Legend,Line,LineChart,ResponsiveContainer,Tooltip,XAxis,YAxis} from 'recharts';
+import {t} from './i18n';
+type Row=Record<string,any>;
+const colors=['var(--accent)','#c28b48','#6199a1','#a07ea2','#8d9c5c','#b96c6c','#7187b0','#bb9272','#5a9e82'];
+export default function InsightChart({rows,series,metric,onChapter}:{rows:Row[];series:{id:string;name:string}[];metric:'tension'|'emotion';onChapter:(id:string)=>void}){
+ return <div className="insight-chart" role="img" aria-label={t('insights:curveChart')}><ResponsiveContainer width="100%" height={310}><LineChart data={rows} margin={{top:14,right:20,bottom:12,left:0}} onClick={event=>{const index=Number(event?.activeTooltipIndex);if(Number.isInteger(index)&&rows[index])onChapter(rows[index].id);}}><CartesianGrid stroke="var(--line)" strokeDasharray="3 3"/><XAxis dataKey="label" minTickGap={28} tick={{fill:'var(--muted)',fontSize:11}}/><YAxis domain={[0,10]} tick={{fill:'var(--muted)',fontSize:11}}/><Tooltip contentStyle={{background:'var(--surface)',borderColor:'var(--line)',borderRadius:10,color:'var(--ink)'}} formatter={(value:any)=>value==null?t('insights:unknown'):Number(value).toFixed(1)}/><Legend/>{series.map((item,index)=><Line key={item.id} type="linear" dataKey={item.id} name={item.name} stroke={colors[index%colors.length]} strokeWidth={2} connectNulls={false} dot={rows.length<90?{r:2}:false} activeDot={{r:5}} isAnimationActive={false}/>)}</LineChart></ResponsiveContainer><small>{t(metric==='tension'?'insights:tensionScale':'insights:emotionScale')}</small></div>;
+}

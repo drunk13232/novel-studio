@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Não foi possível conectar ao serviço local. Verifique se o software continua em execução e tente novamente. As alterações atuais foram mantidas, mas não há confirmação de que foram salvas ou executadas com sucesso.",
+  "remoteDataSendingCanceled": "Envio de dados ao serviço remoto cancelado",
+  "sessionValidationFailed": "Falha na validação da sessão. Abra a página novamente.",
+  "dismiss": "Fechar mensagem de erro"
+}

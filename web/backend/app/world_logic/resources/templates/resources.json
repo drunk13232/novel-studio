@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_00000000000000000000000000000003",
+  "name": "资源收支检查",
+  "description": "可修改的虚构演示参数，不属于任何小说 Canon。",
+  "experiment_type": "resources",
+  "solver": "formula",
+  "inputs": [
+    {
+      "id": "stock",
+      "name": "初始粮食",
+      "kind": "real",
+      "role": "input",
+      "value": 200.0,
+      "unit": "tonne",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "production",
+      "name": "每日生产",
+      "kind": "real",
+      "role": "input",
+      "value": 12.0,
+      "unit": "tonne/day",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "consumption",
+      "name": "每日消耗",
+      "kind": "real",
+      "role": "input",
+      "value": 15.0,
+      "unit": "tonne/day",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "days",
+      "name": "持续天数",
+      "kind": "real",
+      "role": "input",
+      "value": 30.0,
+      "unit": "day",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "demo",
+      "text": "以下仅为虚构演示输入；复制后请由作者重新确认。",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "reserve",
+      "name": "库存不得耗尽",
+      "type": "RANGE",
+      "expression": "",
+      "target": "balance",
+      "minimum": 0.0,
+      "maximum": null,
+      "unit": "tonne",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "balance",
+      "name": "期末库存",
+      "expression": "stock + (production - consumption) * days",
+      "unit": "tonne"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [],
+  "sensitivity": {
+    "variable": "consumption",
+    "minimum": 10.0,
+    "maximum": 22.0,
+    "samples": 8
+  },
+  "baseline_id": "",
+  "baseline_version": null,
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "模板仅验证明确数学关系，不替代语义审查。"
+  ],
+  "steps": []
+}

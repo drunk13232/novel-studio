@@ -1,0 +1,95 @@
+{
+  "npm_version": "6.3.289",
+  "npm_tarball": "https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-6.3.289.tgz",
+  "npm_integrity": "sha512-ZHjSVpDa3D6izMq8/04lvkhkATUmL9px6ChPaXc1k6nU2Mrhlg1/7F0bdUqCwUjw3NsPTfPZsMDUU6ZIcRaeQw==",
+  "npm_git_head": "1c8020a7d4e43668ac287a3ecf9a8dbea17e4c56",
+  "npm_verified": {
+    "npm_integrity_verified": true,
+    "tarball_sha256": "06f25e887adc6489f04c9fcb14198c77e4e5623a59a0bba5c4cea5838a4f1241",
+    "gitHead": "1c8020a7d4e43668ac287a3ecf9a8dbea17e4c56",
+    "font_comparison": [
+      {
+        "file": "LiberationSans-Regular.ttf",
+        "sha256": "f8ace1f892b2bd9dc1792ba7f097fa7588f84fed48321480e04de5390828221f",
+        "bytes": 139512,
+        "matches_installed": true,
+        "matches_excluded_release": true
+      },
+      {
+        "file": "LiberationSans-Bold.ttf",
+        "sha256": "361c61b82d575c5c35fd9157fda8b0194bcfcd0d88ea8521a4fb5dd53d33dddc",
+        "bytes": 137052,
+        "matches_installed": true,
+        "matches_excluded_release": true
+      },
+      {
+        "file": "LiberationSans-Italic.ttf",
+        "sha256": "832b4406dbef23628800d3aaad21048534ac84d7e3ad955be83b8172ed8ef512",
+        "bytes": 162036,
+        "matches_installed": true,
+        "matches_excluded_release": true
+      },
+      {
+        "file": "LiberationSans-BoldItalic.ttf",
+        "sha256": "a224075ac17495ad0a3af3bc0a419ac0704a8b3fd1095456201fb9b095fc281d",
+        "bytes": 135124,
+        "matches_installed": true,
+        "matches_excluded_release": true
+      }
+    ]
+  },
+  "source": {
+    "url": "https://releases.pagure.org/liberation-fonts/liberation-fonts-1.07.4.tar.gz",
+    "sha256": "ad98b7498dc2992f7f0868f79b65ce4a720a3acdb63ab3f1f1cb6881117a5406"
+  },
+  "glyph_audit": [
+    {
+      "file": "LiberationSans-Regular.ttf",
+      "pdfjs_glyphs": 681,
+      "official_release_glyphs": 682,
+      "same_outlines_for_shared_unicode": 668,
+      "different_outlines": 0,
+      "unicode_only_pdfjs": [],
+      "unicode_only_upstream": [],
+      "different_codepoints": []
+    },
+    {
+      "file": "LiberationSans-Bold.ttf",
+      "pdfjs_glyphs": 681,
+      "official_release_glyphs": 682,
+      "same_outlines_for_shared_unicode": 668,
+      "different_outlines": 0,
+      "unicode_only_pdfjs": [],
+      "unicode_only_upstream": [],
+      "different_codepoints": []
+    },
+    {
+      "file": "LiberationSans-Italic.ttf",
+      "pdfjs_glyphs": 681,
+      "official_release_glyphs": 687,
+      "same_outlines_for_shared_unicode": 668,
+      "different_outlines": 0,
+      "unicode_only_pdfjs": [],
+      "unicode_only_upstream": [
+        1114104,
+        1114105
+      ],
+      "different_codepoints": []
+    },
+    {
+      "file": "LiberationSans-BoldItalic.ttf",
+      "pdfjs_glyphs": 681,
+      "official_release_glyphs": 687,
+      "same_outlines_for_shared_unicode": 668,
+      "different_outlines": 0,
+      "unicode_only_pdfjs": [],
+      "unicode_only_upstream": [
+        1114104,
+        1114105
+      ],
+      "different_codepoints": []
+    }
+  ],
+  "modified_by_application": false,
+  "bit_reproducible_build_verified": false
+}

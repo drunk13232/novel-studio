@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "file": "typewriter-soft.wav",
+      "sha256": "84069ab49bf41a05fae2c37c17d83a5d4e17c0a09fb15f2f69601a5f8ff77656",
+      "bytes": 1324,
+      "origin": "Original deterministic procedural keyboard tick; no third-party recording or voice.",
+      "distribution": "Project-wide license remains an owner decision."
+    }
+  ]
+}

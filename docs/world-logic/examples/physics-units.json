@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_00000000000000000000000000000004",
+  "name": "单位与公式检查",
+  "description": "可修改的虚构演示参数，不属于任何小说 Canon。",
+  "experiment_type": "physics",
+  "solver": "formula",
+  "inputs": [
+    {
+      "id": "mass",
+      "name": "物体质量",
+      "kind": "real",
+      "role": "input",
+      "value": 10.0,
+      "unit": "kg",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "gravity",
+      "name": "作者世界的重力加速度",
+      "kind": "real",
+      "role": "input",
+      "value": 3.2,
+      "unit": "m/s**2",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    },
+    {
+      "id": "height",
+      "name": "提升高度",
+      "kind": "real",
+      "role": "input",
+      "value": 5.0,
+      "unit": "m",
+      "minimum": 0.0,
+      "maximum": null,
+      "source_ids": [],
+      "note": ""
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "demo",
+      "text": "以下仅为虚构演示输入；复制后请由作者重新确认。",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "energy_unit",
+      "name": "能量量纲",
+      "type": "DIMENSIONAL",
+      "expression": "mass * gravity * height",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "joule",
+      "condition": "",
+      "basis": "作者在实验中明确接受的阈值。",
+      "applicability": "",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "force",
+      "name": "重力",
+      "expression": "mass * gravity",
+      "unit": "N"
+    },
+    {
+      "id": "energy",
+      "name": "提升所需能量",
+      "expression": "mass * gravity * height",
+      "unit": "joule"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [],
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "模板仅验证明确数学关系，不替代语义审查。"
+  ],
+  "steps": []
+}

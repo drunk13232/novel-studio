@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "name": "@recogito/react-text-annotator",
+      "version": "4.3.6",
+      "license": "BSD-3-Clause",
+      "source": "https://raw.githubusercontent.com/recogito/text-annotator-js/915225ba6caed2ca04a553969afa7bfb30188084/LICENSE",
+      "path": "desktop/third-party/javascript/recogito_react-text-annotator/LICENSE.upstream",
+      "sha256": "3ae9fe44013f55ecbb4732180061c6e5ada08e5bb493967cec2c03cd19a6626a",
+      "reason": "Installed npm package omits root license; original text from exact npm gitHead."
+    },
+    {
+      "name": "@uiw/react-codemirror",
+      "version": "4.25.12",
+      "license": "MIT",
+      "source": "https://raw.githubusercontent.com/uiwjs/react-codemirror/1e2e11f865860c6bd5029d71a2a09bd894ed5bad/LICENSE",
+      "path": "desktop/third-party/javascript/uiw_react-codemirror/LICENSE.upstream",
+      "sha256": "fd1f049b3bb5cbaf5143516b72dbc6805cd30cca0cda94edb37160e37662fd17",
+      "reason": "Installed npm package omits root license; original text from exact npm gitHead."
+    },
+    {
+      "name": "i18next-http-backend",
+      "version": "4.0.2",
+      "license": "MIT",
+      "source": "https://registry.npmjs.org/i18next-http-backend/-/i18next-http-backend-4.0.2.tgz#licence",
+      "path": "desktop/third-party/javascript/i18next-http-backend/LICENSE.upstream",
+      "sha256": "cb8cbae10ab2c80b8d29961fe8cda053a198113396903413a914493eea25551f",
+      "reason": "Original npm licence spelling was not recognized by old collector."
+    }
+  ]
+}

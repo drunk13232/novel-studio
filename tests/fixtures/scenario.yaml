@@ -1,0 +1,24 @@
+label: "人工测试数据，不是正式小说"
+story_time: "2030-01-01T23:00:00+08:00"
+injury: "A 的左臂骨折，不能负重。"
+secret: "B 是凶手。"
+bad_body: "A 用左手举起重物。\n\nA 心想：B 就是凶手。"
+good_body: "A 用右手拿起轻物，左臂仍固定着。\n\nA 尚不知道凶手是谁。"
+bad_claims:
+  - type: "action"
+    character: "A"
+    required_capabilities: ["left_arm_load"]
+    location: "p1"
+    evidence: "A 用左手举起重物。"
+  - type: "knowledge"
+    character: "A"
+    fact_id: "K1"
+    stance: "knows"
+    location: "p2"
+    evidence: "A 心想：B 就是凶手。"
+good_claims:
+  - type: "action"
+    character: "A"
+    required_capabilities: ["right_arm_light"]
+    location: "p1"
+    evidence: "A 用右手拿起轻物，左臂仍固定着。"

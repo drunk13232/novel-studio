@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Impossible de se connecter au service local. Vérifiez que le logiciel est toujours en cours d’exécution, puis réessayez. Vos modifications sont conservées, mais leur enregistrement ou leur exécution n’a pas été confirmé.",
+  "remoteDataSendingCanceled": "Envoi des données à distance annulé",
+  "sessionValidationFailed": "Échec de validation de la session, veuillez rouvrir la page",
+  "dismiss": "Fermer le message d’erreur"
+}

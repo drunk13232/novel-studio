@@ -1,0 +1,1773 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "current": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "project": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "genre": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "current_volume": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "current_scene": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "story_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "current_chapter": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "title",
+            "genre",
+            "current_volume",
+            "current_scene",
+            "story_date",
+            "current_chapter"
+          ],
+          "additionalProperties": false
+        },
+        "pov": {
+          "type": "object",
+          "properties": {
+            "current_character": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tense": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "person": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "current_character",
+            "tense",
+            "person"
+          ],
+          "additionalProperties": false
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "current": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "current"
+          ],
+          "additionalProperties": false
+        },
+        "active_characters": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "active_threads": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "recent_events": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "open_foreshadowing": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "hard_constraints": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "revision",
+        "project",
+        "pov",
+        "location",
+        "active_characters",
+        "active_threads",
+        "recent_events",
+        "open_foreshadowing",
+        "hard_constraints",
+        "warnings"
+      ],
+      "additionalProperties": false
+    },
+    "character": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "alive": {
+              "type": "boolean"
+            },
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "physical_condition": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "mental_condition": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "age": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "limitations": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "alive",
+            "location",
+            "physical_condition",
+            "mental_condition",
+            "age",
+            "limitations"
+          ],
+          "additionalProperties": false
+        },
+        "relationships": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "knowledge": {
+          "type": "object",
+          "properties": {
+            "knows": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "suspects": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "does_not_know": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "knows",
+            "suspects",
+            "does_not_know"
+          ],
+          "additionalProperties": false
+        },
+        "goals": {
+          "type": "object",
+          "properties": {
+            "short_term": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "long_term": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "short_term",
+            "long_term"
+          ],
+          "additionalProperties": false
+        },
+        "secrets": {
+          "type": "object",
+          "properties": {
+            "personal": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "personal"
+          ],
+          "additionalProperties": false
+        },
+        "inventory": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "abilities": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "recent_changes": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "last_updated_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        },
+        "characterization": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "voice": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "established_goals": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "values",
+            "voice",
+            "established_goals"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "aliases",
+        "status",
+        "relationships",
+        "knowledge",
+        "goals",
+        "secrets",
+        "inventory",
+        "abilities",
+        "recent_changes",
+        "last_updated_chapter",
+        "writer_view",
+        "characterization"
+      ],
+      "additionalProperties": false
+    },
+    "view": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visibility": {
+          "enum": [
+            "PUBLIC",
+            "CHARACTER",
+            "AUTHOR"
+          ]
+        },
+        "known_by": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "since_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "story_time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "visibility",
+        "known_by",
+        "since_chapter",
+        "story_time"
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "character_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "acquired_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "story_time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_event": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "character_id",
+        "acquired_chapter",
+        "story_time",
+        "source_event"
+      ],
+      "additionalProperties": false
+    },
+    "fact": {
+      "type": "object",
+      "properties": {
+        "canonical_truth": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "introduced_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "known_by": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/receipt"
+          }
+        },
+        "suspected_by": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/receipt"
+          }
+        },
+        "false_beliefs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "belief": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "acquired_chapter": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "story_time": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source_event": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "belief",
+              "acquired_chapter",
+              "story_time",
+              "source_event"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "restricted_until": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "public_since_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "public_story_time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reader_known_since_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "canonical_truth",
+        "introduced_chapter",
+        "known_by",
+        "suspected_by",
+        "false_beliefs",
+        "restricted_until",
+        "public",
+        "public_since_chapter",
+        "public_story_time"
+      ],
+      "additionalProperties": false
+    },
+    "foreshadow": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "introduced_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "OPEN",
+            "DEVELOPING",
+            "READY",
+            "RESOLVED",
+            "ABANDONED"
+          ]
+        },
+        "importance": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visible_to_reader": {
+          "type": "boolean"
+        },
+        "known_by": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "planned_window": {
+          "type": "object",
+          "properties": {
+            "earliest": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "preferred": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "latest": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "earliest",
+            "preferred",
+            "latest"
+          ],
+          "additionalProperties": false
+        },
+        "setup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "developments": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "intended_payoff": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "resolved_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "introduced_chapter",
+        "status",
+        "importance",
+        "visible_to_reader",
+        "known_by",
+        "planned_window",
+        "setup",
+        "developments",
+        "intended_payoff",
+        "restrictions",
+        "resolved_chapter",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "thread": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "enum": [
+            "main",
+            "sub",
+            "character",
+            "romance",
+            "mystery"
+          ]
+        },
+        "status": {
+          "enum": [
+            "OPEN",
+            "ACTIVE",
+            "DORMANT",
+            "RESOLVED",
+            "DROPPED"
+          ]
+        },
+        "introduced_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "last_advanced_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "developments": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "type",
+        "status",
+        "introduced_chapter",
+        "last_advanced_chapter",
+        "characters",
+        "developments",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "story_time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        },
+        "evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "chapter",
+        "story_time",
+        "location",
+        "characters",
+        "summary",
+        "writer_view",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "strength": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_updated_chapter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "characters",
+        "kind",
+        "strength",
+        "last_updated_chapter",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        },
+        "daylight_hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 23
+          }
+        },
+        "travel_minutes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "name",
+        "writer_view",
+        "daylight_hours",
+        "travel_minutes"
+      ],
+      "additionalProperties": false
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "holder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "holder",
+        "location",
+        "status",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "faction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "members",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "contract": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "hard": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "strong": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "soft": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "preferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "hard",
+        "strong",
+        "soft",
+        "preferences"
+      ],
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "statement": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "check": {
+          "enum": [
+            null,
+            "injury",
+            "knowledge",
+            "alive",
+            "time",
+            "location",
+            "age",
+            "item",
+            "ability",
+            "sequence",
+            "manual"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "check",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "style": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "language_density": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dialogue_ratio": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description_preferences": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "interiority": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pacing": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pov": {
+          "type": "object",
+          "properties": {
+            "person": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tense": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "distance": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "person",
+            "tense",
+            "distance"
+          ],
+          "additionalProperties": false
+        },
+        "allow_internet_slang": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allow_author_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metaphor_density": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "banned_expressions": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "ai_high_risk_expressions": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "hemingway_opt_in": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "language_density",
+        "dialogue_ratio",
+        "description_preferences",
+        "interiority",
+        "pacing",
+        "pov",
+        "allow_internet_slang",
+        "allow_author_summary",
+        "metaphor_density",
+        "banned_expressions",
+        "ai_high_risk_expressions",
+        "hemingway_opt_in"
+      ],
+      "additionalProperties": false
+    },
+    "scene": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "purpose": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "conflict": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "turn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outcome": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "emotional_change": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "purpose",
+        "location",
+        "characters",
+        "conflict",
+        "turn",
+        "outcome",
+        "emotional_change",
+        "writer_view"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "chapter": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "volume": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "number",
+            "title",
+            "volume"
+          ],
+          "additionalProperties": false
+        },
+        "pov": {
+          "type": "object",
+          "properties": {
+            "character": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "character"
+          ],
+          "additionalProperties": false
+        },
+        "setting": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "story_time": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "location",
+            "story_time"
+          ],
+          "additionalProperties": false
+        },
+        "chapter_goal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "character_goals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "scenes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scene"
+          }
+        },
+        "must_include": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "must_not_include": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "foreshadowing": {
+          "type": "object",
+          "properties": {
+            "advance": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "introduce": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "resolve": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "advance",
+            "introduce",
+            "resolve"
+          ],
+          "additionalProperties": false
+        },
+        "knowledge_changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "state_changes_expected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "ending_hook": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_view": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        },
+        "approved_disclosures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fact_id": {
+                "type": "string"
+              },
+              "character_id": {
+                "type": "string"
+              },
+              "scene_id": {
+                "type": "string"
+              },
+              "source_event": {
+                "type": "string"
+              },
+              "author_approved": {
+                "type": "boolean"
+              },
+              "audience": {
+                "enum": [
+                  "CHARACTER",
+                  "READER",
+                  "BOTH"
+                ]
+              }
+            },
+            "required": [
+              "fact_id",
+              "character_id",
+              "scene_id",
+              "source_event",
+              "author_approved"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "chapter",
+        "pov",
+        "setting",
+        "chapter_goal",
+        "character_goals",
+        "scenes",
+        "must_include",
+        "must_not_include",
+        "foreshadowing",
+        "knowledge_changes",
+        "state_changes_expected",
+        "ending_hook",
+        "writer_view",
+        "approved_disclosures"
+      ],
+      "additionalProperties": false
+    },
+    "ledger": {
+      "type": "object",
+      "properties": {
+        "last_commit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chapter": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "body_sha256": {
+                "type": "string"
+              },
+              "proposal_id": {
+                "type": "string"
+              },
+              "proposal_sha256": {
+                "type": "string"
+              },
+              "committed_at": {
+                "type": "string"
+              },
+              "revision": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "chapter",
+              "body_sha256",
+              "proposal_id",
+              "proposal_sha256",
+              "committed_at",
+              "revision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "last_commit",
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      },
+      "required": [
+        "events"
+      ],
+      "additionalProperties": false
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "relationships": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/relationship"
+          }
+        }
+      },
+      "required": [
+        "relationships"
+      ],
+      "additionalProperties": false
+    },
+    "knowledge-state": {
+      "type": "object",
+      "properties": {
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/fact"
+          }
+        }
+      },
+      "required": [
+        "facts"
+      ],
+      "additionalProperties": false
+    },
+    "foreshadowing": {
+      "type": "object",
+      "properties": {
+        "foreshadowing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/foreshadow"
+          }
+        }
+      },
+      "required": [
+        "foreshadowing"
+      ],
+      "additionalProperties": false
+    },
+    "plot-threads": {
+      "type": "object",
+      "properties": {
+        "threads": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/thread"
+          }
+        }
+      },
+      "required": [
+        "threads"
+      ],
+      "additionalProperties": false
+    },
+    "locations": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/location"
+          }
+        }
+      },
+      "required": [
+        "locations"
+      ],
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/item"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "factions": {
+      "type": "object",
+      "properties": {
+        "factions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/faction"
+          }
+        }
+      },
+      "required": [
+        "factions"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

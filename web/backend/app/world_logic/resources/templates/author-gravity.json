@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "exp_88888888888888888888888888888888",
+  "name": "作者重力下的运动与能量",
+  "description": "作者重力下的运动与能量：仅检验作者明确给出的参数，不更新 Canon。",
+  "experiment_type": "physics",
+  "solver": "formula",
+  "inputs": [
+    {
+      "id": "height",
+      "name": "落差",
+      "kind": "real",
+      "role": "input",
+      "value": 10.0,
+      "unit": "meter",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "gravity",
+      "name": "作者指定重力",
+      "kind": "real",
+      "role": "input",
+      "value": 2.0,
+      "unit": "meter/second**2",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    },
+    {
+      "id": "mass",
+      "name": "质量",
+      "kind": "real",
+      "role": "input",
+      "value": 5.0,
+      "unit": "kilogram",
+      "minimum": null,
+      "maximum": null,
+      "source_ids": [],
+      "note": "",
+      "basis": "DEMO"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "model_scope",
+      "text": "恒定重力、忽略空气阻力的理想模型",
+      "origin": "DEMO",
+      "accepted": false
+    }
+  ],
+  "constraints": [],
+  "acceptance_rules": [
+    {
+      "id": "energy_dimension",
+      "name": "能量量纲",
+      "type": "DIMENSIONAL",
+      "expression": "energy",
+      "target": "",
+      "minimum": null,
+      "maximum": null,
+      "unit": "joule",
+      "condition": "",
+      "basis": "仅在作者接受恒定重力、忽略阻力的模型内有效。",
+      "applicability": "",
+      "origin": "AUTHOR",
+      "severity": "HARD",
+      "automatic": true,
+      "source_ids": []
+    }
+  ],
+  "outputs": [
+    {
+      "id": "fall_time",
+      "name": "理想自由落体时间",
+      "expression": "sqrt(2 * height / gravity)",
+      "unit": "second"
+    },
+    {
+      "id": "energy",
+      "name": "势能变化",
+      "expression": "mass * gravity * height",
+      "unit": "joule"
+    }
+  ],
+  "source_references": [],
+  "dependencies": [],
+  "events": [],
+  "schedule": null,
+  "sensitivity": null,
+  "baseline_id": "",
+  "baseline_version": null,
+  "baseline_fingerprint": "",
+  "baseline_acceptance_fingerprint": "",
+  "scenario_note": "",
+  "seed": null,
+  "limitations": [
+    "演示值不是作品事实；自然常数和能力规则由作者确认。"
+  ],
+  "steps": [
+    "核对来源和输入",
+    "确认验收规则",
+    "执行本地求解",
+    "检查结果和未知事项"
+  ]
+}

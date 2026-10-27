@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Keine Verbindung zum lokalen Dienst möglich. Prüfe, ob die Software noch läuft, und versuche es erneut. Deine aktuellen Änderungen bleiben erhalten; erfolgreiches Speichern oder Ausführen wurde nicht bestätigt.",
+  "remoteDataSendingCanceled": "Übertragung der Daten an den externen Dienst abgebrochen",
+  "sessionValidationFailed": "Sitzungsprüfung fehlgeschlagen. Bitte öffne die Seite erneut.",
+  "dismiss": "Fehlermeldung schließen"
+}

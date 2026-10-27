@@ -1,0 +1,40 @@
+schema_version: "0.5"
+id: "chapter_acd2b905ae704888bcd7ac459b76e438"
+number: 1
+order: 1
+title: "退回的潮声"
+status: "FINAL"
+planning_level: "SKELETON"
+volume: "volume_e8935e0db3394c50b69ee10a96c4fa68"
+pov:
+  character: "character_3c063eadd8f04fd5ab660ff97f286130"
+story_time: "2041-10-03T19:20:00+08:00"
+temporal_mode: "PRESENT"
+location: "entity_5e8491185cf44889b1da5f8a365f94d7"
+purpose: "一封旧信改变夜班安排"
+chapter_goal: "决定是否修复信件"
+characters:
+  - "character_3c063eadd8f04fd5ab660ff97f286130"
+  - "character_d0b524ced5324e2f86521f5b6ea0f4b4"
+character_goals: {}
+character_arcs_advanced: []
+conflict: "末班船即将离岸"
+scenes: []
+turn: "江予留下修复信封"
+outcome: "周栖替她去码头询问寄信人"
+emotional_change: null
+plot_threads:
+  advance: []
+  open: []
+  close: []
+foreshadowing:
+  introduce: []
+  advance: []
+  resolve: []
+knowledge_changes_expected: []
+state_changes_expected: []
+must_include: []
+must_not_include: []
+ending_hook: null
+notes: null
+depends_on: []

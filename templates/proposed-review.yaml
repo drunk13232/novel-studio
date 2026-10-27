@@ -1,0 +1,7 @@
+result: null
+coverage: "SEMANTIC_DIFF_REVIEW"
+reviewer: null
+proposal_sha256: null
+extraction_complete: false
+verified_operations: []
+findings: []

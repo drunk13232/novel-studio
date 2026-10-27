@@ -1,0 +1,65 @@
+{
+  "version": "2.16.1",
+  "license": "OWNER_DECISION_PENDING",
+  "private_data_included": false,
+  "requires_existing_release_audit": true,
+  "excluded": [
+    "docs/ai-controls/private-checks/**",
+    "user data",
+    "credentials",
+    "native provider thread history"
+  ],
+  "files": [
+    {
+      "path": "web/backend/app/ai/controls.py",
+      "sha256": "cc6341ce75662dafac6bf56288e01998ee90a063bf707c95b8fb5703b32171e8",
+      "bytes": 8299
+    },
+    {
+      "path": "web/backend/app/ai/parameters.py",
+      "sha256": "a4b974dca6e2767b645bd26e5400467353f9c0543f69d0091ab1610089540dd9",
+      "bytes": 3651
+    },
+    {
+      "path": "web/frontend/src/ai-controls.tsx",
+      "sha256": "721666c6b281a2ffc669703a1981f7a7bd5c7060568b85acbc4d85e5988731d9",
+      "bytes": 20234
+    },
+    {
+      "path": "web/frontend/src/ai-controls.css",
+      "sha256": "e1aca4660c919759fd0870cb369a282405a6a88efa89ccd4e27d50c7155f30e2",
+      "bytes": 2492
+    },
+    {
+      "path": "web/frontend/src/ai-control-writes.ts",
+      "sha256": "395cd45e7028a9323ec1b0d448e5828dc36464a47a4f369042ca4d7631a2484c",
+      "bytes": 767
+    },
+    {
+      "path": "web/backend/tests/test_ai_controls.py",
+      "sha256": "1b03ff2c763772bfc249be5d30c334d4b90bf465da873d2822c98c08b58b4199",
+      "bytes": 14042
+    },
+    {
+      "path": "docs/ai-controls/README.md",
+      "sha256": "7c3912a820618f5c2c6e32f1574f909b6048719f0439f842f8b6d3d60dfa3d3d",
+      "bytes": 6211
+    },
+    {
+      "path": "docs/ai-controls/TECHNICAL-SELECTION.md",
+      "sha256": "4c6dd278759e078d5c3c7c69ab7a7495a612ff2cc7e2956c4964dc2795854d87",
+      "bytes": 3162
+    },
+    {
+      "path": "web/frontend/public/locales/zh-CN/ai-controls.json",
+      "sha256": "59122325e90719fa594a4288019335160355dd368692da2b29abffd46239af6a",
+      "bytes": 7968
+    },
+    {
+      "path": "web/frontend/public/locales/en/ai-controls.json",
+      "sha256": "8449ec302d42ae465b683452d49a7816088bcc8e45b9edbe76503b6bf966bfce",
+      "bytes": 8375
+    }
+  ],
+  "last_reviewed_patch": "2.16.2"
+}

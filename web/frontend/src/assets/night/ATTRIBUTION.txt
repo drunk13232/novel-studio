@@ -1,0 +1,1 @@
+Local editorial compositions use Lucide icons (https://lucide.dev), ISC license. No external image CDN or fonts. Composition: Novel Studio.

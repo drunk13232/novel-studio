@@ -1,0 +1,22 @@
+id: null
+name: null
+role: null
+identity: null
+appearance: null
+personality: null
+core_desire: null
+fear: null
+strengths: []
+weaknesses: []
+values: []
+speech: null
+relationships: {}
+story_function: null
+arc:
+  start: null
+  direction: null
+  potential_end: null
+canon:
+  locked: []
+status: CONCEPT
+appearances: []

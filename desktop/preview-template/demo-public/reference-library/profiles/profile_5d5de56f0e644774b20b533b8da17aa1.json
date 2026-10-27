@@ -1,0 +1,24 @@
+{
+  "id": "profile_5d5de56f0e644774b20b533b8da17aa1",
+  "title": "海边留白",
+  "directives": [
+    "克制写作，用动作承载情绪。",
+    "不在对白后重复解释动机。"
+  ],
+  "sources": [
+    {
+      "scope": "public",
+      "document_id": "document_537b1ef69a374055a350964e266ff5a1"
+    }
+  ],
+  "analysis_ids": [],
+  "status": "USER_CONFIRMED",
+  "created_at": "2026-10-10T05:20:12.789293+00:00",
+  "confirmations": [
+    {
+      "at": "2026-10-10T05:20:12.789293+00:00",
+      "action": "作者编辑并确认"
+    }
+  ],
+  "updated_at": "2026-10-10T05:20:12.794757+00:00"
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "novel-studio-plugin/1",
+  "id": "example.integration-entries",
+  "name": "创作接入入口 / Integration entries",
+  "version": "1.0.0",
+  "min_app_version": "2.20.0",
+  "description": "集中打开已有 AI 接口、模型分配和世界逻辑实验室。",
+  "author": "Novel Studio examples",
+  "license": "Local demonstration; project license pending",
+  "actions": [],
+  "commands": [
+    {
+      "id": "providers",
+      "title": "配置 AI Provider",
+      "description": "",
+      "kind": "entry",
+      "action": null,
+      "arguments": {},
+      "script": null,
+      "target": {
+        "type": "settings",
+        "value": "api"
+      }
+    },
+    {
+      "id": "routing",
+      "title": "配置任务模型",
+      "description": "",
+      "kind": "entry",
+      "action": null,
+      "arguments": {},
+      "script": null,
+      "target": {
+        "type": "settings",
+        "value": "models"
+      }
+    },
+    {
+      "id": "lab",
+      "title": "打开世界逻辑实验室",
+      "description": "",
+      "kind": "entry",
+      "action": null,
+      "arguments": {},
+      "script": null,
+      "target": {
+        "type": "page",
+        "value": "worldlogic"
+      }
+    }
+  ],
+  "settings": [],
+  "resources": [],
+  "files": {
+    "README.md": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13"
+  }
+}

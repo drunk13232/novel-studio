@@ -1,0 +1,6 @@
+{
+  "localServiceConnectionFailed": "Yerel hizmete bağlanılamıyor. Yazılımın hâlâ çalıştığını kontrol edip yeniden deneyin. Mevcut düzenlemeler korunuyor; kaydetme veya yürütmenin başarılı olduğu doğrulanmadı.",
+  "remoteDataSendingCanceled": "Uzak hizmete veri gönderimi iptal edildi",
+  "sessionValidationFailed": "Oturum doğrulaması başarısız oldu, lütfen sayfayı yeniden açın",
+  "dismiss": "Hata bildirimini kapat"
+}

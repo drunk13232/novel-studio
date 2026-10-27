@@ -1,0 +1,84 @@
+schema_version: "0.4"
+id: "character_3c063eadd8f04fd5ab660ff97f286130"
+name: "江予"
+aliases: []
+role: "PROTAGONIST"
+importance: "MAIN"
+identity:
+  summary: "潮汐邮局的夜班信件修复员"
+  gender: "女"
+  age_at_start: 28.0
+  birthday: null
+  occupation: "信件修复员"
+  affiliation: null
+  family_background: null
+appearance:
+  summary: "常穿深蓝工作衫，袖口留有纸浆痕迹"
+  height: null
+  build: null
+  features: []
+  clothing_preferences: []
+  facial_features: null
+  hairstyle: null
+  eye_color: null
+  age_changes: null
+personality:
+  core_traits:
+    - "耐心"
+    - "克制"
+    - "固执"
+  strengths: []
+  flaws: []
+  contradictions: []
+psychology:
+  core_desire: null
+  core_need: null
+  fear: null
+  wound: null
+  values: []
+  boundaries: []
+behavior:
+  default_patterns: []
+  stress_patterns: []
+  habits: []
+  tells: []
+speech:
+  tone: "简短，常以行动代替答复"
+  vocabulary: null
+  sentence_style: null
+  habits: []
+  avoids: []
+  catchphrases: []
+  forms_of_address: []
+biography:
+  origin: null
+  education: null
+  important_events: []
+  trauma: null
+  turning_points: []
+  first_appearance: null
+abilities:
+  skills: []
+  knowledge: []
+  combat: null
+  professional: null
+  weaknesses: []
+  growth_limits: []
+periods: []
+goals:
+  initial_short_term: []
+  initial_long_term: []
+relationships:
+  initial: {}
+story:
+  function: null
+  arc_start: null
+  arc_direction: null
+  possible_end: null
+secrets:
+  author_only: []
+canon:
+  hard: []
+  strong: []
+  soft: []
+tags: []

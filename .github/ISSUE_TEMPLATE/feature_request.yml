@@ -1,0 +1,29 @@
+name: Feature request / 功能建议
+description: Describe the writing problem and the smallest useful improvement.
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste private novel content, API keys, credentials or unsanitized logs.
+        不要粘贴私人小说内容、密钥或未脱敏日志。Use fictional examples.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What authoring problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and existing alternatives
+      description: Explain how it relates to current tools; avoid private material.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: No private novel content, secrets or unsanitized logs are included.
+          required: true

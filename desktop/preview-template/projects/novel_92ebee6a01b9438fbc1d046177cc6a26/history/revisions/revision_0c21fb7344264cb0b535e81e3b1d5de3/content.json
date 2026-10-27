@@ -1,0 +1,37 @@
+{
+  "id": "document_248b8e55e7d841d28405373ec0b6eeec",
+  "scope": "novel_92ebee6a01b9438fbc1d046177cc6a26",
+  "filename": "纸湾镇生活笔记.md",
+  "format": "md",
+  "size": 255,
+  "sha256": "826f023dc97aa78520cb7d74f1026e1beb46a0a943ebe51c60686429e7386c16",
+  "original": "originals/826f023dc97aa78520cb7d74f1026e1beb46a0a943ebe51c60686429e7386c16.md",
+  "uploaded_at": "2026-10-10T05:20:11.825607+00:00",
+  "updated_at": "2026-10-10T05:20:11.825607+00:00",
+  "status": "READY",
+  "error": "",
+  "libraries": [
+    "reference"
+  ],
+  "trashed": false,
+  "archived": false,
+  "metadata": {
+    "title": "纸湾镇生活笔记",
+    "author": "",
+    "year": "",
+    "publisher": "",
+    "isbn": "",
+    "doi": "",
+    "url": "",
+    "language": "zh",
+    "categories": [],
+    "tags": [],
+    "reading": "UNREAD",
+    "favorite": false,
+    "remarks": "",
+    "copyright": "",
+    "ownership": "UNKNOWN"
+  },
+  "warnings": [],
+  "unit_count": 7
+}

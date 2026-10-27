@@ -1,0 +1,37 @@
+{
+  "id": "document_537b1ef69a374055a350964e266ff5a1",
+  "scope": "public",
+  "filename": "克制对白参考.md",
+  "format": "md",
+  "size": 279,
+  "sha256": "81f1248c1b48e681a351aef0001abcef4a91bf7eb3f896c9a91599baebe43b7d",
+  "original": "originals/81f1248c1b48e681a351aef0001abcef4a91bf7eb3f896c9a91599baebe43b7d.md",
+  "uploaded_at": "2026-10-10T05:20:11.958803+00:00",
+  "updated_at": "2026-10-10T05:20:11.958803+00:00",
+  "status": "READY",
+  "error": "",
+  "libraries": [
+    "style"
+  ],
+  "trashed": false,
+  "archived": false,
+  "metadata": {
+    "title": "克制对白参考",
+    "author": "Novel Studio 原创演示",
+    "year": "",
+    "publisher": "",
+    "isbn": "",
+    "doi": "",
+    "url": "",
+    "language": "zh",
+    "categories": [],
+    "tags": [],
+    "reading": "UNREAD",
+    "favorite": false,
+    "remarks": "",
+    "copyright": "原创演示素材，可用于本预览版录屏与展示。",
+    "ownership": "OWN"
+  },
+  "warnings": [],
+  "unit_count": 7
+}

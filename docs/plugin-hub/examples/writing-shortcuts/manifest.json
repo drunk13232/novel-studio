@@ -1,0 +1,77 @@
+{
+  "schema_version": "novel-studio-plugin/1",
+  "id": "example.writing-shortcuts",
+  "name": "写作快捷操作 / Writing shortcuts",
+  "version": "1.0.0",
+  "min_app_version": "2.20.0",
+  "description": "调整字号、切换专注和打开章节；仅调用原有界面 Action。",
+  "author": "Novel Studio examples",
+  "license": "Local demonstration; project license pending",
+  "actions": [
+    "set_editor_font_size",
+    "toggle_focus_mode",
+    "open_chapter"
+  ],
+  "commands": [
+    {
+      "id": "font",
+      "title": "应用插件字号",
+      "description": "",
+      "kind": "action",
+      "action": "set_editor_font_size",
+      "arguments": {
+        "size": "${font_size}"
+      },
+      "script": null,
+      "target": null
+    },
+    {
+      "id": "focus",
+      "title": "切换专注模式",
+      "description": "",
+      "kind": "action",
+      "action": "toggle_focus_mode",
+      "arguments": {},
+      "script": null,
+      "target": null
+    },
+    {
+      "id": "chapter",
+      "title": "打开指定章节",
+      "description": "",
+      "kind": "action",
+      "action": "open_chapter",
+      "arguments": {
+        "number": "${chapter}"
+      },
+      "script": null,
+      "target": null
+    }
+  ],
+  "settings": [
+    {
+      "id": "font_size",
+      "label": "正文大小 / Font size",
+      "description": "",
+      "type": "integer",
+      "default": 18,
+      "choices": [],
+      "minimum": 14.0,
+      "maximum": 32.0
+    },
+    {
+      "id": "chapter",
+      "label": "章节号 / Chapter",
+      "description": "",
+      "type": "integer",
+      "default": 1,
+      "choices": [],
+      "minimum": 1.0,
+      "maximum": 99999.0
+    }
+  ],
+  "resources": [],
+  "files": {
+    "README.md": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13"
+  }
+}
