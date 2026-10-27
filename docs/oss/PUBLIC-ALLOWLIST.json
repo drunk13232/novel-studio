@@ -89,6 +89,11 @@
       "bytes": 411
     },
     {
+      "path": ".gitattributes",
+      "sha256": "8d9896084792a0c3cb1f81e019003e7bcbb2177cd7e34c362c355ba65f6ee30f",
+      "bytes": 181
+    },
+    {
       "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
       "sha256": "d02a20399f2cb5d75e248d9c2bcc55a3ab31b4609b934785e2a60183deec98b9",
       "bytes": 1729
@@ -496,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "761ccad3413e6923e3df0ec346559b3d6def2a29aa4ff0447383e38578190b63",
-      "bytes": 18603
+      "sha256": "11907754214f4678f5f2bfb7c966ba60bd1498f4a9dd292f45ce1a171867e1a5",
+      "bytes": 18626
     },
     {
       "path": "desktop/package_zip.py",

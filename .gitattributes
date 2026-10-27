@@ -1,0 +1,3 @@
+# Preserve exact audited bytes: runtime, template and notice manifests use SHA-256.
+# Do not apply platform-dependent LF/CRLF conversion when committing or checking out.
+* -text

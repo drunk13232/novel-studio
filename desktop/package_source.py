@@ -128,6 +128,7 @@ add('docs/daily-writing-tools/FINAL-ROUND-REPORT.md')
 add('docs/writing-tools/global-replacement.md')
 add('THIRD_PARTY_NOTICES.md')
 for legal in ('LICENSE','NOTICE','COPYRIGHT'):add(legal)
+add('.gitattributes')
 # Reuse the owner's previously reviewed public-only fixture, without editing
 # the private development original. Hashes freeze that specific decision.
 public_fixture=root/'docs/oss/public-overrides/test_global_replace.py'
