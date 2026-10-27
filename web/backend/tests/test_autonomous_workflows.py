@@ -84,7 +84,14 @@ def test_lookup_exact_alias_ambiguity_buffer_and_no_canon_writes(author):
 
 
 def test_saved_action_still_uses_existing_writer_checks_and_route(author,monkeypatch):
-    s,p,root,path=author;b=choice(s,p,path);ctx=s.preview(p,b);s.approve(p,ctx['id'],Approval(context_hash=ctx['context_hash'],confirm=True))
+    s,p,root,path=author
+    # This integration reads an optional, separately installed Skill, not a
+    # bundled fixture. Missing resource is an explicit SKIP, never an AI PASS.
+    from app.integrations.stack import installations
+    skill_root=installations(s.registry.engine)['novel']
+    if not all((skill_root/name).is_file() for name in ('SKILL.md','references/style-fidelity.md','references/cognition-layers-and-language.md')):
+        pytest.skip('Optional novel-writing Skill and its two writing references are not installed; real Skill integration is unverified')
+    b=choice(s,p,path);ctx=s.preview(p,b);s.approve(p,ctx['id'],Approval(context_hash=ctx['context_hash'],confirm=True))
     t=WritingAction(name='精简',action='condense',instruction='保持事实和口吻，精简重复。',candidate_count=2,directions=['短句','保留留白']);saved=save_action(s,p,ActionSave(etag=actions(s,p)['etag'],template=t));loaded=actions(s,p)['templates'][0]
     d=s.tools.doc(p,path);text=normalized(d);cid,_,_=s.tools.chapter(p,path);captured={}
     class A:selected_ai={'backend':'MOCK_NOT_AI'}

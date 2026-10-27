@@ -110,8 +110,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "4cb05cfe1915f9f07cf8880bebc0312b84f796d15a7320c3d902e926af0d4468",
-      "bytes": 4593
+      "sha256": "17c5a84abc78bfe4fe32e19e08962d854dcd97ddf5f0bdbb62883def67aa1fd1",
+      "bytes": 4756
     },
     {
       "path": ".gitignore",
@@ -4991,8 +4991,8 @@
     },
     {
       "path": "docs/oss/INSTALL-VERIFICATION.md",
-      "sha256": "ce1fa0c35965f757d193a627f7433c889cb15345f198be4bb2cc878ca1e3977a",
-      "bytes": 1710
+      "sha256": "67275cdd28ec73d8d049dc4a54d7970b35fa2a6392f68ace6683559a0bbf9f50",
+      "bytes": 2357
     },
     {
       "path": "docs/oss/PREPUBLICATION.md",
@@ -9276,8 +9276,8 @@
     },
     {
       "path": "web/backend/tests/test_autonomous_workflows.py",
-      "sha256": "852619e13053cb8062b210f3e559118eb9dca229ee23f9070154d6fefc5a89a4",
-      "bytes": 9451
+      "sha256": "7f10b9e80a024c7633a252b52fa4ad9559a325fe5cf53b80a36c1d19c277a6e0",
+      "bytes": 10013
     },
     {
       "path": "web/backend/tests/test_cache_maintenance.py",
@@ -9492,8 +9492,8 @@
     },
     {
       "path": "web/backend/tests/test_writing_assist.py",
-      "sha256": "00136f788300245ee28cdcbb7ade395ccc8115ada3cc7ce6dda458bc68a6bbdb",
-      "bytes": 9896
+      "sha256": "adcf76dd623204af7a4931db1b0b4a25f7fe5797a2095469b318bb8178abfad3",
+      "bytes": 10458
     },
     {
       "path": "web/backend/tests/test_writing_dashboard.py",

@@ -72,6 +72,8 @@ jobs:
           # Five existing integration cases require separately installed Screenwriting
           # Skills, which are not redistributed or silently downloaded in public CI.
           # Only those exact cases are deselected; other failures stay failures.
+          # Two novel-writing resource integration tests explicitly SKIP when
+          # that separately installed Skill is missing; no resource is fabricated.
           & ./web/backend/.venv/Scripts/python.exe -m pytest web/backend/tests -q -ra -k 'not real_local_sapi_through_application_audio_routes' --basetemp "$env:RUNNER_TEMP/novel-ci-pytest" --junitxml "$env:RUNNER_TEMP/novel-ci-pytest.xml" --deselect web/backend/tests/test_characters.py::test_partial_freeze_lock_and_review_commit --deselect web/backend/tests/test_planning.py::test_real_skill_prompt_and_ai_candidate_scope --deselect web/backend/tests/test_projects.py::test_partial_merge_preserves_frozen_sections_and_stale_result --deselect web/backend/tests/test_projects.py::test_candidate_review_commit_conflicts_and_archived_readonly --deselect web/backend/tests/test_projects.py::test_candidate_commit_keeps_original_crlf_and_bom
           exit $LASTEXITCODE
       - name: Frontend TypeScript and Vite production build

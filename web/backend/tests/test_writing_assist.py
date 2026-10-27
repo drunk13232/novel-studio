@@ -105,7 +105,14 @@ def test_facts_exact_evidence_epistemic_review_no_commit(service,monkeypatch):
     with pytest.raises(ConsoleError):s.review_facts(p,r['id'],FactReview(etag=r['etag'],items=[decision]))
 
 def test_multi_candidates_use_diff_rejection_acceptance_and_stale_guard(service,monkeypatch):
-    s,p,root=service;c=context(service,'周栖站在门口。\n江予说：“我现在非常非常需要你留下。”\n门外船笛响了。');approve(s,p,c)
+    s,p,root=service
+    # This integration reads an optional, separately installed Skill, not a
+    # bundled fixture. Missing resource is an explicit SKIP, never an AI PASS.
+    from app.integrations.stack import installations
+    skill_root=installations(s.registry.engine)['novel']
+    if not all((skill_root/name).is_file() for name in ('SKILL.md','references/style-fidelity.md','references/cognition-layers-and-language.md')):
+        pytest.skip('Optional novel-writing Skill and its two writing references are not installed; real Skill integration is unverified')
+    c=context(service,'周栖站在门口。\n江予说：“我现在非常非常需要你留下。”\n门外船笛响了。');approve(s,p,c)
     box=capture(s,p,monkeypatch)
     monkeypatch.setattr('app.creative.tasks.adapter',lambda *a,**kw:None)
     doc=s.tools.doc(p,c['choice']['path']);text=normalized(doc);quote='我现在非常非常需要你留下。';i=text.index(quote)

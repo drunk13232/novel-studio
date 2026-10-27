@@ -6,6 +6,8 @@ Procedure: extract the allowlisted source into a new isolated folder with no cop
 
 All application launch/test data and CODEX_HOME are isolated. No real novel or cloud inference is needed. Native GUI, physical IME/DPI, installed SAPI voices, optional external Skills and actual remote AI remain distinct evidence gates. Browser/headless checks or silent installer checks never stand in for native desktop interaction.
 
-The documented CI command explicitly deselects five separately installed Screenwriting integration tests and the local SAPI synthesis case. Other failures remain failures. Opt-in print/symlink/platform tests may report SKIPPED with reasons; report actual counts. GitHub-hosted CI remains unexecuted until the owner creates and pushes the repository.
+The documented CI command explicitly deselects five separately installed Screenwriting integration tests and the local SAPI synthesis case. Other failures remain failures. Opt-in print/symlink/platform tests may report SKIPPED with reasons; report actual counts. Two further integration tests read the optional, separately installed `novel-writing` Skill and its two writing references; when absent they explicitly report SKIPPED and do not claim real Skill validation. All original test assertions still run when those resources are installed. No missing Skill is replaced by a fabricated resource.
+
+Hosted Windows CI is now active at [GitHub Actions](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml). Consult the run for the exact source commit and actual result; a previous failed run or a local PASS is not evidence of the current hosted result. Windows checkouts preserve audited bytes with `.gitattributes`, and per-run test paths are initialized inside a runner step.
 
 If any clean install/build fails, preserve the error and distinguish network failure from dependency/project failure. A partially passing suite is not a full PASS.
