@@ -5,11 +5,11 @@
 
 [![CI](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml)
 
-> 计划仓库：`drunk13232/novel-studio`。当前仅为本地待审阅候选，尚未创建或发布仓库；CI 未在 GitHub 云端运行，徽章不代表通过。
+> 公开仓库：`drunk13232/novel-studio`。GitHub Actions 的实际状态请查看徽章与运行记录；本地验证、云端 CI、原生桌面和真实 AI 验收分别记录，不相互替代。
 
 本地优先的个人AI小说创作工作台。手动写作不需要AI；作者掌握正文、设定和修订的最终决定权。
 
-**当前状态：Preview / PARTIAL；公开发布候选，尚未公开发布。许可证：Apache-2.0；Copyright 2026 drunk13232。** [English](README_EN.md)
+**当前状态：Preview / PARTIAL；首次公开 Preview；完整验证边界与发行说明见 [Releases](https://github.com/drunk13232/novel-studio/releases)。许可证：Apache-2.0；Copyright 2026 drunk13232。** [English](README_EN.md)
 
 ## 功能与外部要求
 

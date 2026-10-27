@@ -4,7 +4,7 @@
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
   "history_included": false,
-  "publication_ready": false,
+  "publication_ready": true,
   "source": "current retained developer manifest + scoped application/tests/helpers + reviewed public docs and notices; no Git history",
   "public_overrides": "Only portable locator and owner-approved synthetic test names; original tests/business data unchanged. Upstream terms remain; no private Git history is exported.",
   "files": [
@@ -380,18 +380,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "0c62d40744a74b0d84974b3a0c81abb70b10240cadad471babd58e6f04a8f2f2",
-      "bytes": 8864
+      "sha256": "95e1f488e60e10114b65dc7fd3c954fd042d08fe9d09b47ba5590686feb74e31",
+      "bytes": 8980
     },
     {
       "path": "README_EN.md",
-      "sha256": "0701be3dc6d01a724c83cca59277e9696ad9927743db07be511a6de7a1bb019c",
-      "bytes": 8967
+      "sha256": "c3f1a2cb5f0ee569faee37dd6d280cb6e487991b12e7c012a770a4aa3840bb75",
+      "bytes": 9048
     },
     {
       "path": "SECURITY.md",
-      "sha256": "a33ec82142db6ce149b75a1e28d063b37248cbfe62f8e6c546094702b22dfede",
-      "bytes": 2245
+      "sha256": "1110cd93bb588f20d1823390c69b3eba34f96ae317d82535e93c9f4b45587dde",
+      "bytes": 1852
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -15175,5 +15175,12 @@
     "parent Git objects and old release archives",
     "generated PDF assets rebuilt from pinned npm package",
     "old audit snapshots not current acceptance"
-  ]
+  ],
+  "verification_status": "Preview / PARTIAL",
+  "owner_authorized_publication": {
+    "date": "2026-10-27",
+    "repository": "https://github.com/drunk13232/novel-studio",
+    "scope": "public reviewed source and Windows Preview Release; remaining verification limits disclosed",
+    "audited_snapshot_commit": "645b17418c037da5741d31e4f960f0efabc6892b"
+  }
 }

@@ -1,18 +1,16 @@
 # Security / 安全说明
 
-Current candidate: 2.24.0 Custom Workflows Preview / PARTIAL. Maintainer: drunk13232. No long-term support or comprehensive security certification is promised.
+Current public version: 2.24.0 Custom Workflows Preview / PARTIAL. Maintainer: drunk13232. No long-term support or comprehensive security certification is promised.
 
 ## Private vulnerability reporting
 
-The selected security channel is GitHub private vulnerability reporting for the intended repository `drunk13232/novel-studio`:
+GitHub private vulnerability reporting is enabled for `drunk13232/novel-studio` (verified 2026-10-27). Submit a private report through:
 
 https://github.com/drunk13232/novel-studio/security/advisories/new
 
-This is currently a local review candidate. The repository/reporting channel has not been created, enabled or tested by this task. Before publication, the owner must enable private vulnerability reporting in repository settings and verify “Report a vulnerability” is available. If the private form is unavailable, do not post exploitable details or secrets in public Issues. No alternative email address or guaranteed response time is invented.
+安全问题请通过 GitHub 的私密漏洞报告入口反馈。请勿在公开 Issue 中粘贴漏洞利用细节、私人小说、密钥或未脱敏日志。如果私密入口暂不可用，请先保留敏感细节，勿转为公开披露。没有另设或虚构私人邮箱及响应时限。
 
-安全反馈采用 GitHub 私密漏洞报告。仓库正式建立并由所有者开启该功能后才可使用上面的地址；当前不声称渠道已启用。请勿把漏洞利用细节、私人小说、密钥或未脱敏日志贴在公开 Issue。
-
-Include the affected version, impact and minimal fictional reproduction. Never attach full API keys, auth.json, config.toml, private manuscripts, databases or backups. Credential holders should revoke/rotate exposed credentials; removing a current file does not erase Git history.
+Include the affected version, impact and a minimal fictional reproduction. Never attach full API keys, auth.json, config.toml, private manuscripts, databases or backups. Credential holders should revoke/rotate exposed credentials; removing a current file does not erase Git history.
 
 ## Existing boundaries
 

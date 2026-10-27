@@ -5,11 +5,11 @@ My Workflows in the existing Director and World Studio supports ordered editable
 
 [![CI](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml)
 
-> Planned repository: `drunk13232/novel-studio`. This is a local review candidate, not a published repository. GitHub-hosted CI has not run; the badge is not a passing result.
+> Public repository: `drunk13232/novel-studio`. Check the badge and Actions history for actual hosted-CI status. Local tests, cloud CI, native desktop and real AI are separate verification gates.
 
 A local-first personal AI fiction workspace. Manual writing needs no AI connection. Authors retain final authority over manuscripts, settings and revisions.
 
-**Status: Preview / PARTIAL; a pre-publication candidate, not a published open-source release. Apache-2.0; Copyright 2026 drunk13232.** [简体中文](README.md)
+**Status: Preview / PARTIAL; the first public Preview; see [Releases](https://github.com/drunk13232/novel-studio/releases) for artifacts and verification limits. Apache-2.0; Copyright 2026 drunk13232.** [简体中文](README.md)
 
 ## Features and external requirements
 
@@ -65,7 +65,7 @@ Historical 2.22.2 focused evidence (not current-version revalidation): 28 isolat
 
 [Historical screenshot provenance and scope](docs/oss/SCREENSHOTS.md). Examples use the original demo; historical screenshots do not certify every current feature.
 
-[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Current prepublication review](docs/oss/PREPUBLICATION.md). Never upload private prose, API keys, login settings or unsanitized logs to Issues/PRs. No user/download/community statistics are invented.
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Candidate review record](docs/oss/PREPUBLICATION.md). Never upload private prose, API keys, login settings or unsanitized logs to Issues/PRs. No user/download/community statistics are invented.
 
 ## License
 
