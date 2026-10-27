@@ -19,12 +19,18 @@ jobs:
       PYTHONUTF8: '1'
       PYTHONNOUSERSITE: '1'
       PYTHONPATH: ${{ github.workspace }}/web/backend
-      NOVEL_WORKSPACE: ${{ runner.temp }}/novel-ci-workspace
-      NOVEL_STUDIO_HOME: ${{ runner.temp }}/novel-ci-home
-      NOVEL_STUDIO_DATA: ${{ runner.temp }}/novel-ci-data
-      CODEX_HOME: ${{ runner.temp }}/novel-ci-codex
       NOVEL_DEMO: '1'
     steps:
+      - name: Initialize isolated per-run paths
+        # runner.temp is not available in jobs.<job>.env. Resolve RUNNER_TEMP
+        # inside a Windows step and pass only isolated paths through GITHUB_ENV.
+        run: |
+          $taskRun = Join-Path $env:RUNNER_TEMP ("novel-ci-" + $env:GITHUB_RUN_ID + "-" + $env:GITHUB_RUN_ATTEMPT)
+          New-Item -ItemType Directory -Force -Path $taskRun | Out-Null
+          "NOVEL_WORKSPACE=$(Join-Path $taskRun 'workspace')" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
+          "NOVEL_STUDIO_HOME=$(Join-Path $taskRun 'home')" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
+          "NOVEL_STUDIO_DATA=$(Join-Path $taskRun 'data')" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CODEX_HOME=$(Join-Path $taskRun 'empty-codex')" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
