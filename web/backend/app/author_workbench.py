@@ -223,6 +223,20 @@ class AuthorWorkbench:
         if path:self.tools.doc(p,path)
         candidates=[read(f) for f in self.tools.local(p,'candidates').glob('*.json')]
         return {'revisions':revisions(self.ws(p).root,path or None)[:200],'candidates':[x for x in candidates if x and x.get('project_id')==p and (not path or x.get('path')==path)],'annotations':self.tools.notes(p,path,True) if path else [],'tasks':self.entries(p).get('revision_tasks',[])}
+    def chapter_work(self,p,path):
+        doc=self.tools.doc(p,path);cid,number,card=self.tools.chapter(p,path);card=card or {}
+        shelf=self.entries(p)
+        active=lambda rows:[{k:x.get(k) for k in ['id','text','status','priority','source','severity','annotation_id','exact','start','revision']} for x in rows if x.get('path')==path and not x.get('trashed') and x.get('status') not in {'DONE','IGNORED','ARCHIVED'}]
+        candidates=[]
+        for file in self.tools.local(p,'candidates').glob('*.json'):
+            row=read(file)
+            if not row or row.get('project_id')!=p or row.get('path')!=path or row.get('status')!='PROPOSED':continue
+            draft=row.get('author_draft') or {}
+            candidates.append({'id':row['id'],'instruction':row.get('instruction') or row.get('advice',''),'created_at':row.get('created_at',''),'source_current':row.get('document_revision')==doc['etag'],'draft_saved_at':max((v.get('updated_at','') for v in draft.get('variants',{}).values()),default='')})
+        candidates.sort(key=lambda x:x['draft_saved_at'] or x['created_at'],reverse=True)
+        # Existing explicit anchors are evidence; mentions and plans are not committed facts.
+        anchors=self.knowledge.anchors(p,path)
+        return {'project_id':p,'path':path,'revision':doc['etag'],'chapter_id':cid,'number':number,'plan':{'goal':card.get('purpose') or card.get('goal') or card.get('summary') or '', 'pov':card.get('pov',{}),'location':card.get('location'),'characters':card.get('characters',[]),'planning_only':True},'todos':active(shelf.get('todos',[]))[:60],'revisions':active(shelf.get('revision_tasks',[]))[:60],'candidates':candidates[:30],'candidate_total':len(candidates),'anchors':anchors[:30],'anchor_total':len(anchors),'counts':{'todos':len(active(shelf.get('todos',[]))),'revisions':len(active(shelf.get('revision_tasks',[])))} }
     def import_preview(self,p,blob,name):
         ws=self.tools.writable(p)
         if len(blob)>8*1024*1024:raise ConsoleError('旧稿单次最多 8 MiB',413)
@@ -368,6 +382,8 @@ def workbench_routes(s):
     def health(p:str):return s.health(p)
     @router.post('/repairs/{id}')
     def repair(p:str,id:str,b:Repair):return s.repair(p,id,b)
+    @router.get('/chapter-work')
+    def chapter_work(p:str,path:str):return s.chapter_work(p,path)
     @router.get('/revisions')
     def revision(p:str,path:str=''):return s.revision_list(p,path)
     @router.post('/imports/preview')

@@ -62,5 +62,17 @@
   "approval_REJECTED": "Rejected by author",
   "approval_CANCELLED": "Cancelled",
   "approval_EXPIRED": "Expired",
-  "approval_UNKNOWN": "Unknown"
+  "approval_UNKNOWN": "Unknown",
+  "directorSource": "From the AI Creative Director",
+  "directorBoundary": "Load the read-only analysis script, then explicitly Run. Only this candidate version is handed off; no extra AI request or manuscript change. Return and hand off again if it changes.",
+  "loadDirector": "Load read-only analysis script",
+  "returnDirector": "Return to Creative Director",
+  "directorBound": "Frozen candidate version bound",
+  "replaceScript": "Replace the current unsaved script? Save it first if needed.",
+  "unlinkDirector": "Unlink this candidate",
+  "analysisReturnTitle": "Return analysis to Director",
+  "analysisReturnBoundary": "Save actual output and candidate provenance as an author note. Never automatically edits prose or sends it to a model.",
+  "analysisComment": "Analysis comment (optional)",
+  "saveAnalysisReturn": "Save analysis and return to Director",
+  "analysisSaved": "Analysis saved as an author-only note."
 }

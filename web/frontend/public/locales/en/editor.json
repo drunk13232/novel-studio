@@ -288,5 +288,22 @@
   "readStateInstructionExample": "Read the current State and explain the steps needed for this chapter…",
   "readOnlyExecution": "Run read-only",
   "hanMetric": "Han characters",
-  "characterMetric": "Text characters"
+  "characterMetric": "Text characters",
+  "unsavedRevisionCandidate": "Unaccepted revision edits",
+  "revisionScopeChanged": "The project or chapter changed. This revision operation was stopped.",
+  "beforeManualRevision": "Before manual revision",
+  "restoreSettingInSourcePage": "Restore non-manuscript versions through the confirmation flow on their original settings page.",
+  "selectionCandidate": "Selection candidate",
+  "revisionEditedLocally": "Local changes, not accepted",
+  "revisionPreviewOnly": "Preview only; manuscript unchanged",
+  "revisionLocalHelp": "Edit the candidate on the right. Only “Confirm and save revision” adopts it. Closing the preview preserves the original candidate; rejecting it is a separate action.",
+  "closeRevisionPreview": "Close preview, keep candidate",
+  "rejectRevisionCandidate": "Reject this suggestion",
+  "chooseRevisionPreview": "Choose a saved version or AI candidate to compare. Previewing does not change the manuscript.",
+  "unsavedRevisionTitle": "Keep your unaccepted edits?",
+  "unsavedRevisionHelp": "You edited the candidate or revision note without accepting it. Continue editing to keep these changes. Discarding preserves the stored original candidate and does not change the manuscript.",
+  "continueRevisionEditing": "Continue editing",
+  "discardAndRejectRevision": "Discard local edits and reject suggestion",
+  "discardAndCloseRevision": "Discard local edits and close preview",
+  "discardAndSwitchRevision": "Discard local edits and switch"
 }

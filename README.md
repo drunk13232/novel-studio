@@ -1,4 +1,22 @@
-# Novel Studio · 2.24.0 Custom Workflows Preview
+# Novel Studio · 2.24.4 Writing Continuity Preview
+
+## 2.24.4
+
+候选手工编辑和说明可按版本在项目内暂存，重启后继续；关闭比较仍保留候选，采用正文必须另行确认。正文侧栏的“本章工作”集中展示目标、待办、修订事项、候选与出处。现有 AI 控制显示计划模型、接收服务、支持的思考档位和资料范围；打开控件本身不调用模型。详见[使用说明](docs/workbench-experience/README.md)和[本轮验证边界](docs/workbench-experience/DELIVERY-2.24.4.md)。
+
+## 2.24.3
+
+正文工具接入现有可调侧栏，不再挤占正文上方的大块空间；创作指挥台可直接进入，资料审核后返回所选工具，但不会自动调用模型。未保存正文先走原保存通道，保存失败或等待期间的新输入不会被旧上下文覆盖。修订台区分关闭比较与拒绝建议，切换或关闭前保护尚未采用的手工编辑与修订说明。详见[工作台使用说明](docs/workbench-experience/README.md)与[本轮验证边界](docs/workbench-experience/DELIVERY-2.24.3.md)。
+
+## 2.24.2
+
+创作指挥台现在支持指定步骤单独执行、步骤独立模型与参数、复制步骤及独立候选尝试。Python 的真实输出可显式带回作者备注，显示候选版本过期提示，并可移除备注。所有执行继续经过现有上下文、权限、预算及 Diff 保护。详见[使用说明](docs/creative-director/README.md)和[本轮验证](docs/creative-director/DELIVERY-2.24.2.md)。
+
+
+## 2.24.1
+
+创作指挥台分为任务书、候选正文、结果与回执；规划和写作可分别保存具体模型与参数。已保存候选可以显式交给现有 Python Control 做本地只读分析，再返回同一条任务。载入脚本不会自动执行、调用 AI 或修改正文。见[控制台说明](docs/creative-director/README.md)与[验证边界](docs/creative-director/DELIVERY-2.24.1.md)。
+
 ## 2.24.0 本轮更新
 
 既有创作指挥台与世界创作工作台新增“我的流程”：可编辑步骤、调整顺序、关闭步骤、选择具体模型与参数、限定资料范围并设置作者检查点。世界观与章节模板可保存、复制和 JSON 导入导出；运行记录保留版本、实际结果和取消后的部分候选。AI 可建议流程，但不会自动执行或采用设定与正文。详见[使用说明](docs/custom-workflows/README.md)和[验证边界](docs/custom-workflows/DELIVERY.md)。仍为 Preview；本地模拟接口通过不等于真实远端 AI 或原生桌面验收。
@@ -9,7 +27,7 @@
 
 本地优先的个人AI小说创作工作台。手动写作不需要AI；作者掌握正文、设定和修订的最终决定权。
 
-**当前状态：Preview / PARTIAL；首次公开 Preview；完整验证边界与发行说明见 [Releases](https://github.com/drunk13232/novel-studio/releases)。许可证：Apache-2.0；Copyright 2026 drunk13232。** [English](README_EN.md)
+**当前状态：Preview / PARTIAL；本地开发预览，公开发行以 Releases 为准；完整验证边界与发行说明见 [Releases](https://github.com/drunk13232/novel-studio/releases)。许可证：Apache-2.0；Copyright 2026 drunk13232。** [English](README_EN.md)
 
 ## 功能与外部要求
 

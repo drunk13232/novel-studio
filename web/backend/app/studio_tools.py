@@ -5,7 +5,7 @@ Manuscripts, Canon and State retain their existing authorities. No review engine
 import json,re,threading,uuid
 from pathlib import Path
 from fastapi import APIRouter
-from pydantic import BaseModel,ConfigDict,Field
+from pydantic import BaseModel,ConfigDict,Field,StrictInt
 from app.errors import ConsoleError
 from app.library.storage import safe,read,write,digest,now,checkpoint,database,write_guard
 from app.models.requests import TaskRequest,TaskOptions
@@ -40,6 +40,14 @@ class Decision(Strict):
     action:str=Field(pattern=r'^(accept|reject)$')
     candidate:str=Field(default='',max_length=32000)
     originalHash:str
+    candidate_etag:str|None=Field(default=None,pattern=r'^[a-f0-9]{64}$')
+class CandidateDraft(Strict):
+    etag:str=Field(pattern=r'^[a-f0-9]{64}$')
+    variant:int=Field(default=0,ge=0,le=2)
+    text:str=Field(max_length=32000)
+    note:str=Field(default='',max_length=4000)
+    chosen_hunks:list[StrictInt]|None=Field(default=None,max_length=1000)
+
 class Note(Strict):
     path:str
     document_revision:str
@@ -90,6 +98,34 @@ class StudioTools:
         row=read(self.candidate_path(p,id))
         if not row:raise ConsoleError('候选不存在',404)
         return row
+    def draft_view(self,p,id,variant=0):
+        file=self.candidate_path(p,id)
+        if not file.is_file():raise ConsoleError('候选不存在',404)
+        data=file.read_bytes();row=json.loads(data)
+        if row.get('project_id')!=p:raise ConsoleError('候选不属于当前作品',404)
+        self.chapter(p,row['path'])
+        try:
+            doc=self.doc(p,row['path']);current=doc['etag']==row['document_revision'] and text_hash(normalized(doc))==row['originalHash']
+        except (ConsoleError,KeyError):current=False
+        draft=row.get('author_draft') or {}
+        return {'id':id,'project_id':p,'path':row['path'],'document_revision':row['document_revision'],'etag':digest(data),'status':row['status'],'source_current':current,'active_variant':draft.get('active_variant',0),'draft':draft.get('variants',{}).get(str(variant)),'variant':variant}
+    def save_draft(self,p,id,body):
+        ws=self.writable(p)
+        with self.lock,ws._save_lock:
+            file=self.candidate_path(p,id);row=self.candidate(p,id)
+            if row.get('project_id')!=p:raise ConsoleError('候选不属于当前作品',404)
+            self.chapter(p,row['path'])
+            if row.get('status')!='PROPOSED':raise ConsoleError('候选已处理，不能改写暂存内容',409)
+            if digest(file.read_bytes())!=body.etag:raise ConsoleError('候选暂存已在其他窗口变化；请保留本地内容并重新载入比较',409)
+            count=len(row.get('variants') or [row])
+            if body.variant>=count:raise ConsoleError('候选版本不存在',422)
+            if body.chosen_hunks is not None and any(type(v)!=int or v<0 or v>10000 for v in body.chosen_hunks):raise ConsoleError('修订选择无效',422)
+            draft=row.get('author_draft') or {'schema_version':1,'variants':{}}
+            draft['active_variant']=body.variant
+            draft['variants'][str(body.variant)]={'text':body.text,'note':body.note,'chosen_hunks':body.chosen_hunks,'source_revision':row['document_revision'],'updated_at':now()}
+            row['author_draft']=draft
+            write(file,row)
+            return self.draft_view(p,id,body.variant)
     def start(self,p,body):
         self.writable(p)
         if p!=body.project_id:raise ConsoleError('项目不匹配',409)
@@ -207,6 +243,7 @@ class StudioTools:
             row=self.candidate(p,id)
             if row['project_id']!=p:raise ConsoleError('候选不属于当前小说',409)
             if row['status']!='PROPOSED':raise ConsoleError('候选已处理或未完成',409)
+            if body.candidate_etag is not None and digest(self.candidate_path(p,id).read_bytes())!=body.candidate_etag:raise ConsoleError('候选已在其他窗口变化，请重新比较',409)
             if body.action=='reject':
                 row.update(status='REJECTED',decided_at=now());write(self.candidate_path(p,id),row);return {'status':'REJECTED'}
             doc=self.doc(p,row['path']);original=normalized(doc)
@@ -402,6 +439,12 @@ def studio_tool_routes(tools):
     async def selection(project:str,body:SelectionRequest):return tools.start(project,body)
     @router.get('/candidates/{id}')
     def candidate(project:str,id:str):return tools.candidate(project,id)
+    @router.get('/candidates/{id}/draft')
+    def candidate_draft(project:str,id:str,variant:int=0):
+        if variant<0 or variant>2:raise ConsoleError('候选版本无效',422)
+        return tools.draft_view(project,id,variant)
+    @router.put('/candidates/{id}/draft')
+    def save_candidate_draft(project:str,id:str,body:CandidateDraft):return tools.save_draft(project,id,body)
     @router.post('/candidates/{id}/decision')
     def decision(project:str,id:str,body:Decision):return tools.decide(project,id,body)
     @router.get('/annotations')

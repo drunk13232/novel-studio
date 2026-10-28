@@ -288,5 +288,22 @@
   "readStateInstructionExample": "读取当前状态，并说明本章所需步骤…",
   "readOnlyExecution": "只读执行",
   "hanMetric": "纯汉字",
-  "characterMetric": "正文字符"
+  "characterMetric": "正文字符",
+  "unsavedRevisionCandidate": "尚未采用的修订编辑",
+  "revisionScopeChanged": "作品或章节已切换，本次修订操作已停止。",
+  "beforeManualRevision": "手动修订前",
+  "restoreSettingInSourcePage": "非正文版本请在原设定页面通过确认流程恢复。",
+  "selectionCandidate": "选段候选",
+  "revisionEditedLocally": "有本地修改，尚未采用",
+  "revisionPreviewOnly": "仅比较，尚未改正文",
+  "revisionLocalHelp": "右侧候选可编辑。点击“作者确认并保存修订”才会采用；关闭比较会保留原候选，拒绝建议是单独操作。",
+  "closeRevisionPreview": "关闭比较，保留候选",
+  "rejectRevisionCandidate": "拒绝这条建议",
+  "chooseRevisionPreview": "选择历史版本或已有 AI 候选查看差异。预览不会改动正文。",
+  "unsavedRevisionTitle": "保留尚未采用的编辑？",
+  "unsavedRevisionHelp": "你修改了候选文本或修订说明，但尚未采用。继续编辑可保留当前内容；放弃后只保留已存储的原候选，正文不会因此改变。",
+  "continueRevisionEditing": "继续编辑",
+  "discardAndRejectRevision": "放弃本地编辑并拒绝建议",
+  "discardAndCloseRevision": "放弃本地编辑并关闭比较",
+  "discardAndSwitchRevision": "放弃本地编辑并切换"
 }

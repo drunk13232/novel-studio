@@ -35,7 +35,7 @@ print(json.dumps({'blocked':blocked,'real_python':sys.version}))
 @pytest.fixture
 def client(tmp_path,monkeypatch):
     engine=tmp_path/'engine';shutil.copytree(ROOT/'desktop/preview-template',engine)
-    monkeypatch.setenv('NOVEL_WORKSPACE',str(engine));monkeypatch.setenv('NOVEL_STUDIO_DATA',str(tmp_path/'data/workspaces'))
+    monkeypatch.setenv('NOVEL_WORKSPACE',str(engine));monkeypatch.setenv('NOVEL_STUDIO_DATA',str(tmp_path/'data/workspaces'));monkeypatch.setenv('NOVEL_STATIC_DIR',str(tmp_path/'no-static-assets'))
     from app.config import Settings
     from app.main import create_app
     from fastapi.testclient import TestClient
@@ -247,3 +247,36 @@ def test_idle_external_grant_does_not_block_builtin_python(client):
     blocked=c.post('/api/control/run',json={'persona':'yoshino','instruction':'Must serialize pending confirmation','context':{'project':p},'code':'print(1)'})
     assert blocked.status_code==409
     source.pending=None
+
+
+def test_director_handoff_runs_real_wasi_without_granting_other_records(client):
+    from app.creative.director import Create,Patch
+    from app.creative.writing import ContextChoice,Approval
+    c,app,p,engine=client;configure(app,p,mode='navigate')
+    director=app.state.creative_director;path='chapters/chapter-90/draft.txt'
+    f=engine/'projects'/p/path;f.parent.mkdir(parents=True);f.write_text('隔离测试正文，不作正式采用。\n',encoding='utf-8');doc=director.tools.doc(p,path)
+    actor=director.tools.characters.list(p)[0]['canonical']['id']
+    context=director.writing.preview(p,ContextChoice(path=path,revision=doc['etag'],pov=actor))
+    director.writing.approve(p,context['id'],Approval(context_hash=context['context_hash'],confirm=True))
+    row=director.create(p,Create(path=path,revision=doc['etag'],context_id=context['id'],goal='Local original fixture only',executor='codex'))
+    row=director.patch(p,row['id'],Patch(etag=row['etag'],draft='隔离候选，尚未采用。'))
+    original=(engine/'projects'/p/path).read_bytes()
+    script='from novel_studio_api import Studio\ns=Studio.connect()\nr=s.call("get_director_result")\nassert r["draft"]=="隔离候选，尚未采用。"\nassert "context_id" not in r\nprint(r["draft_sha256"])\n'
+    args={'persona':'yoshino','instruction':'Author-selected frozen candidate','context':{'project':p,'page':'write','path':path},'code':script,'model':'codex-software','timeout':40,'director_handoff':{'id':row['id'],'etag':row['etag']}}
+    result=c.post('/api/control/run',json=args);assert result.status_code==202,result.text
+    outcome=finish(c,result.json());assert outcome['task']['status']=='SUCCEEDED',outcome
+    assert outcome.get('python_run_id')==result.json()['run_id']
+    note={'project':p,'persona':'yoshino','record_id':row['id'],'run_id':result.json()['run_id'],'etag':row['etag'],'comment':'Author-only local counts'}
+    saved=c.post('/api/control/director-note',json=note);assert saved.status_code==200,saved.text
+    row=saved.json();assert len(row['analysis_notes'])==1 and row['draft']=='隔离候选，尚未采用。'
+    duplicate=c.post('/api/control/director-note',json={**note,'etag':row['etag']});assert duplicate.status_code==200 and len(duplicate.json()['analysis_notes'])==1
+    assert c.post('/api/control/director-note',json={**note,'persona':'rem','etag':row['etag']}).status_code==404
+    assert c.post('/api/control/director-note',json={**note,'output':'forged result','etag':row['etag']}).status_code==422
+    assert (engine/'projects'/p/path).read_bytes()==original
+    no_grant=finish(c,launch(c,p,'from novel_studio_api import Studio\nStudio.connect().call("get_director_result")'))
+    assert no_grant['task']['status']=='FAILED'
+    updated=director.patch(p,row['id'],Patch(etag=row['etag'],draft='A new candidate version.'))
+    stale=c.post('/api/control/run',json=args);assert stale.status_code==409
+    invalid=dict(args,director_handoff={'id':row['id'],'etag':'0'*64})
+    assert c.post('/api/control/run',json=invalid).status_code==409
+    assert app.state.automation.history(p,'yoshino')[0].get('status') in ('SUCCEEDED','FAILED')

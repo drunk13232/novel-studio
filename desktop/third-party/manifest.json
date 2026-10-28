@@ -2616,7 +2616,7 @@
   },
   {
     "name": "certifi",
-    "version": "2026.10.23",
+    "version": "2026.7.22",
     "license": "MPL-2.0"
   },
   {
@@ -2681,7 +2681,7 @@
   },
   {
     "name": "httpcore2",
-    "version": "2.16.0",
+    "version": "2.13.1",
     "license": "BSD-3-Clause"
   },
   {
@@ -2691,7 +2691,7 @@
   },
   {
     "name": "httpx2",
-    "version": "2.16.0",
+    "version": "2.13.1",
     "license": "BSD-3-Clause"
   },
   {
@@ -2732,7 +2732,7 @@
   },
   {
     "name": "jiter",
-    "version": "0.18.0",
+    "version": "0.17.0",
     "license": "MIT"
   },
   {
@@ -2767,7 +2767,7 @@
   },
   {
     "name": "more-itertools",
-    "version": "11.2.1",
+    "version": "11.1.0",
     "license": "MIT"
   },
   {
@@ -2819,8 +2819,8 @@
   },
   {
     "name": "pandas",
-    "version": "3.1.0",
-    "license": "BSD-3-Clause"
+    "version": "3.0.6",
+    "license": "BSD 3-Clause License\n\n Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team\n All rights reserved.\n\n Copyright (c) 2011-2026, Open source contributors.\n\n Redistribution and use in source and binary forms, with or without\n modification, are permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n * Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\n THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\n AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\n FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\n CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\n OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
   },
   {
     "name": "pefile",
@@ -2844,12 +2844,12 @@
   },
   {
     "name": "platformdirs",
-    "version": "4.13.6",
+    "version": "4.13.0",
     "license": "MIT"
   },
   {
     "name": "pluggy",
-    "version": "1.7.0",
+    "version": "1.6.0",
     "license": "MIT"
   },
   {
@@ -2864,17 +2864,17 @@
   },
   {
     "name": "pycparser",
-    "version": "3.12",
+    "version": "3.0",
     "license": "BSD-3-Clause"
   },
   {
     "name": "pydantic",
-    "version": "2.14.1",
+    "version": "2.13.5",
     "license": "MIT"
   },
   {
     "name": "pydantic_core",
-    "version": "2.50.1",
+    "version": "2.46.5",
     "license": "MIT"
   },
   {
@@ -2889,7 +2889,7 @@
   },
   {
     "name": "pyinstaller-hooks-contrib",
-    "version": "2026.9",
+    "version": "2026.8",
     "license": "see included notices"
   },
   {
@@ -2909,7 +2909,7 @@
   },
   {
     "name": "python-dateutil",
-    "version": "3.0.0",
+    "version": "2.9.0.post0",
     "license": "Dual License"
   },
   {
@@ -2924,7 +2924,7 @@
   },
   {
     "name": "pythonnet",
-    "version": "3.2.1",
+    "version": "3.2.0",
     "license": "MIT"
   },
   {
@@ -2964,7 +2964,7 @@
   },
   {
     "name": "setuptools",
-    "version": "84.2.1",
+    "version": "84.0.0",
     "license": "MIT"
   },
   {
@@ -2979,12 +2979,12 @@
   },
   {
     "name": "sse-starlette",
-    "version": "3.6.0",
+    "version": "3.5.0",
     "license": "BSD-3-Clause"
   },
   {
     "name": "starlette",
-    "version": "1.10.0",
+    "version": "1.7.0",
     "license": "BSD-3-Clause"
   },
   {
@@ -2994,7 +2994,7 @@
   },
   {
     "name": "truststore",
-    "version": "0.10.5",
+    "version": "0.10.4",
     "license": "MIT"
   },
   {

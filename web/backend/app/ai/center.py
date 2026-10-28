@@ -50,7 +50,9 @@ class AICenter:
         for m in s.codex_models:rows.append({**m,'ref':'codex::'+m['id'],'provider_id':'codex','provider_name':'Codex 当前登录','protocol':'codex','access':'CATALOG_NOT_ENTITLEMENT'})
         for p in s.providers:
             if not p.enabled:continue
-            for m in p.available_models:rows.append({**m.model_dump(),'ref':p.provider_id+'::'+m.id,'provider_id':p.provider_id,'provider_name':p.display_name,'connection_status':p.connection_status})
+            for m in p.available_models:
+                from urllib.parse import urlsplit
+                rows.append({**m.model_dump(),'ref':p.provider_id+'::'+m.id,'provider_id':p.provider_id,'provider_name':p.display_name,'protocol':m.protocol or p.protocol,'host':urlsplit(p.base_url).hostname,'connection_status':p.connection_status})
         return {'models':rows,'codex_discovery':'ON_DEMAND','provider_defaults':s.default}
     def discover_codex(self):
         from app.codex.adapter import CodexAdapter

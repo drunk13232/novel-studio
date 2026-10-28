@@ -1,4 +1,4 @@
-# AI Creative Director — 2.10.3 Preview
+# AI Creative Director — 2.24.2 Flexible Director Preview
 
 This extends the existing editor, WritingAssist, TaskManager, Providers and ReviewCenter. It is not a new agent runtime or a second data authority.
 
@@ -25,7 +25,7 @@ Records live in `metadata/studio/director/` inside the active project and enter 
 
 Every request checks the source revision and fresh Writer view. Historical records remain viewable, but stale source/context cannot be used to overwrite newer text. Reopening does not restart old upstream work. In-flight partial text is checkpointed about four times per second; an abrupt process failure can lose the last unflushed fraction of a second, not be described as lossless recovery.
 
-Limits are explicit: at most eight calls per record, one to four steps, maximum accumulated model time 1,800 seconds, maximum candidate 32,000 characters and per-request output limit where the model supports it. Default limits are six calls, 600 seconds and 16,000 candidate characters. Plans have a 90-second bounded wait; focused reviews use the remaining budget up to 300 seconds and count as calls. Closing the panel does not cancel an approved task; Stop/Terminate and software shutdown target only owned requests. Completed buffers are released.
+Limits are explicit: at most sixteen calls per record, one to eight manually edited steps, maximum accumulated model time 1,800 seconds, maximum candidate 32,000 characters and per-request output limit where the model supports it. Default limits are six calls, 600 seconds and 16,000 candidate characters. Plans have a 90-second bounded wait; focused reviews use the remaining budget up to 300 seconds and count as calls. Closing the panel does not cancel an approved task; Stop/Terminate and software shutdown target only owned requests. Completed buffers are released.
 
 API budget enforcement requires configured input/output prices, matching currency and a supported token cap. The preflight uses a conservative UTF-8 byte bound, not an official bill or exact token estimator. Returned usage is recorded when provided; canceled or unavailable usage remains UNKNOWN. Codex subscription usage and billing are not invented. Requests are not automatically retried or redirected to another provider.
 
@@ -36,3 +36,36 @@ The new director UI has Simplified Chinese and English catalogs. The other 24 ex
 ## Verification boundary
 
 The delivery report distinguishes local contract tests, compatible protocol fixtures, actual Codex requests and actual Windows WebView interactions. A local compatible stream is not a real DeepSeek response. Lack of a configured, authorized DeepSeek credential is reported as UNVERIFIED. Physical Microsoft Pinyin candidate selection and broad Windows DPI testing are not established by this scoped feature check.
+
+
+## Linked consoles (2.24.1)
+
+The Director remains the primary creative workspace. Task Brief, Candidate and Results/Receipts are views of the same record. The progress bar counts enabled steps with persisted completion receipts. Model call attempts include failed requests; the waiting clock measures only this panel's observation interval, not writing time, inferred model progress or an ETA.
+
+Planning and writing each expose the existing concrete model, supported parameters and context controls. Overrides are saved on this task, not as global preferences. Quick mode only uses the execution model. Older records retain their previous shared-control behavior until an author explicitly edits the role controls. Output caps remain bounded by the task/model limits. Small context budgets fail safely rather than silently removing the approved Writer packet.
+
+1. Finish or stop the current request, then save candidate edits.
+2. In Results/Receipts choose the Python local-analysis handoff.
+3. Existing Python Control opens. Load the read-only sample; loading executes nothing.
+4. Inspect the script and project/persona permissions, then explicitly Run. Suggest mode retains existing confirmations.
+5. `get_director_result` returns only the author-selected fixed candidate version. The sample counts characters/paragraphs locally. It cannot select other Director IDs or read the Writer packet. Other actions retain their normal permissions.
+6. Return to the same record or explicitly unlink. A changed candidate invalidates the old handoff; return and hand off the new version.
+
+This binding grants no external Python token, arbitrary host paths, Shell, SQL or model call. Scripts are never automatically replayed. Handoff provenance stores the selected ID, revision, source path and candidate hash. Candidate content remains private project metadata and uses existing backups.
+
+History supports goal/model search and task-state filters. JSON report export includes the current goal, plan, candidate, receipts and usage: check privacy before sharing. It omits the Writer packet and raw source document. Manuscript adoption still requires existing guarded Diff; saving a local candidate is not adoption.
+
+
+## Flexible author control (2.24.2)
+
+- Run Only This Step executes exactly the selected enabled, pending step, appending its result at the end of the candidate. It does not rearrange old prose or execute following steps, even when whole-plan auto-continue is enabled. The ordinary Run button follows the next pending step.
+- Each step can inherit task defaults or use its own concrete model and supported controls. Advanced controls initialize on expansion. Changing to another model without explicit controls discards the previous model's parameters while retaining the task context policy. Every run rechecks the actual model, approved Writer view, privacy and budgets.
+- An ordinary earlier step may run before an important later step. Scheduling pauses before that important step until the author approves it. Disabled steps do not require approval or execute.
+- Duplicate and reorder steps with stable IDs. Identical text does not imply that a copied step has already completed. Disabling/re-enabling an already completed step retains its completion; it does not repeat work. Editing the content of a completed step makes that changed step pending. Earlier ID-less plans and clients match unchanged instances once; no project migration is required.
+- Independent Attempts copies local configuration without calling a model. Keep Candidate preserves existing progress; Start Fresh clears only the new attempt's candidate/completion. Original tasks remain intact, including terminated tasks. The original source revision and Writer reference stay bound; a stale source/context must be resolved through the existing author workflow before execution/adoption.
+- Explicit Python analysis return reads the actual project/persona run record, not browser-supplied output. Notes record the candidate hash and run provenance. Candidate changes mark an older note stale. Notes never enter planning prompts, Writer context or a candidate snapshot automatically. Removing a task note preserves the original Python history and allows an explicit reattachment.
+- A task can retain 20 analysis notes. The task view stores the first 8,000 output characters and a full-output hash; full output remains in Python history. Private JSON reports include these notes and must be inspected before sharing.
+
+Capacity remains bounded: 8 plan steps and 16 call attempts are maxima an author can choose, not default automatic work. Default plans still ask for at most four AI-proposed steps, with six call attempts, 600 seconds and 16,000 candidate characters. No automatic retry, model fallback or formal adoption was added.
+
+Independent attempts retain saved author directions as well as the plan/model configuration. Prior Python analysis notes are not inherited into the new attempt or Writer prompt.

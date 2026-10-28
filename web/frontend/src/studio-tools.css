@@ -6,3 +6,7 @@
 
 /* Compact existing graph filters so the graph remains visible in desktop windows. */
 .story-graph-page .tools-filters>input,.story-graph-page .tools-filters>select{width:auto;flex:0 1 180px;min-width:120px}.story-graph-page .tools-filters>input{flex:1 1 220px}.story-graph-page .tools-filters>label{display:flex;align-items:center;gap:8px;min-width:0}.story-graph-page .tools-filters>label input{width:160px;min-width:0}.story-graph-page .tools-filters{gap:8px}
+
+/* Keep the comparison readable when draft controls make the dialog scroll. */
+.studio .diff-dialog > *{flex-shrink:0;min-width:0}
+.studio .diff-dialog > section{min-height:240px}

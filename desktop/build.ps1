@@ -1,4 +1,4 @@
-param([string]$VersionDirectory = '', [switch]$Preview, [ValidateSet('', 'companion')][string]$ReleaseSuffix = '')
+﻿param([string]$VersionDirectory = '', [switch]$Preview, [ValidateSet('', 'companion')][string]$ReleaseSuffix = '')
 $ErrorActionPreference = 'Stop'
 $taskCacheLock=Join-Path $PSScriptRoot '.cache-operation.lock'
 $taskCacheHandle=[IO.File]::Open($taskCacheLock,[IO.FileMode]::CreateNew,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
@@ -69,8 +69,12 @@ Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\daily-reliability\README.md') 
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\daily-reliability\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\DAILY-PLANNING-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\world-first\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORLD-FIRST.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\world-first\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORLD-FIRST-DELIVERY.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\CREATIVE-DIRECTOR.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\DELIVERY-2.24.2.md') -Destination (Join-Path $taskRelease 'NovelStudio\DIRECTOR-CONSOLE-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS-DELIVERY.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-EXPERIENCE.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.4.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
 if ($Preview) { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease --preview } else { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease }
 if ($LASTEXITCODE -ne 0) { throw 'Release audit/ZIP failed' }
 & $taskPython (Join-Path $PSScriptRoot 'package_source.py') --release-root $taskRelease

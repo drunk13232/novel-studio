@@ -13,7 +13,11 @@ from app.library.storage import read,now
 from app.models.requests import TaskRequest,TaskOptions
 from app.ai.credentials import scrub
 
+class DirectorHandoff(Strict):
+    id:str=Field(pattern=r'^director_[0-9a-f]{32}$')
+    etag:str=Field(pattern=r'^[0-9a-f]{64}$')
 class Run(Start):
+    director_handoff:DirectorHandoff|None=None
     code:str=Field(min_length=1,max_length=64000)
     title:str=Field(default='Python Control',max_length=120)
     timeout:int=Field(default=90,ge=10,le=180)
@@ -22,6 +26,14 @@ class Script(Strict):
     id:str=Field(default='',pattern=r'^(?:script_[0-9a-f]{32})?$')
     name:str=Field(min_length=1,max_length=120)
     code:str=Field(min_length=1,max_length=64000)
+class DirectorNote(Strict):
+    project:str
+    persona:Persona='assistant'
+    record_id:str=Field(pattern=r'^director_[0-9a-f]{32}$')
+    run_id:str=Field(pattern=r'^py_[0-9a-f]{32}$')
+    etag:str=Field(pattern=r'^[0-9a-f]{64}$')
+    comment:str=Field(default='',max_length=2000)
+
 class Grant(Start):pass
 class Call(Strict):
     action:str=Field(min_length=1,max_length=80)
@@ -130,10 +142,16 @@ class Control:
         if self.closed:raise ConsoleError('软件正在退出',503)
         self.loop=asyncio.get_running_loop()
         if any(not s.ended and s.project==b.context.project and s.id in self.owned and (not getattr(s,'external_python',False) or s.pending or s.task and s.task.status not in {'SUCCEEDED','FAILED','CANCELLED','INTERRUPTED'}) for s in self.center.sessions.values()):raise ConsoleError('当前作品已有 Python 操作，请先停止或等待',409)
+        # Validate explicit source scope before creating a session or task. A
+        # handoff grants only this frozen candidate, never a directory or model.
+        snapshot=self.center.app.state.creative_director.snapshot(b.context.project,b.director_handoff.id,b.director_handoff.etag) if b.director_handoff else None
         s=self.session(b)
+        if snapshot:s.director_result=snapshot
         if plugin:
             s.plugin_source=dict(plugin['source']);s.plugin_actions=frozenset(plugin['actions'])
         run_id='py_'+uuid.uuid4().hex
+        s.python_run_id=run_id
+        if snapshot:s.python_director_source={k:snapshot[k] for k in ('record_id','etag','draft_sha256','source_path')}
         if parent:
             parent.check();s.control_parent=parent
             if not hasattr(parent,'control_children'):parent.control_children=set()
@@ -199,6 +217,7 @@ class Control:
         s.inside_python=True
         id=run_id or 'py_'+uuid.uuid4().hex
         row={'id':id,'project':s.project,'persona':s.persona,'title':b.title,'session_id':s.id,'created_at':now(),'status':'RUNNING','output':'','error':None,'code_sha256':hashlib.sha256(b.code.encode()).hexdigest(),'runtime':'CPython 3.14.7 / Wasmtime 49.0.0','actions':[]}
+        if getattr(s,'director_result',None):row['director_source']={k:s.director_result[k] for k in ('record_id','etag','draft_sha256','source_path')}
         self.runs={k:v for k,v in self.runs.items() if k in self.processes or v.get('status')=='RUNNING'}
         self.runs[id]=row;self.save(row)
         frozen=getattr(sys,'frozen',False)
@@ -290,6 +309,10 @@ def routes(control):
     r=APIRouter(prefix='/api/control')
     @r.post('/run',status_code=202)
     async def run(b:Run):return control.start(b)
+    @r.post('/director-note')
+    def director_note(b:DirectorNote):
+        run=control.get(b.project,b.run_id,b.persona)
+        return control.center.app.state.creative_director.attach_analysis(b.project,b.record_id,b.etag,run,b.comment)
     @r.post('/grants',status_code=201)
     async def grant(b:Grant):return control.grant(b)
     @r.post('/call',status_code=202)

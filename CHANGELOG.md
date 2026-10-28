@@ -1,5 +1,39 @@
 # Changelog / 更新记录
 
+## 2.24.4 — Writing Continuity Preview (2026-10-28)
+
+- Save edited candidate text, revision notes and explicit hunk choices locally per generated variant; reopen from the existing selection history or Revision Desk.
+- Reuse existing candidate records and Data Center backups, with scoped compare-and-swap protection and no database migration.
+- Keep stale/conflicted edits available for recovery without adopting them into manuscripts; serialize auto/manual saves.
+- Bring existing chapter goals, tasks, proposed revisions and bound evidence into the writing dock, with scoped event-driven refresh.
+- Show planned model, receiving host/protocol, supported effort and caller source scope through existing AI controls; reject missing-model readiness and retain real execution receipts.
+- Prevent the comparison editor shrinking to one line in smaller windows; fence late chapter candidate reads and disable adoption until the current Diff is computed.
+- Local/backend/browser and package validation are reported separately from native Windows interaction and real remote AI; see the version-specific delivery note.
+
+## 2.24.3 — Workbench Experience Preview (2026-10-28)
+
+- Dock existing author tools in the resizable reference split; preserve manuscript height, scoped input, focus restoration and independent scrolling.
+- Open the Director directly, with an explicit context-review return path and no automatic model execution.
+- Save once through the existing etag/recovery channel before preparing tools; reject failed, switched or outdated source snapshots.
+- Guard unaccepted revision text and notes; closing a comparison preserves proposals, while rejection remains explicit.
+- Fence scoped revision reads, serialize author decisions and navigate only after the unsaved guard clears.
+- Direct return links for unsaved material/fact review, Chinese/English copy, no dependency or data-format change. Preview verification boundaries are recorded separately from older releases.
+
+## 2.24.2 — Flexible Director Preview (2026-10-28)
+
+- Explicit single-step execution with independent supported model controls; no automatic following steps.
+- Stable step identity, duplication/reordering and compatibility for older ID-less plans.
+- Independent attempts retain the original; choose retained progress or an empty candidate.
+- Return actual Python output to source-bound author-only notes; stale warnings and removal preserve Python history.
+- Opt-in bounded capacity up to 8 plan steps and 16 call attempts; defaults remain 6 calls, 600 seconds, 16,000 candidate characters. No new dependency, permission or Agent.
+
+## 2.24.1 — Director Console Preview (2026-10-28)
+
+- Independent task-local planner/writer controls, actual model/context receipts and persisted step progress.
+- Explicit fixed-candidate handoff to existing WASI Python Control: load, manually run, return and unlink.
+- Search/filter chapter history, preserve unsaved edits, reject stale handoffs and export private task reports.
+- No new dependency, Agent or data migration. Real remote AI and native desktop interaction remain unverified for this update.
+
 ## 2.24.0 Custom Workflows Preview · 2026-10-27
 
 - Ordered, project-local world/chapter workflows reuse existing domain tasks; concrete per-step models, source controls, manual checkpoints and bounded retries.

@@ -16,6 +16,7 @@ EXTRA_ACTIONS={
  'set_workspace_layout':('调用已有工作区布局预设或保存/恢复个人布局；不启动 AI',m.Layout,1,'project'),
  'list_author_entries':('读取当前作品的灵感、待办或修订事项；需设定资料权限',m.Entries,1,'project'),
  'run_python_plan':('在独立 WASI 子进程运行 Python 编排，通过 novel_studio_api 调用同一动作目录；无主机文件/网络；不要自我递归或自动重试',m.PythonPlan,2,'project'),
+ 'get_director_result':('只读本次由作者显式交接的固定创作指挥台候选；不读取其他任务、正文、Writer 包，不启动模型',m.Empty,1,'project'),
  'get_python_run':('查看当前作品 Python 运行记录和实际输出；任务 ID 取运行回执',m.Target,1,'project'),
  'start_text_task':('按当前明确选定模型启动只读 AI/Codex 文本检查任务。chapters 必须获正文权限；需要作者确认，绝不改正文',m.TextTask,3,'project'),
  'read_task_result':('查询本会话创建的真实任务、文本结果、用量与错误，不读取其他会话私有结果',m.Target,1,'project'),
@@ -100,6 +101,11 @@ def execute(actions,s,name,b):
             created.append(value['todos'][-1]['id'])
         return {'created':created,'already_converted':existing,'exact_duplicate_groups':[v for v in groups.values() if len(v)>1],'source_ids':[n['id'] for n in selected],'deleted':False,'canon_changed':False}
     if name=='run_python_plan':return app.state.automation.start_nested(s,b)
+    if name=='get_director_result':
+        import copy
+        value=getattr(s,'director_result',None)
+        if not value or value['project']!=p:raise ConsoleError('请先从创作指挥台显式交接一份固定候选；本脚本无权读取其他任务',403)
+        return copy.deepcopy(value)
     if name=='get_python_run':return app.state.automation.get(p,b.id,s.persona)
     if name in {'read_task_result','read_task_events','stop_controlled_task','wait_controlled_task','steer_controlled_task'}:
         owned=b.id in getattr(s,'controlled_tasks',set())

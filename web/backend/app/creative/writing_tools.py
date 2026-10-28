@@ -98,7 +98,7 @@ def candidate_history(s,p,path,offset=0,limit=30):
     result=[];current_hash=text_hash(text)
     for r in rows[offset:offset+limit]:
         current=doc['etag']==r.get('document_revision') and current_hash==r.get('originalHash')
-        result.append({**{k:r.get(k) for k in ['id','action','status','created_at','completed_at','ai_metadata','saved_path','task_id']},'instruction_summary':str(r.get('instruction',''))[:100],'source_current':current,'variant_count':len(r.get('variants') or [r]),'has_candidate':'candidate' in r})
+        result.append({**{k:r.get(k) for k in ['id','action','status','created_at','completed_at','ai_metadata','saved_path','task_id']},'instruction_summary':str(r.get('instruction',''))[:100],'source_current':current,'variant_count':len(r.get('variants') or [r]),'has_candidate':'candidate' in r,'draft_saved_at':max((v.get('updated_at','') for v in (r.get('author_draft') or {}).get('variants',{}).values()),default='')})
     return {'candidates':result,'total':len(rows),'offset':offset,'limit':limit,'project_id':p,'source_path':path,'source_revision':doc['etag']}
 
 def lookup(s,p,b):

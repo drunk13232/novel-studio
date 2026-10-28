@@ -1,4 +1,22 @@
-# Novel Studio · 2.24.0 Custom Workflows Preview
+# Novel Studio · 2.24.4 Writing Continuity Preview
+
+## 2.24.4
+
+Manual candidate edits and notes now save locally for later recovery, independently for each generated variant. Closing a comparison preserves the proposal; author adoption remains explicit. The existing writing dock brings together current-chapter goals, to-dos, pending candidates and evidence. Existing AI controls show planned model/receiving host, supported effort and source scope before running. No model is called simply by opening these controls. See the [guide](docs/workbench-experience/README.md) and [verification limits](docs/workbench-experience/DELIVERY-2.24.4.md).
+
+## 2.24.3
+
+Writing tools use the existing adjustable sidebar instead of consuming manuscript height. Open the Director directly and return after explicit context approval without starting a model request. Unsaved prose uses the original save channel; failed saves and edits made while waiting prevent stale-context continuation. Revision previews distinguish closing from rejecting, protecting unaccepted text and notes before switching or closing. See the [workbench guide](docs/workbench-experience/README.md) and [verification boundaries](docs/workbench-experience/DELIVERY-2.24.3.md).
+
+## 2.24.2
+
+Run a selected Director step with independent model controls, duplicate steps and create independent candidate attempts. Explicitly return actual Python output as author-only notes with candidate-version warnings and note removal. Existing context approval, permissions, budgets and guarded Diff remain in force. See the [guide](docs/creative-director/README.md) and [verification](docs/creative-director/DELIVERY-2.24.2.md).
+
+
+## 2.24.1
+
+The Creative Director separates task briefs, candidates and execution receipts, with independent task-local planner/writer controls. Explicitly hand a saved candidate to existing Python Control for local read-only analysis and return to the same task. Loading never executes scripts, calls AI or adopts prose. See the [guide](docs/creative-director/README.md) and [verification boundaries](docs/creative-director/DELIVERY-2.24.1.md).
+
 ## 2.24.0 update
 
 My Workflows in the existing Director and World Studio supports ordered editable steps, enable/disable, exact models, request controls, scoped sources and author checkpoints. Save, copy, import and export world/chapter recipes; retain versioned run snapshots, actual results and cancelled candidate prefixes. AI can propose a recipe but never automatically executes or adopts manuscripts/settings. See the [guide](docs/custom-workflows/README.md) and [verification boundaries](docs/custom-workflows/DELIVERY.md). Still Preview: local protocol fixtures are not real remote-AI or native desktop acceptance.
@@ -9,7 +27,7 @@ My Workflows in the existing Director and World Studio supports ordered editable
 
 A local-first personal AI fiction workspace. Manual writing needs no AI connection. Authors retain final authority over manuscripts, settings and revisions.
 
-**Status: Preview / PARTIAL; the first public Preview; see [Releases](https://github.com/drunk13232/novel-studio/releases) for artifacts and verification limits. Apache-2.0; Copyright 2026 drunk13232.** [简体中文](README.md)
+**Status: Preview / PARTIAL; local development preview; public artifacts follow Releases; see [Releases](https://github.com/drunk13232/novel-studio/releases) for artifacts and verification limits. Apache-2.0; Copyright 2026 drunk13232.** [简体中文](README.md)
 
 ## Features and external requirements
 

@@ -62,5 +62,17 @@
   "approval_REJECTED": "作者已拒绝",
   "approval_CANCELLED": "已取消",
   "approval_EXPIRED": "已过期",
-  "approval_UNKNOWN": "状态未知"
+  "approval_UNKNOWN": "状态未知",
+  "directorSource": "来自 AI 创作指挥台",
+  "directorBoundary": "载入只读分析脚本后，由你点击运行。只交接这一版本的候选，不授权额外 AI 调用，也不改正文。候选若已变化，请返回重新交接。",
+  "loadDirector": "载入只读分析脚本",
+  "returnDirector": "返回创作指挥台",
+  "directorBound": "已绑定固定候选版本",
+  "replaceScript": "替换当前未保存的脚本？需要保留时请先保存。",
+  "unlinkDirector": "取消本次候选绑定",
+  "analysisReturnTitle": "带回创作指挥台",
+  "analysisReturnBoundary": "保存本次真实输出与候选版本来源，仅作作者备注；不会自动改正文或送给模型。",
+  "analysisComment": "补充分析备注（可选）",
+  "saveAnalysisReturn": "保存分析并返回指挥台",
+  "analysisSaved": "分析已保存为作者备注。"
 }
