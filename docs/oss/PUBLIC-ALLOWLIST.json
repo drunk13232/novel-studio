@@ -9326,8 +9326,8 @@
     },
     {
       "path": "web/backend/tests/test_api.py",
-      "sha256": "efae95c0b6b397fc0e81844eb07f6f7b08f6bfef39c6bcac4ea2fcb893161d88",
-      "bytes": 5951
+      "sha256": "595d1d5508ac9da12041fac352f65486a1ae9418e8dfdd02a5f8d8e79af81d02",
+      "bytes": 6542
     },
     {
       "path": "web/backend/tests/test_appearance.py",
@@ -9537,8 +9537,8 @@
     },
     {
       "path": "web/backend/tests/test_supervision.py",
-      "sha256": "23ef79f33070214a1ff0464e2419e913fe6715083e8eafaecfb7bc8da3de785f",
-      "bytes": 2315
+      "sha256": "43feb570e1be9ffee254d0ec4454aede62e6f0887bb0fa40208c151fdf6271d9",
+      "bytes": 2479
     },
     {
       "path": "web/backend/tests/test_workflow_backup.py",
@@ -15341,5 +15341,5 @@
     "generated PDF assets rebuilt from pinned npm package",
     "old audit snapshots not current acceptance"
   ],
-  "review": "2.24.9 source/privacy/licensing reviewed; Preview runtime limits remain. Private audit excluded; exact-commit hosted CI gates Release publication."
+  "review": "2.24.9 source/privacy/licensing reviewed; Preview runtime limits remain. Private audit excluded; exact-commit hosted CI gates Release publication. Two legacy missing-runtime tests updated to assert failure/terminal state and explicit override diagnostics, with fail-closed coverage; production binaries unchanged."
 }

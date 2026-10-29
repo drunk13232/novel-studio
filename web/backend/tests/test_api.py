@@ -7,7 +7,7 @@ from app.config import Settings
 from app.main import create_app
 from app.workspace.service import WorkspaceService
 from app.models.requests import TaskRequest
-from app.codex.adapter import CodexAdapter, redact
+from app.codex.adapter import CodexAdapter, CodexUnavailable, codex_binary, redact
 from pydantic import ValidationError
 
 
@@ -96,8 +96,15 @@ def test_redaction():
 
 def test_actual_missing_binary(tmp_path,monkeypatch):
     monkeypatch.setenv('NOVEL_CODEX_BIN',str(tmp_path/'missing.exe'))
+    # An invalid explicit override must fail closed rather than fall back to the
+    # installed SDK binary. Match the actionable setting, not a translated phrase.
+    with pytest.raises(CodexUnavailable):
+        codex_binary()
+    def unexpected_client(*args,**kwargs):
+        raise AssertionError('Missing explicit runtime must not initialize the SDK')
+    monkeypatch.setattr(CodexAdapter,'_new_client',unexpected_client)
     result=CodexAdapter(tmp_path).health()
-    assert result['codex'] is False and '找不到' in result['reason']
+    assert result['codex'] is False and 'NOVEL_CODEX_BIN' in result['reason']
 
 
 def test_status_damaged_shape(client):

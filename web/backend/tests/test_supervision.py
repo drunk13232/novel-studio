@@ -18,7 +18,10 @@ def test_actual_startup_failure_is_terminal(tmp_path,monkeypatch):
         task=manager.start(TaskRequest(type='custom_prompt',prompt='read only',options={'read_only':True}))
         assert task.status=='QUEUED'
         await task.runner
-        assert task.status=='FAILED' and task.finished_at and '找不到' in task.error
+        # Preserve the terminal lifecycle/error contract without tying it to one
+        # Chinese wording of the same missing-runtime failure.
+        assert task.status=='FAILED' and task.finished_at
+        assert 'NOVEL_CODEX_BIN' in task.error
         log=''.join([line async for line in manager.events(task.id,0)])
         assert 'task_completed' in log and 'FAILED' in log
         await manager.close()
