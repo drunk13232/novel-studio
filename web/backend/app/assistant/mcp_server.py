@@ -13,13 +13,13 @@ async def serve():
     async with httpx.AsyncClient(base_url=base,headers={'X-Novel-MCP':token},trust_env=False,follow_redirects=False,timeout=45) as client:
         response=await client.get('/tools');response.raise_for_status();definitions=response.json()['tools'];schemas={d['name']:d['parameters'] for d in definitions}
         async def listing(ctx,params):
-            return types.ListToolsResult(tools=[types.Tool(name=d['name'],description=d['description'],inputSchema=d['parameters'],annotations=types.ToolAnnotations(readOnlyHint=d['name'] in {'list_projects','search_characters','get_project_status'},destructiveHint=False,openWorldHint=False)) for d in definitions])
+            return types.ListToolsResult(tools=[types.Tool(name=d['name'],description=d['description'],inputSchema=d['parameters'],annotations=types.ToolAnnotations(readOnlyHint=d['name'] in {'list_projects','search_characters','get_project_status','read_chapter','read_chapter_candidate','read_creative_writing','get_approved_writing_context','list_chapters'},destructiveHint=False,openWorldHint=False)) for d in definitions])
         async def calling(ctx,params):
             if params.name not in schemas:return types.CallToolResult(isError=True,content=[types.TextContent(type='text',text='Unregistered application action')])
             try:
                 context=await client.get('/context');context.raise_for_status()
                 result=await client.post('/call',json={'session_id':context.json()['session_id'],'name':params.name,'arguments':params.arguments or {},'call_id':uuid.uuid4().hex});result.raise_for_status();value=result.json()
-                return types.CallToolResult(isError=not value.get('ok'),content=[types.TextContent(type='text',text=json.dumps(value,ensure_ascii=False))],structuredContent=value)
+                return types.CallToolResult(isError=not (value.get('ok') or value.get('pending_confirmation')),content=[types.TextContent(type='text',text=json.dumps(value,ensure_ascii=False))],structuredContent=value)
             except Exception:return types.CallToolResult(isError=True,content=[types.TextContent(type='text',text='应用调用未完成；请检查会话状态，不自动重试草稿写入。')])
         server=Server('NovelStudio',version=release_info()['version'],on_list_tools=listing,on_call_tool=calling,get_tool_input_schema=schemas.get)
         async with stdio_server() as (reader,writer):await server.run(reader,writer,server.create_initialization_options())

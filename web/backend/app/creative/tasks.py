@@ -31,7 +31,9 @@ def adapter(center,project,group,prompt,model=None,role='WRITER',parameters=None
 
 def metadata(a):
     value=dict(getattr(a,'metadata',None) or getattr(a,'selected_ai',{}))
-    if value.get('backend')=='codex':value['observed_model']=getattr(a,'actual_model',None)
+    if value.get('backend')=='codex':
+        value['observed_model']=getattr(a,'actual_model',None)
+        if isinstance(a,CodexAdapter):value['runtime']=a.get_status().get('runtime')
     return value
 
 def call(a,prompt,emit,output_schema,cancelled):

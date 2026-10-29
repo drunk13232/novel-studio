@@ -1,4 +1,24 @@
-# Novel Studio · 2.24.4 Writing Continuity Preview
+# Novel Studio · 2.24.9 Writing Reliability Preview
+
+## 2.24.9
+
+本轮强化现有创作指挥台：配套 Codex 运行时、真实正文交付与字数目标、同任务断点恢复、输入预算预检、场景接口和全书候选版本核对。所有写作仍是候选，采用由作者决定；字数不代表文学质量。本机试写使用隔离原创项目。使用与验证边界见[2.24.9 说明](docs/workbench-experience/DELIVERY-2.24.9.md)。以下 2.24.5–2.24.8 为历史本地迭代记录，其改进合并至本次 2.24.9 Preview 发布。窗口、输入法与 DPI 仍不以浏览器或 worker 检查代替原生验收。
+
+## 2.24.8
+
+本轮复用创作指挥台与 Writer，将单章创作、真实进度、停止、继续和 Diff 候选接入 MCP。模型阶段遵守请求超时；作者选择的候选可作为有版本与来源的续写参考，仍需检查并确认，不自动进入 Canon。助手历史保留安全的候选查看入口。真实试写在独立目录进行，正文与运行记录不进入公开包。继续标记 Preview / PARTIAL；原生桌面、实体输入法及完整文学质量未在本轮重新验收。 详见[工作流说明](docs/workbench-experience/DELIVERY-2.24.8.md)。
+
+## 2.24.7
+
+本地 Record Editing Preview，尚未公开发布。本轮补齐已有待办、修订和灵感的编辑保护：保存回执迟到时保留继续输入的修改，并以回执版本为基线继续保存；等待期间撤销、关闭和离开受原门禁保护。简中/英文说明区分本次已保存提交与后续未保存编辑。见[使用说明](docs/workbench-experience/README.md)与[检查边界](docs/workbench-experience/DELIVERY-2.24.7.md)。
+
+## 2.24.6
+
+本地 Save Integrity Preview，尚未发布 GitHub。本轮针对保存回执迟到的真实问题：正文保存与恢复绑定原章节作用域；提交待办、修订和灵感时保留等待期间的新输入；正常检查同一候选版本后继续自动暂存，原有人工暂停仍保留。继续沿用原保存与作者确认通道，不增加数据格式。见[使用说明](docs/workbench-experience/README.md)和[本轮检查边界](docs/workbench-experience/DELIVERY-2.24.6.md)。
+
+## 2.24.5
+
+本轮是本地交付，尚未发布 GitHub。重点修复写作恢复：本章待办与修订输入在切换页签或收起工具后保留；候选读取失败可以重试，两窗口冲突可先对比再明确载入，并在当前比较窗口内恢复刚才的本地编辑。已采用/拒绝记录显示真实只读状态，拒绝后本章列表立即刷新。采用、版本校验与正文保护继续走原通道。详见[使用说明](docs/workbench-experience/README.md)和[本轮验证边界](docs/workbench-experience/DELIVERY-2.24.5.md)。
 
 ## 2.24.4
 

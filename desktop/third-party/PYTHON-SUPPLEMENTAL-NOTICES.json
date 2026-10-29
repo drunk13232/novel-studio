@@ -47,6 +47,16 @@
           "path": "desktop/third-party/python/openai-codex-cli-bin/NOTICE",
           "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915",
           "source": "https://raw.githubusercontent.com/openai/codex/rust-v0.160.1/NOTICE"
+        },
+        {
+          "path": "desktop/third-party/python/openai-codex-cli-bin/RIPGREP-LICENSE-MIT",
+          "sha256": "0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "source": "https://github.com/BurntSushi/ripgrep/blob/e89fff89ac/LICENSE-MIT"
+        },
+        {
+          "path": "desktop/third-party/python/openai-codex-cli-bin/RATATUI-LICENSE",
+          "sha256": "50eb43e8d742c9c61a9391e42b2184fce54dbd1893a1bb1c85b8c9ee217ab1f5",
+          "source": "https://github.com/ratatui/ratatui/blob/ratatui-v0.30.2/LICENSE"
         }
       ]
     }

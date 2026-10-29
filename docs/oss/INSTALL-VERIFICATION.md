@@ -1,4 +1,4 @@
-# Independent install verification — 2.24.0 Preview
+# Independent install verification — 2.24.9 Preview
 
 The source ZIP and artifact-side VERIFICATION.json identify the precise candidate and current execution results. Do not use the older 2.22.2/2.23.x installation records as passing evidence for this candidate.
 
@@ -11,3 +11,5 @@ The documented CI command explicitly deselects five separately installed Screenw
 Hosted Windows CI is now active at [GitHub Actions](https://github.com/drunk13232/novel-studio/actions/workflows/ci.yml). Consult the run for the exact source commit and actual result; a previous failed run or a local PASS is not evidence of the current hosted result. Windows checkouts preserve audited bytes with `.gitattributes`, and per-run test paths are initialized inside a runner step.
 
 If any clean install/build fails, preserve the error and distinguish network failure from dependency/project failure. A partially passing suite is not a full PASS.
+
+The 2.24.9 local delivery ran 72 related tests, 11 isolated headless-browser checks, frozen-worker integrity checks, and a silent isolated installer/backup round trip. These are not a claim that the previous full suite ran unchanged on this new public snapshot. The exact public commit must pass the hosted Windows workflow above before its Preview Release is published. Real Codex evidence is limited to the controlled original-fiction trial described in the version guide; no user manuscripts are distributed.

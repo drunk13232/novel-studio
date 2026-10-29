@@ -13,6 +13,10 @@ class ChatStep(BaseModel):
     model_config=ConfigDict(extra='forbid')
     tool:str=Field(max_length=100)
     status:str=Field(max_length=100)
+    record_id:str|None=Field(default=None,pattern=r'^director_[0-9a-f]{32}$')
+    record_path:str|None=Field(default=None,pattern=r'^chapters/(?:story|chapter-[0-9]+)/(?:draft|final|manual-[a-z0-9-]+)\.(?:txt|md)$')
+    candidate_id:str|None=Field(default=None,pattern=r'^[0-9a-f]{32}$')
+    candidate_path:str|None=Field(default=None,pattern=r'^chapters/(?:story|chapter-[0-9]+)/(?:draft|final|manual-[a-z0-9-]+)\.(?:txt|md)$')
 class ChatRow(BaseModel):
     model_config=ConfigDict(extra='forbid')
     id:str=Field(min_length=1,max_length=100)
@@ -107,7 +111,18 @@ class Conversations:
     def put(self,s):
         if not s.settings.save_conversation:return
         if s.chat_digest and not s.ended and not s.cancelled and not s.pending:return
-        steps=[{'tool':r['tool'],'status':r['status']} for r in s.steps]
+        steps=[]
+        for r in s.steps:
+            step={'tool':r['tool'],'status':r['status']};result=r.get('result') or {}
+            # Persist only a validated local pointer, never manuscript content,
+            # prompts, credentials, model output or arbitrary tool payloads.
+            if r['status']=='已完成' and result.get('candidate_id') and result.get('path'):
+                try:step=ChatStep(**step,candidate_id=result['candidate_id'],candidate_path=result['path']).model_dump(exclude_none=True)
+                except ValueError:pass
+            if r['status']=='已完成' and result.get('record_id') and result.get('path'):
+                try:step=ChatStep(**{**step,'record_id':result['record_id'],'record_path':result['path']}).model_dump(exclude_none=True)
+                except ValueError:pass
+            steps.append(step)
         row={'id':s.id,'at':s.chat_at,'instruction':clean(s.instruction),'output':clean(s.output),
              'status':'CANCELLED' if s.cancelled else 'WAITING_CONFIRMATION' if s.pending and s.pending['kind']=='confirm' else (s.execution_task.status if s.execution_task else s.chat_status),
              'pending_confirmation':bool(s.pending),'provider':s.provider.display_name if s.provider else '', 'model':s.model.id if s.model else '', 'steps':steps,'ai_metadata':getattr(s,'ai_metadata',{})}

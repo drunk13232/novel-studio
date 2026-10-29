@@ -26,6 +26,8 @@ pint_datas,pint_binaries,pint_hidden=collect_all('pint')
 ortools_datas,ortools_binaries,ortools_hidden=collect_all('ortools')
 jieba_datas,jieba_binaries,jieba_hidden=collect_all('jieba')
 wasm_datas,wasm_binaries,wasm_hidden=collect_all('wasmtime')
+codex_datas,codex_binaries,codex_hidden=collect_all('codex_cli_bin')
+data+=codex_datas+copy_metadata('openai-codex-cli-bin')
 data+=jieba_datas+wasm_datas+copy_metadata('wasmtime')+[(str(root/'web/backend/app/automation/runtime'),'app/automation/runtime'),*[(str(f),'resources/python/'+str(f.parent.relative_to(root/'python'))) for f in (root/'python').rglob('*') if f.is_file() and f.suffix in {'.py','.typed'} and '__pycache__' not in f.parts]]
 data+=solver_datas+pint_datas+ortools_datas+[(str(root/'web/backend/app/world_logic/resources'),'app/world_logic/resources')]
 if os.environ.get('NOVEL_PREVIEW_BUILD')=='1':
@@ -33,8 +35,8 @@ if os.environ.get('NOVEL_PREVIEW_BUILD')=='1':
 for dependency in ['jieba','openai-codex','pypdf','python-docx','charset-normalizer','python-multipart','lxml','comtypes','openai','keyring','httpx2','httpcore2','mcp','mcp-types','z3-solver','networkx','sympy','pint','jsonschema','mpmath','flexcache','flexparser','platformdirs','ortools','numpy','pandas','protobuf','absl-py','immutabledict','python-dateutil','six','tzdata']:
     data+=copy_metadata(dependency)
 a=Analysis([str(root/'desktop/launcher.py')],pathex=[str(root/'web/backend')],
-           binaries=solver_binaries+pint_binaries+ortools_binaries+wasm_binaries,datas=data,
-           hiddenimports=jieba_hidden+solver_hidden+pint_hidden+ortools_hidden+wasm_hidden+['app.automation.worker','app.assistant.mcp_server','win32job','app.world_logic.worker','keyring.backends.Windows','win32ctypes.pywin32.win32cred']+collect_submodules('openai')+collect_submodules('httpx2')+collect_submodules('httpcore2')+collect_submodules('uvicorn')+collect_submodules('openai_codex')+collect_submodules('pypdf')+collect_submodules('docx')+collect_submodules('charset_normalizer')+collect_submodules('mcp',filter=lambda name:not name.startswith('mcp.cli'))+collect_submodules('mcp_types')+collect_submodules('comtypes',filter=lambda name:'.test' not in name),
+           binaries=solver_binaries+pint_binaries+ortools_binaries+wasm_binaries+codex_binaries,datas=data,
+           hiddenimports=codex_hidden+jieba_hidden+solver_hidden+pint_hidden+ortools_hidden+wasm_hidden+['app.automation.worker','app.assistant.mcp_server','win32job','app.world_logic.worker','keyring.backends.Windows','win32ctypes.pywin32.win32cred']+collect_submodules('openai')+collect_submodules('httpx2')+collect_submodules('httpcore2')+collect_submodules('uvicorn')+collect_submodules('openai_codex')+collect_submodules('pypdf')+collect_submodules('docx')+collect_submodules('charset_normalizer')+collect_submodules('mcp',filter=lambda name:not name.startswith('mcp.cli'))+collect_submodules('mcp_types')+collect_submodules('comtypes',filter=lambda name:'.test' not in name),
            hookspath=[],runtime_hooks=[],excludes=['pytest','_pytest'],noarchive=False)
 pyz=PYZ(a.pure)
 exe=EXE(pyz,a.scripts,[],exclude_binaries=True,name='NovelStudio',debug=False,

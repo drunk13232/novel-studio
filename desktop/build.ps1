@@ -74,7 +74,7 @@ Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\DELIVERY-2.2
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-EXPERIENCE.md')
-Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.4.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.8.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
 if ($Preview) { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease --preview } else { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease }
 if ($LASTEXITCODE -ne 0) { throw 'Release audit/ZIP failed' }
 & $taskPython (Join-Path $PSScriptRoot 'package_source.py') --release-root $taskRelease

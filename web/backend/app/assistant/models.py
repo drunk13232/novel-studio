@@ -1,5 +1,5 @@
 from typing import Literal
-from pydantic import BaseModel,ConfigDict,Field
+from pydantic import BaseModel,ConfigDict,Field,field_validator
 from app.ai.controls import RequestControls
 from app.appearance import ThemeId
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
@@ -73,6 +73,43 @@ class ChapterDraft(Strict):
     number:int=Field(ge=1,le=99999)
     title:str=Field(default='',max_length=200)
     volume_id:str|None=None
+class ChapterDraftCandidate(Strict):
+    parent_id:str|None=Field(default=None,pattern=r'^[0-9a-f]{32}$')
+    insert_before:str=Field(default='',max_length=1000)
+    number:int=Field(ge=1,le=99999)
+    revision:str=Field(pattern=r'^[0-9a-f]{64}$')
+    content:str=Field(min_length=1,max_length=32000)
+    note:str=Field(default='',max_length=1000)
+
+class ChapterCandidateRead(Strict):
+    id:str=Field(pattern=r'^[0-9a-f]{32}$')
+    start:int=Field(default=0,ge=0,le=32000)
+    limit:int=Field(default=4000,ge=1,le=8000)
+
+class CreativeWritingStart(Strict):
+    entry_state:str=Field(default='',max_length=500)
+    exit_state:str=Field(default='',max_length=500)
+    goal_han:int|None=Field(default=None,ge=0,le=16000)
+    steps:list[str]=Field(default_factory=list,max_length=4)
+    number:int=Field(ge=1,le=99999)
+    context_id:str=Field(pattern=r'^ctx_[0-9a-f]{32}$')
+    goal:str=Field(min_length=1,max_length=2500)
+    timeout:int=Field(default=180,ge=30,le=300)
+    output_characters:int=Field(default=8000,ge=100,le=16000)
+    @field_validator('steps')
+    @classmethod
+    def bounded_steps(cls,steps):
+        if any(not x.strip() or len(x)>800 for x in steps):raise ValueError('每段创作要求需为1至800字')
+        return steps
+
+class CreativeWritingRead(Strict):
+    id:str=Field(pattern=r'^director_[0-9a-f]{32}$')
+    start:int=Field(default=0,ge=0,le=32000)
+    limit:int=Field(default=4000,ge=1,le=8000)
+class CreativeWritingStage(Strict):
+    id:str=Field(pattern=r'^director_[0-9a-f]{32}$')
+    etag:str=Field(pattern=r'^[0-9a-f]{64}$')
+
 class WorldDraft(Strict):
     name:str=Field(min_length=1,max_length=200)
     category:str=Field(default='term',max_length=64)

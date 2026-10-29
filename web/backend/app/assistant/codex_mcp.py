@@ -47,6 +47,13 @@ class Runner:
             time.sleep(.15)
     def phase_start(self,code,status,timeout):
         self.phase=code;self.phase_deadline=time.monotonic()+timeout;self.session.mcp_state=status;self.session.timing.mark(code.lower()+'_start',status)
+    def model_timeout(self):
+        # A writing tool may need a substantial model response after reading its
+        # source. Honor the explicit request budget without extending the request
+        # deadline or changing SDK/MCP/frontend timeouts.
+        controls=getattr(self.session,'ai_controls',None)
+        requested=controls.parameters.get('timeout',90) if controls else 90
+        return max(.1,min(float(requested),self.session.deadline-time.monotonic()))
     def initialize(self):
         s=self.session;self.capsule.mkdir(parents=True,exist_ok=True);self.bridge=Bridge(s)
         threading.Thread(target=self.bounded,name='CodexAssistantLifetime',daemon=True).start()
@@ -96,7 +103,7 @@ class Runner:
             if self.thread_id:s.timing.mark('thread_reused',reused=True);s.timing.mark('tools_reused',reused=True)
             else:self.initialize()
             s.model.id=self.model_id;s.mcp_evidence=dict(self.evidence)
-            self.phase_start('MODEL','正在理解指令',90)
+            self.phase_start('MODEL','正在理解指令',self.model_timeout())
             controls=getattr(s,'ai_controls',None);effort=controls.parameters.get('reasoning_effort') if controls else 'low';selected=controls.model.split('::',1)[1] if controls and controls.model.startswith('codex::') else None
             self.turn=Thread(self.client,self.thread_id).turn(json.dumps(payload,ensure_ascii=False),cwd=str(self.capsule),effort=effort,model=selected);s.timing.mark('turn_started');s.mcp_evidence['turn']=self.turn.id
             if getattr(s,'ai_metadata',None):s.ai_metadata.update(request_model=selected or self.model_id,observed_model=self.model_id,reasoning_effort=effort,effective_parameters={k:v for k,v in {'model':selected,'effort':effort}.items() if v is not None})
@@ -114,7 +121,7 @@ class Runner:
                 if method=='item/started' and kind=='mcpToolCall':
                     self.phase_start('MCP_TOOL','正在调用工具',45);s.timing.mark('model_selected_tool',tool=item.get('tool'))
                 if method=='item/completed' and kind=='mcpToolCall':
-                    s.mcp_evidence.setdefault('calls',[]).append({k:item.get(k) for k in ['tool','status','durationMs']});s.timing.mark('mcp_tool_complete',item.get('status','unknown'),tool=item.get('tool'),duration_ms=item.get('durationMs'));self.phase_start('MODEL','正在整理执行结果',45)
+                    s.mcp_evidence.setdefault('calls',[]).append({k:item.get(k) for k in ['tool','status','durationMs']});s.timing.mark('mcp_tool_complete',item.get('status','unknown'),tool=item.get('tool'),duration_ms=item.get('durationMs'));self.phase_start('MODEL','正在整理执行结果',self.model_timeout())
                 if method=='item/agentMessage/delta':
                     text+=str(data.get('delta',''));s.output='Codex 正在回复（操作状态以回执为准）：\n'+text
                 if method=='item/completed' and kind=='agentMessage':text=item.get('text','')

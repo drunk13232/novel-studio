@@ -181,5 +181,7 @@
   "embodied_state_cancelled": "Task cancelled",
   "embodied_state_rejected": "Rejected · not executed",
   "embodied_state_speaking": "Speaking",
-  "embodied_reportReady": "Review completed. Open the saved report."
+  "embodied_reportReady": "Review completed. Open the saved report.",
+  "openManuscriptCandidate": "Review manuscript candidate",
+  "openWritingTask": "Open writing task"
 }

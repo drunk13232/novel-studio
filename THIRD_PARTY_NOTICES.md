@@ -111,3 +111,7 @@ Custom Workflows adds no dependency. The new public candidate retains the full c
 ## Verified missing Python notice originals (2.24.0)
 
 Jieba 0.42.1 (MIT), openai-codex 0.160.1 and openai-codex-cli-bin 0.160.1 (Apache-2.0) installed metadata declared the licenses but omitted their full text. The official matching GitHub version tags supply unmodified LICENSE and applicable NOTICE copies. URLs, SHA-256 and version checks are recorded in desktop/third-party/PYTHON-SUPPLEMENTAL-NOTICES.json and enforced by collect_licenses.py. Existing upstream copyright remains intact.
+
+### SDK-paired Codex runtime in 2.24.9
+
+The personal Windows package now includes the official `openai-codex-cli-bin` 0.160.1 runtime used by the installed Python SDK. Its Apache-2.0 LICENSE and NOTICE were already tracked in the corresponding-version Python supplemental notice manifest. The explicit Ratatui 0.30.2 MIT notice and the bundled ripgrep 15.2.0 (revision e89fff89ac) MIT license are included with SHA-256 and official-source references. No Codex login, user configuration or credentials are bundled. An explicit runtime override remains available.

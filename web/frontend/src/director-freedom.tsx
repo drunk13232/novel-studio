@@ -1,12 +1,13 @@
 import {useEffect,useState} from 'react';
 import AIControls from './ai-controls';
+import {SceneIntentFields} from './director-delivery';
 import {t} from './i18n';
 type D=Record<string,any>;
 const tr=(key:string)=>t('director:'+key);
 
 export function StepExecution({project,step,index,model,controls,blocked,editingBlocked,canRun,onPatch,onRun,onInspect,onDuplicate,canDuplicate}:{project:string;step:D;index:number;model:string;controls:D|null;blocked:boolean;editingBlocked:boolean;canRun:boolean;onPatch:(patch:D)=>void;onRun:()=>void;onInspect:()=>void;onDuplicate:()=>void;canDuplicate:boolean}){
  const [open,setOpen]=useState(false),custom=!!step.executor||!!step.request_controls;
- return <section className="director-step-execution">
+ return <section className="director-step-execution"><SceneIntentFields value={step.scene} disabled={editingBlocked} onChange={scene=>onPatch({scene})}/>
   <div className="director-controls"><button disabled={!canRun} onClick={onRun}>{tr('runThisStep')} {index+1}</button><button disabled={blocked} onClick={onInspect}>{tr('inspectThisStep')}</button><button disabled={!canDuplicate} onClick={onDuplicate}>{tr('duplicateStep')}</button></div>
   <small>{tr('selectedStepBoundary')}</small>
   <details onToggle={e=>setOpen(e.currentTarget.open)}><summary>{tr('stepModel')} · {custom?(step.executor||step.request_controls?.model||model):tr('inheritModel')}</summary>{open&&<fieldset disabled={editingBlocked}>

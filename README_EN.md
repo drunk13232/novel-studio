@@ -1,4 +1,24 @@
-# Novel Studio · 2.24.4 Writing Continuity Preview
+# Novel Studio · 2.24.9 Writing Reliability Preview
+
+## 2.24.9
+
+This iteration strengthens the existing Director with the SDK-paired Codex runtime, actual-prose delivery and length targets, durable same-task recovery, input-budget preflight, scene interfaces and author-selected book delivery checks. Writing remains proposed until author acceptance; length is not literary quality. Trial data is isolated original fiction. See the [2.24.9 guide and verification boundaries](docs/workbench-experience/DELIVERY-2.24.9.md). Versions 2.24.5–2.24.8 below are historical local iterations whose changes are included in this 2.24.9 Preview release. Browser and worker checks do not replace native GUI, IME or DPI acceptance.
+
+## 2.24.8
+
+This iteration connects the existing Creative Director and Writer to scoped MCP actions for chapter drafting, real progress, stop/resume and existing Diff candidates. Model phases honor the request timeout. Explicit candidate references are version-bound and require author context approval; they never become Canon automatically. Local assistant history retains validated candidate links. Original trial manuscripts and run records remain outside public packages. Preview / PARTIAL remains: native desktop, physical IME and complete literary quality were not reaccepted. See [workflow guide](docs/workbench-experience/DELIVERY-2.24.8.md).
+
+## 2.24.7
+
+Local Record Editing Preview, not publicly released. Existing to-do, revision and inspiration editors retain changes made while a save receipt is pending, then rebase on the acknowledged record for the next explicit save. Existing close/leave protection covers pending saves and undo. Chinese/English guidance separates the saved submission from newer unsaved edits. See the [guide](docs/workbench-experience/README.md) and [verification boundaries](docs/workbench-experience/DELIVERY-2.24.7.md).
+
+## 2.24.6
+
+Local Save Integrity Preview, not yet published to GitHub. Manuscript save/recovery receipts remain bound to their original chapter. Entry submission preserves text and field changes made while waiting for an earlier save. Checking an unchanged candidate resumes normal autosave without clearing existing manual pauses. Existing persistence and author-approval channels remain authoritative, with no new data format. See the [guide](docs/workbench-experience/README.md) and [verification boundaries](docs/workbench-experience/DELIVERY-2.24.6.md).
+
+## 2.24.5
+
+This is a local delivery, not yet a GitHub publication. Chapter to-do and revision inputs survive tab switches and dock closure. Failed candidate reads can be retried; conflicting local/stored versions can be inspected before an explicit reload, with window-local recovery of previous edits. Handled history is accurately read-only, and rejection immediately refreshes Current Chapter. Existing adoption, source-version and manuscript protection remain authoritative. See the [guide](docs/workbench-experience/README.md) and [verification boundaries](docs/workbench-experience/DELIVERY-2.24.5.md).
 
 ## 2.24.4
 

@@ -1,12 +1,24 @@
 # Writing Continuity / 写作连续性
 
-Version: 2.24.4 Writing Continuity Preview.
+Version: 2.24.7 Record Editing Preview.
+
+## 编辑已有记录
+
+已有待办、修订事项和灵感也支持保存中继续编辑。回执只确认本次提交；后续输入仍保留并标为未保存，下一次点击保存使用已确认的新版本。等待回执时不能关闭或离开，以免撤销到旧基线的意图被丢掉。所有字段与已确认版本一致时无需重复保存，可直接关闭；失败时编辑保留并显示原错误。
+
+## 保存回执与新输入
+
+保存回执只用于发起保存的同一作品、章节与加载会话；切章后的回执不再用当前章节内容生成旧章恢复副本。干净正文不重复保存。同一章节保存期间的新正文仍保留。待办、修订与灵感提交后只清空仍与提交快照一致的表单；等待期间继续输入的内容或改过的选项不会被旧回执清空。
+
+正常检查同一候选版本后继续自动暂存；如果此前因为恢复、冲突或错误暂停，检查本身不会解除人工暂停。
 
 ## 从正文继续工作
 
 正文工具栏新增“本章工作”：在现有可调侧栏查看当前章节的计划目标、待处理候选、待办、修订事项与已绑定出处。待办直接使用既有计划/记录服务；完成或新增后按本地事件刷新，不轮询。出处按钮核对真实原文后定位；计划不等于已发生事实，相关资料不会因打开侧栏自动进入 AI 上下文。
 
 “本次写作参考”“AI 场景导演”和“AI 创作指挥台”仍使用同一可调分屏。资料审核后返回所选工具，不自动执行模型。专注模式隐藏侧栏，退出后恢复同章节会话中的表单。尚未保存的材料、事实审核仍有直接返回入口与未保存保护。
+
+本章新待办和新修订输入在同章节会话内随页签、工具面板保留；徽标和直接返回入口可继续填写。切换章节或退出前仍需保存或明确清空。它们不是新的跨重启草稿存储。候选历史可从本章工作直接打开，已处理记录只读，不再显示“未采用”。
 
 ## 暂存候选，再决定是否采用
 
@@ -16,7 +28,7 @@ Version: 2.24.4 Writing Continuity Preview.
 - 不同生成候选分别保留编辑和说明；选段 Diff 还保留作者明确勾选的变更片段。修订台的采用按钮仍表示采用该处完整候选，请核对预览范围。
 - “关闭比较，保留候选”不会拒绝建议。保存尚未结束时，可继续编辑或选择“暂存并关闭”；明确放弃只丢弃未暂存部分。
 - 重新打开“本章工作”的候选或原有候选记录，即可继续。应用重启后从同一项目、同一候选恢复；既有项目备份包含这些字段，恢复为新项目后继续隔离。
-- 两窗口修改同一候选时，后提交者会显示冲突并保留当前文本。可以先下载本地候选副本，再关闭比较并明确放弃未暂存内容，重新打开服务器上保存的版本。不会自动覆盖另一窗口内容。
+- 两窗口修改同一候选时，后提交者会显示冲突并保留当前文本。点击“检查已保存版本”可对比本地文本、已保存文本及说明；先下载需要保留的副本，再明确载入已保存版本。本比较窗口内可恢复刚才的本地编辑；恢复后自动暂存暂停，需作者点击“暂存候选”。关闭窗口或重启后不保留这个临时恢复副本。不会自动覆盖另一窗口内容。
 - 原文变化后保留候选草稿，但禁止直接采用旧来源。下载副本不等于可绕过版本校验。
 - 真正采用仍需作者点击既有确认按钮并通过原文版本、原选区与 Final 保护。正式稿采用后产生既有修订稿；不自动提交设定或人物事实。
 
@@ -30,14 +42,27 @@ Version: 2.24.4 Writing Continuity Preview.
 
 ## English
 
+Existing-record editors keep later typing while a submission is saving. The receipt becomes the new baseline; subsequent edits remain unsaved until the next explicit save. Pending saves protect close/leave and undo intent. Unchanged forms need no extra write.
+
+
+Save receipts remain tied to the original project, chapter and load generation. A late receipt must not use another chapter’s content for recovery. A clean document is not saved again. Entry submissions clear text only if the current composer still matches the submitted snapshot; newer typing and field changes survive. Inspecting an unchanged candidate preserves normal autosave without clearing an earlier manual pause.
+
+
 Current Chapter combines existing planned goals, pending candidates, to-dos, revision tasks and linked evidence in the writing dock. Existing notebook records and scoped local events keep it synchronized. Opening a dock does not expand AI context or commit plans as facts.
+
+Current-chapter to-do/revision inputs and selected fields survive tab/dock switches within the same chapter session. Save or explicitly clear them before leaving; these unsaved forms are not a new persistent store. Open read-only candidate history directly from the dock.
 
 Manual candidate text and notes save locally after 900ms of inactivity or with Save candidate draft. Each generated variant is independent. Selection Diff preserves explicitly selected hunks; the Revision Desk's adoption action still applies the full displayed candidate. Reopen the same candidate after closing or restarting. Existing project backup/restore includes this optional metadata.
 
-Closing preserves a proposal; rejection and adoption remain explicit. Unsaved edits receive keep/save/discard protection. Conflicting windows cannot overwrite a newer saved draft: retain/download local edits, deliberately close without saving, and reopen the stored version. Stale manuscript sources retain draft recovery but block adoption. Existing Final revisions and project boundaries remain authoritative.
+Closing preserves a proposal; rejection and adoption remain explicit. Unsaved edits receive keep/save/discard protection. Conflicting windows cannot overwrite a newer saved draft: inspect local and stored text/notes, download any copies to keep, then explicitly load stored state. The previous local edit can be recovered within this comparison window. Recovery pauses autosave until explicit manual save; this temporary copy does not survive closing/restarting. Stale manuscript sources retain draft recovery but block adoption. Existing Final revisions and project boundaries remain authoritative.
 
 Planned request checks reuse existing model controls: concrete model, destination host/protocol, supported reasoning effort and caller-provided source scope. Unknown values remain unknown. Opening the controls does not call a model. Actual execution receipts and existing source/cost authorization remain authoritative.
 
 ## Verification boundaries
 
-See [2.24.4 delivery evidence](DELIVERY-2.24.4.md). No new dependency, Agent, renderer or database migration. Windows native WebView2 interaction, physical Chinese IME and real remote AI are separate acceptance gates; local tests do not prove them. Large Monaco/PDF/timeline chunks remain lazily loaded and still trigger Vite size notices. No measured startup or memory improvement is claimed.
+See [2.24.7 delivery evidence](DELIVERY-2.24.7.md). No new dependency, Agent, renderer or database migration. Windows native WebView2 interaction, physical Chinese IME and real remote AI are separate acceptance gates; local tests do not prove them. Large Monaco/PDF/timeline chunks remain lazily loaded and still trigger Vite size notices. No measured startup or memory improvement is claimed.
+
+
+## 2.24.8 · MCP 写作闭环
+
+[本轮入口、使用方式与验证边界](DELIVERY-2.24.8.md)。复用已有 Writer、上下文确认与 Diff；未采用候选可明确选择为有限参考，历史记录可重开。模型回合结束不等于全书写足，仍显示实际生成与保存回执。

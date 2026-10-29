@@ -33,7 +33,7 @@ class Bridge:
                 if self.path!='/call':return self.answer(404,{})
                 try:
                     size=int(self.headers.get('Content-Length','0'))
-                    if size<1 or size>20000:raise ValueError('invalid body size')
+                    if size<1 or size>196608:raise ValueError('invalid body size')
                     body=json.loads(self.rfile.read(size));name=body['name'];cid=body['call_id'];args=body['arguments']
                     if set(body)!={'name','call_id','arguments','session_id'} or name not in MCP_ACTIONS or not isinstance(cid,str) or not 1<=len(cid)<=80:raise ValueError('unregistered call')
                     signature=hashlib.sha256(json.dumps([name,args],sort_keys=True,ensure_ascii=False).encode()).hexdigest()

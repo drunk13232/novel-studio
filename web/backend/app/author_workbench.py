@@ -232,7 +232,7 @@ class AuthorWorkbench:
             row=read(file)
             if not row or row.get('project_id')!=p or row.get('path')!=path or row.get('status')!='PROPOSED':continue
             draft=row.get('author_draft') or {}
-            candidates.append({'id':row['id'],'instruction':row.get('instruction') or row.get('advice',''),'created_at':row.get('created_at',''),'source_current':row.get('document_revision')==doc['etag'],'draft_saved_at':max((v.get('updated_at','') for v in draft.get('variants',{}).values()),default='')})
+            candidates.append({'id':row['id'],'status':row['status'],'instruction':row.get('instruction') or row.get('advice',''),'created_at':row.get('created_at',''),'source_current':row.get('document_revision')==doc['etag'],'draft_saved_at':max((v.get('updated_at','') for v in draft.get('variants',{}).values()),default='')})
         candidates.sort(key=lambda x:x['draft_saved_at'] or x['created_at'],reverse=True)
         # Existing explicit anchors are evidence; mentions and plans are not committed facts.
         anchors=self.knowledge.anchors(p,path)

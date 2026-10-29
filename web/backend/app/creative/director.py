@@ -16,6 +16,7 @@ from app.ai.models import Parameters
 from app.ai.controls import RequestControls,merge
 from .tasks import adapter,metadata
 from .director_skills import catalog,load
+from .director_delivery import SceneIntent,DeliveryUpdate,task_delivery,recovery,failure,checkpoint,project_delivery,update_delivery
 
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
 class Limits(Strict):
@@ -38,6 +39,7 @@ class Step(Strict):
     checks:list[str]=Field(default_factory=list,max_length=8)
     enabled:bool=True
     needs_author:bool=False
+    scene:SceneIntent|None=None
     exit_condition:str=Field(default='',max_length=800)
     deferred_outcomes:list[Annotated[str,Field(min_length=1,max_length=400)]]=Field(default_factory=list,max_length=6)
 
@@ -61,6 +63,7 @@ class Create(Strict):
     revision:str=Field(pattern=r'^[0-9a-f]{64}$')
     context_id:str
     goal:str=Field(min_length=1,max_length=2500)
+    goal_han:int|None=Field(default=None,ge=0,le=10000000)
     mode:Literal['quick','director','deep']='director'
     executor:str=Field(max_length=300)
     commander:str=Field(default='codex',max_length=300)
@@ -76,6 +79,7 @@ class Patch(Strict):
     request_controls:RequestControls|None=None
     commander_controls:RequestControls|None=None
     goal:str|None=Field(default=None,min_length=1,max_length=2500)
+    goal_han:int|None=Field(default=None,ge=0,le=10000000)
     executor:str|None=Field(default=None,max_length=300)
     commander:str|None=Field(default=None,max_length=300)
     mode:Literal['quick','director','deep']|None=None
@@ -118,7 +122,7 @@ class Director:
         if not re.fullmatch(r'director_[0-9a-f]{32}',id or ''):raise ConsoleError('指挥任务不存在',404)
         return self.tools.local(p,'director/'+id+'.json')
     def put(self,p,row):
-        row.pop('etag',None);row['updated_at']=now();write(self.path(p,row['id']),row)
+        row.pop('etag',None);row.pop('delivery',None);row.pop('recovery',None);row['updated_at']=now();write(self.path(p,row['id']),row)
     def get(self,p,id):
         with self.lock:
             path=self.path(p,id);row=read(path)
@@ -132,13 +136,28 @@ class Director:
                         row['seconds_used']+=elapsed;row['review_accounted']=task.id
                         row['usage'].append({'backend':'codex','provider':'Codex 定向复核','model':'CURRENT_LOGIN_MODEL','input_tokens':None,'output_tokens':None,'cost':None,'currency':row['limits']['currency'],'seconds':round(elapsed,3)})
                     status='TERMINATED' if row['status']=='TERMINATED' else 'PAUSED' if row['status']=='CANCELLING' else 'REVIEW_READY' if is_review and task and task.status=='SUCCEEDED' else 'INTERRUPTED'
-                    row.update(status=status,phase='定向复核报告已保存，供作者决定' if status=='REVIEW_READY' else '远端请求已结束；从本地检查点创建新请求',active_task=None,pause_requested=True)
+                    if not task and not is_review and status!='TERMINATED':
+                        partial=row.get('partial','')
+                        if partial:
+                            if row.get('rewrite'):row['versions']=(row['versions']+[{'at':now(),'draft':row['draft'],'partial_rewrite':partial,'reason':'interrupted_rewrite_after_restart'}])[-20:]
+                            else:row['draft']+=partial
+                            row['partial']=''
+                        row['resume_checkpoint']=checkpoint(row,row.get('active_step'),'APPLICATION_RESTARTED')
+                        row['failure']={'code':'APPLICATION_RESTARTED','next_action':'REVIEW_LIMITS','automatic_retry':False,'provider_fallback':False}
+                        row['timing_unknown']=True;row['epoch']+=1
+                    row.update(status=status,phase='定向复核报告已保存，供作者决定' if status=='REVIEW_READY' else '本地断点已恢复；先确认预算，再发起新请求',active_task=None,pause_requested=True)
                     if task and task.error:row['last_error']=task.error
                     self.put(p,row)
             for i,step in enumerate(row['plan']['steps']):
                 if not step.get('step_id'):step['step_id']='ds_'+text_hash(row['id']+':'+str(i))[:32]
             for note in row.get('analysis_notes',[]):note['stale']=note['candidate_sha256']!=text_hash(row['draft'])
-            row['etag']=digest(path.read_bytes());return row
+            row['etag']=digest(path.read_bytes())
+            candidate=None
+            if row.get('candidate_id'):
+                try:candidate=self.tools.candidate(p,row['candidate_id'])
+                except ConsoleError:pass
+            row['delivery']=task_delivery(row,candidate);row['recovery']=recovery(row)
+            return row
     def checked(self,p,id,etag):
         row=self.get(p,id)
         if row['etag']!=etag:raise ConsoleError('指挥台记录已更新，请刷新后重试',409)
@@ -177,9 +196,9 @@ class Director:
             scene={'id':b.scene_id,'option':b.scene_option,'value':prior['result']['options'][b.scene_option]};self.safe(ctx,scene)
         skills,proof=load(self.tools.registry.engine,b.skills)
         row={'id':uid('director'),'project_id':p,'path':b.path,'revision':b.revision,'context_id':b.context_id,'context_hash':ctx['context_hash'],
-             'goal':b.goal,'mode':b.mode,'executor':b.executor,'commander':b.commander,'scene_reference':scene,'skills':b.skills,'skill_proof':proof,'status':'READY' if b.mode=='quick' else 'DRAFT',
+             'goal':b.goal,'goal_han':b.goal_han,'mode':b.mode,'executor':b.executor,'commander':b.commander,'scene_reference':scene,'skills':b.skills,'skill_proof':proof,'status':'READY' if b.mode=='quick' else 'DRAFT',
              'phase':'等待作者指令','target':{'start':b.start,'end':b.end,'quote':b.quote},'limits':b.limits.model_dump(),'calls':0,'seconds_used':0,
-             'usage':[],'draft':'','partial':'','plan':{'summary':b.goal,'steps':[Step(title='执行作者要求',instruction=b.goal).model_dump()],'questions':[],'methods':[],'method_application':[]},
+             'usage':[],'draft':'','partial':'','plan':{'summary':b.goal if len(b.goal)<=1500 else b.goal[:1499]+'…','steps':[Step(title='执行作者要求',instruction=b.goal).model_dump()],'questions':[],'methods':[],'method_application':[]},
              'completed':[],'interventions':[],'versions':[],'plan_versions':[],'epoch':0,'active_task':None,'pause_requested':False,'pending_notice':None,'last_error':None,'rewrite':None,'created_at':now(),'updated_at':now()}
         row['controls_version']=2
         if b.request_controls is not None:row['request_controls']=b.request_controls.model_dump()
@@ -193,11 +212,17 @@ class Director:
             if b.context_id:row['context_id']=b.context_id
             ctx=self.context(p,row,locked=True)
             updates=b.model_dump(exclude={'etag','context_id'},exclude_none=True)
-            if b.limits is not None:updates['limits']=b.limits.model_dump()
+            if b.limits is not None:
+                updates['limits']=b.limits.model_dump()
+                if row.get('timing_unknown'):updates.update(timing_unknown=False,recovery_budget_confirmed_at=now())
             self.safe(ctx,updates)
             if b.executor is not None:updates['executor']=self.model_ref(p,'cowrite',b.executor)
             if b.commander is not None:updates['commander']=self.model_ref(p,'scene_design',b.commander)
+            if b.goal_han is not None and b.goal_han!=row.get('goal_han'):
+                row['goal_versions']=(row.get('goal_versions',[])+[{'at':now(),'goal_han':row.get('goal_han'),'reason':'EXPLICIT_AUTHOR_EDIT'}])[-20:]
             if b.draft is not None:row['versions']=(row['versions']+[{'at':now(),'draft':row['draft'],'reason':'before_author_edit'}])[-20:]
+            if b.draft is not None and b.draft!=row['draft']:
+                if row.get('review_id'):updates['review_stale']=True
             if b.plan is not None:
                 # Older clients have no step IDs. Match unchanged instances once,
                 # so reordering preserves completion without marking duplicates done.
@@ -236,13 +261,15 @@ class Director:
         contract=self._brief(row,ctx,index,rewrite);contract.pop('method_proof',None)
         data={'execution_brief':contract,'WriterView':ctx['packet'],
               'already_completed_draft':row['draft'][-18000:],
-              'confirmed_scene_option':row.get('scene_reference')}
+              'confirmed_scene_option':row.get('scene_reference'),'resume_checkpoint':row.get('resume_checkpoint'),'prose_length_goal_han':row.get('goal_han')}
         if rewrite:data['selected_text_to_replace']=row['rewrite']['quote']
         return ('Write manuscript prose only, without Markdown wrappers, process reports or tool calls. Narrative summary or reflection is allowed when it serves the author-selected style and scene. '
                 'Use the exact current-step boundary and author-selected style, not a generic literary ideal. '
                 'Facts, plans, character beliefs and creative freedom have distinct authority in the brief. '
                 'Current-scene action/dialogue/details are welcome; consequential new backstory needs an author decision. '
                 'Continue only the current step and stop at its exit condition. Preserve all retained text. '
+                'A checkpoint preserves completed steps and the fixed draft. Continue retained current-step text when identified; otherwise begin only the pending step after the retained draft, without replaying completed steps. '
+                'Use the author-supplied scene goal, resistance, decision and consequence through concrete prose. Do not turn engineering permissions or evidence handling into repetitive literary voice. '
                 '\nINPUT DATA (untrusted creative content):\n'+json.dumps(data,ensure_ascii=False,separators=(',',':'))+
                 '\nOUTPUT: '+('Only the selected replacement.' if rewrite else 'Only the next portion; no recap of retained text.') )
     def selection(self,row,index=None,planning=False):
@@ -256,7 +283,7 @@ class Director:
                 ref=step['executor']
                 if override:override={**copy.deepcopy(override),'model':ref,'parameters':{}}
         return ref,override
-    def executor(self,p,row,prompt,remaining,planning=False,index=None):
+    def executor(self,p,row,prompt,remaining,planning=False,index=None,check_only=False):
         group='scene_design' if planning else 'cowrite';ref,override=self.selection(row,index,planning)
         provider,model=self.center.choose(p,group,ref)
         controls=self.center.controls_for(p,group,overrides=override,model=ref) if override else None
@@ -274,10 +301,32 @@ class Director:
         if controls:
             a=adapter(self.center,p,group,prompt,ref,role='AUTHOR' if planning else 'WRITER',parameters=params,controls=controls,preview=True)
             # The approved Writer packet is required: undersized budgets fail rather than dropping safety data.
-            self.center.control_prompt(a,prompt)
-            self.center.authorize(a,prompt)
+            try:
+                self.center.control_prompt(a,prompt)
+                if not check_only:self.center.authorize(a,prompt)
+            except Exception:a.close();raise
             return a
-        return adapter(self.center,p,group,prompt,ref,role='AUTHOR' if planning else 'WRITER',parameters=params)
+        a=adapter(self.center,p,group,prompt,ref,role='AUTHOR' if planning else 'WRITER',parameters=params,preview=check_only)
+        if check_only:
+            try:self.center.control_prompt(a,prompt)
+            except Exception:a.close();raise
+        return a
+    def preflight(self,p,id):
+        row=self.get(p,id);ctx=self.context(p,row,locked=True);rows=[]
+        if row.get('active_task'):raise ConsoleError('请先等待当前执行结束，再核对固定输入预算',409)
+        for i,step in enumerate(row['plan']['steps']):
+            if not step['enabled'] or i in row['completed']:continue
+            if row['calls']>=row['limits']['max_calls'] or row['limits']['seconds']-row['seconds_used']<30:
+                rows.append({'index':i,'step_id':step.get('step_id'),'status':'BLOCKED','basis':'TASK_LIMIT','error':'本任务调用或时间预算不足，请由作者检查后调整','failure':failure('本任务时间限制')});continue
+            simulated=copy.deepcopy(row);future=bool(rows)
+            if future:simulated['draft']='界'*row['limits']['output_characters']
+            try:
+                a=self.executor(p,simulated,self.writer_prompt(simulated,ctx,i),max(1,row['limits']['seconds']-row['seconds_used']),index=i,check_only=True)
+                try:meta=metadata(a)
+                finally:a.close()
+                rows.append({'index':i,'step_id':step.get('step_id'),'status':'READY' if not future else 'WITHIN_UPPER_ESTIMATE','basis':'CURRENT_EXACT_PAYLOAD' if not future else 'FUTURE_OUTPUT_CHARACTER_UPPER_BOUND','context':meta.get('context'),'model':meta.get('model')})
+            except ConsoleError as error:rows.append({'index':i,'step_id':step.get('step_id'),'status':'BLOCKED' if not future else 'POSSIBLE_BUDGET_RISK','basis':'CURRENT_EXACT_PAYLOAD' if not future else 'FUTURE_OUTPUT_CHARACTER_UPPER_BOUND','error':str(error)[:500],'failure':failure(error)})
+        return {'record_id':id,'etag':row['etag'],'steps':rows,'model_called':False,'budget_changed':False,'note':'Application estimates only; future retained text is a character-cap upper estimate, not exact model tokens.'}
     async def control(self,p,id,b):
         self.tools.writable(p)
         with self.lock:
@@ -299,11 +348,14 @@ class Director:
                 if row.get('partial'):
                     if row.get('rewrite'):row['versions']=(row['versions']+[{'draft':row['draft'],'partial_rewrite':row['partial'],'reason':'interrupted_rewrite','at':now()}])[-20:]
                     else:row['draft']+=row['partial']
+                row['resume_checkpoint']=checkpoint(row,row.get('active_step'),'AUTHOR_INTERRUPTED')
                 row.update(partial='',pause_requested=True,status='TERMINATED' if b.action=='terminate' else 'CANCELLING',phase='正在取消当前请求；上游可能已经计费',last_error=None)
                 self.put(p,row)
             else:
                 if row.get('active_task'):raise ConsoleError('当前请求尚未结束，请等待取消回执',409)
                 ctx=self.context(p,row,locked=True);self.safe(ctx,{'goal':row['goal'],'plan':row['plan'],'draft':row['draft'],'directions':row['interventions']})
+                if row.get('timing_unknown'):raise ConsoleError('进程重启前的请求耗时无法完整确认，请先检查并保存本任务预算，再手动继续',409)
+                if row.get('goal_han') and row['goal_han']>row['limits']['output_characters']:raise ConsoleError('本次目标汉字数超过候选字符上限，请按场景拆分或由作者调整任务上限',422)
                 if row['calls']>=row['limits']['max_calls'] or row['seconds_used']>=row['limits']['seconds']:raise ConsoleError('已达到本任务轮次或时间限制；作者可调整上限后再继续',409)
                 if b.action=='run' and (not b.confirm_plan):raise ConsoleError('先检查并明确确认当前任务书',409)
 
@@ -314,6 +366,8 @@ class Director:
                 next_index=next((i for i,s in enumerate(row['plan']['steps']) if s['enabled'] and i not in row['completed']),0)
                 if b.step_index is not None:next_index=b.step_index
                 if b.action=='run' and not row['rewrite'] and row['plan']['steps'][next_index]['needs_author'] and not b.continue_important:raise ConsoleError('本步骤含重要剧情决定；需作者明确确认后继续',409)
+                if b.action=='run' and row['status'] in {'FAILED','INTERRUPTED'} and row['draft'].strip() and not row.get('resume_checkpoint'):
+                    row['resume_checkpoint']=checkpoint(row,next_index,'AUTHOR_CONFIRMED_LEGACY_CONTINUATION')
                 row['active_step']=next_index if b.action=='run' else None
                 first_executor=self.executor(p,row,self.writer_prompt(row,ctx,next_index,bool(row['rewrite'])),row['limits']['seconds']-row['seconds_used'],index=next_index) if b.action=='run' else None
                 return self.start(p,row,b,ctx,first_executor)
@@ -324,6 +378,7 @@ class Director:
             current.update(status='TERMINATED' if b.action=='terminate' else 'CANCELLING' if task_id else 'PAUSED',phase='整项任务已终止；正在收尾当前请求' if b.action=='terminate' else '已请求中断，等待真实结束回执；上游仍可能计费')
             self.put(p,current);return self.get(p,id)
     def start(self,p,row,b,ctx,first_executor=None):
+        row['failure']=None
         row.update(epoch=row['epoch']+1,status='PLANNING' if b.action=='plan' else 'GENERATING',phase='Codex 正在制定任务书' if b.action=='plan' else '执行模型正在生成',pause_requested=False,last_error=None,pending_notice=None)
         epoch=row['epoch'];id=row['id'];self.put(p,row);task=None
         def live():
@@ -367,7 +422,9 @@ class Director:
                 result=a.start_task(prompt,relay,read_only=True,output_schema=output_schema,allow_web=False)
                 if expired.is_set():raise ConsoleError('此阶段超时，草稿已保留；上游执行与费用需核对后再手动重试',504)
                 if result['status']!='completed':raise ConsoleError(result.get('error') or '请求已停止，已收到的草稿保留',409)
-                return result['output']
+                output=result.get('output') or buffer
+                if not planning and not output.strip():raise ConsoleError('模型回合已结束但未返回正文，未标记本步骤完成；请检查结果后手动继续',422)
+                return output
             finally:
                 timer.cancel();a.close();meta=metadata(a);usage['receipt']={k:copy.deepcopy(meta[k]) for k in ('backend','provider_id','provider_name','model','request_model','observed_model','reasoning_effort','effective_parameters','context','context_receipt','usage') if k in meta};usage.update(model=metadata(a).get('observed_model') or metadata(a).get('model','UNKNOWN'),seconds=round(time.monotonic()-begin,3),first_response_seconds=first_response,first_output_seconds=first_output,phase='PLAN' if planning else 'WRITE',step_index=step_index)
                 with self.lock:
@@ -413,7 +470,7 @@ class Director:
                         from .writing_contract import observations
                         current['quality_observations']=observations(current['draft'],ctx['packet'])
                         current['execution_receipts']=(current.get('execution_receipts',[])+[{'at':now(),'step':index,'prompt_sha256':text_hash(prompt),'prompt_characters':len(prompt),'context_hash':ctx['context_hash'],'brief':receipt}])[-12:]
-                        current['partial']='';self.put(p,current)
+                        current['partial']='';current['resume_checkpoint']=None;current['failure']=None;self.put(p,current)
                         if rewrite or not b.auto_continue or current['pause_requested']:break
                         next_step=next((s for i,s in enumerate(current['plan']['steps']) if s['enabled'] and i not in current['completed']),None)
                         if next_step and next_step['needs_author'] and not b.continue_important:break
@@ -425,6 +482,7 @@ class Director:
                     current=self.get(p,id)
                     if current['epoch']==epoch:
                         if current['partial'] and not current['rewrite']:current['draft']+=current['partial'];current['partial']=''
+                        current['failure']=failure(error);current['resume_checkpoint']=checkpoint(current,current.get('active_step'),current['failure']['code'])
                         current.update(status='PAUSED' if isinstance(error,InterruptedError) or cancelled() else 'FAILED',active_task=None,last_error=str(error)[:1000],phase='草稿已保留，等待作者处理',active_step=None,pending_notice=getattr(error,'ai_notice',None));self.put(p,current)
                 return {'status':'interrupted' if cancelled() else 'failed','error':str(error)[:1000],'output':''}
         req=TaskRequest(type='custom_prompt',prompt='AI 创作指挥台：'+('任务书' if b.action=='plan' else '执行候选'),options=TaskOptions(read_only=True,resume=False,timeout_seconds=row['limits']['seconds']))
@@ -488,11 +546,17 @@ class Director:
 
     def stage(self,p,id,b):
         with self.lock:
+            row=self.get(p,id)
+            ctx=self.context(p,row,locked=True);self.safe(ctx,row['draft'])
+            if b.etag in {row.get('last_staged_etag'),row['etag']} and row.get('last_staged_hash')==text_hash(row['draft']) and row.get('candidate_id'):
+                previous=self.tools.candidate(p,row['candidate_id'])
+                if previous['status']=='PROPOSED' and self.tools.doc(p,row['path'])['etag']==row['revision']:
+                    return {'candidate':previous,'record':row,'idempotent_replay':True}
             row=self.checked(p,id,b.etag)
             if row.get('active_task') or not row['draft'].strip():raise ConsoleError('先停止生成并保留非空候选',409)
             ctx=self.context(p,row,locked=True);self.safe(ctx,row['draft'])
             target=row['target'];candidate=self.tools.stage_replacement(p,row['path'],row['revision'],target['start'],target['end'],target['quote'],row['draft'],{'kind':'creative-director','record_id':id},allow_insert=True,limit=32000)
-            row['candidate_id']=candidate['id'];self.put(p,row);return {'candidate':candidate,'record':self.get(p,id)}
+            row.update(candidate_id=candidate['id'],last_staged_etag=b.etag,last_staged_hash=text_hash(row['draft']));self.put(p,row);return {'candidate':candidate,'record':self.get(p,id)}
 
 
     def review(self,p,id,b):
@@ -503,7 +567,7 @@ class Director:
             if row['calls']>=row['limits']['max_calls'] or row['limits']['seconds']-row['seconds_used']<30:raise ConsoleError('本任务已达到调用或时间限制',409)
             staged=self.stage(p,id,Candidate(etag=row['etag']));candidate=staged['candidate']
             task=self.reviews.start(p,Start(path=row['path'],candidate_id=candidate['id'],writer_context_id=row['context_id'],mode=b.mode,model=b.model,timeout_seconds=min(300,int(row['limits']['seconds']-row['seconds_used'])),criteria=['只针对候选文本和已授权 Writer View 检查，缺失信息标 UNKNOWN；保留作者声音。','核查疑似新过去、持久关系变化、场景边界与动作后果。没有检索证据不等于情节绝对错误；给出引用、合理解释与待作者确认事项。',json.dumps({'goal':row['goal'],'steps':row['plan']['steps'],'directions':row['interventions'][-4:]},ensure_ascii=False)]))
-            current=self.get(p,id);current['calls']+=1;current['review_id']=task['review_id'];current['review_task_id']=task['id'];current.update(active_task=task['id'],status='REVIEWING',phase='现有文学评审正在定向复核候选');self.put(p,current)
+            current=self.get(p,id);current['calls']+=1;current['review_id']=task['review_id'];current['review_stale']=False;current['review_task_id']=task['id'];current.update(active_task=task['id'],status='REVIEWING',phase='现有文学评审正在定向复核候选');self.put(p,current)
             return {**self.get(p,id),'task':task}
 
 def routes(service):
@@ -514,6 +578,12 @@ def routes(service):
     def history(p:str,path:str|None=None):return {'records':service.history(p,path)}
     @r.post('')
     def create(p:str,b:Create):return service.create(p,b)
+    @r.get('/delivery')
+    def delivery(p:str):return project_delivery(service,p)
+    @r.put('/delivery')
+    def choose_delivery(p:str,b:DeliveryUpdate):return update_delivery(service,p,b)
+    @r.post('/{id}/preflight')
+    def preflight(p:str,id:str):return service.preflight(p,id)
     @r.get('/{id}')
     def get(p:str,id:str):return service.get(p,id)
     @r.get('/{id}/snapshot')

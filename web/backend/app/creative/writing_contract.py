@@ -58,7 +58,9 @@ def PathName(value):
 def brief(row,packet,index,capsules,rewrite=False):
     step=row['plan']['steps'][index] if not rewrite else {'instruction':row['rewrite']['instruction']}
     sources=packet.get('sources',[])
-    return {'version':VERSION,'goal':row['goal'],'current_step':step,
+    enabled=[i for i,s in enumerate(row['plan']['steps']) if s['enabled']]
+    position={'current':index+1,'enabled_total':len(enabled),'remaining_after_current':sum(1 for i in enabled if i>index),'is_final_enabled_step':bool(enabled and index==enabled[-1]),'completed_indices':list(row['completed']),'boundary':'Only the current step is requested; do not close the full chapter while later steps remain.'}
+    return {'version':VERSION,'goal':row['goal'],'current_step':step,'execution_position':position,
         'latest_author_directions':row.get('interventions',[])[-8:],
         'fact_boundaries':FACT_BOUNDARIES,
         'evidence_roles':[{'source_id':s['id'],'basis':s.get('basis','UNKNOWN'),'kind':s['kind']} for s in sources],
@@ -82,5 +84,12 @@ def observations(output,packet):
              'end':utf16_index(output,a+len(quote)),'status':'NEEDS_CONTEXT_NOT_PROVEN_ERROR',
              'message':'此处涉及过去，所给资料未直接支持整句；可能合理，需结合作者设定复核，不自动改写。'})
         if len(rows)>=8:break
-    return {'version':VERSION,'past_reference_signals':rows,'semantic_review':'NOT_RUN',
+    repeated=[];seen={}
+    for match in re.finditer(r'[^\n]+(?:\n(?!\s*\n)[^\n]+)*',output):
+        text=match.group().strip();a=match.start()+len(match.group())-len(match.group().lstrip());b=a+len(text)
+        if len(text)<80:continue
+        if text in seen and len(repeated)<6:
+            first=seen[text];repeated.append({'quote':text[:200],'first':{'start':utf16_index(output,first),'end':utf16_index(output,first+len(text))},'repeat':{'start':utf16_index(output,a),'end':utf16_index(output,b)},'status':'AUTHOR_REVIEW_NOT_AUTOMATIC_ERROR'})
+        else:seen[text]=a
+    return {'version':VERSION,'repeated_passage_signals':repeated,'past_reference_signals':rows,'semantic_review':'NOT_RUN',
             'basis':'DETERMINISTIC_POINTERS_NOT_FACT_OR_LITERARY_VERDICT','text_sha256':text_hash(output)}

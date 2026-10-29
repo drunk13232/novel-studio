@@ -29,6 +29,7 @@ class ContextChoice(Strict):
     material_ids:list[str]=Field(default_factory=list,max_length=4)
     world_ids:list[str]=Field(default_factory=list,max_length=6)
     previous_paths:list[str]=Field(default_factory=list,max_length=6)
+    candidate_ids:list[str]=Field(default_factory=list,max_length=4)
     queries:list[str]=Field(default_factory=list,max_length=3)
     exclude:list[str]=Field(default_factory=list,max_length=80)
     pinned:list[str]=Field(default_factory=list,max_length=24)
@@ -251,6 +252,20 @@ class WritingAssist:
             if not committed:warnings.append('PREVIOUS_DRAFT_NOT_COMMITTED')
             excerpt=tail(text,1600)
             add('chapter:'+path,'前文 · '+str(number),'chapter',excerpt,path,'PUBLIC_TEXT_NOT_ACTOR_KNOWLEDGE',revision=source['etag'])
+        for id in dict.fromkeys(b.candidate_ids):
+            proposal=self.tools.candidate(p,id)
+            if proposal.get('project_id')!=p or proposal.get('status')!='PROPOSED':raise ConsoleError('参考候选不属于当前作品或已处理',409)
+            _,candidate_number,_=self.tools.chapter(p,proposal['path'])
+            if candidate_number>n:raise ConsoleError('不能将未来章节候选交给当前 Writer',409)
+            source=self.tools.doc(p,proposal['path'])
+            if source['etag']!=proposal.get('document_revision'):raise ConsoleError('候选基线已变化，请先重新比较',409)
+            draft=proposal.get('author_draft') or {};active=str(draft.get('active_variant',0));text=(draft.get('variants',{}).get(active) or {}).get('text',proposal.get('candidate',''))
+            source_hash=digest(self.tools.candidate_path(p,id).read_bytes())
+            limit=8000 if candidate_number==n else 2400
+            excerpt=tail(text,limit)
+            add('candidate:'+id,'未采用候选 · '+str(candidate_number),'chapter',excerpt,self.tools.candidate_path(p,id).relative_to(ws.root).as_posix(),'AUTHOR_SELECTED_DRAFT_NOT_CANON_NOT_ACTOR_KNOWLEDGE',revision=source_hash,partial=excerpt.strip()!=paragraphs(text).strip())
+            if not excerpt.strip():warnings.append('SELECTED_DRAFT_NO_SAFE_EXCERPT')
+            warnings.append('SELECTED_DRAFT_NOT_CANON')
         for ref in b.reference_ids:
             source,id=ref.split(':',1) if ':' in ref else (p,ref)
             request=SimpleNamespace(source_scope=source,document_ids=[id],profile_ids=[],note_id=None,current_text='',mode='reference',question='')
@@ -287,6 +302,7 @@ class WritingAssist:
             cost=len(json.dumps(s,ensure_ascii=False))+2
             include=s['id'] not in b.exclude and spent+cost<=b.budget
             if not include and s['id'] in b.pinned:raise ConsoleError('固定参考超过上下文上限，请减少固定内容或提高预算',413)
+            if not include and s['id'] in {'candidate:'+id for id in b.candidate_ids}:raise ConsoleError('明确选择的候选未进入参考包，请减少选择、取消排除或提高预算',413)
             if include:selected.append(s);spent+=cost
         packet['sources']=selected
         excluded_kinds={s['kind'] for s in sources if s['id'] not in {x['id'] for x in selected} and s['id'] not in b.exclude}
@@ -294,7 +310,10 @@ class WritingAssist:
         packet['warnings']=sorted(set(warnings));assert_no_hidden(packet,hidden)
         if len(json.dumps(packet,ensure_ascii=False))>b.budget:raise ConsoleError('参考元数据超过预算，请提高上限',413)
         # Include every source content in the review fingerprint, including exclusions.
-        fingerprint={'packet':packet,'state':full_state,'memory_receipts':memory_audit['receipts_sha256'],'choice':b.model_dump(),'available':sources}
+        choice=b.model_dump()
+        # Empty optional references preserve existing approved-context hashes.
+        if not choice['candidate_ids']:choice.pop('candidate_ids')
+        fingerprint={'packet':packet,'state':full_state,'memory_receipts':memory_audit['receipts_sha256'],'choice':choice,'available':sources}
         context_hash=text_hash(json.dumps(fingerprint,ensure_ascii=False,sort_keys=True))
         def token_range(text):
             # Deliberately a range, not tokenizer usage or provider billing.
@@ -307,7 +326,7 @@ class WritingAssist:
         diagnostics={'hash':context_hash,'budget_unit':'JSON_CHARACTERS','budget':b.budget,'sent_characters':len(json.dumps(packet,ensure_ascii=False)),'approx_tokens_range':token_range(json.dumps(packet,ensure_ascii=False)),'token_estimate_not_usage':True,'sources':audit,'story_time':time or 'UNKNOWN','as_of_committed_chapter':scope['cutoff'],'freshness':'REVALIDATED_ON_APPROVAL_AND_EACH_USE','knowledge_policy':'POV_KNOWLEDGE_SEPARATE_FROM_PUBLIC_READER_CONTEXT','filtered_sources_not_disclosed':True}
 
         diagnostics['narrative_memory']={k:v for k,v in memory_audit.items() if k!='records'}
-        return {'project_id':p,'choice':b.model_dump(),'packet':packet,'context_hash':context_hash,'sources':[{**s,'included':s['id'] in {x['id'] for x in selected},'pinned':s['id'] in b.pinned,'excluded':s['id'] in b.exclude} for s in sources],
+        return {'project_id':p,'choice':choice,'packet':packet,'context_hash':context_hash,'sources':[{**s,'included':s['id'] in {x['id'] for x in selected},'pinned':s['id'] in b.pinned,'excluded':s['id'] in b.exclude} for s in sources],
                 'diagnostics':diagnostics,'characters':[{'id':id,'name':c['name']} for id,c in canonical.items()],'size':len(json.dumps(packet,ensure_ascii=False)),'budget':b.budget,'warnings':packet['warnings'],'hidden':hidden}
     def preview(self,p,b):
         self.tools.writable(p);row=self._build(p,b,locked=True);row.pop('hidden');row.update(id=uid('ctx'),created_at=now(),status='REVIEW_REQUIRED')

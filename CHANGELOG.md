@@ -1,5 +1,50 @@
 # Changelog / 更新记录
 
+## 2.24.9 — Writing Reliability Preview (2026-10-29)
+
+- Use the installed SDK-paired Codex CLI by default, retaining explicit runtime overrides.
+- Separate model/step completion, prose delivery, length goals, Diff staging and author acceptance.
+- Retain partial prose and fixed pending steps across interruption/restart; review unknown timing before continuing.
+- Add local input-budget preflight and author-selected whole-book delivery checks inside the existing Director.
+- Strengthen optional scene interfaces, explicit step position and exact repeated-passage review pointers.
+- Preserve current-draft versus historical candidate/review distinctions.
+- All generated prose remains proposed; no writing statistics, manuscript or Canon commit is performed by these checks.
+- Preview validation boundaries remain explicit; no native GUI, IME or literary-quality pass is inferred from build success.
+
+
+## 2.24.8 — MCP Writing Workflow Preview (2026-10-29)
+
+- Reuse existing Quick Writer, TaskManager, approved Writer Context, fixed confirmations and Diff through MCP; expose real status and bounded result reads.
+- Preserve model-phase request budgets across tool results; distinguish pending approval from tool failure.
+- Persist versioned chapter candidates, exact-anchor additions and safe history pointers; protect original manuscript and author-edited candidates.
+- Explicit draft references remain non-Canon, freshness checked and budgeted; empty optional choices preserve prior approval fingerprints.
+- Scoped real-AI drafting is private acceptance material. Native desktop and physical IME remain unverified for this iteration.
+
+## 2.24.7 — Record Editing Preview (2026-10-29)
+
+- Retain newer input in existing to-do, revision and inspiration editors when a previous save finishes.
+- Rebase local deltas, tags and expected revision on the actual acknowledged record; prevent stale-version self-conflicts and false dirty metadata.
+- Protect close/leave during pending edit saves, preserve undo intent, and skip redundant unchanged saves.
+- Add Chinese/English pending/retained-edit guidance and a guarded local regression helper; no new dependency, Hook, backend API or data migration.
+- Local candidate only; desktop shortcut preferences are separate local actions and are not automatically changed by this candidate.
+
+## 2.24.6 — Save Integrity Preview (2026-10-29)
+
+- Avoid redundant clean manuscript saves; fence delayed save and recovery callbacks to their captured document scope and generation.
+- Clear submitted entry text only when the current composer still matches the submitted snapshot. Preserve edits and field choices made while a previous save is pending.
+- Same-version candidate inspection preserves normal autosave while retaining an existing conflict/error/manual-recovery pause.
+- Existing backend persistence, writer protection and author decisions remain unchanged; isolated delayed-receipt/failure checks are distinguished from real AI or native desktop acceptance.
+
+## 2.24.5 — Writing Recovery Preview (2026-10-29)
+
+- Retain current-chapter to-do/revision composers and selected fields when switching tabs or closing author tools, with direct return and existing unsaved navigation protection.
+- Retry failed candidate reads and fence cancelled/late responses without authorizing stale adoption.
+- Preview local/stored candidate conflicts before loading; keep a window-local recovery copy and pause automatic saving after local recovery until explicit author save.
+- Show accepted/rejected history as read-only; disable hunk editing and remove false unsavable close prompts.
+- Refresh Current Chapter immediately after explicit rejection through a project-scoped event.
+- Keep short-window author-tool entry points clickable and allow dock actions to scroll clear of sticky headings and the floating assistant.
+- Chinese/English copy and responsive comparison layout, no new dependency, API, Agent or data-format migration. Local delivery only; verification boundaries are version-specific.
+
 ## 2.24.4 — Writing Continuity Preview (2026-10-28)
 
 - Save edited candidate text, revision notes and explicit hunk choices locally per generated variant; reopen from the existing selection history or Revision Desk.

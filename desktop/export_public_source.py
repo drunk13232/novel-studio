@@ -51,7 +51,7 @@ def main():
     with zipfile.ZipFile(output) as archive:
         if archive.testzip() is not None:
             raise SystemExit('ZIP CRC validation failed')
-    print('Local review candidate; Apache-2.0 confirmed. Publication is not authorized.')
+    print('Reviewed source snapshot; Apache-2.0 confirmed. Publishing requires explicit owner authorization.')
     print(output)
     print('Files:', len(entries))
     print('SHA256:', hashlib.sha256(output.read_bytes()).hexdigest())

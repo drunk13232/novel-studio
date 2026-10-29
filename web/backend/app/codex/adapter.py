@@ -54,10 +54,22 @@ def codex_binary() -> Path:
     if configured:
         path = Path(configured)
     else:
-        path = Path(os.environ.get('APPDATA', '')) / 'npm/node_modules/@openai/codex/node_modules/@openai/codex-win32-x64/vendor/x86_64-pc-windows-msvc/bin/codex.exe'
+        try:
+            from codex_cli_bin import bundled_codex_path
+            path = bundled_codex_path()
+        except (ImportError, FileNotFoundError):
+            raise CodexUnavailable('与 Python SDK 配套的 Codex 运行时缺失，请修复现有安装；未自动改用其他全局版本') from None
     if not path.is_file():
-        raise CodexUnavailable('找不到本机 Codex CLI；请安装或由服务器环境 NOVEL_CODEX_BIN 指定真实可执行文件')
+        raise CodexUnavailable('指定的 Codex CLI 不存在；请核对显式 NOVEL_CODEX_BIN，或使用 SDK 配套运行时')
     return path.resolve()
+
+
+def codex_runtime_info() -> dict:
+    from importlib.metadata import version, PackageNotFoundError
+    try:expected=version('openai-codex-cli-bin')
+    except PackageNotFoundError:expected=None
+    path=codex_binary()
+    return {'source':'EXPLICIT_OVERRIDE' if os.environ.get('NOVEL_CODEX_BIN') else 'SDK_BUNDLED','sdk_version':SDK_VERSION,'expected_cli_version':expected,'version_match':'UNVERIFIED' if os.environ.get('NOVEL_CODEX_BIN') else 'PINNED_PACKAGE','binary_present':path.is_file()}
 
 
 def codex_environment() -> dict[str, str]:
@@ -143,7 +155,9 @@ class CodexAdapter:
                               'sandbox_mode="workspace-write"',
                               'project_doc_max_bytes=0',
                               'shell_environment_policy.inherit="core"',
-                              'shell_environment_policy.exclude=["*KEY*","*TOKEN*","*SECRET*"]'))
+                              'shell_environment_policy.exclude=["*KEY*","*TOKEN*","*SECRET*"]') + (
+                tuple('features.'+name+'=false' for name in ['plugins','apps','hooks','memories','multi_agent','tool_search','image_generation','view_image'])
+                if self.capsule or self.role=='WRITER' else ()))
         # SDK's default accepts approval requests. Override explicitly and fail closed.
         return CodexClient(config, approval_handler=lambda method, params: {'decision': 'decline'})
 
@@ -183,7 +197,7 @@ class CodexAdapter:
                     unavailable.append(name)
             account_type = (account.get('account') or {}).get('type', 'existing-provider')
             return {'codex': authenticated, 'reason': None if authenticated else 'Codex 未登录，请在本机终端执行 codex login',
-                    'version': process.stdout.strip(), 'sdk_version': SDK_VERSION, 'integration': 'official-python-sdk / app-server stdio',
+                    'version': process.stdout.strip(), 'sdk_version': SDK_VERSION, 'runtime':{**codex_runtime_info(),'actual_cli_version':process.stdout.strip(),'version_match':'MATCH' if process.stdout.strip().split()[-1]==codex_runtime_info()['expected_cli_version'] else 'MISMATCH'}, 'integration': 'official-python-sdk / app-server stdio',
                     'authentication': account_type, 'project_skills': skills, 'plugin_skills': plugin_skills,
                     'unavailable_plugins': unavailable}
         except Exception as error:
@@ -221,7 +235,9 @@ class CodexAdapter:
             self.timings.append(row)
             emit('status', label+'失败', row)
             detail = redact(str(error))[:1200]
-            if 'workspace routing discovery' in detail.lower():
+            if 'memory allocation' in str(error).lower() or 'out of memory' in str(error).lower():
+                detail = 'Codex 子进程内存分配失败；已收到的草稿仍保留。请释放内存后从未完成步骤手动继续；这不证明登录失效，未自动重试或切换服务商。'
+            elif 'workspace routing discovery' in str(error).lower():
                 detail = 'Codex 工作区路由发现失败或超时；登录未被判定失效。请检查网络后手动重试；未自动重试或切换服务商。'
             raise CodexUnavailable(f'Codex {label}失败 [{phase}]：{detail}') from error
         row = {**meta, 'phase_status': 'completed',
@@ -441,5 +457,7 @@ class CodexAdapter:
         if client:
             client.close()
 
-    def get_status(self) -> dict[str, str | None]:
-        return {'thread_id': self.thread_id, 'turn_id': self.turn_id, 'model': self.actual_model}
+    def get_status(self) -> dict[str, Any]:
+        try:runtime=codex_runtime_info()
+        except CodexUnavailable:runtime={'source':'UNAVAILABLE','binary_present':False}
+        return {'thread_id': self.thread_id, 'turn_id': self.turn_id, 'model': self.actual_model,'runtime':runtime}
