@@ -1,4 +1,16 @@
-# Novel Studio · 2.24.10 Director Save & Navigation Preview
+# Novel Studio · 2.24.13 Selection & Save Reliability Preview
+
+## 2.24.13
+
+2.24.13 Preview release candidate, including the local reliability fixes from 2.24.11–2.24.12. Fix source-range mapping for candidate evidence, retain-to-cursor, partial rewrite and literary-scoring selection across newline formats. Explicit Diff adoption preserves document line endings and UTF-8 BOM, retains raw candidate provenance and the pre-adoption snapshot, and keeps existing mixed-source guards. See the [2.24.13 guide](docs/workbench-experience/DELIVERY-2.24.13.md). Local checks remain distinct from remote AI and native GUI/physical IME/DPI acceptance.
+
+## 2.24.12
+
+Local iteration, incorporated into 2.24.13 Preview. Reports become historical when AI append, rewrite, cancellation retention or restart recovery changes a candidate; missing provenance is explicitly unverifiable. Verified quotations can locate candidate text, while changed manuscript/reference sources are disclosed separately. Owned terminal receipts survive background record cleanup. See the [2.24.12 guide](docs/workbench-experience/DELIVERY-2.24.12.md). Native GUI, physical IME, DPI and new remote-AI acceptance remain unverified.
+
+## 2.24.11
+
+Local iteration, incorporated into 2.24.13 Preview. This update retains input during author takeover, orders task-state reads, scopes saved reports and adds read-only retries. Connection checks no longer block author saves and recover from unexpected failures. Existing author confirmation, project isolation and proposed-writing flows remain. See the [2.24.11 guide](docs/workbench-experience/DELIVERY-2.24.11.md). Native GUI, physical IME, DPI and new remote-AI acceptance remain unverified.
 
 ## 2.24.10
 

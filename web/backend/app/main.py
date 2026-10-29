@@ -72,9 +72,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     async def probe():
         started=time.monotonic()
-        result=await asyncio.to_thread(CodexAdapter(ws.root).health)
-        if health.get('verified_at',0)<=started or result.get('codex'):health.update(result)
-        health['checking'] = False
+        # Preserve contemporaneous request verification on coarse Windows clock ticks.
+        try:
+            result=await asyncio.to_thread(CodexAdapter(ws.root).health)
+            if health.get('verified_at',0)<started or result.get('codex'):health.update(result)
+        except Exception as error:
+            reason='Codex 连接检查失败，可重试：'+redact(str(error))[:300]
+            if health.get('verified_at',0)<started:health.update(codex=False,reason=reason)
+            raise ConsoleError(reason,503) from error
+        finally:
+            health['checking'] = False
 
     @asynccontextmanager
     async def lifespan(app):
@@ -281,7 +288,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             # Shared OS lease covers every HTTP mutation and image publication.
             # A cancellation must remain reachable while a Codex writer holds it.
             independent_print=request.method=='POST' and bool(__import__('re').fullmatch(r'/api/projects/novel_[0-9a-f]{32}/(?:book/print-preview(?:/[0-9a-f]{32}/cancel)?|audio-export/audio_[0-9a-f]{32}/cancel)',request.url.path))
-            if request.method in {'POST','PUT','PATCH','DELETE'} and not independent_print and not ('/tasks/' in request.url.path and request.url.path.endswith('/cancel')):
+            # This nonce-protected endpoint only reads login/runtime health, never story data.
+            independent_probe=request.method=='POST' and request.url.path=='/api/studio/codex/check'
+            if request.method in {'POST','PUT','PATCH','DELETE'} and not independent_print and not independent_probe and not ('/tasks/' in request.url.path and request.url.path.endswith('/cancel')):
                 from app.tasks.lease import acquire
                 lease=acquire(settings.workspace,'studio-data.lock')
                 request.state.data_lease=lease

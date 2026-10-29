@@ -1,5 +1,5 @@
 {
-  "version": "2.24.10 Preview",
+  "version": "2.24.13 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
@@ -350,8 +350,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "10d76e27bd4888071e0a0e57f6a9ae92a16dbec9f3950823f4434e4378d575f6",
-      "bytes": 44565
+      "sha256": "09aa96188d14be5c8473df0191dff4fbb7fb7a5f5a2857674b21dcff61ad4870",
+      "bytes": 47299
     },
     {
       "path": "CONTRIBUTING.md",
@@ -385,13 +385,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "3cdf82f2562a4a76ece192048e03b91a5a3c00dd99d3a7e7838c7392e74dbf37",
-      "bytes": 14211
+      "sha256": "c223a8f28d17343f07b03c45f8630cd31fe37f67bc1ad14ebc8297fa6842ece2",
+      "bytes": 15658
     },
     {
       "path": "README_EN.md",
-      "sha256": "7cf1c41c30d2a478e83dc21953c421700e920a4b6c3792c20dd6fdf02dfafe0a",
-      "bytes": 14772
+      "sha256": "6d4f56df287d2a185e0211a7d606433a90ee63fb5f54db87f79c413cf49f1c10",
+      "bytes": 16427
     },
     {
       "path": "SECURITY.md",
@@ -425,7 +425,7 @@
     },
     {
       "path": "desktop/build.ps1",
-      "sha256": "8f48cfaefd7b2b878df7e090880a253ff97d52816f574e5e02cbfe7885f243bd",
+      "sha256": "f49207fdda2b3534a0296b13345492454d093ffa97f66e3954ab6013c320133d",
       "bytes": 10110
     },
     {
@@ -501,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "4b8a452c15fe9bd0238f9e5993d754c9c6e5ede008aac38627e7e40bbcad0b19",
-      "bytes": 19401
+      "sha256": "cddb501061da4c1b1fddc8f0f59a5bb7776f0e77f74fe45be18832d31d82e8ab",
+      "bytes": 19789
     },
     {
       "path": "desktop/package_zip.py",
@@ -4666,8 +4666,8 @@
     },
     {
       "path": "desktop/version.json",
-      "sha256": "b805895f8d7b03ba168df40122bb9c33e4fa7caf28e9df42f20f4170f967b1b5",
-      "bytes": 2272
+      "sha256": "a44ac6f4fd51aecee8877e1415e4bdf6ba0822ee46307152481958aad41c0f11",
+      "bytes": 2735
     },
     {
       "path": "docs/AI.md",
@@ -4981,8 +4981,8 @@
     },
     {
       "path": "docs/oss/CANDIDATE-AUDIT.md",
-      "sha256": "485d9aa5cfd78791e22abcacf55a39f39dd5ff4ab1f4b55758a15e7a452b835f",
-      "bytes": 1333
+      "sha256": "8a7c58616b64799033aa322758b7a811424f204cbd3ecd822bdaeb4f3127cb6f",
+      "bytes": 1062
     },
     {
       "path": "docs/oss/CHANGELOG-SOURCES.json",
@@ -5026,8 +5026,8 @@
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "9877c5e3797760b5903099c8c7a745b08e5057fe0563676937c5806d58ae64ea",
-      "bytes": 2639
+      "sha256": "78057614ea48187173625eb542bc7e30f971e8ca91064bd2206f54e98c40ab14",
+      "bytes": 3792
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -5225,6 +5225,21 @@
       "bytes": 2630
     },
     {
+      "path": "docs/workbench-experience/DELIVERY-2.24.11.md",
+      "sha256": "e845e0f45f6ff56db950cf9ac7d26d82450ee0c9d02fd6ecea46b62f329f35ab",
+      "bytes": 3293
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.12.md",
+      "sha256": "2e21c169ac9d8dab3f081d0adfdaef5e0ca7d8a0d6431a7565961773513d6ad2",
+      "bytes": 3457
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.13.md",
+      "sha256": "b299540aeee19dd7f0580493690f677eb3fbb75fd2c24acf951f3049d2bc0f38",
+      "bytes": 3697
+    },
+    {
       "path": "docs/workbench-experience/DELIVERY-2.24.3.md",
       "sha256": "2dee4ec00c49d1b61dddbf7ba7dd1cd0808ac4bfb285dce0a8d190433e3f88eb",
       "bytes": 5726
@@ -5261,8 +5276,8 @@
     },
     {
       "path": "docs/workbench-experience/README.md",
-      "sha256": "2049a4c6da712fbc6bef931f682a5b580a31a35417c3173031caedd0085d1076",
-      "bytes": 10005
+      "sha256": "8ccdd4c2b7423acda2ad08bba7aff5543a3261ee6a925bc47bd726f4dc502463",
+      "bytes": 14817
     },
     {
       "path": "docs/workflow-reliability/README.md",
@@ -5826,8 +5841,8 @@
     },
     {
       "path": "tools/oss/build_public_allowlist.py",
-      "sha256": "8a154353c4ea71067bc328b191d03066c35cbd9e703073e2e4b0847195f84981",
-      "bytes": 7039
+      "sha256": "84eb39792e521de1661f0f24ff4eec8d9b0c6c2378c19ee66e7c9162ac4b473f",
+      "bytes": 7183
     },
     {
       "path": "tools/oss/scan_public_candidate.py",
@@ -8731,13 +8746,13 @@
     },
     {
       "path": "web/backend/app/creative/director.py",
-      "sha256": "c46fe05f1e1a93ec9ab998283be8f6e46d34cb0fc7569aa0244c286727ce807d",
-      "bytes": 54428
+      "sha256": "174eaab10f59bbc9f181d49b14a32c00a854894376783c609a6b19481e78ef10",
+      "bytes": 55256
     },
     {
       "path": "web/backend/app/creative/director_delivery.py",
-      "sha256": "9515dd8d6487ba360176743a31e6041fa3cabf880cf6a7e237aeb4313326a7c4",
-      "bytes": 10969
+      "sha256": "3a1a05138ca95dd6d9c44dd3d95c65e9f65f5fda6b1421a97ed2e3ab22d82873",
+      "bytes": 12285
     },
     {
       "path": "web/backend/app/creative/director_skills.py",
@@ -9061,8 +9076,8 @@
     },
     {
       "path": "web/backend/app/main.py",
-      "sha256": "6d37ff8990baa139ca6026186843dabe3a497c8a719702721f56083d391b9de0",
-      "bytes": 41791
+      "sha256": "815c7b9f9aaa815744fd3e76e7bad3b3e1b29f28cfacebe71607c24844cd8610",
+      "bytes": 42417
     },
     {
       "path": "web/backend/app/models/__init__.py",
@@ -9146,8 +9161,8 @@
     },
     {
       "path": "web/backend/app/studio_tools.py",
-      "sha256": "7ed9765d583f314bac8b750a33a3753e2250d0428fdfd960597ad30555cf2196",
-      "bytes": 37455
+      "sha256": "460729b2fef42b5914b21dc917879be9d60b412eabdf2a198682c34c77e6fc7d",
+      "bytes": 37572
     },
     {
       "path": "web/backend/app/system_fonts.py",
@@ -9360,6 +9375,11 @@
       "bytes": 7082
     },
     {
+      "path": "web/backend/tests/test_candidate_line_endings.py",
+      "sha256": "56f0cf37119505e8267886ca4937033c86bdf289ce790b7881ab5dbf24f56dff",
+      "bytes": 3237
+    },
+    {
       "path": "web/backend/tests/test_chapter_versions.py",
       "sha256": "0fd74f0d7c096489f5f47ff4bdbc1e9a24194de7dba512753dd400a27e65df91",
       "bytes": 36790
@@ -9378,6 +9398,11 @@
       "path": "web/backend/tests/test_codex_preflight.py",
       "sha256": "10f24424a6cef8c3ef05323274c239aa123026836e6c7a812a52985b99aef451",
       "bytes": 4639
+    },
+    {
+      "path": "web/backend/tests/test_codex_probe_concurrency.py",
+      "sha256": "bed66fc265541d6a0a1041a1c53afbf1166a63f02c826dde3fecf5f603840bcf",
+      "bytes": 6481
     },
     {
       "path": "web/backend/tests/test_companion.py",
@@ -9448,6 +9473,11 @@
       "path": "web/backend/tests/test_director_reliability.py",
       "sha256": "614d4c136f865db785905b259bd88974047ea22e25bb0fdedc0e464af68b1ff6",
       "bytes": 10837
+    },
+    {
+      "path": "web/backend/tests/test_director_review_basis.py",
+      "sha256": "02355a1a32a66c5fa58b56fddc1242538d3d141d297a218c9a34858406a60ac0",
+      "bytes": 7164
     },
     {
       "path": "web/backend/tests/test_embodied_assistant.py",
@@ -9617,12 +9647,12 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "9d5b7e5745a5f6004928b0d0ee0e0515ca849dc06e4590de303896adff45cd0a",
+      "sha256": "b722e43028b736ddff03d3d826667a86ace24a6b038769585f6c64227d81b692",
       "bytes": 339218
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "932112a6b153190a6a1c318b886b3550e52e1880d34c03c8e3b1a8b767929589",
+      "sha256": "fcd8faf7c85936d65f59c0489b4ca38a3c5df03c34b460fdedab760670f3c606",
       "bytes": 2086
     },
     {
@@ -10217,8 +10247,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/director.json",
-      "sha256": "a055f3551c8cec16e649ed066faea754f6675648fd15f5171296e48aca9eb94b",
-      "bytes": 18713
+      "sha256": "3c4db4436671dfddf9e60e31ac6e7d2b9a9877bb9274b6f7e304f830f2e1d96b",
+      "bytes": 20920
     },
     {
       "path": "web/frontend/public/locales/en/editor.json",
@@ -13677,8 +13707,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/director.json",
-      "sha256": "191763d33958a1108ed1b54170dbf4abae81105555dbbaa6f02b05a55f4998d1",
-      "bytes": 17732
+      "sha256": "dfad7b53ea5180a973c6d644ffb706160d74235ea8414762ae1584533719487f",
+      "bytes": 19760
     },
     {
       "path": "web/frontend/public/locales/zh-CN/editor.json",
@@ -14186,6 +14216,26 @@
       "bytes": 11406
     },
     {
+      "path": "web/frontend/scripts/check-director-records.mjs",
+      "sha256": "370305ff2dd258060e42cf3e87ee338164c276bfeebca9a49b4bdcc813405246",
+      "bytes": 13492
+    },
+    {
+      "path": "web/frontend/scripts/check-director-review-basis.mjs",
+      "sha256": "a471606d26f8f4f0e70515fcb8d79b3873f50176626fa603c4509f55413add17",
+      "bytes": 6753
+    },
+    {
+      "path": "web/frontend/scripts/check-director-takeover.mjs",
+      "sha256": "c58c06c2dc5f9a3a1dc8cdda8c61930759dd87fc0064796ef2cb0fac276f9e38",
+      "bytes": 11485
+    },
+    {
+      "path": "web/frontend/scripts/check-director-textarea.mjs",
+      "sha256": "5975c9817be8e28e2de3479c25e594903b6124a85e3a273e616d4491f152f4d4",
+      "bytes": 9476
+    },
+    {
       "path": "web/frontend/scripts/check-document-location.mjs",
       "sha256": "a4181bd58648f28da9807dc8d2345fad11c1d9213d49edb6c05a76089e6443f9",
       "bytes": 2334
@@ -14194,6 +14244,11 @@
       "path": "web/frontend/scripts/check-entry-edit-receipts.mjs",
       "sha256": "f57412a5a025207a8431e60329cc9743fdd8c2aa49e717c923274bd05c48aa22",
       "bytes": 15325
+    },
+    {
+      "path": "web/frontend/scripts/check-evaluation-selection.mjs",
+      "sha256": "dca148026edd38069b54e626d5f52014ff2ef4efe28b2f73d8d9fc7d142b6e3a",
+      "bytes": 5703
     },
     {
       "path": "web/frontend/scripts/check-focus-tools.mjs",
@@ -14242,6 +14297,11 @@
       "bytes": 10900
     },
     {
+      "path": "web/frontend/scripts/check-probe-write.mjs",
+      "sha256": "407dc814cb4dc40935610c8eb80b62e24f424f3da30816ee04af5acbb5967d4f",
+      "bytes": 4658
+    },
+    {
       "path": "web/frontend/scripts/check-replacement-refresh.mjs",
       "sha256": "83103fda291b454c322b3b67b09795e938e9b7ad96c56ebba93cdda5ab052319",
       "bytes": 2238
@@ -14252,9 +14312,19 @@
       "bytes": 1670
     },
     {
+      "path": "web/frontend/scripts/check-revision-line-endings.mjs",
+      "sha256": "31c5862de155d018d142b58339736794e8b52af14d52773928506d7a3e92ebf1",
+      "bytes": 2238
+    },
+    {
       "path": "web/frontend/scripts/check-save-receipts.mjs",
       "sha256": "55dd242b3507cbe716db2443aa092e48f472b5c31e69b859d5b0936e03e54806",
       "bytes": 8606
+    },
+    {
+      "path": "web/frontend/scripts/check-textarea-coordinates.mjs",
+      "sha256": "680121c686d5c1b6f4883f3092b2c80b929c84208af6e23e0042f65a82501e5e",
+      "bytes": 3416
     },
     {
       "path": "web/frontend/scripts/check-workbench-experience.mjs",
@@ -14317,6 +14387,11 @@
       "bytes": 3779
     },
     {
+      "path": "web/frontend/scripts/start-director-fixture.py",
+      "sha256": "679959dcfeb01e41e6c4eeb1e86a83aa896894ec3e6c881b307aeece49b13a21",
+      "bytes": 11449
+    },
+    {
       "path": "web/frontend/src/ai-center.css",
       "sha256": "6ba93e383a948fa560a5576620b43785ca1c7cdc68439d6aa49e3ce82c69f164",
       "bytes": 1654
@@ -14348,8 +14423,8 @@
     },
     {
       "path": "web/frontend/src/api.ts",
-      "sha256": "33a076d6a19d1bbb1aed367bc4bbe8747cde248684b825f74c62621875c2b142",
-      "bytes": 9721
+      "sha256": "00c57b7f77f906ed6eafc108c4da70516c5a52489ae2eed566a474729ca83a10",
+      "bytes": 9760
     },
     {
       "path": "web/frontend/src/asset-gallery.tsx",
@@ -14558,8 +14633,8 @@
     },
     {
       "path": "web/frontend/src/creative-director.tsx",
-      "sha256": "e9fbe2ab818d0234744a551a45b5f79d0d2c91d977d493654e108856673f0d59",
-      "bytes": 32657
+      "sha256": "daec79298d1ecb6940d15e97a14380dfc7d9d2c1648beb88e608ab253b5b191d",
+      "bytes": 38925
     },
     {
       "path": "web/frontend/src/creative-insights.css",
@@ -14798,8 +14873,8 @@
     },
     {
       "path": "web/frontend/src/literary-evaluation.tsx",
-      "sha256": "2cf360246af6d8e3e9e4253fda84a44d4340ef0e9f5475027159a3b6d40a9e78",
-      "bytes": 29071
+      "sha256": "37a8e297579e1145f607e19622f88a46345c014b301302cc4a7512f704e9ff8e",
+      "bytes": 29183
     },
     {
       "path": "web/frontend/src/literary-review.tsx",
@@ -15008,8 +15083,8 @@
     },
     {
       "path": "web/frontend/src/revision-hunks.ts",
-      "sha256": "d8ec9bf86c6699927e54269eda1ed01a78f2311c22c13cd2f68684af04b23ddb",
-      "bytes": 1125
+      "sha256": "e7c8086988a9c51c03f1170f82c0c3696b834836ae457f111259f314db52258a",
+      "bytes": 1226
     },
     {
       "path": "web/frontend/src/roleplay-workbench.tsx",
@@ -15018,8 +15093,8 @@
     },
     {
       "path": "web/frontend/src/selection-assistant.tsx",
-      "sha256": "88b8978d07484ea0f05e3be1426ff48e8be74023740a9a9ca30d616f2a8a4f45",
-      "bytes": 19023
+      "sha256": "417c9bb463178b47a3376cb068b7f4e4abe9d80a1d83add1b07680197d40ad64",
+      "bytes": 19360
     },
     {
       "path": "web/frontend/src/selection-diff-editor.tsx",
@@ -15115,6 +15190,11 @@
       "path": "web/frontend/src/text-analysis.tsx",
       "sha256": "0489387d33d9fcbcbc195f5cd77cd4776837a813bca43f2994f5afe024554a92",
       "bytes": 6171
+    },
+    {
+      "path": "web/frontend/src/textarea-coordinates.ts",
+      "sha256": "5bfd7584ca3bfc4b576b2be55780ec07214ac4f34a2cafb7d08acdeca4e83a09",
+      "bytes": 1737
     },
     {
       "path": "web/frontend/src/theme-gallery.tsx",

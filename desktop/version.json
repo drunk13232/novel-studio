@@ -1,17 +1,18 @@
 {
-  "version": "2.24.10",
+  "version": "2.24.13",
   "release_date": "2026-10-30",
   "changes": [
-    "Preserve book target and reason edits while visiting My Workflows; restore keyboard focus on return.",
-    "Save receipts acknowledge only submitted values; later edits remain unsaved and retryable.",
-    "Protect unsaved book delivery fields on close, context, world lab, Diff and Python handoffs.",
-    "Ignore late Diff or Python UI handoffs after their Director view closes; retain already-created proposals.",
-    "Reject unseen record revisions before staging, review or rewrite rather than silently using another window’s revision.",
-    "Reuse existing author confirmation, project isolation and proposal-only writing; no new model call or data format.",
-    "Preview: isolated real-service headless browser checks and production build pass; native GUI/IME/DPI and new remote-AI acceptance remain unverified."
+    "Use a shared, exact UTF-16 mapping between native textarea API values and unchanged source candidates; handle LF, CRLF, CR and mixed newlines without migrating records.",
+    "Fix evidence navigation, retain-to-cursor and partial rewrite so visible selections address the intended source range, including emoji and multiline text.",
+    "Bind delayed selection actions to their record/view; reject mismatched text, invalid bounds, half-CRLF and split-surrogate ranges.",
+    "Use the same mapping for literary-scoring source selections; keep preview local and clear a collapsed selection instead of reusing an old passage.",
+    "Normalize incoming replacement line breaks only inside explicit author adoption, then preserve the original document EOL and UTF-8 BOM; retain raw candidate provenance and the pre-adoption snapshot.",
+    "Initialize existing Diff readiness from the real editor and compare logical newline representations; adopted receipts still require explicit author acceptance and matching content.",
+    "Keep existing mixed-source write guards, original revision checks, Diff confirmation and Canon/State boundaries.",
+    "Local Preview: real browser/local services and fixed MOCK writer checks are separate from remote AI and native GUI/IME/DPI acceptance."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Director Save & Navigation Preview",
+  "edition": "Selection & Save Reliability Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

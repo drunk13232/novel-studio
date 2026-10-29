@@ -12,7 +12,7 @@ let token='';
 let mutations:Promise<unknown>=Promise.resolve();
 export type LocalReadOptions={signal?:AbortSignal};
 /** These authenticated local requests never edit manuscript or authoritative story data. */
-const independentLocalPreview=(url:string,method:string)=>method==='POST'&&/^\/api\/projects\/[^/?#]+\/(?:workbench\/replace\/search|experience\/focus-summary|book\/print-preview(?:\/[0-9a-f]{32}\/cancel)?|audio-export\/audio_[0-9a-f]{32}\/cancel)$/.test(url);
+const independentLocalOperation=(url:string,method:string)=>method==='POST'&&(url==='/api/studio/codex/check'||/^\/api\/projects\/[^/?#]+\/(?:workbench\/replace\/search|experience\/focus-summary|book\/print-preview(?:\/[0-9a-f]{32}\/cancel)?|audio-export\/audio_[0-9a-f]{32}\/cancel)$/.test(url));
 async function request<T>(url:string,body:unknown,method:string,signal?:AbortSignal):Promise<T>{
   if(signal?.aborted)throw new DOMException('Request cancelled','AbortError');
   const mutation=method!=='GET';
@@ -49,7 +49,7 @@ async function request<T>(url:string,body:unknown,method:string,signal?:AbortSig
   throw new Error(t('errors:SESSION_INVALID'));
 }
 export function api<T>(url:string,body?:unknown,method='GET',options:LocalReadOptions={}):Promise<T>{
-  const independent=method==='GET'||independentLocalPreview(url,method);
+  const independent=method==='GET'||independentLocalOperation(url,method);
   // Cancel a preview/read, never mislabel an already-submitted save or paid task as cancelled.
   if(options.signal&&!independent)return Promise.reject(Object.assign(new Error(t('errors:REQUEST_REJECTED')),{code:'CANCELLATION_NOT_SUPPORTED'}));
   if(independent||url.endsWith('/cancel'))return request<T>(url,body,method,options.signal);

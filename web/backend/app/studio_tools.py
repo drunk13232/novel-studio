@@ -13,6 +13,7 @@ from app.codex.adapter import CodexAdapter
 from app.tasks.router import core_workflow
 
 def text_hash(text):return digest(text.encode('utf8'))
+def lf_text(text):return text.replace('\r\n','\n').replace('\r','\n')
 def normalized(row):return row['content'].replace('\r\n','\n') if row['line_ending']=='CRLF' else row['content']
 def utf16_slice(text,start,end):
     try:return text.encode('utf-16-le')[start*2:end*2].decode('utf-16-le')
@@ -252,7 +253,8 @@ class StudioTools:
             if utf16_slice(original,row['start'],row['end'])!=row['selected_text']:raise ConsoleError('选区已变化',409)
             if not body.candidate and not row.get('allow_empty'):raise ConsoleError('候选为空',422)
             encoded=original.encode('utf-16-le');start=row['start']*2;end=row['end']*2
-            result=encoded[:start].decode('utf-16-le')+body.candidate+encoded[end:].decode('utf-16-le')
+            replacement=lf_text(body.candidate)
+            result=encoded[:start].decode('utf-16-le')+replacement+encoded[end:].decode('utf-16-le')
             output=result.replace('\n','\r\n') if doc['line_ending']=='CRLF' else result
             if doc['line_ending']=='MIXED':raise ConsoleError('混合换行需外部合并',409)
             revision=checkpoint(ws.root,row['path'],'PRE_SELECTION_ACCEPT','作者接受局部 AI 候选')

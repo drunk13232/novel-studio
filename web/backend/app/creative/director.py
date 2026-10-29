@@ -16,7 +16,7 @@ from app.ai.models import Parameters
 from app.ai.controls import RequestControls,merge
 from .tasks import adapter,metadata
 from .director_skills import catalog,load
-from .director_delivery import SceneIntent,DeliveryUpdate,task_delivery,recovery,failure,checkpoint,project_delivery,update_delivery
+from .director_delivery import SceneIntent,DeliveryUpdate,task_delivery,recovery,failure,checkpoint,project_delivery,update_delivery,review_validity
 
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
 class Limits(Strict):
@@ -122,7 +122,13 @@ class Director:
         if not re.fullmatch(r'director_[0-9a-f]{32}',id or ''):raise ConsoleError('指挥任务不存在',404)
         return self.tools.local(p,'director/'+id+'.json')
     def put(self,p,row):
-        row.pop('etag',None);row.pop('delivery',None);row.pop('recovery',None);row['updated_at']=now();write(self.path(p,row['id']),row)
+        if row.get('review_id'):
+            previous=read(self.path(p,row['id'])) or {}
+            if previous.get('review_id')==row['review_id']:
+                basis=('draft','goal','plan','interventions','context_id','context_hash','path','revision','target')
+                if previous.get('review_stale') or any(previous.get(k)!=row.get(k) for k in basis):row['review_stale']=True
+        for key in ('etag','delivery','recovery','review_validity'):row.pop(key,None)
+        row['updated_at']=now();write(self.path(p,row['id']),row)
     def get(self,p,id):
         with self.lock:
             path=self.path(p,id);row=read(path)
@@ -156,6 +162,12 @@ class Director:
             if row.get('candidate_id'):
                 try:candidate=self.tools.candidate(p,row['candidate_id'])
                 except ConsoleError:pass
+            report=None
+            if row.get('review_id'):
+                try:report=read(self.reviews.path(p,row['review_id']))
+                except (ConsoleError,OSError):pass # A failed optional report read must not hide retained prose.
+            row['review_validity']=review_validity(row,report)
+            if row['review_validity']['status']=='HISTORICAL':row['review_stale']=True
             row['delivery']=task_delivery(row,candidate);row['recovery']=recovery(row)
             return row
     def checked(self,p,id,etag):

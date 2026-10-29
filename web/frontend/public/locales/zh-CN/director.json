@@ -265,5 +265,23 @@
     "pendingClose": "交付修改正在等待保存回执，请稍候再关闭；你仍可继续编辑目标说明。",
     "discardTargetDraft": "放弃未保存的目标编辑",
     "targetDiscarded": "未提交的目标与说明已放弃，保留最后核对到的已保存目标。"
-  }
+  },
+  "takeoverRetained": "已停止生成，本地未保存的文字和要求仍保留。请检查后保存；尚未采用到正文。",
+  "takeoverReady": "已载入保留候选，可在此继续手写。保存仍是候选，不会自动采用到正文。",
+  "takeoverHelp": "接管会停止当前生成并打开候选编辑区；已有未保存输入会保留，不会被服务器草稿替换。",
+  "savedReview": "定向复核报告",
+  "reviewLoading": "正在读取已保存的报告…",
+  "reviewLoadFailed": "报告暂时无法读取，候选未被修改。若此前评审未完成，报告可能尚未生成；可重试读取或查看错误详情。",
+  "reviewErrorDetails": "查看读取错误",
+  "reviewHistorical": "历史报告：当前候选或本次创作依据已经改变。保留旧报告供参考，不视为当前版本的复核。",
+  "reviewReload": "重新读取报告",
+  "reviewReadOnly": "只尝试读取本项目已有报告，不调用模型，也不产生新的评审费用。",
+  "recordReadFailed": "暂未读到最新任务状态，界面保留上次结果。收到后续有效状态后会自动更新；不会因此重新执行任务。",
+  "reviewCandidateMatch": "报告与当前已保存候选的文本指纹一致；它不是正式正文的通过凭证。",
+  "reviewUnverified": "无法确认报告对应当前候选：缺少可核对的版本依据或报告不可读取。请先核对，不将其视为当前版本复核。",
+  "reviewLocateCandidate": "定位候选原文",
+  "reviewMultipleLocations": "存在多处相同引用；定位到第一处可准确显示的已核实位置。",
+  "reviewNoVerifiedEvidence": "此项没有已核实的原文引用，仅作为待作者判断的意见。",
+  "reviewSourcesChanged": "报告所依据的正文或引用来源已变化。候选指纹一致也不代表来源仍是当前版本；请重新核对来源与复核范围。",
+  "selectionChanged": "候选显示或选区已变化，请保存或刷新后重新选择。"
 }

@@ -1,9 +1,7 @@
-# Public candidate audit — 2.24.10 Preview
+# Public candidate audit — 2.24.13 Preview
 
-This release uses the existing explicit source Allowlist and a new isolated staging directory. It does not copy parent Git history, user works, user-level Codex settings, credentials, local logs, private character assets or audit fixtures.
+The explicit Allowlist is refreshed from the retained developer manifest and reviewed current code/tests/guides. Source is staged independently; parent Git history, works, credentials, user Codex configuration, local logs and private character assets are excluded.
 
-The update changes existing Director save/navigation handling, bilingual guidance and reproducible isolated browser checks. Two actual-service headless browser suites passed nine checks each. Controlled response delays and one failed-save injection are separate from real provider or network acceptance.
+This release incorporates 2.24.11–2.24.13 reliability changes. Local/browser/MOCK checks remain distinct from real remote inference and native GUI/IME/DPI acceptance. Current scanner dispositions, source/tree hashes, package alignment, installer/worker checks, protected-file checks and exact-commit CI are recorded in the private publication receipt and release notes. No clean-environment install is inferred from a local build.
 
-Source fingerprints, secret-scanner findings, packaged resources, upstream license records, protected-file hashes and exact-commit CI are reviewed in the private publication receipt. Previously owner-reviewed false positives are accepted only when the category and content fingerprint remain identical; new findings block publication.
-
-Apache-2.0 and drunk13232 attribution remain. Public binaries use the public data locator and do not select a private project. The old release is retained. This remains Preview / PARTIAL: native GUI, physical IME, system DPI, voices and new real-AI calls are not newly accepted. The release page records the checks actually completed; no clean-environment install is inferred from a local build.
+Apache-2.0, drunk13232 attribution and third-party notices remain. Previously reviewed findings are accepted only when fingerprints and relevant file bytes remain identical. New unresolved findings block publication. Existing releases and the desktop shortcut remain unchanged. Preview / PARTIAL is retained.

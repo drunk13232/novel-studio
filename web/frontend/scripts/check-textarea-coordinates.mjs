@@ -1,0 +1,16 @@
+import {readFile,writeFile} from 'node:fs/promises';import path from 'node:path';import {pathToFileURL} from 'node:url';import assert from 'node:assert/strict';
+const root=process.cwd(),a=path.resolve(process.argv[2]||''),relative=path.relative(path.join(root,'desktop/build'),a);assert(relative&&!relative.startsWith('..')&&!path.isAbsolute(relative));const {textareaValue,textareaRange,sourceRange}=await import(pathToFileURL(path.join(root,'web/frontend/src/textarea-coordinates.ts')).href),{chromium}=await import(pathToFileURL(path.join(root,'web/frontend/node_modules/playwright/index.mjs')).href);const browser=await chromium.launch({channel:'msedge',headless:true}),page=await browser.newPage();const report={checks:[],driver:'Real browser textarea API values and selections; Node uses the actual shared TypeScript source, no application, network or model'};
+try{
+ const sources=['普通中文。','A\r\n🌧️B\r\n中文','A\rB\r末尾\r','A\nB\r\n👩‍💻C\rD','\r\n🌧️\r\n','汉\u2028字\n结尾',('长篇片段。\r\n').repeat(3500)];
+ const apiValues=await page.evaluate(values=>values.map(value=>{const el=document.createElement('textarea');el.value=value;return el.value;}),sources);let count=0;
+ for(let index=0;index<sources.length;index++){
+  const source=sources[index],value=apiValues[index];assert.equal(textareaValue(source),value);const points=value.length>100?[0,1,Math.floor(value.length/2),value.length-1,value.length]:Array.from({length:value.length+1},(_,i)=>i);const raw=[];
+  for(const from of points)for(const to of points){if(to<from)continue;const split=n=>n>0&&n<value.length&&value.charCodeAt(n-1)>=0xd800&&value.charCodeAt(n-1)<=0xdbff&&value.charCodeAt(n)>=0xdc00&&value.charCodeAt(n)<=0xdfff;if(split(from)||split(to))continue;const mapped=sourceRange(source,value,from,to);assert(mapped);const back=textareaRange(source,mapped.start,mapped.end);assert.deepEqual(back,{start:from,end:to});raw.push({source,from,to,quote:mapped.quote});count++;}
+  const native=await page.evaluate(cases=>cases.map(({source,from,to,quote})=>{const el=document.createElement('textarea');el.value=source;el.setSelectionRange(from,to);const q=document.createElement('textarea');q.value=quote;return {selection:el.value.slice(el.selectionStart,el.selectionEnd),quote:q.value};}),raw);for(const pair of native)assert.equal(pair.selection,pair.quote);
+ }
+ report.checks.push({name:'Browser API round-trips preserve visible selections and raw source slices',source_variants:sources.length,ranges:count});
+ const source='A\r\n🌧️B',value=apiValues[1];assert.equal(sourceRange(source,'changed',0,1),null);assert.equal(textareaRange(source,2,3),null);assert.equal(textareaRange(source,4,5),null);
+ for(const [from,to] of [[-1,1],[0,999],[2,1],[NaN,1],[0,Infinity],[.5,1]]){assert.equal(sourceRange(source,'A\n🌧️B',from,to),null);assert.equal(textareaRange(source,from,to),null);}
+ const emoji=sourceRange(source,'A\n🌧️B',2,5);assert.deepEqual(emoji,{start:3,end:6,quote:'🌧️'});report.checks.push({name:'Mismatched views, invalid bounds, half CRLF and split surrogate are rejected; exact emoji survives'});report.result='BROWSER_CONTRACT_PASS';
+}catch(e){report.result='FAIL';report.failure=String(e);throw e;}finally{await writeFile(path.join(a,'textarea-contract.json'),JSON.stringify(report,null,2));await browser.close();}
+console.log(JSON.stringify(report));

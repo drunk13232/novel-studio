@@ -1,8 +1,9 @@
 /** Monaco uses inclusive line ranges and end=0 for empty insertion/deletion ranges.
  * Splice logical lines, including the final empty line, so EOF changes retain newlines. */
+export const revisionText=(value:string)=>value.replace(/\r\n?/g,'\n');
 export type RevisionHunk={originalStartLineNumber:number;originalEndLineNumber:number;modifiedStartLineNumber:number;modifiedEndLineNumber:number};
 export function mergeSelectedHunks(original:string,modified:string,changes:RevisionHunk[],chosen:number[]):string{
- const lines=original.split('\n'),replacement=modified.split('\n'),selected=new Set(chosen);
+ const lines=revisionText(original).split('\n'),replacement=revisionText(modified).split('\n'),selected=new Set(chosen);
  for(let i=changes.length-1;i>=0;i--){
   if(!selected.has(i))continue;
   const c=changes[i],start=c.originalEndLineNumber===0?c.originalStartLineNumber:c.originalStartLineNumber-1;

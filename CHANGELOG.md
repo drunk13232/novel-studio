@@ -1,5 +1,36 @@
 # Changelog / 更新记录
 
+## 2.24.13 — Selection & Save Reliability Preview (2026-10-30)
+
+- Map normalized textarea UTF-16 selections back to exact raw source positions; preserve source/candidate text and reject mismatched or unrepresentable ranges.
+- Repair evidence navigation, retain-to-cursor, local rewrite and literary-scoring selection for CRLF/CR/mixed text.
+- Preserve the original document EOL and UTF-8 BOM on explicit candidate adoption, keeping raw proposal history and the original byte snapshot.
+- Initialize existing Diff readiness from the real editor, compare logical newlines consistently and preserve actual selected-hunk text.
+- Recognize accepted candidates when only the editor newline representation differs; content or terminal-newline changes remain significant.
+- Retain mixed-source write protection, revision conflicts and author-controlled Diff acceptance.
+- No new dependency, data migration, background polling or remote inference; native GUI/IME/DPI and real-AI quality remain unverified.
+
+## 2.24.12 — Review Evidence & Recovery Preview (2026-10-30, local)
+
+- Apply historical-report marking at the existing guarded record write point for AI append, rewrite, cancellation retention, restart recovery and author-basis changes.
+- Derive candidate report validity from existing hashes and project/path/version provenance; no project migration or report rewrite.
+- Keep recoverable prose visible when optional saved reports are missing/corrupt.
+- Display verified evidence only, with guarded UTF-16 selection into matching candidate text; distinguish repeated quotations and changed source versions.
+- Accept owned terminal receipts after background record cleanup while rejecting events for another record or newer execution.
+- Preserve existing save, Diff, project isolation and author-confirmation authorities. No new dependency or remote inference.
+- Local Preview; native GUI, physical IME/DPI and new real-AI acceptance remain unverified.
+
+## 2.24.11 — Task & Review Reliability Preview (2026-10-30, local)
+
+- Preserve local text, goal, plan and directions on author takeover; restore input focus safely.
+- Ignore obsolete record/report receipts and retain current task status.
+- Add scoped saved-report loading/errors and GET-only retry; mark historical reviews clearly.
+- Check execution identity before stop/pause/terminate.
+- Keep read-only Codex health probes independent of author-write serialization and leases.
+- Recover checking state after probe exceptions while retaining real error reporting.
+- No dependency or data-format change; all writing remains candidate-only.
+- Preview boundaries: controlled local checks are not native GUI, physical IME/DPI or real-AI acceptance.
+
 ## 2.24.10 — Director Save & Navigation Preview (2026-10-30)
 
 - Preserve target drafts and focus while visiting nested workflows.

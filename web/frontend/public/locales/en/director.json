@@ -265,5 +265,23 @@
     "pendingClose": "A delivery update is awaiting its save receipt. Please wait before closing; you can continue editing the target fields.",
     "discardTargetDraft": "Discard unsaved target edits",
     "targetDiscarded": "Unsubmitted target edits and reason discarded; the last checked saved target is retained."
-  }
+  },
+  "takeoverRetained": "Generation has stopped. Unsaved local text and directions are retained. Review and save them; nothing has been adopted into the manuscript.",
+  "takeoverReady": "The retained candidate is ready for manual writing. Saving keeps it proposed and does not adopt it into the manuscript.",
+  "takeoverHelp": "Takeover stops the current generation and opens candidate editing. Unsaved local input is retained instead of being replaced by the server draft.",
+  "savedReview": "Targeted review report",
+  "reviewLoading": "Loading the saved report…",
+  "reviewLoadFailed": "The report is unavailable; the candidate was not changed. An unfinished review may not have produced a report. Retry reading or inspect the error details.",
+  "reviewErrorDetails": "Read error details",
+  "reviewHistorical": "Historical report: the candidate or its authoring basis has changed. Retained for reference, not a review of the current version.",
+  "reviewReload": "Reload report",
+  "reviewReadOnly": "Only attempts to read an existing project report. No model call or new review charge.",
+  "recordReadFailed": "The latest task state could not be read. The last known result is retained until a valid update arrives; the task is not rerun.",
+  "reviewCandidateMatch": "The report matches the saved candidate fingerprint. This is not approval of the manuscript.",
+  "reviewUnverified": "This report cannot be verified against the current candidate: version evidence is missing or the report cannot be read. Check it before treating it as a current review.",
+  "reviewLocateCandidate": "Locate in candidate",
+  "reviewMultipleLocations": "This quote occurs more than once; the first accurately displayable verified location is selected.",
+  "reviewNoVerifiedEvidence": "No verified source quotation is available for this finding; treat it as an opinion for author review.",
+  "reviewSourcesChanged": "The manuscript or referenced sources used by this report have changed. A matching candidate fingerprint does not establish current sources; recheck them and the review scope.",
+  "selectionChanged": "The displayed candidate or selection changed. Save or refresh it, then select again."
 }

@@ -86,3 +86,54 @@ A receipt acknowledges only its submitted target/reason; newer edits stay local 
 查看流程时保留交付表单；真正离开时使用原保护。关闭后的迟到回执不会重新弹出界面，旧记录版本不能静默用于新请求。详见 [2.24.10](DELIVERY-2.24.10.md)。
 
 Nested workflow viewing retains the delivery form; real exits use existing protection. Late receipts cannot reopen closed views, and unseen revisions cannot silently power new requests. See [2.24.10](DELIVERY-2.24.10.md).
+
+
+## 未发布：作者接管与任务刷新 / Unreleased: author takeover and task refresh
+
+“停止生成，作者接管”保留本地未保存的候选文字、目标、计划与补充要求，并在表单恢复可编辑后将焦点交回候选区。任务结束后的读取回执会重新检查本地输入；其他窗口改变了闲置记录时，接管不静默覆盖。停止、暂停、终止核对当前执行轮次，旧视图不能误取消新任务。保存候选仍不等于采用正文。
+
+Author takeover retains unsaved candidate text, goals, plan fields and directions, and restores focus after editing is enabled. Terminal read receipts recheck local edits. Unseen idle revisions are rejected instead of silently replacing the form. Stop/pause/terminate verify the execution identity so a stale view cannot cancel a newer task. Saving remains candidate-only.
+
+### Scoped development check
+
+Run from the engine root with existing development dependencies and a built frontend. These helpers copy only the public demo template into an explicitly owned directory. They use real local services/TaskManager with a controlled executor; they do not run an AI model or access personal works. A running fixture can be stopped with Ctrl+C in its own terminal. Do not point the fixture at personal data.
+
+```powershell
+.\web\backend\.venv\Scripts\python.exe web/frontend/scripts/start-director-fixture.py --root desktop/build/director-ui-fixture --port 8917
+```
+
+In another terminal at the engine root:
+
+```powershell
+node web/frontend/scripts/check-director-takeover.mjs desktop/build/director-ui-fixture
+node web/frontend/scripts/check-director-handoffs.mjs desktop/build/director-ui-fixture
+node web/frontend/scripts/check-delivery-receipts.mjs desktop/build/director-ui-fixture
+```
+
+The checks mutate synthetic candidate metadata only. Delays and controlled completion are test inputs, not evidence of real Codex, native desktop or physical IME acceptance. Do not run the fixtures concurrently in the same directory.
+
+
+## 2.24.11 本地 Preview：状态、报告与连接检查
+
+较早发出的刷新晚到时不会覆盖已接收的新状态；已结束任务不会被旧快照退回执行中。定向复核报告跟随当前记录和报告 ID，读取失败可明确重读，不重新发起模型评审。手动编辑候选后旧报告保留为历史参考。连接探测独立于作者写入队列和数据锁；错误后可重试，更新的已验证连接结果不被旧失败覆盖。作者确认、真正写入的锁、来源和会话校验均保留。
+
+In this local Preview, ordered reads retain newer task state, report receipts stay with their record/review ID, and explicit report retries are GET-only. Manual candidate edits label old reviews historical. Connection probes do not serialize author writes; failures release the checking state and preserve later verified connection evidence. Author confirmation, actual-write leases, origin and nonce guards remain intact.
+
+Additional scoped checks, using the same owned public-demo fixture:
+
+```powershell
+node web/frontend/scripts/check-director-records.mjs desktop/build/director-ui-fixture
+node web/frontend/scripts/check-probe-write.mjs desktop/build/director-ui-fixture
+```
+
+Probe comparison can use `--published-baseline` with the retained 2.24.10 package; that mode serves its immutable public frontend assets for the controlled queue test. This is not a remote-model latency benchmark. See [2.24.11 validation boundaries](DELIVERY-2.24.11.md).
+
+
+## 2.24.12：候选报告有效性与证据定位
+
+See [2.24.12 local validation boundaries](DELIVERY-2.24.12.md). Reproduce with a dedicated `desktop/build/<owned-directory>` public-demo fixture and `scripts/check-director-review-basis.mjs`; controlled model doubles and synthetic reports are not real-AI acceptance. Run focused `test_director_review_basis.py` with an isolated pytest `--basetemp` if the machine default cache is inaccessible. Never point fixture startup at user data. No native desktop input or publication is required.
+
+
+## 2.24.13：选区坐标与采用格式
+
+See [2.24.13 boundaries](DELIVERY-2.24.13.md). `check-textarea-coordinates.mjs` compares the shared mapping to real browser controls. `check-director-textarea.mjs` requires an owned public-demo fixture started with `--local-writer`; its responses are fixed MOCK text, never remote AI. `check-evaluation-selection.mjs` uses an owned `--mixed-source` fixture for local range preview only; optional `--baseline-22412` serves the retained package's immutable frontend assets in the test browser. All output roots must be dedicated children of `desktop/build`. Keep raw per-run JSON separately when chaining older helpers that share `after-report.json`.

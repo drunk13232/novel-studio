@@ -5,7 +5,7 @@ import copy,re
 from pydantic import BaseModel,ConfigDict,Field,model_validator
 from app.errors import ConsoleError
 from app.library.storage import read,write,digest,now
-from app.studio_tools import normalized,utf16_slice,text_hash
+from app.studio_tools import normalized,utf16_slice,text_hash,lf_text
 from app.studio import body_counts
 
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
@@ -33,9 +33,25 @@ def failure(error):
 def task_delivery(row,candidate=None):
     counts=body_counts(row.get('draft',''));minimum=row.get('goal_han')
     matches=bool(candidate and candidate.get('candidate')==row.get('draft',''))
-    adopted=bool(matches and candidate.get('status')=='ACCEPTED' and candidate.get('accepted_text',candidate.get('candidate'))==row.get('draft',''))
+    adopted=bool(matches and candidate.get('status')=='ACCEPTED' and lf_text(candidate.get('accepted_text',candidate.get('candidate')))==lf_text(row.get('draft','')))
     pending=[{'index':i,'step_id':s.get('step_id'),'title':s['title']} for i,s in enumerate(row['plan']['steps']) if s['enabled'] and i not in row['completed']]
     return {'counts':counts,'goal_han':minimum,'length_state':'NOT_SET' if not minimum else 'REACHED' if counts['han']>=minimum else 'BELOW_TARGET','text_produced':bool(row.get('draft','').strip()),'steps_complete':not pending,'remaining_steps':pending,'candidate_staged':matches,'candidate_matches_current_draft':matches,'candidate_status':candidate.get('status') if candidate else None,'author_adopted':adopted,'literary_review':'NOT_PROVEN_BY_COMPLETION','source_validation':'AT_PREFLIGHT_AND_STAGE','candidate_only':True}
+
+
+def review_validity(row,report):
+    """Derived read-only evidence. A matching candidate is not a manuscript approval."""
+    def state(status,reason):return {'status':status,'reason':reason,'scope':'CANDIDATE_ONLY'}
+    if not row.get('review_id'):return state('NOT_RUN','NO_REVIEW')
+    if not isinstance(report,dict):
+        pending=row.get('active_task') and row.get('active_task')==row.get('review_task_id')
+        return state('PENDING' if pending else 'UNVERIFIED','REPORT_UNAVAILABLE')
+    if any(report.get(a)!=row.get(b) for a,b in [('id','review_id'),('project_id','project_id'),('source_path','path')]):return state('UNVERIFIED','REPORT_SCOPE_MISMATCH')
+    basis=report.get('candidate_sha256')
+    if report.get('source_kind')!='CREATIVE_CANDIDATE' or not isinstance(basis,str) or not re.fullmatch(r'[0-9a-f]{64}',basis) or report.get('body_sha256')!=basis:return state('UNVERIFIED','CANDIDATE_HASH_UNAVAILABLE')
+    if basis!=text_hash(row.get('draft','')):return state('HISTORICAL','CANDIDATE_CHANGED')
+    if report.get('source_revision')!=row.get('revision'):return state('HISTORICAL','SOURCE_VERSION_CHANGED')
+    if row.get('review_stale'):return state('HISTORICAL','AUTHOR_BASIS_CHANGED')
+    return state('MATCHES_CANDIDATE','EXACT_CANDIDATE_HASH')
 
 def recovery(row):
     return {'failure':row.get('failure'),'checkpoint':copy.deepcopy(row.get('resume_checkpoint')),'attempts_used':row['calls'],'attempts_remaining':max(0,row['limits']['max_calls']-row['calls']),'seconds_remaining':None if row.get('timing_unknown') else max(0,round(row['limits']['seconds']-row['seconds_used'],1)),'budget_confirmation_required':bool(row.get('timing_unknown')),'retained_han':body_counts(row.get('draft',''))['han'],'can_resume':not row.get('active_task') and row['status']!='TERMINATED' and any(s['enabled'] and i not in row['completed'] for i,s in enumerate(row['plan']['steps'])),'automatic_resume':False}
