@@ -1,11 +1,9 @@
-# Public candidate audit method — 2.24.9
+# Public candidate audit — 2.24.10 Preview
 
-The current allowlist is refreshed against 2.24.9, not the historical 2.22.2 RC2. Export excludes all parent Git objects; this does not declare the private parent history safe to publish. Do not push it.
+This release uses the existing explicit source Allowlist and a new isolated staging directory. It does not copy parent Git history, user works, user-level Codex settings, credentials, local logs, private character assets or audit fixtures.
 
-Checks: allowlist bytes/SHA-256, export CRC, prohibited filenames/directories, local user paths/private project identifiers, credential-shaped strings and Gitleaks 8.30.1. Raw findings are retained locally with redacted summaries; scans do not prove absence of secrets. Binary/visual provenance and independent build verification are separate gates. The matching artifact-side AUDIT.md/VERIFICATION.json records actual results, exact hashes and unresolved items.
+The update changes existing Director save/navigation handling, bilingual guidance and reproducible isolated browser checks. Two actual-service headless browser suites passed nine checks each. Controlled response delays and one failed-save injection are separate from real provider or network acceptance.
 
-Prior explicit owner dispositions are retained narrowly: exclude the old private-ID script; public synthetic fixture names differ from the original local test; CPython upstream documentation sample paths, two isolated fake-key fixtures and five public stdlib SHA-256 hits are reviewed false positives. New hits are not automatically waived. User data, global Codex settings, runtime logs and private assets do not enter the allowlist. Historic pending-license drafts and private audit records are omitted.
+Source fingerprints, secret-scanner findings, packaged resources, upstream license records, protected-file hashes and exact-commit CI are reviewed in the private publication receipt. Previously owner-reviewed false positives are accepted only when the category and content fingerprint remain identical; new findings block publication.
 
-The owner selected Apache-2.0 and drunk13232 attribution on 2026-10-27. Third-party notices/source obligations remain. No repository publication, settings change or application submission is authorized by an export.
-
-For 2.24.9, the independent source snapshot excludes every long-form trial, model transcript, private report, personal launcher and global user configuration. New Codex runtime LICENSE/NOTICE and bundled component notices are explicitly included. Publication receipts and current scan dispositions are retained separately; old audit results do not validate new bytes.
+Apache-2.0 and drunk13232 attribution remain. Public binaries use the public data locator and do not select a private project. The old release is retained. This remains Preview / PARTIAL: native GUI, physical IME, system DPI, voices and new real-AI calls are not newly accepted. The release page records the checks actually completed; no clean-environment install is inferred from a local build.

@@ -66,3 +66,23 @@ See [2.24.7 delivery evidence](DELIVERY-2.24.7.md). No new dependency, Agent, re
 ## 2.24.8 · MCP 写作闭环
 
 [本轮入口、使用方式与验证边界](DELIVERY-2.24.8.md)。复用已有 Writer、上下文确认与 Diff；未采用候选可明确选择为有限参考，历史记录可重开。模型回合结束不等于全书写足，仍显示实际生成与保存回执。
+
+
+## 开发中：全书交付目标的回执保护（尚未发布）
+
+等待保存回执期间，新输入的目标与作者说明会保留；回执只确认已提交的版本。选择/清除交付候选、手动刷新核对结果不会清掉无关的目标草稿。并发冲突后，可先刷新基线再明确保存，未保存输入保持可见。
+
+等待交付修改回执时暂不能关闭指挥台；未保存目标与说明纳入既有离开保护。仅修改说明但尚未提交时，可以明确放弃本地编辑，保留最后核对到的已保存目标。输入标签与保存反馈提供简中/英文。
+
+本地真实服务+无界面浏览器覆盖9项流程；保存失败分支使用明确注入的503。无真实模型调用，不代表Windows原生窗口/输入法验收。现有已发布2.24.9包、用户数据和快捷方式未更新。
+
+### In development: book-target receipt protection (unreleased)
+
+A receipt acknowledges only its submitted target/reason; newer edits stay local and visible. Candidate selection and explicit refresh preserve unrelated drafts. Conflict refresh adopts the current etag without silently retrying. Pending mutations protect closing; unsaved forms use the existing leave guard. Explicit local discard handles reason-only edits. Nine isolated real-service/headless-browser scenarios passed, including one clearly injected save error; no model or native-desktop acceptance is claimed. Published 2.24.9 artifacts remain unchanged.
+
+
+## 2.24.10 — 工作台交接 / Workspace handoffs
+
+查看流程时保留交付表单；真正离开时使用原保护。关闭后的迟到回执不会重新弹出界面，旧记录版本不能静默用于新请求。详见 [2.24.10](DELIVERY-2.24.10.md)。
+
+Nested workflow viewing retains the delivery form; real exits use existing protection. Late receipts cannot reopen closed views, and unseen revisions cannot silently power new requests. See [2.24.10](DELIVERY-2.24.10.md).

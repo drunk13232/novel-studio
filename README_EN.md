@@ -1,4 +1,8 @@
-# Novel Studio · 2.24.9 Writing Reliability Preview
+# Novel Studio · 2.24.10 Director Save & Navigation Preview
+
+## 2.24.10
+
+This update repairs input retention, save receipts and workspace handoffs in the existing Creative Director. Visiting My Workflows preserves book-target drafts; new typing survives a pending save; guarded exits cover Diff and Python; late receipts cannot reopen a closed view. Existing author confirmation and proposed-writing flows remain intact. See the [2.24.10 guide and verification boundaries](docs/workbench-experience/DELIVERY-2.24.10.md). Preview / PARTIAL remains: browser checks do not establish native GUI, physical IME or real-AI acceptance.
 
 ## 2.24.9
 

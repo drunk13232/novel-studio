@@ -1,33 +1,31 @@
-# Novel Studio 2.24.9 Writing Reliability Preview
+# Novel Studio 2.24.10 Director Save & Navigation Preview
 
-**Preview / PARTIAL · Windows x64 · Apache-2.0 · Copyright 2026 drunk13232**
+## 简体中文
 
-## 下载 / Downloads
+本版修复现有创作指挥台，不新增 Agent、依赖或数据格式。
 
-- `NovelStudio-2.24.9-Preview-Setup.exe`: per-user Windows installer. Keep application installation and your existing data directory separate; back up your work before updating. No Python installation is required.
-- `NovelStudio-2.24.9-Windows-Preview.zip`: portable Preview. Extract the entire folder including `_internal`; its default entry offers the original public demo. Select your own workspace/data explicitly for personal writing.
-- `SHA256SUMS.txt`: verify both binary assets locally. Windows x64 and Microsoft WebView2 Runtime are required. The executable is unsigned; antivirus reputation/false-positive warnings are possible. Do not disable protection indiscriminately; verify provenance and hashes.
-- Source is in the repository/tag. Private Developer ZIP, personal launchers, trial manuscripts, logs, user databases, credentials and character assets are not release assets.
+- 查看“我的流程”再返回时，全书目标与说明草稿保留，键盘焦点返回原入口。
+- 保存回执只确认本次提交；等待期间继续输入的内容保留为未保存修改。候选选择与刷新不清空无关草稿。
+- 关闭、上下文、世界实验室、Diff 和 Python 交接继续经过作者的离开保护；待保存期间不能误丢输入。
+- 窗口关闭后，迟到的候选或 Python 回执不再自动打开新界面。已实际保存的候选仍留在原项目，不自动采用。
+- 其他窗口改变记录后，暂存、复核和改写拒绝静默使用作者尚未查看的新版本。
 
-## 本次更新 / Changes since 2.24.4
+### 验证边界
 
-- 2.24.5–2.24.7: candidate/read-conflict recovery and chapter-work editing retain newer unsaved input while older save receipts arrive. Save/recovery remains bound to its original chapter; existing close/leave and author-adoption protection remain authoritative.
-- 2.24.8: existing Director/Writer workflow is available through scoped MCP drafting, reading, staging, stop and resume. Candidate references carry real source/version checks and require context approval.
-- 2.24.9: paired Codex SDK/CLI runtime, explicit prose/target/adoption states, fixed-step checkpoints, local budget preflight, scene intent/interfaces, exact-repeat review pointers and version-bound whole-book candidate checks. No new Agent framework, database migration or model-provider fallback.
-- 字数目标不等于文学质量；模型完成不等于作者采用。所有候选仍需作者审核，正式作品与 Canon 不会自动变化。
+两组隔离浏览器检查分别覆盖保存回执和工作台交接，各 9 项通过。请求使用本地真实业务服务；延迟回执和一次保存失败由测试注入，并非真实网络事故。前端生产构建通过。没有新调用远端模型，没有采用小说候选。验证资料只使用公开演示模板，不含私人作品。
 
-## Verification / 验证边界
+本轮不操作用户电脑界面。原生窗口交互、实体中文输入法、系统 DPI、真实语音及新远端 AI 调用均未重新验收。Windows 包验证另行记录在发布记录中；构建或 worker 通过不等于 GUI 通过。保持 Preview / PARTIAL。
 
-- Local: 72 related backend tests and production frontend build passed; 11 isolated headless-browser interactions passed.
-- Real Codex/MCP: controlled original-fiction candidate generation reached 102,115 Han characters across 31 explicitly selected chapter candidates. Author-directed orchestration; not one autonomous model turn, not author-adopted prose and not a complete literary review.
-- A failed task retained its 486-character prefix and continued only its remaining two steps, reaching 2,044 / 2,400 Han characters; the shortfall remains visible.
-- One same-base-model review of a 5,214-character candidate verified 10 of 12 quotes and flagged the other two. This is not independent model consensus.
-- Existing Data Center backup restored all 31 candidate chapters and pinned versions into a separate project. Frozen MCP/WASI entry points, bundled CLI 0.160.1, package integrity and silent isolated install/uninstall passed.
-- Exact-public-commit hosted Windows CI is an additional release gate. Its actual result is linked on the published Release; older CI results are not substituted.
-- Native WebView2 clicks, physical Chinese IME, system DPI, installed SAPI voices and long-duration personal use were not reaccepted this round. Browser, mock, worker and silent-install results do not stand in for these gates.
+## English
 
-## Known limits / 已知限制
+This update repairs the existing Creative Director without adding agents, dependencies or data formats.
 
-Generation may fall short of chapter targets or repeat/reinterpret prose; counters and review pointers expose this, without automatic padding, deletion or relaxed thresholds. Recorded four-step generation tasks took approximately 90.68–176.99 seconds; there is no same-condition speedup claim. SDK-paired runtime resources increase the portable ZIP by approximately 142.49 MiB versus 2.24.8. There is no new native-GUI memory/startup benchmark. External AI/ComfyUI/voice/Skills features still require their respective setup. No third-party paid AI service is enabled by installing this update.
+- Visiting My Workflows retains book-target and reason drafts and restores trigger focus.
+- Receipts acknowledge submitted values only. Later typing stays unsaved; selection and refresh preserve unrelated drafts.
+- Existing author leave protection covers close, context, world lab, Diff and Python handoffs, including pending saves.
+- Late receipts cannot reopen a closed view. Valid staged proposals remain in their original project and are not adopted.
+- Unseen record revisions are rejected before staging, review or rewrite.
 
-User works retain their own rights. Apache-2.0 covers the original software; third-party notices remain applicable. Use GitHub private vulnerability reporting for security issues; do not attach private fiction, credentials or unredacted logs to public issues.
+Two isolated headless browser suites passed nine checks each against the actual local domain services. Delayed receipts and one failed save are controlled test injections. Production frontend build passed. No new remote-model call or author adoption occurred. Fixtures use public demonstration data only.
+
+Native GUI, physical Chinese IME, system DPI, installed voices and new remote-AI calls were not reaccepted. Packaged-worker or build success does not establish GUI acceptance. This remains Preview / PARTIAL.

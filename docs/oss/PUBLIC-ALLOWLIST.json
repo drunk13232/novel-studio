@@ -1,10 +1,10 @@
 {
-  "version": "2.24.9 Preview",
+  "version": "2.24.10 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
   "history_included": false,
-  "publication_ready": true,
+  "publication_ready": false,
   "source": "current retained developer manifest + scoped application/tests/helpers + reviewed public docs and notices; no Git history",
   "public_overrides": "Only portable locator and owner-approved synthetic test names; original tests/business data unchanged. Upstream terms remain; no private Git history is exported.",
   "files": [
@@ -350,8 +350,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "94128fd0d2dddc75fd30fd615696b98fa2dca9c07bd913e22909b66e932db977",
-      "bytes": 43908
+      "sha256": "10d76e27bd4888071e0a0e57f6a9ae92a16dbec9f3950823f4434e4378d575f6",
+      "bytes": 44565
     },
     {
       "path": "CONTRIBUTING.md",
@@ -385,13 +385,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "7722543c6019051f45419b1b789e774231dbbd06d99ceff1ef438c3b5feb9d94",
-      "bytes": 13675
+      "sha256": "3cdf82f2562a4a76ece192048e03b91a5a3c00dd99d3a7e7838c7392e74dbf37",
+      "bytes": 14211
     },
     {
       "path": "README_EN.md",
-      "sha256": "2ff5cc9fbf2a19b7c191e98d420ed6a064813c184b75b7cf005208d04c491f20",
-      "bytes": 14192
+      "sha256": "7cf1c41c30d2a478e83dc21953c421700e920a4b6c3792c20dd6fdf02dfafe0a",
+      "bytes": 14772
     },
     {
       "path": "SECURITY.md",
@@ -425,8 +425,8 @@
     },
     {
       "path": "desktop/build.ps1",
-      "sha256": "08d8f193915b07d09b902bcb382c26e4964c1eaa350c0ce94b4026dca4653c68",
-      "bytes": 10109
+      "sha256": "8f48cfaefd7b2b878df7e090880a253ff97d52816f574e5e02cbfe7885f243bd",
+      "bytes": 10110
     },
     {
       "path": "desktop/build_installer.py",
@@ -501,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "67045e6fd1e2bf5ff89765b180369b12b48eca1e0d9afa46e50394d28a547705",
-      "bytes": 19294
+      "sha256": "4b8a452c15fe9bd0238f9e5993d754c9c6e5ede008aac38627e7e40bbcad0b19",
+      "bytes": 19401
     },
     {
       "path": "desktop/package_zip.py",
@@ -4666,8 +4666,8 @@
     },
     {
       "path": "desktop/version.json",
-      "sha256": "dcf6541d06cc4667e2b9c24680f3f92e09837d5dacc11b6de64461587edbe760",
-      "bytes": 2793
+      "sha256": "b805895f8d7b03ba168df40122bb9c33e4fa7caf28e9df42f20f4170f967b1b5",
+      "bytes": 2272
     },
     {
       "path": "docs/AI.md",
@@ -4981,8 +4981,8 @@
     },
     {
       "path": "docs/oss/CANDIDATE-AUDIT.md",
-      "sha256": "a8063ab58d0decf3cdcc8297bf34ed298fced3bed8f3744163b7787609cefa1b",
-      "bytes": 1816
+      "sha256": "485d9aa5cfd78791e22abcacf55a39f39dd5ff4ab1f4b55758a15e7a452b835f",
+      "bytes": 1333
     },
     {
       "path": "docs/oss/CHANGELOG-SOURCES.json",
@@ -5011,8 +5011,8 @@
     },
     {
       "path": "docs/oss/INSTALL-VERIFICATION.md",
-      "sha256": "32f174dc2c3fa1f0d6941a92fea94923efc6bf117132e82e06fd52e5dc501ca1",
-      "bytes": 2872
+      "sha256": "cbb8aa2641cdf54d92d762a6b9349ab87ba304c02bcbe98d34c9cecd2277df37",
+      "bytes": 3406
     },
     {
       "path": "docs/oss/PREPUBLICATION.md",
@@ -5026,8 +5026,8 @@
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "042c11d118a00140e5f94e9d3fea895f0adc8c2d5f35ad56c4e84e71d1a44401",
-      "bytes": 4286
+      "sha256": "9877c5e3797760b5903099c8c7a745b08e5057fe0563676937c5806d58ae64ea",
+      "bytes": 2639
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -5220,6 +5220,11 @@
       "bytes": 3196
     },
     {
+      "path": "docs/workbench-experience/DELIVERY-2.24.10.md",
+      "sha256": "1c9b8b18c16cd04f6234265fe3c25f3ad5503edb87a29883c37ddb4e2198fa09",
+      "bytes": 2630
+    },
+    {
       "path": "docs/workbench-experience/DELIVERY-2.24.3.md",
       "sha256": "2dee4ec00c49d1b61dddbf7ba7dd1cd0808ac4bfb285dce0a8d190433e3f88eb",
       "bytes": 5726
@@ -5256,8 +5261,8 @@
     },
     {
       "path": "docs/workbench-experience/README.md",
-      "sha256": "86e26189aa1c81bbe0e02d388cc4c34d0ed1d64f7fb8934bf0fa696c9737e03c",
-      "bytes": 8019
+      "sha256": "2049a4c6da712fbc6bef931f682a5b580a31a35417c3173031caedd0085d1076",
+      "bytes": 10005
     },
     {
       "path": "docs/workflow-reliability/README.md",
@@ -5821,8 +5826,8 @@
     },
     {
       "path": "tools/oss/build_public_allowlist.py",
-      "sha256": "b213faef37afd9b31325e15b8f5840dbcbcd50c7ec61b2c4a629ada19b0224f9",
-      "bytes": 6991
+      "sha256": "8a154353c4ea71067bc328b191d03066c35cbd9e703073e2e4b0847195f84981",
+      "bytes": 7039
     },
     {
       "path": "tools/oss/scan_public_candidate.py",
@@ -9612,13 +9617,13 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "c8933d2cef68dc0232b8b01a5a1baa3b3028ed2dd6a22b6532222f024912debe",
-      "bytes": 339216
+      "sha256": "9d5b7e5745a5f6004928b0d0ee0e0515ca849dc06e4590de303896adff45cd0a",
+      "bytes": 339218
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "abf1c85cd11a0b999fc5aad5b83d5c3d45e9f0285d9482dd136c07cdd64c0af2",
-      "bytes": 2085
+      "sha256": "932112a6b153190a6a1c318b886b3550e52e1880d34c03c8e3b1a8b767929589",
+      "bytes": 2086
     },
     {
       "path": "web/frontend/public/companion/README.txt",
@@ -10212,8 +10217,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/director.json",
-      "sha256": "b267543c3c13e2bbee9be421598a5c84b373c2f5ac6426e3e7c98c1f29ea07e4",
-      "bytes": 17916
+      "sha256": "a055f3551c8cec16e649ed066faea754f6675648fd15f5171296e48aca9eb94b",
+      "bytes": 18713
     },
     {
       "path": "web/frontend/public/locales/en/editor.json",
@@ -13672,8 +13677,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/director.json",
-      "sha256": "7e78c86fed6cd4b96df5815edae9553be6e8a42f26d2dcec04f9d68e57d7fbdd",
-      "bytes": 16988
+      "sha256": "191763d33958a1108ed1b54170dbf4abae81105555dbbaa6f02b05a55f4998d1",
+      "bytes": 17732
     },
     {
       "path": "web/frontend/public/locales/zh-CN/editor.json",
@@ -14161,6 +14166,11 @@
       "bytes": 5522
     },
     {
+      "path": "web/frontend/scripts/check-delivery-receipts.mjs",
+      "sha256": "19556ef2bd7a4d7c0180b6ada9492238ef06067e8cbdcb00c6ec0a635c0e836f",
+      "bytes": 11584
+    },
+    {
       "path": "web/frontend/scripts/check-director-console.mjs",
       "sha256": "c8990d497cf9dbbdaa23324832480f5b90c696dd9508084a77df2a0ef4929e3e",
       "bytes": 6635
@@ -14169,6 +14179,11 @@
       "path": "web/frontend/scripts/check-director-freedom.mjs",
       "sha256": "80df3d1e914cc0281d989112b2b5a787ab431c15f2cd4246ce6cd54b02135d76",
       "bytes": 10518
+    },
+    {
+      "path": "web/frontend/scripts/check-director-handoffs.mjs",
+      "sha256": "3e18f7a339fcf734d92ecc9cfe83577fe09fec96cbff3d16a20fb8d1494799ce",
+      "bytes": 11406
     },
     {
       "path": "web/frontend/scripts/check-document-location.mjs",
@@ -14543,8 +14558,8 @@
     },
     {
       "path": "web/frontend/src/creative-director.tsx",
-      "sha256": "867f98bb6e1596a97cc7cc33606e56660dfd29d846c27380c70db97e00502391",
-      "bytes": 31376
+      "sha256": "e9fbe2ab818d0234744a551a45b5f79d0d2c91d977d493654e108856673f0d59",
+      "bytes": 32657
     },
     {
       "path": "web/frontend/src/creative-insights.css",
@@ -14618,8 +14633,8 @@
     },
     {
       "path": "web/frontend/src/director-delivery.tsx",
-      "sha256": "104d3851a3c571b6879ffd39ebee804a341c94db0556be4587a0eebdd74fdb0e",
-      "bytes": 7305
+      "sha256": "f66e7155318c7058d3bc3cd18e92c9f0ed96b4ea0518b98a9af054616ce783e1",
+      "bytes": 9074
     },
     {
       "path": "web/frontend/src/director-freedom.tsx",
@@ -14833,8 +14848,8 @@
     },
     {
       "path": "web/frontend/src/my-workflows.tsx",
-      "sha256": "90eb68d290b3786bf54d4214fba748005cdeaf1dd0dcffd52c715ac0f6a07d18",
-      "bytes": 21519
+      "sha256": "b9ae21989d6a846450154efb2d91a550e7032dea2d8f9146242e302a9d2ba458",
+      "bytes": 21628
     },
     {
       "path": "web/frontend/src/narrative-memory.tsx",
@@ -15340,6 +15355,5 @@
     "parent Git objects and old release archives",
     "generated PDF assets rebuilt from pinned npm package",
     "old audit snapshots not current acceptance"
-  ],
-  "review": "2.24.9 source/privacy/licensing reviewed; Preview runtime limits remain. Private audit excluded; exact-commit hosted CI gates Release publication. Two legacy missing-runtime tests updated to assert failure/terminal state and explicit override diagnostics, with fail-closed coverage; production binaries unchanged."
+  ]
 }

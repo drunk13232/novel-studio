@@ -1,4 +1,8 @@
-# Novel Studio · 2.24.9 Writing Reliability Preview
+# Novel Studio · 2.24.10 Director Save & Navigation Preview
+
+## 2.24.10
+
+本次修复现有创作指挥台的输入保留、保存回执与工作台切换：查看“我的流程”不丢失全书目标草稿；保存期间的新输入保留；离开、Diff 和 Python 交接受保护；关闭后迟到的回执不会重新弹出工作区。保留原有作者确认与候选流程。详见 [2.24.10 说明及验证边界](docs/workbench-experience/DELIVERY-2.24.10.md)。继续标记 Preview / PARTIAL；未把浏览器检查当作原生桌面、中文输入法或真实 AI 验收。
 
 ## 2.24.9
 

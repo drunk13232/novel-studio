@@ -13,3 +13,8 @@ Hosted Windows CI is now active at [GitHub Actions](https://github.com/drunk1323
 If any clean install/build fails, preserve the error and distinguish network failure from dependency/project failure. A partially passing suite is not a full PASS.
 
 The 2.24.9 local delivery ran 72 related tests, 11 isolated headless-browser checks, frozen-worker integrity checks, and a silent isolated installer/backup round trip. These are not a claim that the previous full suite ran unchanged on this new public snapshot. The exact public commit must pass the hosted Windows workflow above before its Preview Release is published. Real Codex evidence is limited to the controlled original-fiction trial described in the version guide; no user manuscripts are distributed.
+
+
+## 2.24.10 publication scope
+
+The Director UI patch is checked with the retained development dependencies and isolated real-service browser fixtures. A fresh public-candidate installation is not repeated in this patch. Exact-commit GitHub Windows CI installs its own Python/npm dependencies and runs its configured backend/build checks; consult that run for its actual status. Local packaging and isolated silent installation are recorded separately in the release receipt, and do not constitute native GUI/IME/DPI acceptance.

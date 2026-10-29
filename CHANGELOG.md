@@ -1,5 +1,15 @@
 # Changelog / 更新记录
 
+## 2.24.10 — Director Save & Navigation Preview (2026-10-30)
+
+- Preserve target drafts and focus while visiting nested workflows.
+- Acknowledge submitted target values without discarding later typing; protect pending saves and local undo/close.
+- Apply existing discard protection to context, world lab, Diff and Python handoffs.
+- Suppress late UI handoffs after close while retaining valid staged proposals.
+- Refuse stale record revisions before staging, review and rewrite.
+- Add isolated real-service browser regression scripts; no new dependency or data migration.
+- Retain Preview boundaries and all existing author/project protections.
+
 ## 2.24.9 — Writing Reliability Preview (2026-10-29)
 
 - Use the installed SDK-paired Codex CLI by default, retaining explicit runtime overrides.

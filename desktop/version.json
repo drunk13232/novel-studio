@@ -1,18 +1,17 @@
 {
-  "version": "2.24.9",
-  "release_date": "2026-10-29",
+  "version": "2.24.10",
+  "release_date": "2026-10-30",
   "changes": [
-    "Default Codex execution uses the SDK-bundled CLI with explicit overrides preserved; no global installation or login change.",
-    "Existing Creative Director distinguishes model completion, retained prose, length goals, staged Diff candidates and author acceptance. Empty completion never marks a writing step complete.",
-    "Persistent fixed-step checkpoints retain partial prose after interruption or restart; unknown pre-restart timing requires an explicit author budget review.",
-    "Local next-step budget preflight and conservative future growth estimates preserve required sources, model choice and request limits.",
-    "Book delivery checks count current manuscripts or author-selected candidate versions once, validate source freshness, retain target history and never change writing statistics or Canon.",
-    "Optional scene intent and entry/exit conditions, explicit execution position and source-bound retained drafts strengthen sequential writing without a new planner.",
-    "Exact repeated long passages remain review pointers with real positions, never automatic literary verdicts or deletions; edited drafts do not claim old Diff/review results as current.",
-    "Preview: original isolated real-Codex/MCP drafting is author-directed and candidate-only; length targets do not prove literary quality or native GUI acceptance."
+    "Preserve book target and reason edits while visiting My Workflows; restore keyboard focus on return.",
+    "Save receipts acknowledge only submitted values; later edits remain unsaved and retryable.",
+    "Protect unsaved book delivery fields on close, context, world lab, Diff and Python handoffs.",
+    "Ignore late Diff or Python UI handoffs after their Director view closes; retain already-created proposals.",
+    "Reject unseen record revisions before staging, review or rewrite rather than silently using another window’s revision.",
+    "Reuse existing author confirmation, project isolation and proposal-only writing; no new model call or data format.",
+    "Preview: isolated real-service headless browser checks and production build pass; native GUI/IME/DPI and new remote-AI acceptance remain unverified."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "MCP Writing Workflow Preview",
+  "edition": "Director Save & Navigation Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

@@ -256,6 +256,14 @@
     "staleReview": "The existing review describes the earlier candidate, for historical comparison only. Review the new version separately.",
     "adoptedOtherVariant": "The author accepted an edited Diff version; this draft was not overwritten",
     "preflightStale": "The task, draft or controls changed. The old preflight is not valid for this version. Run the check again.",
-    "bookSnapshot": "This is the last manually checked snapshot. Reload the book delivery check after manuscript or candidate changes."
+    "bookSnapshot": "This is the last manually checked snapshot. Reload the book delivery check after manuscript or candidate changes.",
+    "targetSaved": "The submitted book target is saved.",
+    "targetSavedNewer": "The submitted target is saved. Your newer target or reason is still unsaved and remains in the form.",
+    "choiceSaved": "Delivery candidate selection updated. Manuscript adoption still requires separate review.",
+    "bookLoaded": "Book delivery check refreshed.",
+    "targetKept": "Check refreshed. Your unsaved target and reason remain in the form; review before saving explicitly.",
+    "pendingClose": "A delivery update is awaiting its save receipt. Please wait before closing; you can continue editing the target fields.",
+    "discardTargetDraft": "Discard unsaved target edits",
+    "targetDiscarded": "Unsubmitted target edits and reason discarded; the last checked saved target is retained."
   }
 }
