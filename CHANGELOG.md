@@ -1,5 +1,22 @@
 # Changelog / 更新记录
 
+## 2.24.18 — Candidate Open Reliability Preview (2026-10-30, local)
+
+- Share a scoped candidate-read owner across history and existing external requests; cancel/ignore stale success and failure callbacks.
+- Recheck live unsaved input and document scope before opening a response; keep existing save/adoption protections.
+- Show read progress, cancellation and explicit retry; clear obsolete history-list state and abort its reads on scope changes.
+- Preserve the existing safe initial-read close behavior and window-local recovery guards.
+- No dependencies, storage migration, remote-model call or automatic publication. Native GUI/IME/DPI/speech, real cloud AI and long-duration use remain unverified.
+
+## 2.24.17 — Candidate Recovery Protection Preview (2026-10-30, local)
+
+- Retained genuinely unsaved local copies keep existing exit/navigation protection after a conflict reload, including handled candidate receipts.
+- Export the retained local buffer separately from the current stored buffer; downloading does not imply project persistence.
+- Require explicit recovery or discard before editing/saving/adopting/switching unresolved copies; keep handled candidates locked.
+- Apply the same recovery controls and explicit close/switch discard to the existing Revision Desk.
+- Reuse existing etags, storage and author-only adoption. No new dependencies, migrations, AI calls or automatic publication.
+- Recovery remains window-local; crash persistence, native GUI, physical IME/DPI, real speech and new remote AI are not claimed.
+
 ## 2.24.16 — Candidate History Reliability Preview (2026-10-30, local)
 
 - Reset transient notes and choices between distinct candidate generations and after closing a decided comparison.

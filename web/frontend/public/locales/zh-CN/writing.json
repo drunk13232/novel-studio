@@ -186,7 +186,7 @@
   "candidateStale": "原文版本已变化。暂存内容保留，不能直接覆盖；请重新比较或下载候选。",
   "saveCandidateDraft": "暂存候选",
   "downloadCandidateDraft": "下载本地候选副本",
-  "candidateSaveFirst": "候选尚未暂存成功，请处理冲突或下载副本后再继续。",
+  "candidateSaveFirst": "候选尚未暂存成功。请先处理冲突并暂存；下载只保留副本，不能代替暂存或作者的放弃确认。",
   "candidateNote": "候选修改说明",
   "candidateCloseHelp": "候选有未暂存编辑。可以暂存后关闭，或继续编辑；放弃仅丢弃尚未暂存的部分，已暂存版本仍保留。",
   "saveAndClose": "暂存并关闭",
@@ -242,5 +242,18 @@
   "savedCandidateHistory": "作者暂存的文字与说明（只读）",
   "savedCandidateHistoryHelp": "这些是决策前保留的候选草稿，可能包含未采用的修改。实际采用结果请看处理回执；查看记录不会修改正文。",
   "savedCandidateText": "查看当时暂存的候选文字",
-  "readOnlyComparisonHelp": "左侧为当时的原文，右侧为所选历史候选；仅供查看，不能覆盖当前正文。作者暂存的文字与说明在只读记录中单独列出。"
+  "readOnlyComparisonHelp": "左侧为当时的原文，右侧为所选历史候选；仅供查看，不能覆盖当前正文。作者暂存的文字与说明在只读记录中单独列出。",
+  "candidateRecoveryUnsaved": "本窗口仍保留一份未保存的本地输入。恢复或明确放弃之前，它会继续受到离开保护；不会自动覆盖已存版本。",
+  "candidateDownloadRecovery": "下载保留的本地副本",
+  "candidateKeepStored": "放弃本地副本，保留已存版本",
+  "candidateRecoveryReturn": "返回处理保留副本",
+  "candidateRecoveryCloseHelp": "保留的本地副本尚未保存。下载不会自动保存到项目，也不会自动解除保护。可以返回处理，或明确放弃后离开；已存版本保持不变。",
+  "candidateRecoveryReadonlyHelp": "另一窗口已处理此候选。本窗口的未保存输入仍受保护，可下载留存；不能再次暂存或采用。明确放弃后才能关闭或切换。",
+  "candidateResolveRecovery": "请先恢复并暂存本地副本，或下载需要保留的内容后明确放弃，再打开其他候选或开始新任务。",
+  "candidateOpening": "正在打开候选…",
+  "candidateCancelOpen": "取消打开",
+  "candidateTaskBusy": "当前选段任务仍在处理，请等待完成或先停止任务。",
+  "candidateOpenBlocked": "当前候选有未保存输入。请先暂存，或通过关闭确认明确放弃后，再打开其他候选或开始新任务。",
+  "candidateReadPending": "当前候选仍在读取或核对。请等待完成，或先关闭比较。",
+  "candidateOpenScopeChanged": "候选已不属于当前作品或章节，未载入。"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "2.24.16 Preview",
+  "version": "2.24.18 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
@@ -350,8 +350,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e47ea89ae01632b24d5dd41fd07ebf04de23680c937deb64e960471efdd9c5eb",
-      "bytes": 49524
+      "sha256": "8dfc4488444904922d1e53a8c9828518146f823b18cb62d4631dc015d2320144",
+      "bytes": 51080
     },
     {
       "path": "CONTRIBUTING.md",
@@ -385,13 +385,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "f7de7206bf6fd09887638adf5d9d56a4c838d316f60f2a4ad4d70f3324243b00",
-      "bytes": 17008
+      "sha256": "08f60cf28bdb3656d1b1c4a92ba35257cf5eca182139669894c9e49422280788",
+      "bytes": 18321
     },
     {
       "path": "README_EN.md",
-      "sha256": "316d2711fd125d9cb8edcaec11cbc5f4cccdb6b0cfe7414ff5be08ca67ed12ea",
-      "bytes": 17811
+      "sha256": "e7ff992bbad43419962d5624ea90f9ccdc665bc130024008b968f3451b0d4e6a",
+      "bytes": 19151
     },
     {
       "path": "SECURITY.md",
@@ -425,7 +425,7 @@
     },
     {
       "path": "desktop/build.ps1",
-      "sha256": "8c5beda851829a2977901f04e268fcf44cb24e03076ccded427de3e9f8119e4a",
+      "sha256": "7d1ea3406cadafe3b13c7bde8d7eca620796aabebf579661af77f4c2481de398",
       "bytes": 10110
     },
     {
@@ -501,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "c34e2a990206da87683fdb15e0b46bfad936cdc4f4776b826a90e5e57e6a8807",
-      "bytes": 19843
+      "sha256": "a35c995e000c2af5d5178527e1e0abb5e7b568a1e4dbdb558fe9c79949395bf5",
+      "bytes": 20059
     },
     {
       "path": "desktop/package_zip.py",
@@ -4666,8 +4666,8 @@
     },
     {
       "path": "desktop/version.json",
-      "sha256": "fca7228256b7a57ba1ef457c99b254915e7f827957087795a004ad39ada28ccc",
-      "bytes": 2252
+      "sha256": "aaa0513fded3fb2e43029d882750defb5bf136e98a8f1692bec29883d95e1fdb",
+      "bytes": 2278
     },
     {
       "path": "docs/AI.md",
@@ -4981,8 +4981,8 @@
     },
     {
       "path": "docs/oss/CANDIDATE-AUDIT.md",
-      "sha256": "2c1608eee49589c2bd36413b1df8e5d0ed599bafa65ff414ba6c16405794b845",
-      "bytes": 1615
+      "sha256": "a4ce318b96dc84552e9f75bee04de816cc4cae4b7c9e0999617fe559854f444f",
+      "bytes": 1905
     },
     {
       "path": "docs/oss/CHANGELOG-SOURCES.json",
@@ -5026,8 +5026,8 @@
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "b70a4e4f4e691ec94d481bc673436fafeb1797eb80d35e7fe5d9ad7d44d54634",
-      "bytes": 4442
+      "sha256": "a71658ea9bda1ba7062f333eb173e9513d69aa41d8dad118a3f72f678bee2215",
+      "bytes": 5264
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -5253,6 +5253,16 @@
       "path": "docs/workbench-experience/DELIVERY-2.24.16.md",
       "sha256": "5bf97fccadbf14f7fb1dec2fa67ec2e6edc45de558243c00b1c375ac1383584c",
       "bytes": 2152
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.17.md",
+      "sha256": "430292944526d942343e9ef9d2398bafddf62f4d5ef400e1ef2108ef37a6f39c",
+      "bytes": 3029
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.18.md",
+      "sha256": "cf2b64da3bead3a7a3331a6a65c10c3b6f148109e01d6bbcd672012fc2b93c2c",
+      "bytes": 2971
     },
     {
       "path": "docs/workbench-experience/DELIVERY-2.24.3.md",
@@ -5856,8 +5866,8 @@
     },
     {
       "path": "tools/oss/build_public_allowlist.py",
-      "sha256": "5f557987781a1e19f0c0e260714de1a6e64cfef3ca71c0c3f8c3cab93c5bc84c",
-      "bytes": 7327
+      "sha256": "1ab223751e416d3455449dd0590b02f94f30eb9e3ba5fa81f34afc8a224dabb1",
+      "bytes": 7423
     },
     {
       "path": "tools/oss/scan_public_candidate.py",
@@ -9662,12 +9672,12 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "24d6f62ef6ec29c234e259739cc549bf635bf1320ea247c65ba81d43e00b1ba9",
+      "sha256": "eb92438a41084fd617095704f7e753dba5e8ac346200000ae943ea71bdc59674",
       "bytes": 339218
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "e6f6212e18d14f69b3ca0a8be4202f5237458972b49f63275a770f49ac26550c",
+      "sha256": "87437ae1303d373b839407a39667f585e570295580c0799e5e4ac41adbe819d9",
       "bytes": 2086
     },
     {
@@ -10437,8 +10447,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/writing.json",
-      "sha256": "6e58309932c93683536cac053b4e81f1146af568515bc5c68865087779cefab4",
-      "bytes": 17620
+      "sha256": "05ed5bb4df36e096cf09c91ac7473a7b5626c70f29905fdabdb1ca48e48bd23d",
+      "bytes": 19355
     },
     {
       "path": "web/frontend/public/locales/es/ai.json",
@@ -13897,8 +13907,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/writing.json",
-      "sha256": "767e24cf6744cd5d06e442261a9d58b24ab6d4cd928bf61739b039d76fba41a6",
-      "bytes": 16635
+      "sha256": "bf7d712e91f686877b151b901a8254936a5f35499f499e13a54e38c0a2d8a21e",
+      "bytes": 18181
     },
     {
       "path": "web/frontend/public/locales/zh-TW/ai.json",
@@ -14201,9 +14211,19 @@
       "bytes": 8136
     },
     {
+      "path": "web/frontend/scripts/check-candidate-open.mjs",
+      "sha256": "a7ef34f4b7ebca3e9d78e13d8ea11d203a18233e726409b6b1b193da6352c51f",
+      "bytes": 10664
+    },
+    {
       "path": "web/frontend/scripts/check-candidate-ownership.mjs",
       "sha256": "2d86cd9cba3e20190a97e2954398f72cd6aefa1827e05a2c021a24a9546c8a89",
       "bytes": 7852
+    },
+    {
+      "path": "web/frontend/scripts/check-candidate-recovery.mjs",
+      "sha256": "b2006a50929ae6f3e0dd3270f76389c51e244c2a2e88e9b4ad7caa1a6d47824a",
+      "bytes": 12428
     },
     {
       "path": "web/frontend/scripts/check-candidate-stale.mjs",
@@ -14593,8 +14613,8 @@
     },
     {
       "path": "web/frontend/src/author-workbench.tsx",
-      "sha256": "3b29f30254551c0a7a941faf90d93ccff201b61201a8ad466acabde1febfa671",
-      "bytes": 21109
+      "sha256": "50a7e3d06a6d2192a3efe7a1eb6b0e17aa5fb2fcbac7874ea5f6d09fc5d4e4ab",
+      "bytes": 21362
     },
     {
       "path": "web/frontend/src/book-center.tsx",
@@ -14608,8 +14628,8 @@
     },
     {
       "path": "web/frontend/src/candidate-draft.tsx",
-      "sha256": "3e94cf5b6399dcd58e998560b8e4e719dc30d4b221c13a718a973162a80d3e8c",
-      "bytes": 9405
+      "sha256": "9fd3ad3122ac2cee4285be104483c11922878a097d3f47218ed8ca99a122b709",
+      "bytes": 10878
     },
     {
       "path": "web/frontend/src/chapter-versions.css",
@@ -15138,8 +15158,8 @@
     },
     {
       "path": "web/frontend/src/selection-assistant.tsx",
-      "sha256": "e3679db7537bba2a5dc9938c353b2f5ea16646bb55e24e4a143885c487642e02",
-      "bytes": 21657
+      "sha256": "5d0704d5516fe7cff194ef90bc0a5e7e44d4c313668ac9fd52551896406a6667",
+      "bytes": 24050
     },
     {
       "path": "web/frontend/src/selection-diff-editor.tsx",
@@ -15363,8 +15383,8 @@
     },
     {
       "path": "web/frontend/src/writing-action-tools.tsx",
-      "sha256": "ddcc7468db019f7bf342cc9cfdc920abaeefcfcb8dee7e2324bffa6bd81ca04d",
-      "bytes": 3753
+      "sha256": "d2a74581c13658f6c50113e63ea2fb896e431cc0d216c68e42b461f1abbe3498",
+      "bytes": 4086
     },
     {
       "path": "web/frontend/src/writing-annual.css",

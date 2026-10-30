@@ -1,4 +1,16 @@
-# Novel Studio · 2.24.16 Candidate History Reliability Preview
+# Novel Studio · 2.24.18 Candidate Open Reliability Preview
+
+## 2.24.18
+
+2.24.18 Preview。历史与外部候选入口统一读取归属，过时响应不覆盖新候选；等待期间的未保存输入会在载入前重新核对。提供实际读取状态、取消读取与失败后明确重试。沿用原有 Diff、版本与作者确认。见 [2.24.18 说明](docs/workbench-experience/DELIVERY-2.24.18.md)。
+
+安装程序、便携包和校验值见 [2.24.18 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.18-preview)。
+
+> **已知输入风险：** 通过软件助手结果中的“打开文档”导航时，在读取尚未完成期间继续输入，新增的未保存正文可能被较旧磁盘内容替换；该边界已在隔离项目复现。请先保存，再导航，等待加载完成后继续输入。修复尚未完成，不混入本版。窗口内恢复副本也不等于持久备份，请明确保存或下载后再退出。
+
+## 2.24.17
+
+本地迭代，合并至 2.24.18 Preview。修复多窗口载入后保留副本失去关闭保护的问题：可单独下载真正的本地副本，明确恢复或放弃后再继续。另一窗口已处理的候选保持只读，修订台同步保护。下载不等于项目暂存，副本仍是窗口内状态。见 [2.24.17 说明](docs/workbench-experience/DELIVERY-2.24.17.md)。
 
 ## 2.24.16
 

@@ -1,4 +1,16 @@
-# Novel Studio · 2.24.16 Candidate History Reliability Preview
+# Novel Studio · 2.24.18 Candidate Open Reliability Preview
+
+## 2.24.18
+
+2.24.18 Preview. Scoped candidate reads prevent late responses from replacing a newer comparison; live unsaved input is checked again before applying a response. Real read status, cancel-read and explicit retry preserve existing Diff, revision and author approvals. See the [2.24.18 guide](docs/workbench-experience/DELIVERY-2.24.18.md).
+
+Installer, portable ZIP and checksums: [2.24.18 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.18-preview).
+
+> **Known input risk:** when opening a document from an assistant result, typing while its lookup is still pending can replace newer unsaved manuscript input with older disk content. This boundary was reproduced in an isolated project; its unfinished fix is outside this release. Save first, navigate, then wait for loading to finish before typing. Window-local recovery is not a persistent backup: explicitly save or download before exiting.
+
+## 2.24.17
+
+Local iteration, included in 2.24.18 Preview. Protect unsaved local recovery after cross-window reloads in Selection Diff and Revision Desk. Export the actual retained copy and explicitly restore or discard it; handled candidates remain locked. Download is not project persistence, and recovery remains window-local. See the [2.24.17 guide](docs/workbench-experience/DELIVERY-2.24.17.md).
 
 ## 2.24.16
 

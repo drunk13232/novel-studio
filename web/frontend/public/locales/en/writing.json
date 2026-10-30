@@ -186,7 +186,7 @@
   "candidateStale": "The source changed. Your draft is retained and cannot overwrite it; compare again or download the candidate.",
   "saveCandidateDraft": "Save candidate draft",
   "downloadCandidateDraft": "Download a local candidate copy",
-  "candidateSaveFirst": "The candidate draft was not saved. Resolve the conflict or download a copy before continuing.",
+  "candidateSaveFirst": "The candidate has not been saved. Resolve conflicts and save first; downloading a copy does not replace saving or an explicit discard confirmation.",
   "candidateNote": "Candidate revision note",
   "candidateCloseHelp": "This candidate has unsaved edits. Save and close or continue editing. Discarding drops only unsaved changes; previously saved drafts remain.",
   "saveAndClose": "Save draft and close",
@@ -242,5 +242,18 @@
   "savedCandidateHistory": "Saved author text and notes (read-only)",
   "savedCandidateHistoryHelp": "These are candidate drafts retained before the decision and may include edits that were not adopted. The decision receipt records actual adoption. Viewing these snapshots never changes the manuscript.",
   "savedCandidateText": "View the saved candidate text",
-  "readOnlyComparisonHelp": "The left side is the original snapshot; the right side is the selected historical candidate. This view cannot overwrite the current manuscript. Saved author text and notes are listed separately in the read-only record."
+  "readOnlyComparisonHelp": "The left side is the original snapshot; the right side is the selected historical candidate. This view cannot overwrite the current manuscript. Saved author text and notes are listed separately in the read-only record.",
+  "candidateRecoveryUnsaved": "This view still holds unsaved local input. It remains protected until you restore or explicitly discard it; the stored version is not overwritten automatically.",
+  "candidateDownloadRecovery": "Download retained local copy",
+  "candidateKeepStored": "Discard local copy and keep stored version",
+  "candidateRecoveryReturn": "Return to retained copy",
+  "candidateRecoveryCloseHelp": "The retained local copy is unsaved. Downloading does not save it into the project or remove the exit guard. Return to resolve it, or explicitly discard it before leaving; the stored version is unchanged.",
+  "candidateRecoveryReadonlyHelp": "Another window handled this candidate. Your unsaved local input remains protected and can be downloaded; it cannot be saved or adopted again. Explicitly discard it before closing or switching.",
+  "candidateResolveRecovery": "Restore and save the retained copy, or download what you need and explicitly discard it, before opening another candidate or starting a new task.",
+  "candidateOpening": "Opening candidate…",
+  "candidateCancelOpen": "Cancel opening",
+  "candidateTaskBusy": "A selection task is still running. Wait for it to finish or stop it first.",
+  "candidateOpenBlocked": "The current candidate has unsaved input. Save it, or explicitly discard it through the close confirmation before opening another candidate or starting a new task.",
+  "candidateReadPending": "The current candidate is still loading or being checked. Wait for it to finish, or close the comparison first.",
+  "candidateOpenScopeChanged": "The candidate no longer belongs to this project or chapter and was not loaded."
 }
