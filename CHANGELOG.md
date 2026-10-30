@@ -1,5 +1,23 @@
 # Changelog / 更新记录
 
+## 2.24.26 — Bounded Chapter Opening Preview (2026-10-30)
+
+Local Preview / PARTIAL. Cancellable chapter/recovery reads use a 10-second header/body deadline, retain existing content on failure and never bypass recovery or replay saves. Workspace restore resolves its target first; two measured scenarios reduced four reads to two, without claiming a matching startup-speed improvement. Thirty-nine isolated headless cases passed, including unsaved text, undo/redo, cancellation with an enabled writing ritual, save/format and snapshot regressions. See [2.24.26 notes](docs/workbench-experience/DELIVERY-2.24.26.md). No publication or shortcut update.
+
+本地 Preview / PARTIAL。章节正文和恢复副本读取可取消，10 秒时限覆盖响应头与正文；失败时保留原有内容，不跳过恢复检查，也不重放保存。恢复工作区先确定最终目标，两项实际对照由 4 次读取降为 2 次，不据此夸称启动时间减半。39 项隔离 headless 检查通过，包括未保存文字、撤销/重做、启用仪式后的取消、保存与格式回归。见 [2.24.26 说明](docs/workbench-experience/DELIVERY-2.24.26.md)。本轮未发布或更新快捷方式。
+
+## 2.24.25 — Recovery Progress Preview (2026-10-30)
+
+Local Preview / PARTIAL. Successful author reload of a changed revision after an uncertain save refreshes actual saved-event progress without creating events or word counts. Unconfirmed saves expose existing compare/reload controls; read-only snapshots support empty files, cancellation, explicit retry and a deadline. 28 isolated headless cases passed. See [2.24.25 notes](docs/workbench-experience/DELIVERY-2.24.25.md). Public release remains 2.24.23; no automatic publication or shortcut change.
+
+本地 Preview / PARTIAL。保存结果不明后，作者成功重载不同磁盘版本时同步刷新真实码字进度；不补造字数或保存事件。未确认状态直接提供现有比较/重载入口，空磁盘文件可明确查看；比较读取支持关闭取消、失败重试和时限。28 个隔离 headless 场景通过。见 [2.24.25 说明](docs/workbench-experience/DELIVERY-2.24.25.md)。公开版仍为 2.24.23，未自动发布或更新快捷方式。
+
+## 2.24.24 — Bounded Save Verification Preview (2026-10-30)
+
+Local Preview / PARTIAL. Post-save read-only verification has a 10-second deadline covering headers and JSON body. Timeout stops the browser read, retains edits/unconfirmed state and never cancels or replays the submitted write. 18 isolated headless cases passed. See [2.24.24 notes](docs/workbench-experience/DELIVERY-2.24.24.md). Public release remains 2.24.23; no automatic publication or shortcut change.
+
+本地 Preview / PARTIAL。保存回执不明后的只读核对设置 10 秒时限，覆盖响应头和 JSON 响应体；超时停止此次浏览器读取，保留编辑与未确认状态，不取消或重放已提交的正文写入。18 个隔离 headless 场景通过。见 [2.24.24 说明](docs/workbench-experience/DELIVERY-2.24.24.md)。当前公开版仍为 2.24.23；本轮未自动发布或更新快捷方式。
+
 ## 2.24.23 — Verified Save Feedback Preview (2026-10-30, local)
 
 - Distinguish confirmed manuscript writes from recovery cleanup/update failures, preserving real saved counts and visible warnings.

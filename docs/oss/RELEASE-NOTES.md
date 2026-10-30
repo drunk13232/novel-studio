@@ -1,22 +1,27 @@
-# Novel Studio 2.24.23 — Verified Save Feedback Preview
+# Novel Studio 2.24.26 — Bounded Chapter Opening Preview
 
-## Updates / 更新
+Preview / PARTIAL. This update includes the completed 2.24.24–2.24.26 local improvements. Previous releases remain available.
 
-- 2.24.20: revalidate selection and scope immediately before task creation; reject cancelled/expired assistant and Python ownership. Never automatically replay ambiguous task dispatches.
-- 2.24.21: late save/recovery receipts cannot navigate after cancellation or newer input; actual errors and explicit retry.
-- 2.24.22: owned nonblocking desktop-exit guard, duplicate protection and active-task recheck after backups. Real save/recovery/preferences outcomes.
-- 2.24.23: distinguish confirmed manuscript saves from recovery-maintenance failures. Check ambiguous receipts once through the existing read-only file API, without replaying writes. Preserve newer input and unknown/conflicting state through undo; explicit manual recovery does not enable automatic recovery.
+## 中文
 
-本次汇总选区任务取消、离开/退出与保存反馈修复。正文保存和恢复副本维护分别显示真实结果，不明回执不自动重发写入；未知或不同磁盘版本保持编辑保护。无新增依赖、Agent、数据库迁移或权限。统计只刷新既有视图，不制造字数、计时或用量。
+- 保存成功后按实际正文保存事件刷新码字统计；不靠持续轮询，不将恢复副本计为正文增字。
+- 只读磁盘快照具有取消和明确的失败状态，仍走原有作者选择与修订保护流程。
+- 保存回执核对和章节读取具有明确等待边界。章节正文/恢复副本读取共用 10 秒时限，作者可以取消；取消或失败保留原有缓冲区与撤销/重做。
+- 工作区恢复先选最终目标。保留版 2.24.25 与新版本的两个实际对照场景中，正文/恢复 GET 从四次减少为两次；不据此宣称启动时间或内存改善比例。
+- 不自动重发正文保存，不跳过未完成的恢复检查，不扩大 Codex、文件或模型权限。
 
-## Verification and limitations / 验证与限制
+## English
 
-47 isolated headless-browser scenarios passed for 2.24.23: 18 receipt/format/safety flows, 12 leave-dialog regressions, 15 exit regressions and 2 confirmed-save/recovery-failure combinations. Actual local file APIs and disk-byte checks, controlled response faults and a labelled desktop-boundary double. No model calls. Earlier-version evidence remains separate.
+- Refresh writing statistics from actual successful manuscript-save events, without continuous polling or treating recovery snapshots as manuscript growth.
+- Cancellable read-only disk previews preserve the existing author-choice/revision flow.
+- Bounded save-receipt verification and cancellable chapter opening; paired chapter/recovery reads share a 10-second deadline. Failed/cancelled loads preserve existing text and undo/redo.
+- Workspace restoration resolves the final target first. Both measured same/alternate-target comparisons reduced content/recovery GETs from four to two; no startup-time or memory percentage is inferred.
+- No automatic manuscript-save replay, silent recovery bypass or wider Codex/file/model permissions.
 
-Preview / PARTIAL: native GUI, physical Chinese IME, system DPI, voices, real Codex/MCP/cloud AI and prolonged use are not newly validated. The packaged worker is a process check, not GUI acceptance. One earlier isolated-service shutdown cause and pre-existing outside-candidate global configuration drift remain unattributed; global configuration was not modified or reverted. Recovery snapshots do not replace persistent backups.
+## Verification boundaries / 验证边界
 
-源码与发行候选排除私人作品、文献、凭据、用户配置、私有角色资源及父仓库 Git 历史。旧版保留。原生桌面、实体输入法、DPI、真实语音与新云端 AI 验收未完成，继续标为 Preview。
+The completed local 2.24.26 delivery records 39 isolated headless cases, a production frontend build, source/frozen-code alignment, a real packaged bounded worker and isolated silent install/uninstall. They are separate gates, not native desktop acceptance. Native WebView2 clicks, physical Chinese IME, actual system DPI, voice, real cloud AI and prolonged-use acceptance were not newly performed. Existing build chunk warnings remain. Older isolated shutdown problems and pre-existing, candidate-external Codex config drift have not been attributed or claimed fixed. Recovery copies are not durable backups. In-progress recovery-integrity changes are intentionally outside this immutable release.
 
-## Installation / 安装
+## Install / 安装
 
-Use Setup EXE or extract the portable ZIP to a new directory. Keep user data separate. Verify SHA256SUMS.txt before installing. AI, external Skills and ComfyUI require their own configuration; manual writing does not require an API key. PyInstaller EXEs may trigger antivirus heuristics; do not disable security protections to bypass warnings. Unsigned Preview; no signing guarantee.
+Download the **Preview Setup.exe** for installation, or extract the **Windows Preview.zip** fully before running NovelStudio.exe. Keep existing writing data separate from the installation; select your existing data directory when upgrading. No Python/Node installation is required for packaged basic use. WebView2 and optional external AI/image/voice services keep their documented requirements. Windows may warn about the unsigned PyInstaller application; verify SHA-256 and its GitHub source, and do not disable security protection blindly. Both packages contain no personal writing, login credentials or private character models.

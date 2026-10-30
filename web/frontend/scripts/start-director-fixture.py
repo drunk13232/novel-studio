@@ -13,6 +13,7 @@ parser.add_argument('--selection-writer',action='store_true',help='Fixed local s
 parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-only mixed-newline chapter for selection checks')
 parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
 parser.add_argument('--trace-shutdown',action='store_true',help='Record isolated service close boundaries and thread stacks, never user request data')
+parser.add_argument('--readback-delay-fixture',action='store_true',help='Controlled stalled read headers/body for save-receipt tests; no model or private data')
 args=parser.parse_args();A=args.root.resolve()
 if args.selection_gated and not args.selection_writer:raise SystemExit('Gated selection requires the fixed local selection adapter')
 if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
@@ -145,6 +146,34 @@ async def start_fixture():
  service.put(p,current);return {'task':task.public(),'record_id':record['id']}
 @app.post('/api/test-fixture-finish')
 def finish_fixture():fixture_gate.set();return {'released':True}
+if args.readback_delay_fixture:
+ import asyncio
+ from fastapi import Request
+ from fastapi.responses import StreamingResponse,Response
+ readback_events=[]
+ @app.get('/api/test-fixture-readback-events')
+ def readback_status():return {'events':readback_events}
+ @app.get('/api/test-fixture-readback')
+ async def delayed_readback(request:Request,stage:str='headers',rid:str='test'):
+  assert stage in {'headers','body','slow','late'} and len(rid)<=60
+  payload=json.dumps(app.state.studio_tools.doc(p,path),ensure_ascii=False).encode('utf8')
+  readback_events.append({'id':rid,'stage':stage,'event':'started'})
+  if stage=='body':
+   async def chunks():
+    try:
+     yield payload[:max(1,len(payload)//2)]
+     await asyncio.sleep(45)
+     yield payload[max(1,len(payload)//2):]
+    finally:readback_events.append({'id':rid,'stage':stage,'event':'body_closed'})
+   return StreamingResponse(chunks(),media_type='application/json')
+  duration=1 if stage=='slow' else 12.5 if stage=='late' else 45
+  deadline=time.monotonic()+duration
+  while time.monotonic()<deadline:
+   if stage!='late' and await request.is_disconnected():
+    readback_events.append({'id':rid,'stage':stage,'event':'disconnected'});return Response(status_code=204)
+   await asyncio.sleep(.05)
+  readback_events.append({'id':rid,'stage':stage,'event':'finished'})
+  return Response(payload,media_type='application/json')
 import uvicorn
 # Optional diagnostic only: preserve the real lifespan and close behavior.
 if args.trace_shutdown:

@@ -1,4 +1,24 @@
-# Novel Studio · 2.24.23 Verified Save Feedback Preview
+# Novel Studio · 2.24.26 Bounded Chapter Opening Preview
+
+## Current public version: 2.24.26 Preview
+
+Includes 2.24.24–2.24.26 save-triggered statistics refresh, read-only disk snapshots, bounded save-receipt verification, cancellable chapter loading and deduplicated workspace restoration. [Release 2.24.26](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.26-preview) provides Setup, portable ZIP and SHA-256 checksums. Older releases are retained.
+
+**Preview / PARTIAL**: the completed local 2.24.26 delivery records 39 isolated headless cases; packaged worker and silent install/uninstall were checked separately. Native GUI, physical Chinese IME, system DPI, voices, real cloud AI and prolonged use are not newly verified. See Actions and the Release for exact-commit CI. In-progress recovery changes are excluded.
+
+Chapter and recovery reads share a 10-second deadline. Ambiguous save receipts cause read-only verification, never automatic manuscript-write replay. Recovery copies do not replace persistent backups.
+
+## 2.24.26
+
+Local Preview / PARTIAL. Cancellable chapter/recovery reads use a 10-second header/body deadline, retain existing content on failure and never bypass recovery or replay saves. Workspace restore resolves its target first; two measured scenarios reduced four reads to two, without claiming a matching startup-speed improvement. Thirty-nine isolated headless cases passed, including unsaved text, undo/redo, cancellation with an enabled writing ritual, save/format and snapshot regressions. See [2.24.26 notes](docs/workbench-experience/DELIVERY-2.24.26.md). No publication or shortcut update.
+
+## 2.24.25
+
+Local Preview / PARTIAL. Successful author reload of a changed revision after an uncertain save refreshes actual saved-event progress without creating events or word counts. Unconfirmed saves expose existing compare/reload controls; read-only snapshots support empty files, cancellation, explicit retry and a deadline. 28 isolated headless cases passed. See [2.24.25 notes](docs/workbench-experience/DELIVERY-2.24.25.md). Public release remains 2.24.23; no automatic publication or shortcut change.
+
+## 2.24.24
+
+Local Preview / PARTIAL. Post-save read-only verification has a 10-second deadline covering headers and JSON body. Timeout stops the browser read, retains edits/unconfirmed state and never cancels or replays the submitted write. 18 isolated headless cases passed. See [2.24.24 notes](docs/workbench-experience/DELIVERY-2.24.24.md). Public release remains 2.24.23; no automatic publication or shortcut change.
 
 ## Current public version: 2.24.23 Preview
 
