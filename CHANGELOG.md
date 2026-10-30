@@ -1,5 +1,13 @@
 # Changelog / 更新记录
 
+## 2.24.19 — Assistant Navigation Safety Preview (2026-10-30)
+
+- Recheck project, page, document load, newer navigation and unsaved input after delayed assistant-result lookups.
+- Report actual file-read success/failure; superseded or failed reads cannot continue candidate/director display.
+- Apply live guards to existing character, world entity, reference and report lookups.
+- Clear result-button errors for an explicit retry; ignore errors from older request/scope owners.
+- Preserve existing Actions, author approvals, source versions and recovery. Local Preview / PARTIAL, without automatic publication or native GUI/real-model acceptance claims.
+
 ## 2.24.18 — Candidate Open Reliability Preview (2026-10-30, local)
 
 - Share a scoped candidate-read owner across history and existing external requests; cancel/ignore stale success and failure callbacks.

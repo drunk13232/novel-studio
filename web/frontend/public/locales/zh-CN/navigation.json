@@ -384,5 +384,7 @@
   "emotionCurve": "情绪与张力曲线",
   "readerPersonas": "虚拟读者画像",
   "planningCenter": "计划中心",
-  "returnToTool_plans": "返回计划中心"
+  "returnToTool_plans": "返回计划中心",
+  "navigationContextChanged": "页面或章节已变化，已停止较早的导航。请从当前页面重新操作。",
+  "documentOpenFailed": "文件未能打开，已停止后续跳转或候选展示。请检查读取错误后重试。"
 }

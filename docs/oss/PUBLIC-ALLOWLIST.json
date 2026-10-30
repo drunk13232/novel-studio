@@ -1,12 +1,21 @@
 {
-  "version": "2.24.18 Preview",
+  "version": "2.24.19 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
   "history_included": false,
   "publication_ready": false,
-  "source": "current retained developer manifest + scoped application/tests/helpers + reviewed public docs and notices; no Git history",
+  "source": "Previous reviewed public allowlist plus immutable completed 2.24.19 developer snapshot and scoped public release documents; no working-tree draft or private Git history",
   "public_overrides": "Only portable locator and owner-approved synthetic test names; original tests/business data unchanged. Upstream terms remain; no private Git history is exported.",
+  "excluded_categories": [
+    "user works and private project IDs",
+    "credentials and user-level Codex settings",
+    "private character models/voices and plugin caches",
+    "developer environments and runtime/audit logs",
+    "parent Git objects and old release archives",
+    "generated PDF assets rebuilt from pinned npm package",
+    "old audit snapshots not current acceptance"
+  ],
   "files": [
     {
       "path": ".agents/skills/.gitkeep",
@@ -115,8 +124,8 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "ff974d53bb27fb78f3f7d3d7ac04aa1a4bee08c06960f5f76f1fc335e8a92294",
-      "bytes": 2134
+      "sha256": "52f5d3f6bd9a0f19a248268c19ee50035ed574a5a74b7c0c5f0edcd1133bcb55",
+      "bytes": 358
     },
     {
       "path": ".novelforge/.cursorrules",
@@ -127,6 +136,11 @@
       "path": ".novelforge/AGENTS.md",
       "sha256": "b6484b4acc287525297075b066cb4ddfeeb16e591caaa914ba9de1ea172e2e9f",
       "bytes": 3707
+    },
+    {
+      "path": ".novelforge/assets/banner.svg",
+      "sha256": "e3dce3840ff1a40d9bf7dc2b050151381099fc74489fe16141c0853696cce4f2",
+      "bytes": 4110
     },
     {
       "path": ".novelforge/CLAUDE.md",
@@ -144,19 +158,14 @@
       "bytes": 1104
     },
     {
-      "path": ".novelforge/README.md",
-      "sha256": "41c7f9d3cf361a6ada6704268bb4156f77ce9e7a06102f92143a5d56acf7c5c6",
-      "bytes": 17715
-    },
-    {
-      "path": ".novelforge/assets/banner.svg",
-      "sha256": "e3dce3840ff1a40d9bf7dc2b050151381099fc74489fe16141c0853696cce4f2",
-      "bytes": 4110
-    },
-    {
       "path": ".novelforge/plugin.json",
       "sha256": "3cf71584ec40d0ccbd6f6565bed6a0ee0bbed47c8481521d2b2edd7f01125574",
       "bytes": 216
+    },
+    {
+      "path": ".novelforge/README.md",
+      "sha256": "41c7f9d3cf361a6ada6704268bb4156f77ce9e7a06102f92143a5d56acf7c5c6",
+      "bytes": 17715
     },
     {
       "path": ".novelforge/references/agents/architect.md",
@@ -350,8 +359,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8dfc4488444904922d1e53a8c9828518146f823b18cb62d4631dc015d2320144",
-      "bytes": 51080
+      "sha256": "c0fdc8c3112f26a02a8e74c38e14644333142abf645f2f3b4c6d28a6e6dfd8cc",
+      "bytes": 51745
     },
     {
       "path": "CONTRIBUTING.md",
@@ -369,63 +378,8 @@
       "bytes": 1058
     },
     {
-      "path": "INSTALL.md",
-      "sha256": "09c7375cdec8e96cb61635672f02af58a5a151cec6ce9b83fe8dfa43d1037c2b",
-      "bytes": 1937
-    },
-    {
-      "path": "LICENSE",
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-      "bytes": 11358
-    },
-    {
-      "path": "NOTICE",
-      "sha256": "64e9b74c20d662440fcbbc38aeeff05faac147e28f6f28e3db11de51d98dd118",
-      "bytes": 812
-    },
-    {
-      "path": "README.md",
-      "sha256": "08f60cf28bdb3656d1b1c4a92ba35257cf5eca182139669894c9e49422280788",
-      "bytes": 18321
-    },
-    {
-      "path": "README_EN.md",
-      "sha256": "e7ff992bbad43419962d5624ea90f9ccdc665bc130024008b968f3451b0d4e6a",
-      "bytes": 19151
-    },
-    {
-      "path": "SECURITY.md",
-      "sha256": "1110cd93bb588f20d1823390c69b3eba34f96ae317d82535e93c9f4b45587dde",
-      "bytes": 1852
-    },
-    {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "8f98383941708594f38d55a5db4587af2105de3d76c0855a6d741b830f6dc0a0",
-      "bytes": 11844
-    },
-    {
-      "path": "desktop/INSTALLER.md",
-      "sha256": "fb32ae2262946016a6bb2810fb1d10845e5f6723a8f1453b9ad9cc8b920cee7b",
-      "bytes": 3385
-    },
-    {
-      "path": "desktop/NovelStudio.spec",
-      "sha256": "4c70457e83a1f3ffce0f0ca5aae736588988cacb5c098a8acfda56c92c203d65",
-      "bytes": 4038
-    },
-    {
-      "path": "desktop/PREVIEW-DEMO-GUIDE.md",
-      "sha256": "741cd5eca6699f074de0a6c77f7f373eb3228d2c71791ca62e82eafeb5420b1d",
-      "bytes": 2876
-    },
-    {
-      "path": "desktop/README.txt",
-      "sha256": "7380d0d8970706aed823c1b8c160d7ca208708205d2f9bf7c2720d472a9b8a28",
-      "bytes": 7098
-    },
-    {
       "path": "desktop/build.ps1",
-      "sha256": "7d1ea3406cadafe3b13c7bde8d7eca620796aabebf579661af77f4c2481de398",
+      "sha256": "cb8ec28684d00937cdce6f727af8ffcdc757c8ae5f1d649456d369ebc14efeae",
       "bytes": 10110
     },
     {
@@ -485,6 +439,11 @@
       "bytes": 2747
     },
     {
+      "path": "desktop/INSTALLER.md",
+      "sha256": "fb32ae2262946016a6bb2810fb1d10845e5f6723a8f1453b9ad9cc8b920cee7b",
+      "bytes": 3385
+    },
+    {
       "path": "desktop/installer.nsi",
       "sha256": "09f09a14050d04ac78e9c3f0a665e78e066f09734b8d2628e4d6d5bd3c4b99ed",
       "bytes": 16441
@@ -500,14 +459,24 @@
       "bytes": 2056
     },
     {
+      "path": "desktop/NovelStudio.spec",
+      "sha256": "4c70457e83a1f3ffce0f0ca5aae736588988cacb5c098a8acfda56c92c203d65",
+      "bytes": 4038
+    },
+    {
       "path": "desktop/package_source.py",
-      "sha256": "a35c995e000c2af5d5178527e1e0abb5e7b568a1e4dbdb558fe9c79949395bf5",
-      "bytes": 20059
+      "sha256": "23b493438ccd1f4aa4995d981c71b43414188285cc32ad414984a93b3d89ce40",
+      "bytes": 20113
     },
     {
       "path": "desktop/package_zip.py",
       "sha256": "05aac3dafe7d98eeb970fae94fd26fd28800eae0b272a5326b415fed8cb46960",
       "bytes": 4040
+    },
+    {
+      "path": "desktop/PREVIEW-DEMO-GUIDE.md",
+      "sha256": "741cd5eca6699f074de0a6c77f7f373eb3228d2c71791ca62e82eafeb5420b1d",
+      "bytes": 2876
     },
     {
       "path": "desktop/preview-template/.agents/skills/.gitkeep",
@@ -600,6 +569,11 @@
       "bytes": 3707
     },
     {
+      "path": "desktop/preview-template/.novelforge/assets/banner.svg",
+      "sha256": "e3dce3840ff1a40d9bf7dc2b050151381099fc74489fe16141c0853696cce4f2",
+      "bytes": 4110
+    },
+    {
       "path": "desktop/preview-template/.novelforge/CLAUDE.md",
       "sha256": "90a0b36b1c349fcbfd25f5afc17376232ea9e42e67165a4c9463fb0b46eee413",
       "bytes": 3672
@@ -615,19 +589,14 @@
       "bytes": 1104
     },
     {
-      "path": "desktop/preview-template/.novelforge/README.md",
-      "sha256": "41c7f9d3cf361a6ada6704268bb4156f77ce9e7a06102f92143a5d56acf7c5c6",
-      "bytes": 17715
-    },
-    {
-      "path": "desktop/preview-template/.novelforge/assets/banner.svg",
-      "sha256": "e3dce3840ff1a40d9bf7dc2b050151381099fc74489fe16141c0853696cce4f2",
-      "bytes": 4110
-    },
-    {
       "path": "desktop/preview-template/.novelforge/plugin.json",
       "sha256": "3cf71584ec40d0ccbd6f6565bed6a0ee0bbed47c8481521d2b2edd7f01125574",
       "bytes": 216
+    },
+    {
+      "path": "desktop/preview-template/.novelforge/README.md",
+      "sha256": "41c7f9d3cf361a6ada6704268bb4156f77ce9e7a06102f92143a5d56acf7c5c6",
+      "bytes": 17715
     },
     {
       "path": "desktop/preview-template/.novelforge/references/agents/architect.md",
@@ -825,11 +794,6 @@
       "bytes": 320
     },
     {
-      "path": "desktop/preview-template/DEMO.txt",
-      "sha256": "613b96df6da6e2ddc3fca65c0f048a903a73ff488fa8f3ae51e5f101223d583c",
-      "bytes": 33
-    },
-    {
       "path": "desktop/preview-template/demo-manifest.json",
       "sha256": "0d34ee2b71641cf10bbcf10620e7f83788eaa244776ae01eea6303af90f1cb5a",
       "bytes": 24863
@@ -853,6 +817,11 @@
       "path": "desktop/preview-template/demo-public/reference-library/profiles/profile_5d5de56f0e644774b20b533b8da17aa1.json",
       "sha256": "bac43fb1048c360a0e4c5950c215e1de3c58dc0e8c76bbfc775a97c5208cf367",
       "bytes": 598
+    },
+    {
+      "path": "desktop/preview-template/DEMO.txt",
+      "sha256": "613b96df6da6e2ddc3fca65c0f048a903a73ff488fa8f3ae51e5f101223d583c",
+      "bytes": 33
     },
     {
       "path": "desktop/preview-template/engine/templates/character.yaml",
@@ -1425,24 +1394,14 @@
       "bytes": 75
     },
     {
+      "path": "desktop/README.txt",
+      "sha256": "7380d0d8970706aed823c1b8c160d7ca208708205d2f9bf7c2720d472a9b8a28",
+      "bytes": 7098
+    },
+    {
       "path": "desktop/requirements.txt",
       "sha256": "07d37b414a049d1bc1bcf96146ff990976ec7af3d75808906d462cf3b68ebd88",
       "bytes": 162
-    },
-    {
-      "path": "desktop/third-party/PYTHON-SUPPLEMENTAL-NOTICES.json",
-      "sha256": "18d6ffdfa8e745d94aaeac9cced3ea4763f90264d94bb2b46d3dfb91331c622e",
-      "bytes": 2718
-    },
-    {
-      "path": "desktop/third-party/README.txt",
-      "sha256": "ae393813cbcde12b789bba099c43db4d8262c77c1df28c606e4053199e4a2ba2",
-      "bytes": 586
-    },
-    {
-      "path": "desktop/third-party/SUPPLEMENTAL-NOTICES.json",
-      "sha256": "0919f916530bfec8e352f5d1d454bc7e360530c48d8e7246b71160fdbd90e8bd",
-      "bytes": 1540
     },
     {
       "path": "desktop/third-party/font-source/AUTHORS",
@@ -1455,6 +1414,11 @@
       "bytes": 17987
     },
     {
+      "path": "desktop/third-party/font-source/liberation-fonts-1.07.4.tar.gz",
+      "sha256": "ad98b7498dc2992f7f0868f79b65ce4a720a3acdb63ab3f1f1cb6881117a5406",
+      "bytes": 2937949
+    },
+    {
       "path": "desktop/third-party/font-source/License.txt",
       "sha256": "c40dd6adebad817defd68c7edad151d9c13d2ac3b4e1790ce2b727b024438b6d",
       "bytes": 4012
@@ -1463,16 +1427,6 @@
       "path": "desktop/third-party/font-source/README.txt",
       "sha256": "3b823c64804ea3f3f5315e09de8713957427aabfeee591dda8b2e02f4f1dadf2",
       "bytes": 1424
-    },
-    {
-      "path": "desktop/third-party/font-source/liberation-fonts-1.07.4.tar.gz",
-      "sha256": "ad98b7498dc2992f7f0868f79b65ce4a720a3acdb63ab3f1f1cb6881117a5406",
-      "bytes": 2937949
-    },
-    {
-      "path": "desktop/third-party/javascript/CETEIcean/LICENSE.md",
-      "sha256": "d10845e3fb318c4e60a6e5d9dcb81ccf797b419d547b57a82ff9f3b81ca1a3d0",
-      "bytes": 1315
     },
     {
       "path": "desktop/third-party/javascript/agent-base/LICENSE",
@@ -1673,6 +1627,11 @@
       "path": "desktop/third-party/javascript/caniuse-lite/LICENSE",
       "sha256": "fd3a263fe19ed8faa9068b43abaebafc02c77897b0c6fc09abc04bb592e5f16e",
       "bytes": 18651
+    },
+    {
+      "path": "desktop/third-party/javascript/CETEIcean/LICENSE.md",
+      "sha256": "d10845e3fb318c4e60a6e5d9dcb81ccf797b419d547b57a82ff9f3b81ca1a3d0",
+      "bytes": 1315
     },
     {
       "path": "desktop/third-party/javascript/chalk/license",
@@ -1930,13 +1889,13 @@
       "bytes": 731
     },
     {
-      "path": "desktop/third-party/javascript/d3-time-format/LICENSE",
-      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
+      "path": "desktop/third-party/javascript/d3-time/LICENSE",
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884",
       "bytes": 731
     },
     {
-      "path": "desktop/third-party/javascript/d3-time/LICENSE",
-      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884",
+      "path": "desktop/third-party/javascript/d3-time-format/LICENSE",
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
       "bytes": 731
     },
     {
@@ -1980,14 +1939,14 @@
       "bytes": 1139
     },
     {
-      "path": "desktop/third-party/javascript/decimal.js-light/LICENCE.md",
-      "sha256": "fc0397fbd5c128bec7edef4e8d3f45e15db5fd043cdd0a2edfc4f14d47fbc3e4",
-      "bytes": 1110
-    },
-    {
       "path": "desktop/third-party/javascript/decimal.js/LICENCE.md",
       "sha256": "3108b546bcff5d346923a82f48b2d252ca722f9088076db6d145f6b67757ad6c",
       "bytes": 1104
+    },
+    {
+      "path": "desktop/third-party/javascript/decimal.js-light/LICENCE.md",
+      "sha256": "fc0397fbd5c128bec7edef4e8d3f45e15db5fd043cdd0a2edfc4f14d47fbc3e4",
+      "bytes": 1110
     },
     {
       "path": "desktop/third-party/javascript/decompress-response/license",
@@ -2175,12 +2134,12 @@
       "bytes": 1089
     },
     {
-      "path": "desktop/third-party/javascript/floating-ui_react-dom/LICENSE",
+      "path": "desktop/third-party/javascript/floating-ui_react/LICENSE",
       "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
       "bytes": 1089
     },
     {
-      "path": "desktop/third-party/javascript/floating-ui_react/LICENSE",
+      "path": "desktop/third-party/javascript/floating-ui_react-dom/LICENSE",
       "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
       "bytes": 1089
     },
@@ -2290,14 +2249,14 @@
       "bytes": 11357
     },
     {
+      "path": "desktop/third-party/javascript/i18next/LICENSE",
+      "sha256": "1cd0a2b02a6cc40ef8ee16310d13eeffdd7b5de4a562fd3ee7c921d8eb54f60a",
+      "bytes": 1082
+    },
+    {
       "path": "desktop/third-party/javascript/i18next-cli/LICENSE",
       "sha256": "c1ea6f03bcd4bd788cf18ad10f1dbc36e176dee1d4f3b4a00b9ab2cf06d8581b",
       "bytes": 1071
-    },
-    {
-      "path": "desktop/third-party/javascript/i18next-http-backend/LICENSE.upstream",
-      "sha256": "cb8cbae10ab2c80b8d29961fe8cda053a198113396903413a914493eea25551f",
-      "bytes": 1059
     },
     {
       "path": "desktop/third-party/javascript/i18next-http-backend/licence",
@@ -2305,14 +2264,14 @@
       "bytes": 1059
     },
     {
-      "path": "desktop/third-party/javascript/i18next-resources-for-ts/licence",
-      "sha256": "1fc41dd33bc57175417b98af953af77cdfe0d418a15bfea47ea68fd68cf44bdf",
+      "path": "desktop/third-party/javascript/i18next-http-backend/LICENSE.upstream",
+      "sha256": "cb8cbae10ab2c80b8d29961fe8cda053a198113396903413a914493eea25551f",
       "bytes": 1059
     },
     {
-      "path": "desktop/third-party/javascript/i18next/LICENSE",
-      "sha256": "1cd0a2b02a6cc40ef8ee16310d13eeffdd7b5de4a562fd3ee7c921d8eb54f60a",
-      "bytes": 1082
+      "path": "desktop/third-party/javascript/i18next-resources-for-ts/licence",
+      "sha256": "1fc41dd33bc57175417b98af953af77cdfe0d418a15bfea47ea68fd68cf44bdf",
+      "bytes": 1059
     },
     {
       "path": "desktop/third-party/javascript/iconv-lite/LICENSE",
@@ -2685,17 +2644,17 @@
       "bytes": 1069
     },
     {
+      "path": "desktop/third-party/javascript/motion/LICENSE.md",
+      "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1",
+      "bytes": 1100
+    },
+    {
       "path": "desktop/third-party/javascript/motion-dom/LICENSE.md",
       "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1",
       "bytes": 1100
     },
     {
       "path": "desktop/third-party/javascript/motion-utils/LICENSE.md",
-      "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1",
-      "bytes": 1100
-    },
-    {
-      "path": "desktop/third-party/javascript/motion/LICENSE.md",
       "sha256": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1",
       "bytes": 1100
     },
@@ -2920,12 +2879,12 @@
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/pixi_mesh-extras/LICENSE",
+      "path": "desktop/third-party/javascript/pixi_mesh/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/pixi_mesh/LICENSE",
+      "path": "desktop/third-party/javascript/pixi_mesh-extras/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
     },
@@ -2965,6 +2924,11 @@
       "bytes": 1092
     },
     {
+      "path": "desktop/third-party/javascript/pixi_sprite/LICENSE",
+      "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
+      "bytes": 1092
+    },
+    {
       "path": "desktop/third-party/javascript/pixi_sprite-animated/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
@@ -2975,22 +2939,17 @@
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/pixi_sprite/LICENSE",
-      "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
-      "bytes": 1092
-    },
-    {
       "path": "desktop/third-party/javascript/pixi_spritesheet/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/pixi_text-bitmap/LICENSE",
+      "path": "desktop/third-party/javascript/pixi_text/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/pixi_text/LICENSE",
+      "path": "desktop/third-party/javascript/pixi_text-bitmap/LICENSE",
       "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
       "bytes": 1092
     },
@@ -3005,22 +2964,22 @@
       "bytes": 1092
     },
     {
-      "path": "desktop/third-party/javascript/playwright-core/LICENSE",
-      "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb",
-      "bytes": 11601
-    },
-    {
-      "path": "desktop/third-party/javascript/playwright-core/NOTICE",
-      "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d",
-      "bytes": 254
-    },
-    {
       "path": "desktop/third-party/javascript/playwright/LICENSE",
       "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb",
       "bytes": 11601
     },
     {
       "path": "desktop/third-party/javascript/playwright/NOTICE",
+      "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d",
+      "bytes": 254
+    },
+    {
+      "path": "desktop/third-party/javascript/playwright-core/LICENSE",
+      "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb",
+      "bytes": 11601
+    },
+    {
+      "path": "desktop/third-party/javascript/playwright-core/NOTICE",
       "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d",
       "bytes": 254
     },
@@ -3140,12 +3099,12 @@
       "bytes": 1063
     },
     {
-      "path": "desktop/third-party/javascript/radix-ui_react-context-menu/LICENSE",
+      "path": "desktop/third-party/javascript/radix-ui_react-context/LICENSE",
       "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
       "bytes": 1063
     },
     {
-      "path": "desktop/third-party/javascript/radix-ui_react-context/LICENSE",
+      "path": "desktop/third-party/javascript/radix-ui_react-context-menu/LICENSE",
       "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
       "bytes": 1063
     },
@@ -3305,12 +3264,12 @@
       "bytes": 1063
     },
     {
-      "path": "desktop/third-party/javascript/radix-ui_react-toggle-group/LICENSE",
+      "path": "desktop/third-party/javascript/radix-ui_react-toggle/LICENSE",
       "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
       "bytes": 1063
     },
     {
-      "path": "desktop/third-party/javascript/radix-ui_react-toggle/LICENSE",
+      "path": "desktop/third-party/javascript/radix-ui_react-toggle-group/LICENSE",
       "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
       "bytes": 1063
     },
@@ -3400,6 +3359,11 @@
       "bytes": 1088
     },
     {
+      "path": "desktop/third-party/javascript/react/LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "bytes": 1088
+    },
+    {
       "path": "desktop/third-party/javascript/react-dom/LICENSE",
       "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
       "bytes": 1088
@@ -3455,11 +3419,6 @@
       "bytes": 1078
     },
     {
-      "path": "desktop/third-party/javascript/react/LICENSE",
-      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
-      "bytes": 1088
-    },
-    {
       "path": "desktop/third-party/javascript/readable-stream/LICENSE",
       "sha256": "ec62dc96da0099b87f4511736c87309335527fb7031639493e06c95728dc8c54",
       "bytes": 2337
@@ -3480,14 +3439,14 @@
       "bytes": 1499
     },
     {
-      "path": "desktop/third-party/javascript/redux-thunk/LICENSE.md",
-      "sha256": "635da794c92d278f8355428be0f9922d643f556d4f75f33fe4aca6b98d27affe",
-      "bytes": 1107
-    },
-    {
       "path": "desktop/third-party/javascript/redux/LICENSE.md",
       "sha256": "f2da73c752c6b87624755edacf927cbd915fa76555d383e74494bad4a5155ab3",
       "bytes": 1086
+    },
+    {
+      "path": "desktop/third-party/javascript/redux-thunk/LICENSE.md",
+      "sha256": "635da794c92d278f8355428be0f9922d643f556d4f75f33fe4aca6b98d27affe",
+      "bytes": 1107
     },
     {
       "path": "desktop/third-party/javascript/reduxjs_toolkit/LICENSE",
@@ -3560,6 +3519,11 @@
       "bytes": 765
     },
     {
+      "path": "desktop/third-party/javascript/side-channel/LICENSE",
+      "sha256": "cfc3f455254c0af0655cc3ff46a41ed644b67599f6043346169d285bf2b3cf3b",
+      "bytes": 1071
+    },
+    {
       "path": "desktop/third-party/javascript/side-channel-list/LICENSE",
       "sha256": "5e325595b4ea8cfec3802f545b1def5d7b73e4a5b8e9ba63e32a320f67732292",
       "bytes": 1071
@@ -3571,11 +3535,6 @@
     },
     {
       "path": "desktop/third-party/javascript/side-channel-weakmap/LICENSE",
-      "sha256": "cfc3f455254c0af0655cc3ff46a41ed644b67599f6043346169d285bf2b3cf3b",
-      "bytes": 1071
-    },
-    {
-      "path": "desktop/third-party/javascript/side-channel/LICENSE",
       "sha256": "cfc3f455254c0af0655cc3ff46a41ed644b67599f6043346169d285bf2b3cf3b",
       "bytes": 1071
     },
@@ -3665,12 +3624,12 @@
       "bytes": 1100
     },
     {
-      "path": "desktop/third-party/javascript/swc_core-win32-x64-msvc/LICENSE",
+      "path": "desktop/third-party/javascript/swc_core/LICENSE",
       "sha256": "d96eba1f1881334d50ffc144276dfa98e147a415e7c591ecdfcb81680361dc91",
       "bytes": 10836
     },
     {
-      "path": "desktop/third-party/javascript/swc_core/LICENSE",
+      "path": "desktop/third-party/javascript/swc_core-win32-x64-msvc/LICENSE",
       "sha256": "d96eba1f1881334d50ffc144276dfa98e147a415e7c591ecdfcb81680361dc91",
       "bytes": 10836
     },
@@ -3710,12 +3669,12 @@
       "bytes": 1076
     },
     {
-      "path": "desktop/third-party/javascript/tldts-core/LICENSE",
+      "path": "desktop/third-party/javascript/tldts/LICENSE",
       "sha256": "c64182d48160db948b6aa97a984f1a32974ce4d2053900361264cd33853796cb",
       "bytes": 1078
     },
     {
-      "path": "desktop/third-party/javascript/tldts/LICENSE",
+      "path": "desktop/third-party/javascript/tldts-core/LICENSE",
       "sha256": "c64182d48160db948b6aa97a984f1a32974ce4d2053900361264cd33853796cb",
       "bytes": 1078
     },
@@ -3855,12 +3814,12 @@
       "bytes": 1141
     },
     {
-      "path": "desktop/third-party/javascript/types_react-dom/LICENSE",
+      "path": "desktop/third-party/javascript/types_react/LICENSE",
       "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
       "bytes": 1141
     },
     {
-      "path": "desktop/third-party/javascript/types_react/LICENSE",
+      "path": "desktop/third-party/javascript/types_react-dom/LICENSE",
       "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
       "bytes": 1141
     },
@@ -3950,14 +3909,14 @@
       "bytes": 10171
     },
     {
-      "path": "desktop/third-party/javascript/vis-timeline/LICENSE.MIT.txt",
-      "sha256": "507e7e91e0a385c9de0464889068fada0620e327d23f1d64605a7d046490ec97",
-      "bytes": 1145
-    },
-    {
       "path": "desktop/third-party/javascript/vis-timeline/LICENSE.md",
       "sha256": "535036cac87eaf62b4460a592c2d12e349d6b1135f0203e77eab1b23ad08bc55",
       "bytes": 315
+    },
+    {
+      "path": "desktop/third-party/javascript/vis-timeline/LICENSE.MIT.txt",
+      "sha256": "507e7e91e0a385c9de0464889068fada0620e327d23f1d64605a7d046490ec97",
+      "bytes": 1145
     },
     {
       "path": "desktop/third-party/javascript/vis-util/LICENSE-APACHE-2.0",
@@ -4085,46 +4044,6 @@
       "bytes": 59595
     },
     {
-      "path": "desktop/third-party/python/CPython-WASI/LICENSE",
-      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
-      "bytes": 13804
-    },
-    {
-      "path": "desktop/third-party/python/CPython/LICENSE.txt",
-      "sha256": "886a0ead2d89030ee62dbff52b04e47ab91998341295bb9c56fb952b4e081c7a",
-      "bytes": 25066
-    },
-    {
-      "path": "desktop/third-party/python/Pillow/LICENSE",
-      "sha256": "4f7866a74802c6326f81faff59a56546b6aec2b10b91973e0e9308de95e79857",
-      "bytes": 78016
-    },
-    {
-      "path": "desktop/third-party/python/Pint/LICENSE",
-      "sha256": "46e43fb463fe2e0e28b32c900bbbdb6f376959df3936e1c134566860a55b2112",
-      "bytes": 1584
-    },
-    {
-      "path": "desktop/third-party/python/PyInstaller/COPYING.txt",
-      "sha256": "0598064c7d2718e38d7914a7d08343b2fa008e3bea9ebba2aa7a6ffa5900dd64",
-      "bytes": 32604
-    },
-    {
-      "path": "desktop/third-party/python/PyJWT/LICENSE",
-      "sha256": "797a7a20231d4c433e9f1911db1731d06b5828b98f499819a034f7c0f56f5ce5",
-      "bytes": 1085
-    },
-    {
-      "path": "desktop/third-party/python/PyYAML/LICENSE",
-      "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4",
-      "bytes": 1101
-    },
-    {
-      "path": "desktop/third-party/python/Pygments/LICENSE",
-      "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17",
-      "bytes": 1331
-    },
-    {
       "path": "desktop/third-party/python/absl-py/LICENSE",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "bytes": 11358
@@ -4193,6 +4112,16 @@
       "path": "desktop/third-party/python/comtypes/LICENSE.txt",
       "sha256": "3b1767f010980b46926b23bf0afce5d72f3359ee5e2b27baca71b9b4209ab383",
       "bytes": 1273
+    },
+    {
+      "path": "desktop/third-party/python/CPython/LICENSE.txt",
+      "sha256": "886a0ead2d89030ee62dbff52b04e47ab91998341295bb9c56fb952b4e081c7a",
+      "bytes": 25066
+    },
+    {
+      "path": "desktop/third-party/python/CPython-WASI/LICENSE",
+      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "bytes": 13804
     },
     {
       "path": "desktop/third-party/python/cryptography/LICENSE",
@@ -4290,13 +4219,13 @@
       "bytes": 1112
     },
     {
-      "path": "desktop/third-party/python/jsonschema-specifications/COPYING",
-      "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+      "path": "desktop/third-party/python/jsonschema/COPYING",
+      "sha256": "4f92a015a13c4d1a040bef018aa13430b4f1bc73b41b16bb846c346766de7439",
       "bytes": 1057
     },
     {
-      "path": "desktop/third-party/python/jsonschema/COPYING",
-      "sha256": "4f92a015a13c4d1a040bef018aa13430b4f1bc73b41b16bb846c346766de7439",
+      "path": "desktop/third-party/python/jsonschema-specifications/COPYING",
+      "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
       "bytes": 1057
     },
     {
@@ -4315,12 +4244,12 @@
       "bytes": 6348
     },
     {
-      "path": "desktop/third-party/python/mcp-types/LICENSE",
+      "path": "desktop/third-party/python/mcp/LICENSE",
       "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
       "bytes": 1071
     },
     {
-      "path": "desktop/third-party/python/mcp/LICENSE",
+      "path": "desktop/third-party/python/mcp-types/LICENSE",
       "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d",
       "bytes": 1071
     },
@@ -4360,6 +4289,21 @@
       "bytes": 1039
     },
     {
+      "path": "desktop/third-party/python/openai/LICENSE",
+      "sha256": "154759c1e9eb58e42643ee43ec59d556def4d1d702d911a484c469e02f85dd5d",
+      "bytes": 1493
+    },
+    {
+      "path": "desktop/third-party/python/openai-codex/LICENSE",
+      "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
+      "bytes": 10926
+    },
+    {
+      "path": "desktop/third-party/python/openai-codex/NOTICE",
+      "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915",
+      "bytes": 242
+    },
+    {
       "path": "desktop/third-party/python/openai-codex-cli-bin/LICENSE",
       "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
       "bytes": 10926
@@ -4378,21 +4322,6 @@
       "path": "desktop/third-party/python/openai-codex-cli-bin/RIPGREP-LICENSE-MIT",
       "sha256": "0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
       "bytes": 1081
-    },
-    {
-      "path": "desktop/third-party/python/openai-codex/LICENSE",
-      "sha256": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
-      "bytes": 10926
-    },
-    {
-      "path": "desktop/third-party/python/openai-codex/NOTICE",
-      "sha256": "9d71575ecfd9a843fc1677b0efb08053c6ba9fd686a0de1a6f5382fd3c220915",
-      "bytes": 242
-    },
-    {
-      "path": "desktop/third-party/python/openai/LICENSE",
-      "sha256": "154759c1e9eb58e42643ee43ec59d556def4d1d702d911a484c469e02f85dd5d",
-      "bytes": 1493
     },
     {
       "path": "desktop/third-party/python/opentelemetry-api/LICENSE",
@@ -4445,6 +4374,16 @@
       "bytes": 1083
     },
     {
+      "path": "desktop/third-party/python/Pillow/LICENSE",
+      "sha256": "4f7866a74802c6326f81faff59a56546b6aec2b10b91973e0e9308de95e79857",
+      "bytes": 78016
+    },
+    {
+      "path": "desktop/third-party/python/Pint/LICENSE",
+      "sha256": "46e43fb463fe2e0e28b32c900bbbdb6f376959df3936e1c134566860a55b2112",
+      "bytes": 1584
+    },
+    {
       "path": "desktop/third-party/python/pip/LICENSE.txt",
       "sha256": "634300a669d49aeae65b12c6c48c924c51a4cdf3d1ff086dc3456dc8bcaa2104",
       "bytes": 1093
@@ -4480,9 +4419,24 @@
       "bytes": 1101
     },
     {
+      "path": "desktop/third-party/python/Pygments/LICENSE",
+      "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17",
+      "bytes": 1331
+    },
+    {
+      "path": "desktop/third-party/python/PyInstaller/COPYING.txt",
+      "sha256": "0598064c7d2718e38d7914a7d08343b2fa008e3bea9ebba2aa7a6ffa5900dd64",
+      "bytes": 32604
+    },
+    {
       "path": "desktop/third-party/python/pyinstaller-hooks-contrib/LICENSE",
       "sha256": "91d0baaff00773038e72c0a1fc9d5d2d38706b7a2b9c04f34296608f931b9cd0",
       "bytes": 27666
+    },
+    {
+      "path": "desktop/third-party/python/PyJWT/LICENSE",
+      "sha256": "797a7a20231d4c433e9f1911db1731d06b5828b98f499819a034f7c0f56f5ce5",
+      "bytes": 1085
     },
     {
       "path": "desktop/third-party/python/pypdf/LICENSE",
@@ -4520,14 +4474,14 @@
       "bytes": 1518
     },
     {
-      "path": "desktop/third-party/python/pywin32-ctypes/LICENSE.txt",
-      "sha256": "dfa83b3e2709adfcdb838d9ad55823ca674abb780e60563d9dd9544ccbf785e9",
-      "bytes": 1644
-    },
-    {
       "path": "desktop/third-party/python/pywin32/LICENSE",
       "sha256": "1c4cf44d2fb8bf2d10214d6da80cc9e05502824cc4460f35be4c7bcb4cde53da",
       "bytes": 1087
+    },
+    {
+      "path": "desktop/third-party/python/pywin32/license.txt",
+      "sha256": "fad39c18fc3825fa278db1c86fd52cf88d7c525b3c2fbf7817fa383cbae4d423",
+      "bytes": 1570
     },
     {
       "path": "desktop/third-party/python/pywin32/NOTICE.md",
@@ -4535,9 +4489,14 @@
       "bytes": 476
     },
     {
-      "path": "desktop/third-party/python/pywin32/license.txt",
-      "sha256": "fad39c18fc3825fa278db1c86fd52cf88d7c525b3c2fbf7817fa383cbae4d423",
-      "bytes": 1570
+      "path": "desktop/third-party/python/pywin32-ctypes/LICENSE.txt",
+      "sha256": "dfa83b3e2709adfcdb838d9ad55823ca674abb780e60563d9dd9544ccbf785e9",
+      "bytes": 1644
+    },
+    {
+      "path": "desktop/third-party/python/PyYAML/LICENSE",
+      "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4",
+      "bytes": 1101
     },
     {
       "path": "desktop/third-party/python/referencing/COPYING",
@@ -4665,24 +4624,24 @@
       "bytes": 1096
     },
     {
+      "path": "desktop/third-party/PYTHON-SUPPLEMENTAL-NOTICES.json",
+      "sha256": "18d6ffdfa8e745d94aaeac9cced3ea4763f90264d94bb2b46d3dfb91331c622e",
+      "bytes": 2718
+    },
+    {
+      "path": "desktop/third-party/README.txt",
+      "sha256": "ae393813cbcde12b789bba099c43db4d8262c77c1df28c606e4053199e4a2ba2",
+      "bytes": 586
+    },
+    {
+      "path": "desktop/third-party/SUPPLEMENTAL-NOTICES.json",
+      "sha256": "0919f916530bfec8e352f5d1d454bc7e360530c48d8e7246b71160fdbd90e8bd",
+      "bytes": 1540
+    },
+    {
       "path": "desktop/version.json",
-      "sha256": "aaa0513fded3fb2e43029d882750defb5bf136e98a8f1692bec29883d95e1fdb",
-      "bytes": 2278
-    },
-    {
-      "path": "docs/AI.md",
-      "sha256": "364628fb343cfe6a0145384e86aba8728d85a32ed9e68597b722544903caa5c5",
-      "bytes": 1930
-    },
-    {
-      "path": "docs/DEVELOPMENT.md",
-      "sha256": "bfcf3ab7002a266d7d2841be2dc2ae064849637e49f12c6a7d77d48dacfc5aae",
-      "bytes": 5332
-    },
-    {
-      "path": "docs/WINDOWS-BUILD.md",
-      "sha256": "4e89b48ae44656cc04f3f0112b0c857baa5f61122b562bd5007c4f8a693f370c",
-      "bytes": 3119
+      "sha256": "2b35dbdac845cc17144cc510b8b045fa48075002c58fb3634aea5d1aef02147c",
+      "bytes": 2250
     },
     {
       "path": "docs/ai-controls/PUBLIC-REVIEW.json",
@@ -4700,14 +4659,19 @@
       "bytes": 3162
     },
     {
+      "path": "docs/ai-writing/README.md",
+      "sha256": "9898c7c5581dec7b7af486c6beed84b6c3b34e663a39e8e7d508f1b96fdb3ae3",
+      "bytes": 2905
+    },
+    {
       "path": "docs/ai-writing-quality/README.md",
       "sha256": "0e48184678fff4288dfdd24a7990d4a0476d21f63dc30de3ccde681249d10b6c",
       "bytes": 5026
     },
     {
-      "path": "docs/ai-writing/README.md",
-      "sha256": "9898c7c5581dec7b7af486c6beed84b6c3b34e663a39e8e7d508f1b96fdb3ae3",
-      "bytes": 2905
+      "path": "docs/AI.md",
+      "sha256": "364628fb343cfe6a0145384e86aba8728d85a32ed9e68597b722544903caa5c5",
+      "bytes": 1930
     },
     {
       "path": "docs/art-refinement/README.md",
@@ -4860,6 +4824,11 @@
       "bytes": 4659
     },
     {
+      "path": "docs/DEVELOPMENT.md",
+      "sha256": "bfcf3ab7002a266d7d2841be2dc2ae064849637e49f12c6a7d77d48dacfc5aae",
+      "bytes": 5332
+    },
+    {
       "path": "docs/evaluation/DESIGN.md",
       "sha256": "413831903652c7c1831b33e79e3b3b892d9e2c86cb25c725fc3ea93c87043c77",
       "bytes": 1875
@@ -4880,6 +4849,11 @@
       "bytes": 2530
     },
     {
+      "path": "docs/goal-upgrade/character-card.example.json",
+      "sha256": "d93935e793a6b4923f406e4cda0303320e42a92e611ca914354dc2c03fb0a308",
+      "bytes": 560
+    },
+    {
       "path": "docs/goal-upgrade/README.md",
       "sha256": "00e6010e58da17bb7d4045f76f5944bb85977cab3d9c0bc7f7b455fb34d319aa",
       "bytes": 4765
@@ -4893,11 +4867,6 @@
       "path": "docs/goal-upgrade/UPGRADE-REPORT.md",
       "sha256": "106f0d0e75d1cbe84f7d57396d640b211f40e3cb8b63d9fa298bbe710697cd36",
       "bytes": 8341
-    },
-    {
-      "path": "docs/goal-upgrade/character-card.example.json",
-      "sha256": "d93935e793a6b4923f406e4cda0303320e42a92e611ca914354dc2c03fb0a308",
-      "bytes": 560
     },
     {
       "path": "docs/i18n/LANGUAGE-STATUS.md",
@@ -4981,8 +4950,8 @@
     },
     {
       "path": "docs/oss/CANDIDATE-AUDIT.md",
-      "sha256": "a4ce318b96dc84552e9f75bee04de816cc4cae4b7c9e0999617fe559854f444f",
-      "bytes": 1905
+      "sha256": "c70e854090947dee7601683716c8fad3ce3d43f79c21c4906bd1581fc37f2b61",
+      "bytes": 910
     },
     {
       "path": "docs/oss/CHANGELOG-SOURCES.json",
@@ -5020,14 +4989,24 @@
       "bytes": 1498
     },
     {
+      "path": "docs/oss/public-overrides/check-global-replace.mjs",
+      "sha256": "35761656fbd1c44955caca1fae0563cbf9a57a64bc2c4d7f2c851e35ca57aed7",
+      "bytes": 34426
+    },
+    {
+      "path": "docs/oss/public-overrides/test_global_replace.py",
+      "sha256": "6b44df79e034f84a1e0c183259a33250a59a03627a579c210aebce8c093618c8",
+      "bytes": 24920
+    },
+    {
       "path": "docs/oss/RELEASE-NOTES-TEMPLATE.md",
       "sha256": "25589f09c5ac6f8441a976fc82902bf09e4f2b25d7fa21a809bbc7c1fb9be380",
       "bytes": 1324
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "a71658ea9bda1ba7062f333eb173e9513d69aa41d8dad118a3f72f678bee2215",
-      "bytes": 5264
+      "sha256": "1ca6b3b63e430cdd383a91bff37ef876aa0c4698266733cdddcb087e706b4027",
+      "bytes": 3184
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -5040,21 +5019,6 @@
       "bytes": 550
     },
     {
-      "path": "docs/oss/SCREENSHOTS.md",
-      "sha256": "8995a29c85b22c1dfdffeb1dde8607702e4679b410a127df98836466fc2b6290",
-      "bytes": 555
-    },
-    {
-      "path": "docs/oss/public-overrides/check-global-replace.mjs",
-      "sha256": "35761656fbd1c44955caca1fae0563cbf9a57a64bc2c4d7f2c851e35ca57aed7",
-      "bytes": 34426
-    },
-    {
-      "path": "docs/oss/public-overrides/test_global_replace.py",
-      "sha256": "6b44df79e034f84a1e0c183259a33250a59a03627a579c210aebce8c093618c8",
-      "bytes": 24920
-    },
-    {
       "path": "docs/oss/screenshots/bookshelf.png",
       "sha256": "15d954974c26b718c507cec7afa7949d0dfa3a77f4270081618355759363201b",
       "bytes": 75017
@@ -5065,14 +5029,9 @@
       "bytes": 98701
     },
     {
-      "path": "docs/plugin-hub/README.md",
-      "sha256": "4d4087ebd85912085a0cfd262feb34965855200fdb2fc7672496e75d12c52d22",
-      "bytes": 4829
-    },
-    {
-      "path": "docs/plugin-hub/examples/chapter-summary/README.md",
-      "sha256": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13",
-      "bytes": 154
+      "path": "docs/oss/SCREENSHOTS.md",
+      "sha256": "8995a29c85b22c1dfdffeb1dde8607702e4679b410a127df98836466fc2b6290",
+      "bytes": 555
     },
     {
       "path": "docs/plugin-hub/examples/chapter-summary/manifest.json",
@@ -5080,14 +5039,14 @@
       "bytes": 928
     },
     {
+      "path": "docs/plugin-hub/examples/chapter-summary/README.md",
+      "sha256": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13",
+      "bytes": 154
+    },
+    {
       "path": "docs/plugin-hub/examples/chapter-summary/scripts/summary.py",
       "sha256": "cc66bdc00995a2011d82f9571db96f49f37fe215247a41cf81b28ca1987fc53f",
       "bytes": 234
-    },
-    {
-      "path": "docs/plugin-hub/examples/integration-entries/README.md",
-      "sha256": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13",
-      "bytes": 154
     },
     {
       "path": "docs/plugin-hub/examples/integration-entries/manifest.json",
@@ -5095,7 +5054,7 @@
       "bytes": 1366
     },
     {
-      "path": "docs/plugin-hub/examples/writing-shortcuts/README.md",
+      "path": "docs/plugin-hub/examples/integration-entries/README.md",
       "sha256": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13",
       "bytes": 154
     },
@@ -5105,9 +5064,19 @@
       "bytes": 1811
     },
     {
+      "path": "docs/plugin-hub/examples/writing-shortcuts/README.md",
+      "sha256": "19454fb0e6148100aa8fead3bcb9405cab1b45b58217083fb25ae7e280221c13",
+      "bytes": 154
+    },
+    {
       "path": "docs/plugin-hub/manifest.schema.json",
       "sha256": "364d966c3707e802789c6934b3b9899f820bdb1213095c74de7847cd32586820",
       "bytes": 7147
+    },
+    {
+      "path": "docs/plugin-hub/README.md",
+      "sha256": "4d4087ebd85912085a0cfd262feb34965855200fdb2fc7672496e75d12c52d22",
+      "bytes": 4829
     },
     {
       "path": "docs/product-evolution/PUBLIC-REVIEW.json",
@@ -5155,26 +5124,6 @@
       "bytes": 1566
     },
     {
-      "path": "docs/visual-renaissance/ASSETS.md",
-      "sha256": "05c4aa3621dcfa44e0158a950793e653d541c91074f223f534d2876b94b270a8",
-      "bytes": 1973
-    },
-    {
-      "path": "docs/visual-renaissance/PUBLIC-REVIEW.json",
-      "sha256": "a959b43637bb205c6ec1a37de3d8a4ce1ad2fe78500984f13f674fc4ecc9c241",
-      "bytes": 1771
-    },
-    {
-      "path": "docs/visual-renaissance/README.md",
-      "sha256": "a02d400101dd035c81dafe983d5b9bedc4aba8f8fc50516788ddb125c7b7b4eb",
-      "bytes": 3326
-    },
-    {
-      "path": "docs/visual-renaissance/TECHNICAL-DECISIONS.md",
-      "sha256": "60d8de2693c9d11f889f40b0133bbb9290d794d5526411c897360171730a908d",
-      "bytes": 4023
-    },
-    {
       "path": "docs/visual-renaissance/art-source/cyber.png",
       "sha256": "b66d9b96af1e492b1f32dca9772711c134fe45d27eec42b7f7bd9236904c71a3",
       "bytes": 2068332
@@ -5205,9 +5154,29 @@
       "bytes": 2328775
     },
     {
+      "path": "docs/visual-renaissance/ASSETS.md",
+      "sha256": "05c4aa3621dcfa44e0158a950793e653d541c91074f223f534d2876b94b270a8",
+      "bytes": 1973
+    },
+    {
       "path": "docs/visual-renaissance/generation.json",
       "sha256": "33831911f4341e4dff42a4e9e01eda9f2dba6f34fe17ea62c98e2f8ef2857803",
       "bytes": 4173
+    },
+    {
+      "path": "docs/visual-renaissance/PUBLIC-REVIEW.json",
+      "sha256": "a959b43637bb205c6ec1a37de3d8a4ce1ad2fe78500984f13f674fc4ecc9c241",
+      "bytes": 1771
+    },
+    {
+      "path": "docs/visual-renaissance/README.md",
+      "sha256": "a02d400101dd035c81dafe983d5b9bedc4aba8f8fc50516788ddb125c7b7b4eb",
+      "bytes": 3326
+    },
+    {
+      "path": "docs/visual-renaissance/TECHNICAL-DECISIONS.md",
+      "sha256": "60d8de2693c9d11f889f40b0133bbb9290d794d5526411c897360171730a908d",
+      "bytes": 4023
     },
     {
       "path": "docs/visual-upgrade/PORTRAITS.md",
@@ -5218,6 +5187,11 @@
       "path": "docs/visual-upgrade/README.md",
       "sha256": "474ece0fa23a5d1ca3ef439500c3de0302e1be9b2616581f56ecb28cebb57c09",
       "bytes": 3196
+    },
+    {
+      "path": "docs/WINDOWS-BUILD.md",
+      "sha256": "4e89b48ae44656cc04f3f0112b0c857baa5f61122b562bd5007c4f8a693f370c",
+      "bytes": 3119
     },
     {
       "path": "docs/workbench-experience/DELIVERY-2.24.10.md",
@@ -5263,6 +5237,11 @@
       "path": "docs/workbench-experience/DELIVERY-2.24.18.md",
       "sha256": "cf2b64da3bead3a7a3331a6a65c10c3b6f148109e01d6bbcd672012fc2b93c2c",
       "bytes": 2971
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.19.md",
+      "sha256": "11a9d582bd93e820ff792330ceffa7eed20191c6fa0268ac63c6853c27d35c2d",
+      "bytes": 3596
     },
     {
       "path": "docs/workbench-experience/DELIVERY-2.24.3.md",
@@ -5325,46 +5304,6 @@
       "bytes": 1759
     },
     {
-      "path": "docs/world-logic/EXPERIMENT-FORMAT.md",
-      "sha256": "4c372f37d0a0964c475e969e375e23a23c8b9852895cef21191617e07ea82455",
-      "bytes": 1763
-    },
-    {
-      "path": "docs/world-logic/README.md",
-      "sha256": "7dd4f09395df4e4af3beb0fb7c7b7248c1b94872be646a747ec3271e66c92421",
-      "bytes": 2202
-    },
-    {
-      "path": "docs/world-logic/RULE-SPECIFICATION.md",
-      "sha256": "86d9625a7efe1fa8ab9194b9375ce2b5383c64006e1a75d1d7b11824c7e4120f",
-      "bytes": 1587
-    },
-    {
-      "path": "docs/world-logic/SECURITY-MODEL.md",
-      "sha256": "9d34298c302ff6da3318a9a704939956285dac37d1f66bddb3eb7d3a7e6c10e8",
-      "bytes": 1802
-    },
-    {
-      "path": "docs/world-logic/SOLVER-ADAPTER-GUIDE.md",
-      "sha256": "6b6cdea254df5874b667bb5ebd528072c46fc92d83f3d5fc7fd2ad6f37aea282",
-      "bytes": 1489
-    },
-    {
-      "path": "docs/world-logic/TECHNICAL-SELECTION.md",
-      "sha256": "39c006af0cf660248fda4691bcec39e1178feae9c626557cb7342aee2c7d4807",
-      "bytes": 2953
-    },
-    {
-      "path": "docs/world-logic/TEMPLATE-AUTHORING.md",
-      "sha256": "1d78aea671fcba50212de2592eabdbba40ea7cf8d92ee965e286a4e46c48694f",
-      "bytes": 1260
-    },
-    {
-      "path": "docs/world-logic/VERSIONING.md",
-      "sha256": "e5128f72170c97c484d5d1dd56596934e44bc6c77bb2deb5da31cec8e2e89df9",
-      "bytes": 1593
-    },
-    {
       "path": "docs/world-logic/examples/adapter.json",
       "sha256": "6bebb1a340e3a1340b0ef247065af848e908c60812bc029136dbb38a8790b543",
       "bytes": 387
@@ -5403,6 +5342,46 @@
       "path": "docs/world-logic/examples/travel.json",
       "sha256": "fe50e977bf1546ab34832fa6c9f2067995f72a5f9ba9bc1298dc515562fe4b3c",
       "bytes": 2753
+    },
+    {
+      "path": "docs/world-logic/EXPERIMENT-FORMAT.md",
+      "sha256": "4c372f37d0a0964c475e969e375e23a23c8b9852895cef21191617e07ea82455",
+      "bytes": 1763
+    },
+    {
+      "path": "docs/world-logic/README.md",
+      "sha256": "7dd4f09395df4e4af3beb0fb7c7b7248c1b94872be646a747ec3271e66c92421",
+      "bytes": 2202
+    },
+    {
+      "path": "docs/world-logic/RULE-SPECIFICATION.md",
+      "sha256": "86d9625a7efe1fa8ab9194b9375ce2b5383c64006e1a75d1d7b11824c7e4120f",
+      "bytes": 1587
+    },
+    {
+      "path": "docs/world-logic/SECURITY-MODEL.md",
+      "sha256": "9d34298c302ff6da3318a9a704939956285dac37d1f66bddb3eb7d3a7e6c10e8",
+      "bytes": 1802
+    },
+    {
+      "path": "docs/world-logic/SOLVER-ADAPTER-GUIDE.md",
+      "sha256": "6b6cdea254df5874b667bb5ebd528072c46fc92d83f3d5fc7fd2ad6f37aea282",
+      "bytes": 1489
+    },
+    {
+      "path": "docs/world-logic/TECHNICAL-SELECTION.md",
+      "sha256": "39c006af0cf660248fda4691bcec39e1178feae9c626557cb7342aee2c7d4807",
+      "bytes": 2953
+    },
+    {
+      "path": "docs/world-logic/TEMPLATE-AUTHORING.md",
+      "sha256": "1d78aea671fcba50212de2592eabdbba40ea7cf8d92ee965e286a4e46c48694f",
+      "bytes": 1260
+    },
+    {
+      "path": "docs/world-logic/VERSIONING.md",
+      "sha256": "e5128f72170c97c484d5d1dd56596934e44bc6c77bb2deb5da31cec8e2e89df9",
+      "bytes": 1593
     },
     {
       "path": "docs/world-model/PUBLIC-REVIEW.json",
@@ -5660,9 +5639,24 @@
       "bytes": 926
     },
     {
+      "path": "INSTALL.md",
+      "sha256": "09c7375cdec8e96cb61635672f02af58a5a151cec6ce9b83fe8dfa43d1037c2b",
+      "bytes": 1937
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
       "path": "licenses/installer/NSIS-3.13.txt",
       "sha256": "388357c1215ff403c5ebde3a5ecd273e68f8b79a579996775245d1ee65442aba",
       "bytes": 15632
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "64e9b74c20d662440fcbbc38aeeff05faac147e28f6f28e3db11de51d98dd118",
+      "bytes": 812
     },
     {
       "path": "python/novel_studio_api/__init__.py",
@@ -5683,6 +5677,16 @@
       "path": "python/pyproject.toml",
       "sha256": "0e82d4471d333f0901465e69f2d4610af8a3062012849f03edf13dcd9267e628",
       "bytes": 388
+    },
+    {
+      "path": "README.md",
+      "sha256": "1bf08862b6b9e48510f6bf899401854d2ccf6cecc5160356c88fb4ec81ebe5de",
+      "bytes": 18860
+    },
+    {
+      "path": "README_EN.md",
+      "sha256": "4752e714f8add660aafa3558463438a042c569949477b3af53fe0cfc34b17400",
+      "bytes": 19691
     },
     {
       "path": "schemas/novel-v0.1.schema.json",
@@ -5753,6 +5757,11 @@
       "path": "scripts/yaml_io.py",
       "sha256": "fc1a4b69d4235658d13d30bb92222023cf70a8b0751b1420983ec53aea14928d",
       "bytes": 8553
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "1110cd93bb588f20d1823390c69b3eba34f96ae317d82535e93c9f4b45587dde",
+      "bytes": 1852
     },
     {
       "path": "start-web.ps1",
@@ -5860,14 +5869,19 @@
       "bytes": 19699
     },
     {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "8f98383941708594f38d55a5db4587af2105de3d76c0855a6d741b830f6dc0a0",
+      "bytes": 11844
+    },
+    {
       "path": "tools/build_plugin.py",
       "sha256": "64914d856a3a392674e19b7569d3a05116681415fc38dbea59f9fd972b39a71b",
       "bytes": 2078
     },
     {
       "path": "tools/oss/build_public_allowlist.py",
-      "sha256": "1ab223751e416d3455449dd0590b02f94f30eb9e3ba5fa81f34afc8a224dabb1",
-      "bytes": 7423
+      "sha256": "d7245405e46585a8f83cdb6b4d8678dda1e999572789bd2551a77249ad9507c6",
+      "bytes": 7471
     },
     {
       "path": "tools/oss/scan_public_candidate.py",
@@ -6003,11 +6017,6 @@
       "path": "web/backend/app/automation/actions.py",
       "sha256": "9873913bffd610cd889eab5028a5ab220fdab789249c4ade8ea5140d71e0a4c8",
       "bytes": 14629
-    },
-    {
-      "path": "web/backend/app/automation/runtime/LICENSE",
-      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
-      "bytes": 13804
     },
     {
       "path": "web/backend/app/automation/runtime/lib/python3.14/__future__.py",
@@ -6500,11 +6509,6 @@
       "bytes": 11978
     },
     {
-      "path": "web/backend/app/automation/runtime/lib/python3.14/cProfile.py",
-      "sha256": "4349fe3dba56e2636cee1ce4038baac7988104986c96be808b62bb46939ad7bf",
-      "bytes": 7122
-    },
-    {
       "path": "web/backend/app/automation/runtime/lib/python3.14/calendar.py",
       "sha256": "071c962f9000d42c565b92bae4063e1b7f615ae2db4f574e7c682c41f99c5146",
       "bytes": 29863
@@ -6660,6 +6664,11 @@
       "bytes": 7716
     },
     {
+      "path": "web/backend/app/automation/runtime/lib/python3.14/cProfile.py",
+      "sha256": "4349fe3dba56e2636cee1ce4038baac7988104986c96be808b62bb46939ad7bf",
+      "bytes": 7122
+    },
+    {
       "path": "web/backend/app/automation/runtime/lib/python3.14/csv.py",
       "sha256": "1919637c2fbec5a385774b0c7edace6139b3222295a0ba1ba2ea6da75bc28243",
       "bytes": 20133
@@ -6683,11 +6692,6 @@
       "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/_layout.py",
       "sha256": "02c1f1c159b23daa8af9ed3ece20f047b25127da70c8cdb75daf43896838db0d",
       "bytes": 11442
-    },
-    {
-      "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/macholib/README.ctypes",
-      "sha256": "dc29d1da83b6a0a09a41647e4111eee878ed079c2d6b54a98fd6d8b88dd581f2",
-      "bytes": 296
     },
     {
       "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/macholib/__init__.py",
@@ -6718,6 +6722,11 @@
       "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/macholib/framework.py",
       "sha256": "302439e40d9cbdd61b8b7cffd0b7e1278a6811b635044ee366a36e0d991f62da",
       "bytes": 1105
+    },
+    {
+      "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/macholib/README.ctypes",
+      "sha256": "dc29d1da83b6a0a09a41647e4111eee878ed079c2d6b54a98fd6d8b88dd581f2",
+      "bytes": 296
     },
     {
       "path": "web/backend/app/automation/runtime/lib/python3.14/ctypes/util.py",
@@ -8525,11 +8534,6 @@
       "bytes": 557
     },
     {
-      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/dom/NodeFilter.py",
-      "sha256": "9bfacbbb64e239a75591a7260b3ed86748eeb4366e6c40f3542753e79bace9a7",
-      "bytes": 936
-    },
-    {
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/dom/__init__.py",
       "sha256": "e7139ed583a7f60fbbc750044df4f1e3655371d8b8c4f80a43bff4aa3ba97857",
       "bytes": 4033
@@ -8555,6 +8559,11 @@
       "bytes": 68456
     },
     {
+      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/dom/NodeFilter.py",
+      "sha256": "9bfacbbb64e239a75591a7260b3ed86748eeb4366e6c40f3542753e79bace9a7",
+      "bytes": 936
+    },
+    {
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/dom/pulldom.py",
       "sha256": "614b88673d496a360e6b10efe8d733c7c0826fb214470ff12f24a1e597699870",
       "bytes": 11637
@@ -8563,6 +8572,16 @@
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/dom/xmlbuilder.py",
       "sha256": "26883dc30a461cb6a3583bd79d363858059569c04e94e3787d4d028f5fab7354",
       "bytes": 12420
+    },
+    {
+      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/__init__.py",
+      "sha256": "91950edfb196c105d93886f8af7ea3c0a79e06a6b63be3e5a4ea09804e8672a6",
+      "bytes": 1605
+    },
+    {
+      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/cElementTree.py",
+      "sha256": "d0f57acab07fe4f9c116c3392d85946bac8e78608f409cea70005f16ea019b57",
+      "bytes": 82
     },
     {
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/ElementInclude.py",
@@ -8578,16 +8597,6 @@
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/ElementTree.py",
       "sha256": "9623c9e6c2f45c906fae8d4b221648a7efb8ac81bd4f6cd79c5eb2698fb015ef",
       "bytes": 75160
-    },
-    {
-      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/__init__.py",
-      "sha256": "91950edfb196c105d93886f8af7ea3c0a79e06a6b63be3e5a4ea09804e8672a6",
-      "bytes": 1605
-    },
-    {
-      "path": "web/backend/app/automation/runtime/lib/python3.14/xml/etree/cElementTree.py",
-      "sha256": "d0f57acab07fe4f9c116c3392d85946bac8e78608f409cea70005f16ea019b57",
-      "bytes": 82
     },
     {
       "path": "web/backend/app/automation/runtime/lib/python3.14/xml/parsers/__init__.py",
@@ -8693,6 +8702,11 @@
       "path": "web/backend/app/automation/runtime/lib/python3.14/zoneinfo/_zoneinfo.py",
       "sha256": "0279b3226e70f7ec2a8b0127f4bcab524587486ae1f80b26eb46ee87ba95bfe4",
       "bytes": 25053
+    },
+    {
+      "path": "web/backend/app/automation/runtime/LICENSE",
+      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "bytes": 13804
     },
     {
       "path": "web/backend/app/automation/runtime/python.wasm",
@@ -9672,23 +9686,23 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "eb92438a41084fd617095704f7e753dba5e8ac346200000ae943ea71bdc59674",
+      "sha256": "76201c5b530c50c270c33a96303cc3b3e6b92cc0fca2704f2f3fa429cb53a12a",
       "bytes": 339218
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "87437ae1303d373b839407a39667f585e570295580c0799e5e4ac41adbe819d9",
+      "sha256": "0ea219422f7fc71955942564d07ddb11e01c0ea0581e5def3e60ce007abdd5f2",
       "bytes": 2086
-    },
-    {
-      "path": "web/frontend/public/companion/README.txt",
-      "sha256": "edd00d9b181ad4f08e3d74fc80794945b0680a58aad787066632c4d1f6c3e1dd",
-      "bytes": 1199
     },
     {
       "path": "web/frontend/public/companion/manifest.json",
       "sha256": "6e837e9f1b2eecd1e937fb702c08c7af079521654b5310215bd308711249643c",
       "bytes": 48
+    },
+    {
+      "path": "web/frontend/public/companion/README.txt",
+      "sha256": "edd00d9b181ad4f08e3d74fc80794945b0680a58aad787066632c4d1f6c3e1dd",
+      "bytes": 1199
     },
     {
       "path": "web/frontend/public/i18n-help/language-status.md",
@@ -10342,8 +10356,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/navigation.json",
-      "sha256": "74fa6e28f4d3bbb9a7b6bff0f5b26eca77438ce69434027d25289cce6b88d5a5",
-      "bytes": 22979
+      "sha256": "64be168337c0fbb6072721f7c02c2db56cddcc7e02fd5381326ead9bc198faec",
+      "bytes": 23250
     },
     {
       "path": "web/frontend/public/locales/en/plans.json",
@@ -13802,8 +13816,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/navigation.json",
-      "sha256": "2939b1ed4de3e93dd42c3740839b184aca987cd76f4ddd2e439ca4583fbe1dd6",
-      "bytes": 20840
+      "sha256": "f1b4364913606902476566c2666a5e60bb8dc50fe20c6b33b08836227af74346",
+      "bytes": 21084
     },
     {
       "path": "web/frontend/public/locales/zh-CN/plans.json",
@@ -14071,11 +14085,6 @@
       "bytes": 3283
     },
     {
-      "path": "web/frontend/public/sounds/TYPEWRITER-SOUND.md",
-      "sha256": "d90372f948af3ddccb47029d90b3d5b08d9808812b78666194263d0040249645",
-      "bytes": 679
-    },
-    {
       "path": "web/frontend/public/sounds/manifest.json",
       "sha256": "a2f45590029c323b44fce013e68e13fbcc00fa51aad662508144858f2585aa9c",
       "bytes": 386
@@ -14084,6 +14093,11 @@
       "path": "web/frontend/public/sounds/typewriter-soft.wav",
       "sha256": "84069ab49bf41a05fae2c37c17d83a5d4e17c0a09fb15f2f69601a5f8ff77656",
       "bytes": 1324
+    },
+    {
+      "path": "web/frontend/public/sounds/TYPEWRITER-SOUND.md",
+      "sha256": "d90372f948af3ddccb47029d90b3d5b08d9808812b78666194263d0040249645",
+      "bytes": 679
     },
     {
       "path": "web/frontend/public/themes/arch.svg",
@@ -14332,6 +14346,11 @@
       "bytes": 1489
     },
     {
+      "path": "web/frontend/scripts/check-live-navigation.mjs",
+      "sha256": "10074eb3fab98a547fbbf5283590c121608b067c98358a8c7f06bfd4531d75b0",
+      "bytes": 11002
+    },
+    {
       "path": "web/frontend/scripts/check-local-request-scheduling.mjs",
       "sha256": "88193a5e4ad0e68e0b0272a0594c5dc292e290a850ed486e2165f35ee2dd5989",
       "bytes": 6837
@@ -14502,11 +14521,6 @@
       "bytes": 139
     },
     {
-      "path": "web/frontend/src/assets/night/Lucide-LICENSE.txt",
-      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
-      "bytes": 3208
-    },
-    {
       "path": "web/frontend/src/assets/night/books.svg",
       "sha256": "3c0f46d26f84420f7f2f6b924c66b81ba9fe67be29f90b1cd5e3b96ed7324e1b",
       "bytes": 1704
@@ -14520,6 +14534,11 @@
       "path": "web/frontend/src/assets/night/library.svg",
       "sha256": "9e4bbc607c7b68c8e739c7378a1fc33e95f456c9c7b26f3d96bb1f60ac7ac763",
       "bytes": 1588
+    },
+    {
+      "path": "web/frontend/src/assets/night/Lucide-LICENSE.txt",
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+      "bytes": 3208
     },
     {
       "path": "web/frontend/src/assets/night/reading.svg",
@@ -15188,8 +15207,8 @@
     },
     {
       "path": "web/frontend/src/software-assistant.tsx",
-      "sha256": "4ec5933e76b5c5e3b5c0f244c5a4995c3c6be8259fd0c5e77ee2e8d04af00932",
-      "bytes": 34995
+      "sha256": "d7e73af25b3d81d5c3ef2efa1f4dc3019155aad7ebd56bc7059a779fdc37100d",
+      "bytes": 35177
     },
     {
       "path": "web/frontend/src/speech-panel.tsx",
@@ -15233,8 +15252,8 @@
     },
     {
       "path": "web/frontend/src/studio.tsx",
-      "sha256": "030a25a6e23bcd740f848f2e1c5eb05965c0fd5c533b1580ebf6c898b56f7a66",
-      "bytes": 144510
+      "sha256": "344e49cb73bcb1103247f7205f27d49d1fccdfc149eef883b63e3337876b876a",
+      "bytes": 145964
     },
     {
       "path": "web/frontend/src/study-components.tsx",
@@ -15491,14 +15510,5 @@
       "sha256": "e21292544c219e41d0e6b2d3f3a01e7763c251e1706fe8e7ab8cfcca35925bf2",
       "bytes": 667
     }
-  ],
-  "excluded_categories": [
-    "user works and private project IDs",
-    "credentials and user-level Codex settings",
-    "private character models/voices and plugin caches",
-    "developer environments and runtime/audit logs",
-    "parent Git objects and old release archives",
-    "generated PDF assets rebuilt from pinned npm package",
-    "old audit snapshots not current acceptance"
   ]
 }

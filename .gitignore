@@ -1,92 +1,21 @@
-# Official source checkouts are pinned in docs/installation/source-lock.json.
-# Keep their nested Git metadata out of the parent repository.
-/.novelforge/
-/docs/vendor/
-/docs/installation/runtime/
-/docs/validation-v0.1/runtime/
-__pycache__/
-*.pyc
-/state/.commit.lock
-/state/**/*.yaml.next
-/state/**/*.yaml.rollback
-/web/backend/.venv/
+# Developer snapshot: local works, credentials and runtime evidence are private.
+/projects/*
+!/projects/.gitkeep
+**/private-checks/
+**/private-assets/
+/release/
+/web/.runtime/
+/web/runtime/
 /web/frontend/node_modules/
 /web/frontend/dist/
-/web/.runtime/
-/web/writer-runs/
-/web/runtime/*
-!/web/runtime/README.md
-/docs/web-validation/runtime/
-.pytest_cache/
-*.tsbuildinfo
-
-# Research libraries are project private reference material
-**/.research/
-
-
-# Public-source hygiene: ignore all user/runtime material, including untracked files.
-/projects/
-/chapters/
-/state/
-/settings/
-/outlines/
-/reviews/
-/logs/
-/release/
-/desktop/build/
-/desktop/data-location.json
-/desktop/preview-data/
-/docs/oss/private-audit/
-/docs/*/safety-backups/
-**/source-backup/
+/web/backend/.venv/
+/.codex/
+**/__pycache__/
+**/.pytest_cache/
 .env
 .env.*
 !.env.example
-*.db
-*.db-wal
-*.db-shm
-*.sqlite*
 *.log
 *.dmp
-*.zip
-*.7z
-*.bak
-*.pending
-/tools/oss/gitleaks/
-
-# World experiments and local verification are private, never public assets.
-/docs/world-logic/private-checks/
-**/metadata/world-logic/
-
-# Private localization audit, backups and translation jobs
-docs/i18n/private-checks/
-/docs/goal-upgrade/private-checks/
-/.research/
-/docs/lightweight/private-checks/
-/docs/visual-upgrade/private-checks/
-
-docs/visual-upgrade/private-assets/
-
-/docs/live2d/private-checks/
-
-# Private character, voice and dialogue verification evidence
-/docs/assistant-stability/private-checks/
-
-# Private proofreading fixtures, safety snapshots and local verification
-docs/writing-quality/private-checks/
-
-/docs/ai-writing/private-checks/
-
-/docs/autonomous-enhancement/private-checks/
-
-/docs/daily-reliability/private-checks/
-
-/docs/creative-director/private-checks/
-docs/creative-workspace/private-checks/
-docs/professional-writing/private-checks/
-
-# Keep all local verification, model prompts and safety snapshots private.
-**/private-checks/
-
-# Local installer compiler and downloaded build tools.
-/tools/build/
+*.sqlite
+*.sqlite3

@@ -1,11 +1,5 @@
-# Public candidate audit — 2.24.18 Preview
+# Novel Studio 2.24.19 public source review
 
-The owner authorized updating drunk13232/novel-studio. Use the completed retained 2.24.18 developer manifest and reviewed application/tests/docs, excluding the unfinished live-navigation investigation. Publish an independent allowlisted tree, never parent Git history, works, credentials, user configuration, logs, private character assets or the whole private developer archive.
+Source is assembled from the previous hash-checked public allowlist and the completed immutable 2.24.19 developer snapshot, with only public release documentation and the allowlist helper updated. In-progress working-tree source is excluded. The public parent history is retained; private parent Git objects, manuscripts, credentials, local configuration and audit logs are excluded.
 
-Local evidence: seven new candidate-read cases (six headless pointer/keyboard flows and one controlled renderer boundary), seven recovery regressions, nineteen existing browser checks, 57 related backend tests, TypeScript/Vite, package alignment, actual EXE worker and isolated silent installer. Fixed local generation is MOCK. Exact-commit Windows CI and remote source/asset hashes are verified separately before publishing the draft release. No dependencies, licenses or art assets were added.
-
-Scanner findings require exact reviewed fingerprints plus unchanged file bytes or new review. Unresolved candidate findings block publication. Apache-2.0 / drunk13232 and all existing third-party notices are preserved.
-
-Known input risk: typing during pending assistant-result document navigation can lose newer unsaved buffer text; reproduced only in an isolated project. Save before navigating and wait for navigation to finish. Its incomplete fix is excluded and disclosed in both READMEs and release notes. Recovery remains window-local. Native GUI, physical IME, system DPI, real speech, new remote AI and long-duration use remain UNVERIFIED.
-
-The original protected-work baseline is retained. A pre-existing user-level Codex config.toml drift has UNRESOLVED attribution; it is outside candidates, is not reverted, and is not evidence of a project write. Private receipts record only the necessary paths/hashes. Remaining protected works are checked independently.
+This snapshot requires privacy finding dispositions, unchanged third-party notices/provenance, binary checksum/source alignment, exact remote-tree verification and exact-commit hosted CI before publishing the draft release. Automated scans are not a universal absence-of-secrets proof. Final results are recorded in Release notes and a local publication receipt. Preview/PARTIAL, the selected-text delayed-dispatch boundary and window-local recovery limits remain disclosed.

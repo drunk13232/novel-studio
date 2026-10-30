@@ -1,17 +1,16 @@
 {
-  "version": "2.24.18",
+  "version": "2.24.19",
   "release_date": "2026-10-30",
   "changes": [
-    "Use one scoped read path for candidate history and existing external candidate requests.",
-    "Cancel or ignore obsolete candidate reads; late successes and errors cannot replace a newer comparison.",
-    "Recheck live unsaved input, save state, task state and project/chapter before applying a candidate response.",
-    "Show actual candidate-read progress with a cancel-read action and explicit retry after a current failure.",
-    "Cancel candidate reads on close, variant changes, new tasks or leaving their document scope.",
-    "Retain existing Diff, candidate etags, source guards and author-only adoption. No dependency, migration, remote-model call or automatic publication.",
-    "Preview / PARTIAL: browser, controlled MOCK and worker checks do not establish real cloud AI or native GUI/IME/DPI/voice acceptance."
+    "Recheck live project, page, chapter load, newer navigation and unsaved edits after assistant lookups, before replacing an editor.",
+    "Return actual file-load success or failure; failed or superseded reads stop subsequent candidate/director display.",
+    "Reuse live guards for existing character, entity, reference and report lookups.",
+    "Scope result-button errors to the latest request and project/persona; explicit retry clears its earlier error.",
+    "Retain existing Action Registry, author approval, source revisions, recovery and data isolation. No dependency, migration or permission expansion.",
+    "Local Preview / PARTIAL. Browser and executable-worker checks do not establish native GUI, physical IME/DPI, speech or real Codex/MCP acceptance. No automatic new GitHub release."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Candidate Open Reliability Preview",
+  "edition": "Assistant Navigation Safety Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

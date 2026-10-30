@@ -1,4 +1,12 @@
-# Novel Studio · 2.24.18 Candidate Open Reliability Preview
+# Novel Studio · 2.24.19 Assistant Navigation Safety Preview
+
+## 2.24.19
+
+2.24.19 Preview. Recheck the live page, chapter, newer navigation and unsaved input after assistant-result lookups. Failed reads stop subsequent candidate/task display; explicit retries clear their own errors. Existing Actions and author approvals remain. See the [2.24.19 guide](docs/workbench-experience/DELIVERY-2.24.19.md).
+
+Installer, portable ZIP and checksums: [2.24.19 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.19-preview).
+
+> **Preview / PARTIAL:** native GUI, physical IME/DPI, voice and new real-model acceptance remain unverified. Selected-text AI preparation and cancellation still have a known delayed-dispatch boundary: a candidate task can start after an assistant receipt times out or is cancelled. Check task history before retrying and avoid this route with paid models until the follow-up is delivered. Adoption still requires the existing author Diff approval. Window-local recovery is not a persistent backup.
 
 ## 2.24.18
 
@@ -6,7 +14,6 @@
 
 Installer, portable ZIP and checksums: [2.24.18 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.18-preview).
 
-> **Known input risk:** when opening a document from an assistant result, typing while its lookup is still pending can replace newer unsaved manuscript input with older disk content. This boundary was reproduced in an isolated project; its unfinished fix is outside this release. Save first, navigate, then wait for loading to finish before typing. Window-local recovery is not a persistent backup: explicitly save or download before exiting.
 
 ## 2.24.17
 

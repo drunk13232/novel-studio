@@ -384,5 +384,7 @@
   "emotionCurve": "Emotion and tension curves",
   "readerPersonas": "Simulated reader personas",
   "planningCenter": "Planning center",
-  "returnToTool_plans": "Return to plans"
+  "returnToTool_plans": "Return to plans",
+  "navigationContextChanged": "The page or chapter changed. The earlier navigation was stopped; retry from the current view.",
+  "documentOpenFailed": "The file could not be opened. Further navigation or candidate display was stopped; check the read error and retry."
 }

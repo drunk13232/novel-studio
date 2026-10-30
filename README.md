@@ -1,4 +1,12 @@
-# Novel Studio · 2.24.18 Candidate Open Reliability Preview
+# Novel Studio · 2.24.19 Assistant Navigation Safety Preview
+
+## 2.24.19
+
+2.24.19 Preview。修复助手结果导航的异步输入保护：读取返回后重新核对当前页面、章节、较新操作和未保存修改；读取失败时停止后续候选或任务展示。明确重试清理自己的错误。沿用现有 Action 与作者确认。见 [2.24.19 说明](docs/workbench-experience/DELIVERY-2.24.19.md)。
+
+安装程序、便携包和校验值见 [2.24.19 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.19-preview)。
+
+> **Preview / PARTIAL：** 原生窗口、实体中文输入法、系统 DPI、语音与新真实模型验收仍未完成。选区 AI 的准备和取消仍存在已知迟到提交边界：助手回执超时或取消后，候选任务仍可能启动。请先检查任务记录再重试；付费模型建议暂避该选区入口，等待后续修复。采用仍须作者在既有 Diff 中确认。窗口内恢复副本不等于持久备份。
 
 ## 2.24.18
 
@@ -6,7 +14,6 @@
 
 安装程序、便携包和校验值见 [2.24.18 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.18-preview)。
 
-> **已知输入风险：** 通过软件助手结果中的“打开文档”导航时，在读取尚未完成期间继续输入，新增的未保存正文可能被较旧磁盘内容替换；该边界已在隔离项目复现。请先保存，再导航，等待加载完成后继续输入。修复尚未完成，不混入本版。窗口内恢复副本也不等于持久备份，请明确保存或下载后再退出。
 
 ## 2.24.17
 
@@ -50,15 +57,15 @@
 
 ## 2.24.7
 
-本地 Record Editing Preview，尚未公开发布。本轮补齐已有待办、修订和灵感的编辑保护：保存回执迟到时保留继续输入的修改，并以回执版本为基线继续保存；等待期间撤销、关闭和离开受原门禁保护。简中/英文说明区分本次已保存提交与后续未保存编辑。见[使用说明](docs/workbench-experience/README.md)与[检查边界](docs/workbench-experience/DELIVERY-2.24.7.md)。
+本地迭代，已包含在后续 Preview 发行版。本轮补齐已有待办、修订和灵感的编辑保护：保存回执迟到时保留继续输入的修改，并以回执版本为基线继续保存；等待期间撤销、关闭和离开受原门禁保护。简中/英文说明区分本次已保存提交与后续未保存编辑。见[使用说明](docs/workbench-experience/README.md)与[检查边界](docs/workbench-experience/DELIVERY-2.24.7.md)。
 
 ## 2.24.6
 
-本地 Save Integrity Preview，尚未发布 GitHub。本轮针对保存回执迟到的真实问题：正文保存与恢复绑定原章节作用域；提交待办、修订和灵感时保留等待期间的新输入；正常检查同一候选版本后继续自动暂存，原有人工暂停仍保留。继续沿用原保存与作者确认通道，不增加数据格式。见[使用说明](docs/workbench-experience/README.md)和[本轮检查边界](docs/workbench-experience/DELIVERY-2.24.6.md)。
+本地迭代，已包含在后续 Preview 发行版。本轮针对保存回执迟到的真实问题：正文保存与恢复绑定原章节作用域；提交待办、修订和灵感时保留等待期间的新输入；正常检查同一候选版本后继续自动暂存，原有人工暂停仍保留。继续沿用原保存与作者确认通道，不增加数据格式。见[使用说明](docs/workbench-experience/README.md)和[本轮检查边界](docs/workbench-experience/DELIVERY-2.24.6.md)。
 
 ## 2.24.5
 
-本轮是本地交付，尚未发布 GitHub。重点修复写作恢复：本章待办与修订输入在切换页签或收起工具后保留；候选读取失败可以重试，两窗口冲突可先对比再明确载入，并在当前比较窗口内恢复刚才的本地编辑。已采用/拒绝记录显示真实只读状态，拒绝后本章列表立即刷新。采用、版本校验与正文保护继续走原通道。详见[使用说明](docs/workbench-experience/README.md)和[本轮验证边界](docs/workbench-experience/DELIVERY-2.24.5.md)。
+本地迭代，已包含在后续 Preview 发行版。重点修复写作恢复：本章待办与修订输入在切换页签或收起工具后保留；候选读取失败可以重试，两窗口冲突可先对比再明确载入，并在当前比较窗口内恢复刚才的本地编辑。已采用/拒绝记录显示真实只读状态，拒绝后本章列表立即刷新。采用、版本校验与正文保护继续走原通道。详见[使用说明](docs/workbench-experience/README.md)和[本轮验证边界](docs/workbench-experience/DELIVERY-2.24.5.md)。
 
 ## 2.24.4
 
