@@ -9,7 +9,9 @@ parser.add_argument('--root',required=True,type=Path)
 parser.add_argument('--port',type=int,default=8917)
 parser.add_argument('--local-writer',action='store_true',help='Fixed local test response only; never a real AI')
 parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-only mixed-newline chapter for selection checks')
+parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
 args=parser.parse_args();A=args.root.resolve()
+if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
 if not A.is_relative_to((ROOT/'desktop/build').resolve()) or A==(ROOT/'desktop/build').resolve():raise SystemExit('Fixture must use a dedicated directory below desktop/build')
 if not 1024<=args.port<=65535:raise SystemExit('Use an unprivileged loopback port')
 W=A/'workspace'
@@ -21,13 +23,16 @@ if not W.exists():shutil.copytree(ROOT/'desktop/preview-template',W)
 if args.mixed_source:
  source=next((W/'projects').glob('novel_*'))/'chapters/chapter-2/draft.md'
  assert source.resolve().is_relative_to(W.resolve());source.write_bytes('第一段。\r\n\r\n🌧️第二段的回答。\n\n尾段保留。\n'.encode('utf8'))
+if args.revision_fixture:
+ source=next((W/'projects').glob('novel_*'))/'chapters/chapter-2/draft.md'
+ assert source.resolve().is_relative_to(W.resolve());source.write_bytes(('第2章 海边的试写\n\n甲段原文。\n'+''.join('中间保留文字第'+str(i)+'行。\n' for i in range(1,17))+'乙段原文。\n尾段保留。\n').encode('utf8'))
 os.environ.update(NOVEL_WORKSPACE=str(W),NOVEL_STUDIO_HOME=str(A/'app-data'),NOVEL_STUDIO_DATA=str(A/'app-data/workspaces'),NOVEL_PORT=str(args.port),NOVEL_DEMO='1')
 sys.path.insert(0,str(ROOT/'web/backend'));sys.path.insert(0,str(ROOT/'scripts'))
 from app.main import create_app
 from app.config import Settings
 from app.assistant.service import Session
 from app.assistant.models import Start,Context,AssistantSettings
-from app.studio_tools import normalized
+from app.studio_tools import normalized,utf16_index
 app=create_app(Settings(workspace=W,port=args.port,static_dir=ROOT/'web/frontend/dist'));p=next((W/'projects').glob('novel_*')).name
 path='chapters/chapter-2/draft.md';doc=app.state.studio_tools.doc(p,path)
 s=Session(app.state.assistant,Start(instruction='LOCAL_SERVICE_TEST: 保存可查看的正文候选，不调用模型',context=Context(project=p,page='write',path=path)),AssistantSettings(mode='draft',manuscript=True,save_conversation=True));s.manager=app.state.assistant.manager(p);s.model=SimpleNamespace(id='LOCAL_SERVICE_TEST',capabilities={'tools':True});s.provider=SimpleNamespace(provider_id='local-action',display_name='LOCAL_SERVICE_TEST');s.ai_metadata={'backend':'local-service','remote_model_called':False}
@@ -48,7 +53,8 @@ if args.local_writer:
  def local_adapter(center,project,group,prompt,*other,**kw):
   assert project==p and group=='cowrite';return LocalWriter()
  director_module.adapter=local_adapter
-record=app.state.creative_director.create(p,Create(path=path,revision=doc['etag'],context_id=ctx['id'],goal='LOCAL_SERVICE_TEST: open a saved task only; no model is called',executor='codex',commander='codex',mode='quick',goal_han=3000))
+target={'start':0,'end':utf16_index(normalized(doc),len(normalized(doc))),'quote':normalized(doc)} if args.revision_fixture else {}
+record=app.state.creative_director.create(p,Create(**target,path=path,revision=doc['etag'],context_id=ctx['id'],goal='LOCAL_SERVICE_TEST: open a saved task only; no model is called',executor='codex',commander='codex',mode='quick',goal_han=3000))
 record=app.state.creative_director.patch(p,record['id'],Patch(etag=record['etag'],draft='她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。\n\n她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。'))
 record.update(status='FAILED',failure={'code':'TIMEOUT','automatic_retry':False},last_error='LOCAL_SERVICE_TEST: timeout after retained output')
 record['resume_checkpoint']=checkpoint(record,0,'TIMEOUT');app.state.creative_director.put(p,record)
@@ -62,7 +68,11 @@ fixture_reports={}
 for kind in ['ALPHA','BETA']:
  rid=uid('review');fixture_reports[kind]=rid
  write(app.state.creative_director.reviews.path(p,rid),{'id':rid,'project_id':p,'source_path':path,'source_revision':doc['etag'],'mode':'character','created_at':now(),'criteria':['SYNTHETIC LOCAL FIXTURE — not AI review'],'ai_metadata':{'backend':'CONTROLLED_LOCAL_FIXTURE'},'report':{'summary':'LOCAL_REPORT_'+kind,'issues':[]},'sources':[]})
-(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source}),encoding='utf-8')
+if args.revision_fixture:
+ text=normalized(doc);a=text.replace('甲段原文。','甲段候选 A。').replace('乙段原文。','乙段候选 A。');a=''.join(line+('\r\n' if i%2==0 else '\n') for i,line in enumerate(a.split('\n')[:-1]));b=text.replace('甲段原文。','甲段候选 B。').replace('乙段原文。','乙段候选 B。')
+ record=app.state.creative_director.patch(p,record['id'],Patch(etag=app.state.creative_director.get(p,record['id'])['etag'],draft=a))
+ staged=app.state.creative_director.stage(p,record['id'],Candidate(etag=record['etag']))['candidate'];staged['variants']=[{'label':'A','candidate':a},{'label':'B','candidate':b}];write(app.state.studio_tools.candidate_path(p,staged['id']),staged)
+(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture}),encoding='utf-8')
 import threading
 from app.models.requests import TaskRequest,TaskOptions
 from app.tasks.manager import now as task_now

@@ -1,4 +1,4 @@
-# Novel Studio V2.0 Preview 录屏路线
+# Novel Studio Preview — 独立演示书房指南
 
 双击 `NovelStudio.exe` 默认打开原创演示《潮汐邮局》。演示工作区与旧版、私人作品分离；可直接演示手动功能。首次使用会复制演示模板到独立用户应用数据，之后保留自己的演示编辑。
 

@@ -1,5 +1,5 @@
 {
-  "version": "2.24.13 Preview",
+  "version": "2.24.15 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
@@ -350,8 +350,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "09aa96188d14be5c8473df0191dff4fbb7fb7a5f5a2857674b21dcff61ad4870",
-      "bytes": 47299
+      "sha256": "c9fc363dd39f5e5067753af981921a567d2d6e75050eca23147f92a5fd04aa61",
+      "bytes": 48859
     },
     {
       "path": "CONTRIBUTING.md",
@@ -385,13 +385,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "c223a8f28d17343f07b03c45f8630cd31fe37f67bc1ad14ebc8297fa6842ece2",
-      "bytes": 15658
+      "sha256": "32aa87fe2173e8eae2ac5769683cf218e8c4086d9b3893a1bfeb201c8d1b946e",
+      "bytes": 16550
     },
     {
       "path": "README_EN.md",
-      "sha256": "6d4f56df287d2a185e0211a7d606433a90ee63fb5f54db87f79c413cf49f1c10",
-      "bytes": 16427
+      "sha256": "09fff59d557ce9e610341349f44d19a2fe86becb081750ac2835f9bce457e184",
+      "bytes": 17328
     },
     {
       "path": "SECURITY.md",
@@ -415,17 +415,17 @@
     },
     {
       "path": "desktop/PREVIEW-DEMO-GUIDE.md",
-      "sha256": "f0a10075386b005b97e561d443e373cf1ce2c35c2dae7907b71926c4806aab10",
-      "bytes": 2846
+      "sha256": "741cd5eca6699f074de0a6c77f7f373eb3228d2c71791ca62e82eafeb5420b1d",
+      "bytes": 2876
     },
     {
       "path": "desktop/README.txt",
-      "sha256": "78dc4f6de94ad11c49570aa939e40cadb0783c53b0fdb8e225d03876911cd3fd",
-      "bytes": 7115
+      "sha256": "7380d0d8970706aed823c1b8c160d7ca208708205d2f9bf7c2720d472a9b8a28",
+      "bytes": 7098
     },
     {
       "path": "desktop/build.ps1",
-      "sha256": "f49207fdda2b3534a0296b13345492454d093ffa97f66e3954ab6013c320133d",
+      "sha256": "d65528c8ae51b5d61993be4499e609aa4821d9c630d6f41d6f3d825691351718",
       "bytes": 10110
     },
     {
@@ -501,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "cddb501061da4c1b1fddc8f0f59a5bb7776f0e77f74fe45be18832d31d82e8ab",
-      "bytes": 19789
+      "sha256": "7471fbec44a7085a44d4b633f1af5436bec3f7fdc44b5ca16c6418bd38ed789e",
+      "bytes": 19843
     },
     {
       "path": "desktop/package_zip.py",
@@ -4666,8 +4666,8 @@
     },
     {
       "path": "desktop/version.json",
-      "sha256": "a44ac6f4fd51aecee8877e1415e4bdf6ba0822ee46307152481958aad41c0f11",
-      "bytes": 2735
+      "sha256": "037fb7201e40287afb586e3849bfbbd18bb25e60ed42c794a71effeba11fa69d",
+      "bytes": 2221
     },
     {
       "path": "docs/AI.md",
@@ -4981,8 +4981,8 @@
     },
     {
       "path": "docs/oss/CANDIDATE-AUDIT.md",
-      "sha256": "8a7c58616b64799033aa322758b7a811424f204cbd3ecd822bdaeb4f3127cb6f",
-      "bytes": 1062
+      "sha256": "d3ddbcdbbad288772a3138b64dfd1f8a729918e9ebf784a3b27fc59f48d6c3fb",
+      "bytes": 1549
     },
     {
       "path": "docs/oss/CHANGELOG-SOURCES.json",
@@ -5026,8 +5026,8 @@
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "78057614ea48187173625eb542bc7e30f971e8ca91064bd2206f54e98c40ab14",
-      "bytes": 3792
+      "sha256": "9b2f41b47334ac6ab0a2cf0f8026e924ea83a659f0c1692be96e0525aea34669",
+      "bytes": 4126
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -5238,6 +5238,16 @@
       "path": "docs/workbench-experience/DELIVERY-2.24.13.md",
       "sha256": "b299540aeee19dd7f0580493690f677eb3fbb75fd2c24acf951f3049d2bc0f38",
       "bytes": 3697
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.14.md",
+      "sha256": "68bb30c62a459ca709bd0056caca81e46e23f826fe0a3127372848042ca83255",
+      "bytes": 3864
+    },
+    {
+      "path": "docs/workbench-experience/DELIVERY-2.24.15.md",
+      "sha256": "5dcb9789b4ccedef5c894431cf234b1f674a00638d3ec8f5fd4e70bac5a0d17a",
+      "bytes": 2314
     },
     {
       "path": "docs/workbench-experience/DELIVERY-2.24.3.md",
@@ -5841,8 +5851,8 @@
     },
     {
       "path": "tools/oss/build_public_allowlist.py",
-      "sha256": "84eb39792e521de1661f0f24ff4eec8d9b0c6c2378c19ee66e7c9162ac4b473f",
-      "bytes": 7183
+      "sha256": "d2d3b14104acfbd7c88aebdc1105915ab7c87108f7e6738b750ac2e71711816a",
+      "bytes": 7279
     },
     {
       "path": "tools/oss/scan_public_candidate.py",
@@ -9647,12 +9657,12 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "b722e43028b736ddff03d3d826667a86ace24a6b038769585f6c64227d81b692",
+      "sha256": "4d23cd9952230c085b4af7c73e9924f61b713a2417777daf624cf11913edda5e",
       "bytes": 339218
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "fcd8faf7c85936d65f59c0489b4ca38a3c5df03c34b460fdedab760670f3c606",
+      "sha256": "e0e140df6830548543c24faef43cf1664a90b8651f368e73511d71bdc71f547d",
       "bytes": 2086
     },
     {
@@ -10252,8 +10262,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/editor.json",
-      "sha256": "af9c9dd2234cdcd9e3537f1cfffcae1c8ff0ce5581759f723e1b6aa127c53d3d",
-      "bytes": 18349
+      "sha256": "6d4da7a7e022868121e522cec1b133dcebc5fcb791b1290b85b73d448e2fb7fa",
+      "bytes": 18507
     },
     {
       "path": "web/frontend/public/locales/en/errors.json",
@@ -13712,8 +13722,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/editor.json",
-      "sha256": "f30629f1b47f0b88eaab86c8cb1d9c7610966b3393857b54beed99864fac04f2",
-      "bytes": 16437
+      "sha256": "1a58027830336d123ad6c8b1485a1bbbcc0ad8ee377c07a4ec1b606d0df9fee5",
+      "bytes": 16590
     },
     {
       "path": "web/frontend/public/locales/zh-CN/errors.json",
@@ -14171,6 +14181,16 @@
       "bytes": 2331
     },
     {
+      "path": "web/frontend/scripts/check-candidate-choices.mjs",
+      "sha256": "f269d438b0a3cd0f4b3e6f41c8fa4dd8ff24d69cbb4aad4644d19d50c96f6164",
+      "bytes": 12905
+    },
+    {
+      "path": "web/frontend/scripts/check-candidate-ownership.mjs",
+      "sha256": "2d86cd9cba3e20190a97e2954398f72cd6aefa1827e05a2c021a24a9546c8a89",
+      "bytes": 7852
+    },
+    {
       "path": "web/frontend/scripts/check-chapter-versions.mjs",
       "sha256": "b596f4ca136c95eadd7eb851751ae3b4f47124c55f353708f6d5058105e63072",
       "bytes": 20384
@@ -14307,6 +14327,11 @@
       "bytes": 2238
     },
     {
+      "path": "web/frontend/scripts/check-revision-choices.mjs",
+      "sha256": "dd751d16cf72ece730ef9d25af0338b9d6c45c72d5f6985168ac62b0ff5fbdcd",
+      "bytes": 2850
+    },
+    {
       "path": "web/frontend/scripts/check-revision-hunks.mjs",
       "sha256": "cdc15dfa051314da33dc4d927094351f14353d3731bbabb2f5b56edf0923f4b1",
       "bytes": 1670
@@ -14388,8 +14413,8 @@
     },
     {
       "path": "web/frontend/scripts/start-director-fixture.py",
-      "sha256": "679959dcfeb01e41e6c4eeb1e86a83aa896894ec3e6c881b307aeece49b13a21",
-      "bytes": 11449
+      "sha256": "605c5ad10defbf8159a85003f933a9f08f9e5c4755ded4ce81a51b9345773084",
+      "bytes": 12954
     },
     {
       "path": "web/frontend/src/ai-center.css",
@@ -14563,8 +14588,8 @@
     },
     {
       "path": "web/frontend/src/candidate-draft.tsx",
-      "sha256": "7b518b31724175b59e2802665d1a99bbd05bbc662835c84c3ba9a4e8a369d282",
-      "bytes": 9195
+      "sha256": "4d6bf8f9f1a31ab1c500781be8aaba229aa8357e992ad6984a19f4316bbd1a64",
+      "bytes": 9361
     },
     {
       "path": "web/frontend/src/chapter-versions.css",
@@ -15083,8 +15108,8 @@
     },
     {
       "path": "web/frontend/src/revision-hunks.ts",
-      "sha256": "e7c8086988a9c51c03f1170f82c0c3696b834836ae457f111259f314db52258a",
-      "bytes": 1226
+      "sha256": "c8623b2bfa8d1cada705ba60255ab11606d2f4c1c49fa9847532f986b7d6297e",
+      "bytes": 2485
     },
     {
       "path": "web/frontend/src/roleplay-workbench.tsx",
@@ -15093,8 +15118,8 @@
     },
     {
       "path": "web/frontend/src/selection-assistant.tsx",
-      "sha256": "417c9bb463178b47a3376cb068b7f4e4abe9d80a1d83add1b07680197d40ad64",
-      "bytes": 19360
+      "sha256": "272c6acc90ee22caed60502f2d6e33758defc07bc03b3788ae5ad5abf2b5c5d0",
+      "bytes": 20351
     },
     {
       "path": "web/frontend/src/selection-diff-editor.tsx",

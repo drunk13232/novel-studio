@@ -1,4 +1,12 @@
-# Novel Studio · 2.24.13 Selection & Save Reliability Preview
+# Novel Studio · 2.24.15 Candidate Session Reliability Preview
+
+## 2.24.15
+
+2.24.15 Preview includes the candidate-editing improvements from 2.24.14 and prevents late save receipts from replaying a cancelled variant switch or closing a replacement comparison. Already committed snapshots remain stored; source checks and author adoption authority remain intact. See the [2.24.15 guide](docs/workbench-experience/DELIVERY-2.24.15.md). Preview / PARTIAL remains: headless browser and worker checks do not establish native GUI, physical IME or real-model acceptance.
+
+## 2.24.14
+
+Local iteration, incorporated into 2.24.15 Preview. Repair selected-hunk persistence, independent variants and continuous candidate/note typing during autosave. Explicit save remembers the selected variant; new, expanded or ambiguous merged changes require author review. See the [2.24.14 guide](docs/workbench-experience/DELIVERY-2.24.14.md). Public artifacts follow Releases.
 
 ## 2.24.13
 

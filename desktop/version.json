@@ -1,18 +1,16 @@
 {
-  "version": "2.24.13",
+  "version": "2.24.15",
   "release_date": "2026-10-30",
   "changes": [
-    "Use a shared, exact UTF-16 mapping between native textarea API values and unchanged source candidates; handle LF, CRLF, CR and mixed newlines without migrating records.",
-    "Fix evidence navigation, retain-to-cursor and partial rewrite so visible selections address the intended source range, including emoji and multiline text.",
-    "Bind delayed selection actions to their record/view; reject mismatched text, invalid bounds, half-CRLF and split-surrogate ranges.",
-    "Use the same mapping for literary-scoring source selections; keep preview local and clear a collapsed selection instead of reusing an old passage.",
-    "Normalize incoming replacement line breaks only inside explicit author adoption, then preserve the original document EOL and UTF-8 BOM; retain raw candidate provenance and the pre-adoption snapshot.",
-    "Initialize existing Diff readiness from the real editor and compare logical newline representations; adopted receipts still require explicit author acceptance and matching content.",
-    "Keep existing mixed-source write guards, original revision checks, Diff confirmation and Canon/State boundaries.",
-    "Local Preview: real browser/local services and fixed MOCK writer checks are separate from remote AI and native GUI/IME/DPI acceptance."
+    "Includes 2.24.14 candidate selection, variant persistence and continuous-input reliability improvements.",
+    "A completed candidate draft save may continue a UI operation only in the exact editing session that initiated it.",
+    "Late receipts cannot replay a cancelled variant switch or close a replacement comparison, even when reopened text and IDs match.",
+    "Already committed old draft snapshots remain stored; stale failed receipts do not contaminate a newer view.",
+    "Reuse existing candidate schema, author adoption/source checks and project isolation; no new dependencies or remote model calls.",
+    "Preview / PARTIAL: headless browser and packaged-worker checks do not establish native GUI, physical IME/DPI, voice or real remote-AI acceptance."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Selection & Save Reliability Preview",
+  "edition": "Candidate Session Reliability Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

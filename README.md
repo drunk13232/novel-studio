@@ -1,4 +1,12 @@
-# Novel Studio · 2.24.13 Selection & Save Reliability Preview
+# Novel Studio · 2.24.15 Candidate Session Reliability Preview
+
+## 2.24.15
+
+2.24.15 Preview 包含 2.24.14 的候选编辑改进，并修复关闭后迟到保存回执对新比较窗口的影响：取消的版本切换或关闭操作不会在重开后重演。作者已保存的原候选快照继续保留；正式采用与源版本保护不变。见 [2.24.15 说明](docs/workbench-experience/DELIVERY-2.24.15.md)。保持 Preview / PARTIAL，不把 headless 浏览器或 worker 检查当作原生窗口、实体输入法或真实模型验收。
+
+## 2.24.14
+
+本地迭代，已合并至 2.24.15 Preview。 修复候选比较中的勾选保留、独立版本恢复和持续输入：自动暂存不再打断候选与说明输入；明确暂存可记住所选版本。编辑后新增、扩大的或合并的修改需要作者重新核对。见 [2.24.14 说明](docs/workbench-experience/DELIVERY-2.24.14.md)。公开发行仍以 Releases 为准。
 
 ## 2.24.13
 

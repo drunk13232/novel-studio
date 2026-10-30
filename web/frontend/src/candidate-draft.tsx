@@ -1,5 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {api} from './api';
+import {revisionText} from './revision-hunks';
 import {base,useUnsavedChanges,saveJSON,type Data} from './library-shared';
 import {t,useUiTranslation} from './i18n';
 
@@ -7,7 +8,7 @@ type Value={text:string;note:string;chosen_hunks:number[]|null};
 type Options={project:string;id:string|null;variant?:number;text:string;note?:string;chosenHunks?:number[]|null;readOnly?:boolean;suspended?:boolean;onRestore:(value:Value)=>void};
 type Session={key:string;etag:string;baseline:string;view:Data|null;initial:Value;pending:Promise<boolean>|null;checking:boolean;incoming:Data|null;recovery:Value|null;paused:boolean;controller?:AbortController};
 type State={key:string;ready:boolean;saving:boolean;checking:boolean;error:string;view:Data|null;baseline:string;incoming:Data|null;recovery:Value|null;paused:boolean};
-const signature=(v:Value)=>JSON.stringify(v);
+const signature=(v:Value)=>JSON.stringify({...v,text:revisionText(v.text)});
 const failure=(error:unknown)=>String((error as {technicalDetail?:string;message?:string})?.technicalDetail||(error as Error)?.message||error);
 const empty=(key:string):State=>({key,ready:false,saving:false,checking:false,error:'',view:null,baseline:'',incoming:null,recovery:null,paused:false});
 const savedValue=(view:Data,fallback:Value):Value=>view.status==='PROPOSED'&&view.draft?{text:view.draft.text,note:view.draft.note||'',chosen_hunks:view.draft.chosen_hunks??null}:fallback;
@@ -43,12 +44,12 @@ export function useCandidateDraft(options:Options){
   const s=session.current;if(!key)return true;if(!s||s.key!==key||!s.view||readOnly||s.view.status!=='PROPOSED'||s.checking||s.incoming)return false;
   while(s.pending){if(!await s.pending)return false;}
   if(session.current!==s||latest.current.key!==key)return false;
-  const snapshot=latest.current.value,baseline=signature(snapshot);if(baseline===s.baseline){s.paused=false;publish(s);return true;}
+  const snapshot=latest.current.value,baseline=signature(snapshot);if(baseline===s.baseline&&(s.view.active_variant??0)===variant){s.paused=false;publish(s);return true;}
   const pending=api<Data>(base(project)+'/studio-tools/candidates/'+id+'/draft',{etag:s.etag,variant,...snapshot},'PUT').then(view=>{
    s.etag=view.etag;s.baseline=baseline;s.view=view;s.paused=false;
    window.dispatchEvent(new CustomEvent('novel-candidate-draft-saved',{detail:{project,id,path:view.path}}));return true;
   }).catch(error=>{s.paused=true;publish(s,failure(error));return false;}).finally(()=>{s.pending=null;});
-  s.pending=pending;publish(s);const ok=await pending;if(ok)publish(s);else if(session.current===s)setState(v=>v.key===key?{...v,saving:false}:v);return ok&&signature(latest.current.value)===s.baseline;
+  s.pending=pending;publish(s);const ok=await pending;if(ok)publish(s);else if(session.current===s)setState(v=>v.key===key?{...v,saving:false}:v);return session.current===s&&latest.current.key===s.key&&ok&&signature(latest.current.value)===s.baseline;
  }
  function loadStored(){
   const s=session.current;if(!s||s.key!==key||!s.incoming||s.pending||s.checking)return;

@@ -305,5 +305,6 @@
   "continueRevisionEditing": "Continue editing",
   "discardAndRejectRevision": "Discard local edits and reject suggestion",
   "discardAndCloseRevision": "Discard local edits and close preview",
-  "discardAndSwitchRevision": "Discard local edits and switch"
+  "discardAndSwitchRevision": "Discard local edits and switch",
+  "revisionChoicesRecheck": "The text changed. Skipped content is not selected automatically; review new, expanded or merged changes before choosing them."
 }

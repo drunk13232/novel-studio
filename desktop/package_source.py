@@ -257,6 +257,7 @@ add('docs/workbench-experience/DELIVERY-2.24.10.md')
 add('docs/workbench-experience/DELIVERY-2.24.11.md')
 add('docs/workbench-experience/DELIVERY-2.24.12.md')
 add('docs/workbench-experience/DELIVERY-2.24.13.md')
+add('docs/workbench-experience/DELIVERY-2.24.15.md')
 files['.gitignore']='# Developer snapshot: local works, credentials and runtime evidence are private.\n/projects/*\n!/projects/.gitkeep\n**/private-checks/\n**/private-assets/\n/release/\n/web/.runtime/\n/web/runtime/\n/web/frontend/node_modules/\n/web/frontend/dist/\n/web/backend/.venv/\n/.codex/\n**/__pycache__/\n**/.pytest_cache/\n.env\n.env.*\n!.env.example\n*.log\n*.dmp\n*.sqlite\n*.sqlite3\n'.encode('utf8')
 manifest={'release':version,'files':{n:hashlib.sha256(b).hexdigest() for n,b in sorted(files.items())}}
 files['SOURCE-MANIFEST.json']=json.dumps(manifest,ensure_ascii=False,indent=2).encode()

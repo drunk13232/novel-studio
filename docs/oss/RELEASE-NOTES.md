@@ -1,40 +1,41 @@
-# Novel Studio 2.24.13 Selection & Save Reliability Preview
+# Novel Studio 2.24.15 Candidate Session Reliability Preview
 
 ## 简体中文
 
-本次合并 2.24.11–2.24.13 的可靠性修复，继续使用现有创作指挥台、任务管理、文学评分与 Diff，不新增 Agent、依赖或数据迁移。
+本次更新合并 2.24.14–2.24.15 的候选编辑与保存回执修复，继续使用现有创作指挥台、候选 Diff 和安全保存通道。
 
-- 作者接管、保存等待和报告刷新期间保留本地输入；迟到或不属于当前任务的回执不再覆盖当前状态。
-- 候选经追加、改写、取消保留或重启恢复发生变化后，旧审查报告明确标为历史；缺失来源依据时不冒充当前评价。
-- 修复 CRLF、CR、混合换行和 emoji 下的证据定位、保留到光标、局部改写及文学评分选区，避免选错文字。
-- 修复首次 Diff 差异读取和换行核对；作者明确采用候选时保留原文件 LF/CRLF、UTF-8 BOM 和接受前快照。已有混合换行来源仍拒绝静默覆盖。
-- 已采用回执仅忽略编辑器换行表现差异，不忽略正文差异或末尾换行变化。
-- Codex 连接检查与作者保存分离；检查异常后可以再次尝试，不自动重放写作任务。
+- 候选文字和说明可在自动暂存等待期间继续编辑，后续输入不会被旧回执覆盖。
+- 每个候选版本独立恢复勾选和说明；明确暂存也会记住所选版本，单纯查看不写入。
+- 编辑某处修改后，已跳过的其他修改不会重新勾选；新增、扩大或无法可靠对应的变化保留给作者核对。
+- 修复持续打字时的受控回写问题，保留实时文字、撤销和重做。
+- 修复关闭后迟到回执误切换版本、误关闭新比较窗口的问题。已真正保存的原候选快照继续保留。
+- 采用仍由作者明确决定，保留原文版本校验、EOL/BOM、接受前快照、项目隔离与 Canon/State/Knowledge 权限。
 
 ### 下载与升级
 
-- 普通 Windows 用户：下载 `NovelStudio-2.24.13-Preview-Setup.exe`。
-- 便携体验：下载 `NovelStudio-2.24.13-Windows-Preview.zip`；它保留公开演示模式。
-- 作品独立于安装目录。升级前建议在软件中创建备份，并在安装器中选择原有数据目录；不要用演示数据覆盖作品。
-- `SHA256SUMS.txt` 用于检查下载完整性。未提供代码签名，PyInstaller EXE 可能被杀毒软件误报；不要盲目关闭安全防护。
+- Windows 安装程序：`NovelStudio-2.24.15-Preview-Setup.exe`。
+- 便携 Preview：`NovelStudio-2.24.15-Windows-Preview.zip`，保留独立公开演示模式。
+- 个人使用推荐安装程序，升级前备份作品，在安装器中明确选择原有数据目录。安装目录与作品目录应分开。
+- `SHA256SUMS.txt` 用于完整性核对。程序尚未进行代码签名；PyInstaller EXE 可能出现杀毒软件误报，请先核对来源与校验值，不要盲目关闭安全防护。
+- 源码在仓库；私人 Developer ZIP、审计记录、用户数据和角色资产不会上传为 Release 附件。
 
-### 验证边界
+### 验证与限制
 
-本轮使用隔离公开演示数据、本地真实业务 API、实际 headless 浏览器和固定 MOCK 写作响应。固定响应不是真实 AI 能力验收。发布记录分别记录 Windows CI、包内资源及静默安装/worker 结果。
+本轮 13 项实际 headless 浏览器流程和 45 项相关后端检查通过；使用隔离公开模板和合成正文，没有远端模型调用。受控延迟/错误是回执边界检查，不是真实 AI 能力证明。封包、静默隔离安装/卸载、EXE worker 与当前提交的 Windows CI 结果分别记录。
 
-仍为 **Preview / PARTIAL**：本轮没有重新验收原生窗口点击、实体中文输入法、系统 DPI、真实语音、新远端 AI 和长期使用。构建、worker 或浏览器通过不等于这些场景通过。
+保持 **Preview / PARTIAL**。原生窗口交互、实体中文输入法、系统 DPI、真实语音、新远端 AI 和长期使用未在本轮验收。没有新增依赖、Agent、数据迁移或权限扩张。
 
 ## English
 
-This release incorporates the local 2.24.11–2.24.13 reliability fixes without new agents, dependencies or data migrations.
+This Preview includes the local 2.24.14–2.24.15 candidate editing and save-receipt fixes.
 
-- Preserve local author input during takeover, pending saves and report refresh; reject obsolete execution receipts.
-- Mark reports historical when their candidate changes, and show missing provenance rather than claiming a current evaluation.
-- Map native textarea UTF-16 selections to exact source ranges across LF/CRLF/CR/mixed newlines and emoji, fixing quotation navigation, retain-to-cursor, partial rewrite and scoring selection.
-- Initialize real Diff changes on mount and compare logical newline representations. Explicit adoption preserves document EOL, UTF-8 BOM and the original byte snapshot; existing mixed-source guards remain.
-- Adoption receipts ignore newline representation only; actual content and terminal-newline differences remain significant.
-- Read-only Codex checks no longer serialize author saves and recover after probe failures without replaying AI work.
+- Keep editing candidate text and notes during autosave; later input remains pending rather than being overwritten by an old receipt.
+- Restore each variant's choices and note independently. Explicit Save also remembers the active variant; viewing alone does not write.
+- Keep skipped edits skipped after unrelated changes. New, expanded or ambiguous changes require author review.
+- Preserve rapid typing, undo and redo by separating live editor input from deliberate replacements.
+- Prevent late receipts from replaying cancelled variant switches or closing a reopened comparison. Legitimately saved old snapshots remain stored.
+- Preserve explicit author adoption, source revisions, EOL/BOM, original snapshots, project isolation and Canon/State/Knowledge protections.
 
-Use the Windows Setup for installation, or the portable ZIP for the public demo. Keep creative data separate, back up before upgrading, and select your existing data directory explicitly. SHA-256 checksums are supplied. Binaries are unsigned; PyInstaller-based executables can trigger antivirus false positives. Do not blindly disable protection.
+Use the Setup installer for personal installation and explicitly select the existing data directory after backing up. The portable Preview retains an isolated public demo mode. Source is in the repository; private developer archives, audit logs, author data and character assets are not Release attachments. SHA-256 checksums are supplied. Binaries are unsigned and PyInstaller executables may trigger antivirus false positives; verify origin/checksums rather than blindly disabling protection.
 
-Validation uses isolated public fixtures, actual local APIs/headless browser and fixed MOCK writing. Native GUI, physical IME, system DPI, voices, new remote-model calls and long-duration use are not newly accepted. Keep **Preview / PARTIAL**; build, worker and browser checks are separate evidence gates.
+Thirteen actual headless browser workflows and 45 scoped backend checks passed on isolated public/synthetic data, with no remote-model requests. Controlled delays/errors are transport-boundary tests, not real-AI evidence. Packaging, silent isolated install/uninstall, executable worker and exact-commit Windows CI have distinct receipts. Native GUI, physical IME, system DPI, real speech, new remote AI and long-duration use remain **UNVERIFIED**. Product status stays **Preview / PARTIAL**; no new dependencies, agents, migration or permission expansion.

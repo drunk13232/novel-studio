@@ -305,5 +305,6 @@
   "continueRevisionEditing": "继续编辑",
   "discardAndRejectRevision": "放弃本地编辑并拒绝建议",
   "discardAndCloseRevision": "放弃本地编辑并关闭比较",
-  "discardAndSwitchRevision": "放弃本地编辑并切换"
+  "discardAndSwitchRevision": "放弃本地编辑并切换",
+  "revisionChoicesRecheck": "文本已变化，先前跳过的内容不会自动采用；新增、扩大的或合并的修改请重新核对勾选。"
 }

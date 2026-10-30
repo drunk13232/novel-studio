@@ -1,7 +1,9 @@
-# Public candidate audit — 2.24.13 Preview
+# Public candidate audit — 2.24.15 Preview
 
-The explicit Allowlist is refreshed from the retained developer manifest and reviewed current code/tests/guides. Source is staged independently; parent Git history, works, credentials, user Codex configuration, local logs and private character assets are excluded.
+The reviewed Allowlist is refreshed from the retained developer manifest plus scoped current application/tests/guides. An independent file-only staging tree excludes parent Git objects, works, credentials, user Codex settings, private logs and private character assets. Developer snapshots are not published wholesale.
 
-This release incorporates 2.24.11–2.24.13 reliability changes. Local/browser/MOCK checks remain distinct from real remote inference and native GUI/IME/DPI acceptance. Current scanner dispositions, source/tree hashes, package alignment, installer/worker checks, protected-file checks and exact-commit CI are recorded in the private publication receipt and release notes. No clean-environment install is inferred from a local build.
+This update incorporates 2.24.14–2.24.15 candidate-editing/session fixes. Actual local checks used isolated public/synthetic fixtures and authenticated application APIs; controlled late responses validate receipt ownership, not model capability. No new remote-model call is part of this release validation.
 
-Apache-2.0, drunk13232 attribution and third-party notices remain. Previously reviewed findings are accepted only when fingerprints and relevant file bytes remain identical. New unresolved findings block publication. Existing releases and the desktop shortcut remain unchanged. Preview / PARTIAL is retained.
+The private publication receipt records scanner dispositions, source/tree and server-asset hashes, package alignment, installer/worker results, protected-file checks and exact-commit Windows CI. Previously reviewed findings carry forward only when content fingerprints and relevant file bytes match. Any unresolved new finding blocks publication. No fresh local dependency installation is inferred from the retained development environment; hosted CI installs dependencies separately.
+
+Apache-2.0 and drunk13232 attribution remain. Third-party terms and provenance remain separate from project licensing. Older releases, real works, global Codex configuration and the desktop shortcut are preserved. Preview / PARTIAL remains: native GUI/physical IME/DPI, real voices, new remote AI and long-duration acceptance are not established by browser/build/worker checks.

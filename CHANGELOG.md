@@ -1,5 +1,24 @@
 # Changelog / 更新记录
 
+## 2.24.15 — Candidate Session Reliability Preview (2026-10-30)
+
+- Includes the local 2.24.14 candidate editing improvements below.
+- Require exact candidate-session ownership before a completed save can continue a UI operation.
+- Prevent cancelled variant switches and save-and-close actions from affecting a reopened comparison with matching IDs/text.
+- Keep legitimately committed snapshots; isolate stale failures from a newer view.
+- No dependency, data migration, permission expansion or new remote-model request.
+- Local browser, domain and packaged-worker verification remain separate from native GUI/IME/DPI, speech and real remote AI.
+
+## 2.24.14 — Candidate Editing Reliability Preview (2026-10-30, local)
+
+- Preserve explicit hunk choices across newline representation changes, variant switching and later candidate editing.
+- Retain consent by immutable original-line coverage; new/expanded or ambiguous merged changes stay unchecked.
+- Separate live editor input from deliberate replacement props to prevent rapid input echoes from reverting characters/caret.
+- Continue candidate/note editing during autosave; retain initial-read, incoming-conflict and actual-decision locks.
+- Explicit save updates the existing active-variant marker even when text is unchanged; plain viewing remains read-only.
+- Keep the existing draft schema, source guards, EOL/BOM and author adoption authority. No dependency, migration or new AI call.
+- Native GUI, physical IME/DPI, voices, new remote AI and long-duration use remain unverified.
+
 ## 2.24.13 — Selection & Save Reliability Preview (2026-10-30)
 
 - Map normalized textarea UTF-16 selections back to exact raw source positions; preserve source/candidate text and reject mismatched or unrepresentable ranges.

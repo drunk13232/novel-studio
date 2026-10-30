@@ -1,4 +1,4 @@
-Novel Studio 2.21.3 Model Control and MCP Preview
+Novel Studio — Windows Preview
 
 启动
 解压完整 NovelStudio 文件夹后双击 NovelStudio.exe；保留 _internal。
