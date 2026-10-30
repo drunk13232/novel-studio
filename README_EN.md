@@ -1,4 +1,8 @@
-# Novel Studio · 2.24.15 Candidate Session Reliability Preview
+# Novel Studio · 2.24.16 Candidate History Reliability Preview
+
+## 2.24.16
+
+2.24.16 Preview. Fresh candidates no longer inherit prior notes/choices. Handled history exposes saved author text and notes separately; stale read-only previews retain the selected variant rather than restoring a different draft. Existing source and adoption protections remain. Installer and portable ZIP: [Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.16-preview). See the [2.24.16 guide](docs/workbench-experience/DELIVERY-2.24.16.md).
 
 ## 2.24.15
 

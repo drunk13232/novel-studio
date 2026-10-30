@@ -238,5 +238,9 @@
   "candidateHandledHelp": "此候选已处理，不能再次采用或暂存。本窗口文本可下载留存；实际采用内容请从候选历史核对。",
   "candidateCloseConflict": "已发现另一个已保存版本。请先继续编辑并检查冲突、下载需要保留的本地副本；当前不能直接暂存并离开。",
   "continueCandidateContext": "继续这份候选",
-  "candidateContextNeedsReview": "已加入续写参考；它仍不是 Canon。请检查并确认上下文后再生成。"
+  "candidateContextNeedsReview": "已加入续写参考；它仍不是 Canon。请检查并确认上下文后再生成。",
+  "savedCandidateHistory": "作者暂存的文字与说明（只读）",
+  "savedCandidateHistoryHelp": "这些是决策前保留的候选草稿，可能包含未采用的修改。实际采用结果请看处理回执；查看记录不会修改正文。",
+  "savedCandidateText": "查看当时暂存的候选文字",
+  "readOnlyComparisonHelp": "左侧为当时的原文，右侧为所选历史候选；仅供查看，不能覆盖当前正文。作者暂存的文字与说明在只读记录中单独列出。"
 }

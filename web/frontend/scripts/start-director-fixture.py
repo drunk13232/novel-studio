@@ -8,6 +8,7 @@ parser=argparse.ArgumentParser(description='Isolated public-demo Director UI fix
 parser.add_argument('--root',required=True,type=Path)
 parser.add_argument('--port',type=int,default=8917)
 parser.add_argument('--local-writer',action='store_true',help='Fixed local test response only; never a real AI')
+parser.add_argument('--selection-writer',action='store_true',help='Fixed local selection JSON through the real TaskManager; never a real AI')
 parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-only mixed-newline chapter for selection checks')
 parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
 args=parser.parse_args();A=args.root.resolve()
@@ -53,6 +54,21 @@ if args.local_writer:
  def local_adapter(center,project,group,prompt,*other,**kw):
   assert project==p and group=='cowrite';return LocalWriter()
  director_module.adapter=local_adapter
+if args.selection_writer:
+ import app.creative.tasks as text_tasks
+ class LocalSelectionWriter:
+  role='WRITER';bound_ai_selection=True;request_controls={'fixture':True};selected_ai={'backend':'MOCK','provider_name':'CONTROLLED_LOCAL_SELECTION','model':'fixed-local-json'}
+  def close(self):pass
+  interrupt=close
+  def start_task(self,prompt,emit,**kw):
+   payload=json.loads(prompt.split('\nINPUT:\n',1)[1]);text=payload['selected_text'];assert '甲段原文。' in text and '乙段原文。' in text
+   candidate=text.replace('甲段原文。','甲段本地新候选。').replace('乙段原文。','乙段本地新候选。')
+   result={'candidate':candidate,'advice':'CONTROLLED_LOCAL_SELECTION — fixed local response, not AI'}
+   (A/'selection-calls.jsonl').open('a',encoding='utf8').write(json.dumps({'backend':'MOCK','selected_characters':len(text),'source':'isolated public fixture'})+'\n')
+   return {'status':'completed','output':json.dumps(result,ensure_ascii=False),'ai_metadata':self.selected_ai}
+ def selection_adapter(center,project,group,prompt,*other,**kw):
+  assert project==p and group in {'polish','cowrite'};return LocalSelectionWriter()
+ text_tasks.adapter=selection_adapter
 target={'start':0,'end':utf16_index(normalized(doc),len(normalized(doc))),'quote':normalized(doc)} if args.revision_fixture else {}
 record=app.state.creative_director.create(p,Create(**target,path=path,revision=doc['etag'],context_id=ctx['id'],goal='LOCAL_SERVICE_TEST: open a saved task only; no model is called',executor='codex',commander='codex',mode='quick',goal_han=3000))
 record=app.state.creative_director.patch(p,record['id'],Patch(etag=record['etag'],draft='她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。\n\n她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。'))
@@ -72,7 +88,7 @@ if args.revision_fixture:
  text=normalized(doc);a=text.replace('甲段原文。','甲段候选 A。').replace('乙段原文。','乙段候选 A。');a=''.join(line+('\r\n' if i%2==0 else '\n') for i,line in enumerate(a.split('\n')[:-1]));b=text.replace('甲段原文。','甲段候选 B。').replace('乙段原文。','乙段候选 B。')
  record=app.state.creative_director.patch(p,record['id'],Patch(etag=app.state.creative_director.get(p,record['id'])['etag'],draft=a))
  staged=app.state.creative_director.stage(p,record['id'],Candidate(etag=record['etag']))['candidate'];staged['variants']=[{'label':'A','candidate':a},{'label':'B','candidate':b}];write(app.state.studio_tools.candidate_path(p,staged['id']),staged)
-(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture}),encoding='utf-8')
+(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture,'selection_writer':args.selection_writer}),encoding='utf-8')
 import threading
 from app.models.requests import TaskRequest,TaskOptions
 from app.tasks.manager import now as task_now

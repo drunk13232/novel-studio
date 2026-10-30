@@ -238,5 +238,9 @@
   "candidateHandledHelp": "This candidate has been handled and cannot be adopted or saved again. Download the local text if needed; check history for the actual adopted text.",
   "candidateCloseConflict": "Another stored version was found. Continue editing to inspect the conflict and download local copies you need. Save-and-leave is blocked until it is resolved.",
   "continueCandidateContext": "Continue this candidate",
-  "candidateContextNeedsReview": "Added as a draft reference, not Canon. Review and approve the context before generating."
+  "candidateContextNeedsReview": "Added as a draft reference, not Canon. Review and approve the context before generating.",
+  "savedCandidateHistory": "Saved author text and notes (read-only)",
+  "savedCandidateHistoryHelp": "These are candidate drafts retained before the decision and may include edits that were not adopted. The decision receipt records actual adoption. Viewing these snapshots never changes the manuscript.",
+  "savedCandidateText": "View the saved candidate text",
+  "readOnlyComparisonHelp": "The left side is the original snapshot; the right side is the selected historical candidate. This view cannot overwrite the current manuscript. Saved author text and notes are listed separately in the read-only record."
 }

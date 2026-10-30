@@ -1,4 +1,8 @@
-# Novel Studio · 2.24.15 Candidate Session Reliability Preview
+# Novel Studio · 2.24.16 Candidate History Reliability Preview
+
+## 2.24.16
+
+2.24.16 Preview。新候选不会继承上一轮说明或勾选；已处理历史可查看作者暂存的文字与说明。原文过期的只读历史保持所选版本，不再被另一版本暂存内容覆盖。既有原文与作者采用权限不变。安装程序与便携版见 [Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.16-preview)。见 [2.24.16 说明](docs/workbench-experience/DELIVERY-2.24.16.md)。
 
 ## 2.24.15
 

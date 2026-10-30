@@ -1,5 +1,14 @@
 # Changelog / 更新记录
 
+## 2.24.16 — Candidate History Reliability Preview (2026-10-30, local)
+
+- Reset transient notes and choices between distinct candidate generations and after closing a decided comparison.
+- Expose saved author text/notes in read-only history without equating saved edits with actual adoption.
+- Do not restore editable draft content into a stale read-only variant preview.
+- Retain same-text diff readiness and existing independently saved variants.
+- Reuse existing storage/permissions. No dependency, migration, remote-model call or automatic publication.
+- Native GUI, physical IME/DPI, speech, real remote AI and long-duration use remain unverified.
+
 ## 2.24.15 — Candidate Session Reliability Preview (2026-10-30)
 
 - Includes the local 2.24.14 candidate editing improvements below.

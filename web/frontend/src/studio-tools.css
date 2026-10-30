@@ -10,3 +10,5 @@
 /* Keep the comparison readable when draft controls make the dialog scroll. */
 .studio .diff-dialog > *{flex-shrink:0;min-width:0}
 .studio .diff-dialog > section{min-height:240px}
+
+.candidate-history-snapshots{border:1px solid var(--line);border-radius:var(--radius-md,10px);padding:10px 12px}.candidate-history-snapshots article{padding:10px 0;border-top:1px solid var(--line)}.candidate-history-snapshots h4{margin:4px 0}.candidate-history-snapshots textarea{width:100%;box-sizing:border-box;resize:vertical}.candidate-history-snapshots pre{max-height:12rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}

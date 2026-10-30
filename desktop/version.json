@@ -1,16 +1,16 @@
 {
-  "version": "2.24.15",
+  "version": "2.24.16",
   "release_date": "2026-10-30",
   "changes": [
-    "Includes 2.24.14 candidate selection, variant persistence and continuous-input reliability improvements.",
-    "A completed candidate draft save may continue a UI operation only in the exact editing session that initiated it.",
-    "Late receipts cannot replay a cancelled variant switch or close a replacement comparison, even when reopened text and IDs match.",
-    "Already committed old draft snapshots remain stored; stale failed receipts do not contaminate a newer view.",
-    "Reuse existing candidate schema, author adoption/source checks and project isolation; no new dependencies or remote model calls.",
-    "Preview / PARTIAL: headless browser and packaged-worker checks do not establish native GUI, physical IME/DPI, voice or real remote-AI acceptance."
+    "Reset transient comparison notes and hunk choices when starting a fresh candidate or closing a decided review.",
+    "Keep saved author text and notes visible in a separate read-only history record; stored snapshots are not claimed as the adopted result.",
+    "Prevent editable-draft restoration from overriding the selected variant in stale read-only history.",
+    "Retain computed identical-text diffs when switching variants, and preserve independently stored variant edits.",
+    "Reuse existing TaskManager, candidate storage, source revision checks and author-only adoption. No dependency, migration or permission expansion.",
+    "Preview / PARTIAL: controlled local MOCK generation, browser checks and packaged-worker execution do not establish real AI or native GUI/IME/DPI acceptance."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Candidate Session Reliability Preview",
+  "edition": "Candidate History Reliability Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

@@ -16,7 +16,7 @@ export function useCandidateDraft(options:Options){
  const {project,id,variant=0,text,note='',chosenHunks=null,readOnly=false,suspended=false}=options;
  const key=id?project+':'+id+':'+variant:'';
  const value:Value={text,note,chosen_hunks:chosenHunks};
- const latest=useRef({key,value,restore:options.onRestore});latest.current={key,value,restore:options.onRestore};
+ const latest=useRef({key,value,restore:options.onRestore,readOnly});latest.current={key,value,restore:options.onRestore,readOnly};
  const session=useRef<Session|null>(null),[state,setState]=useState<State>(empty(''));
  const current=state.key===key?state:null,stamp=signature(value);
  const locked=readOnly||!!current?.view&&current.view.status!=='PROPOSED';
@@ -32,7 +32,7 @@ export function useCandidateDraft(options:Options){
    const view=await api<Data>(base(project)+'/studio-tools/candidates/'+id+'/draft?variant='+variant,undefined,'GET',{signal:s.controller.signal});
    if(session.current!==s||latest.current.key!==s.key)return false;
    if(inspect&&s.view){if(view.etag===s.etag){s.view=view;s.paused=wasPaused;}else s.incoming=view;}
-   else{const restored=savedValue(view,s.initial);s.view=view;s.etag=view.etag;s.baseline=signature(restored);if(view.status==='PROPOSED'&&view.draft)latest.current.restore(restored);}
+   else{const restored=savedValue(view,s.initial);s.view=view;s.etag=view.etag;s.baseline=signature(restored);if(view.status==='PROPOSED'&&view.draft&&!latest.current.readOnly)latest.current.restore(restored);}
    s.checking=false;publish(s);return true;
   }catch(error){if(session.current===s){s.checking=false;publish(s,failure(error));}return false;}
  }
