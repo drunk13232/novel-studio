@@ -51,5 +51,7 @@
   "frontendResourcesMissing": "发行资源缺失：未找到生产前端。请重新解压完整 ZIP。",
   "backendStartupFailed": "本地服务启动失败，请查看应用日志。",
   "backendReadyTimeout": "等待本地服务就绪超时。",
-  "demoLogLocation": "独立演示应用数据 / launcher.log"
+  "demoLogLocation": "独立演示应用数据 / launcher.log",
+  "exitAlreadyPreparing": "正在准备安全退出，请稍候。",
+  "exitCloseFailed": "无法准备关闭窗口。编辑仍保留，请稍后重试。"
 }

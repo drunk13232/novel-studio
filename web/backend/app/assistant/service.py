@@ -40,7 +40,7 @@ class Session:
     def check(self):
         if getattr(self,'plugin_source',None):self.center.app.state.plugins.check_session(self)
         if getattr(self,'control_parent',None) and self.control_parent.cancelled:raise ConsoleError('所属助手任务已取消，未执行操作已撤销',409)
-        if self.ended and not self.confirming or self.cancelled or time.monotonic()>self.deadline or self.task and self.task.cancel_requested:raise ConsoleError('助手已停止或等待超时；已执行草稿保留，未执行操作取消',409)
+        if self.ended and not self.confirming or self.cancelled or time.monotonic()>self.deadline or self.task and self.task.cancel_requested or getattr(self,'execution_task',None) and self.execution_task.cancel_requested:raise ConsoleError('助手已停止或等待超时；已执行草稿保留，未执行操作取消',409)
     def wait(self,kind,name,args):
         with self.cv:
             self.check();token=uuid.uuid4().hex;self.pending={'token':token,'kind':kind,'tool':name,'arguments':args,'project':self.project,'message':'请确认本次受影响对象；不会直接覆盖正文、Canon 或 State。' if kind=='confirm' else '等待界面真实执行结果'};self.response=None
@@ -56,7 +56,13 @@ class Session:
                 # A timed-out/failed frontend operation must not remain an active ghost.
                 self.pending=None;self.response=None
             self.timing.mark('frontend_receipt','ok' if result['approved'] else '失败')
-            if not result['approved']:raise ConsoleError('用户拒绝或界面未执行，操作取消',409)
+            if not result['approved']:
+                detail=result.get('result')
+                # A failed UI receipt is not the author's refusal. Both still fail
+                # closed; never reinterpret an unapproved response as permission.
+                if kind=='frontend' and isinstance(detail,dict) and detail.get('ok') is False and isinstance(detail.get('error'),str) and detail['error'].strip():
+                    raise ConsoleError('界面执行失败：'+scrub(detail['error'])[:300],409)
+                raise ConsoleError('用户拒绝或界面未执行，操作取消',409)
             return result['result']
     def front(self,name,args):
         result=self.wait('frontend',name,args)
@@ -337,6 +343,33 @@ class AssistantCenter:
     def session(self,id):
         if id not in self.sessions:raise ConsoleError('助手会话不存在；重启只恢复操作摘要，不自动恢复任务',404)
         return self.sessions[id]
+    def start_frontend_selection(self,project,body,start):
+        """Recheck the existing live operation at actual task creation, not just UI intent."""
+        owner=body.frontend_origin
+        try:s=self.session(owner.session_id)
+        except ConsoleError as error:raise ConsoleError(str(error),error.status,code='FRONTEND_SELECTION_INACTIVE') from error
+        with s.cv:
+            try:s.check()
+            except ConsoleError as error:raise ConsoleError(str(error),error.status,code='FRONTEND_SELECTION_INACTIVE') from error
+            pending=s.pending
+            if s.project!=project or body.project_id!=project or s.response is not None or not pending or pending['kind']!='frontend' or pending['tool']!='propose_chapter_revision' or pending['project']!=project or pending['token']!=owner.token:
+                raise ConsoleError('选区操作已过期或不属于当前作品，未启动任务',409,code='FRONTEND_SELECTION_INACTIVE')
+            if s.context.path!=body.path or s.context.selection!=body.selected_text or pending['arguments'].get('instruction')!=body.instruction or body.action!='polish':
+                raise ConsoleError('选区操作与作者确认的目标或要求不一致，未启动任务',409,code='FRONTEND_SELECTION_SCOPE_CHANGED')
+            if pending.get('selection_submitted'):
+                raise ConsoleError('本次选区操作已提交任务，请先查看已有任务记录，未重复启动',409,code='FRONTEND_SELECTION_ALREADY_SUBMITTED')
+            result=start(project,body)
+            pending['selection_submitted']=True
+            if not hasattr(s,'controlled_tasks'):s.controlled_tasks=set()
+            if not hasattr(s,'spawned_tasks'):s.spawned_tasks=set()
+            s.controlled_tasks.add(result['id']);s.spawned_tasks.add(result['id'])
+            try:self.app.state.automation.remember_task(s,result['id'],body.ai_model or 'UNKNOWN')
+            except Exception:
+                # The task already exists. Preserve its real receipt, stop linkage
+                # and one-shot guard even if ancillary history persistence fails.
+                result['warning_code']='SELECTION_HISTORY_UNSAVED'
+                result['warning']='任务已启动，但角色任务记录未能持久化；请先查看任务记录，不要重复发起。'
+            return result
     async def reply(self,id,b):
         s=self.session(id)
         if s.pending and s.pending['kind']=='confirm' or b.token in self.confirmations.rows:return self.confirmations.approve(s,b)

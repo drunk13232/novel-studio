@@ -1,3 +1,4 @@
+import type {FrontendOrigin} from './api';
 import {useEffect,useRef,useState} from 'react';
 import {api,terminal} from './api';
 import {DIRECTOR_PYTHON_SAMPLE,type DirectorHandoff} from './director-console';
@@ -16,8 +17,8 @@ const samples={
  ai:'from novel_studio_api import Studio, StudioError\n\nstudio = Studio.connect()\nprint(studio.ai.models())\ntry:\n    task = studio.ai.start("只读检查已明确选定的范围；引用原文，不编造事实。", chapters=[1, 2])\n    print(task)\n    print(studio.tasks.wait(task["id"], timeout=60))\nexcept StudioError as error:\n    print(error.result)  # 等待作者确认时停止，不自动重复付费调用。\n',
  inspect:'from novel_studio_api import Studio\n\nstudio = Studio.connect()\nprint(studio.ui.state())\nprint(studio.world.search())\nprint(studio.call("get_codex_status"))\n',
 };
-export default function PythonControl({directorHandoff,onReturnDirector,initialSession,open,onClose,project,persona,onPersona,getContext,onAction,onChanged,onActivity}:{directorHandoff?:DirectorHandoff|null;onReturnDirector?:(v:DirectorHandoff)=>void;initialSession?:D|null;open:boolean;onClose:()=>void;project:string;persona:string;onPersona:(v:string)=>void;getContext:()=>D;onAction:(name:string,args:D)=>Promise<D>;onChanged:()=>void;onActivity:(v:D)=>void}){
- useUiTranslation(['control','assistant']);
+export default function PythonControl({directorHandoff,onReturnDirector,initialSession,open,onClose,project,persona,onPersona,getContext,onAction,onChanged,onActivity}:{directorHandoff?:DirectorHandoff|null;onReturnDirector?:(v:DirectorHandoff)=>void;initialSession?:D|null;open:boolean;onClose:()=>void;project:string;persona:string;onPersona:(v:string)=>void;getContext:()=>D;onAction:(name:string,args:D,signal?:AbortSignal,owner?:FrontendOrigin)=>Promise<D>;onChanged:()=>void;onActivity:(v:D)=>void}){
+ useUiTranslation(['control','assistant','writing']);
  const [code,C]=useState(samples.browse),[name,N]=useState(''),[scripts,S]=useState<D[]>([]),[history,H]=useState<D[]>([]),[session,V]=useState<D|null>(null),[error,E]=useState(''),[busy,B]=useState(false),[cfg,F]=useState<D|null>(null),[help,Q]=useState<D[]>([]),[filter,FL]=useState(''),[grant,G]=useState<D|null>(null),[tab,T]=useState('script');
  const [savedId,SI]=useState(''),[chosen,CH]=useState<D|null>(null),[settings,SET]=useState(false);
  const [boundDirector,BD]=useState<DirectorHandoff|null>(null);
@@ -41,6 +42,7 @@ export default function PythonControl({directorHandoff,onReturnDirector,initialS
   return()=>{live=false;source.close();};
  },[open,aiTask?.id,terminal(aiTask?.status)]);
  const controls=useRef<D|null>(null),sent=useRef(new Set<string>()),latest=useRef({getContext,onAction,onChanged,project,onActivity});latest.current={getContext,onAction,onChanged,project,onActivity};
+ const revisionExecutions=useRef(new Map<string,{session:string;controller:AbortController}>());
  const buffers=useRef(new Map<string,D>()),scope=project+':'+persona,scopeRef=useRef(scope);scopeRef.current=scope;
  const current=useRef(session);current.current=session;
  const active=!!session&&(!!session.pending||!!session.task&&!terminal(session.task.status));
@@ -53,10 +55,16 @@ export default function PythonControl({directorHandoff,onReturnDirector,initialS
  // controls keep allowed read-only work alive; closing never starts new tasks.
  useEffect(()=>{if(!project)return;const source=new EventSource('/api/control/events?project='+encodeURIComponent(project));let disposed=false;
   source.onmessage=event=>{const rows: D[]=JSON.parse(event.data).sessions;for(const s of rows){
+   if(s.persona!==persona||s.project!==project)continue;
+   if(s.execution_status==='CANCELLED'||terminal(s.task?.status)&&!s.pending)for(const item of revisionExecutions.current.values())if(item.session===s.id)item.controller.abort('caller-ended');
    if(s.persona===persona&&(!current.current||current.current.id===s.id||terminal(current.current.task?.status)&&!current.current.pending))V(s);
    const p=s.pending;if(p?.kind!=='frontend'||sent.current.has(p.token))continue;sent.current.add(p.token);
-   void (async()=>{let result:D;try{const context=latest.current.getContext();await api('/api/assistant/sessions/'+s.id+'/frontend-claim',{token:p.token,context},'POST');if(disposed||context.project!==p.project)throw new Error(tr('scopeChanged'));result=await latest.current.onAction(p.tool,{...p.arguments,project:p.project});latest.current.onChanged();}catch(e){result={ok:false,error:String(e)};}if(!disposed)await api('/api/assistant/sessions/'+s.id+'/reply',{token:p.token,approved:result.ok===true,result,context:latest.current.getContext()},'POST');})().catch(e=>{if(!disposed)E(String(e));});
-  }};source.onerror=()=>{if(open)E(tr('bridgeReconnect'));};return()=>{disposed=true;source.close();};
+   void (async()=>{const controller=p.tool==='propose_chapter_revision'?new AbortController():null;if(controller)revisionExecutions.current.set(p.token,{session:s.id,controller});const timeout=controller?setTimeout(()=>controller.abort('timeout'),20000):null;let result:D;
+    try{const context=latest.current.getContext();await api('/api/assistant/sessions/'+s.id+'/frontend-claim',{token:p.token,context},'POST',{beforeSend:()=>{if(disposed||controller?.signal.aborted)throw new DOMException('Preparation aborted','AbortError');}});if(disposed||context.project!==p.project||latest.current.project!==p.project)throw new Error(tr('scopeChanged'));if(controller?.signal.aborted)throw new DOMException('Preparation aborted','AbortError');result=await latest.current.onAction(p.tool,{...p.arguments,project:p.project},controller?.signal,{session_id:s.id,token:p.token});if(!disposed)latest.current.onChanged();}
+    catch(e){result={ok:false,error:controller?.signal.aborted?t(controller.signal.reason==='timeout'?'writing:selectionPreparationTimedOut':'writing:selectionPreparationCancelled'):String(e)};}
+    finally{if(timeout)clearTimeout(timeout);revisionExecutions.current.delete(p.token);}
+    if(!disposed&&(!controller?.signal.aborted||controller.signal.reason==='timeout'))await api('/api/assistant/sessions/'+s.id+'/reply',{token:p.token,approved:result.ok===true,result,context:latest.current.getContext()},'POST');})().catch(e=>{if(!disposed)E(String(e));});
+  }};source.onerror=()=>{if(open)E(tr('bridgeReconnect'));};return()=>{disposed=true;for(const item of revisionExecutions.current.values())item.controller.abort('scope');revisionExecutions.current.clear();source.close();};
  },[project,persona]);
  useEffect(()=>{if(!session?.id||!active)return;let alive=true,running=false;const poll=async()=>{if(running)return;running=true;try{const s=await api<D>('/api/assistant/sessions/'+session.id);if(alive){V(s);if(terminal(s.task?.status)&&!s.pending)void refresh();}}catch(e){if(alive)E(String(e));}finally{running=false;}};void poll();const timer=setInterval(poll,650);return()=>{alive=false;clearInterval(timer);};},[session?.id,active]);
  useEffect(()=>{if(!active&&(!open||!aiTask||terminal(aiTask.status))){onActivity({active:false,state:'idle'});return;}const pending=session?.pending;const tool=[...(session?.steps||[])].reverse().find((v:D)=>v.status==='正在执行')?.tool||'';const state=pending?.kind==='confirm'?'confirm':!active&&aiTask&&!terminal(aiTask.status)?'analyzing':/search|read|list|get_/.test(tool)?'searching':'executing';onActivity({active:true,state,output:session?.output||'',persona});},[active,open,aiTask?.status,session?.pending?.kind,session?.steps?.length,session?.output]);
@@ -71,7 +79,7 @@ export default function PythonControl({directorHandoff,onReturnDirector,initialS
   try{const record=await api<D>('/api/projects/'+project+'/creative-director/'+analysisSource.record_id);const value=await api<D>('/api/control/director-note',{project,persona:chosen?.persona||session?.persona||persona,record_id:record.id,run_id:analysisRunId,etag:record.etag,comment:analysisComment},'POST');if(scopeRef.current!==owner)return;AC('');E(tr('analysisSaved'));onReturnDirector?.({project,path:value.path,id:value.id,etag:value.etag,title:value.goal,request:Date.now()});}catch(e){if(scopeRef.current===owner)E(String((e as {technicalDetail?:string})?.technicalDetail||e));}finally{B(false);}
  }
  async function reply(approved:boolean){if(!session?.pending)return;B(true);try{await api('/api/assistant/sessions/'+session.id+'/reply',{token:session.pending.token,approved,context:getContext()},'POST');V(await api<D>('/api/assistant/sessions/'+session.id));}catch(e){E(String(e));}finally{B(false);}}
- async function stop(){if(!session)return;try{V(await api<D>('/api/assistant/sessions/'+session.id+'/cancel',{},'POST'));}catch(e){E(String(e));}}
+ async function stop(){if(!session)return;for(const item of revisionExecutions.current.values())if(item.session===session.id)item.controller.abort('user');try{V(await api<D>('/api/assistant/sessions/'+session.id+'/cancel',{},'POST'));}catch(e){E(String(e));}}
  async function save(){try{const row=await api<D>('/api/control/scripts',{project,persona,id:savedId,name:name.trim()||'Python script',code},'POST');SI(row.id);N(row.name);await refresh();E(tr('saved'));}catch(e){E(String(e));}}
  async function makeGrant(){B(true);try{const row=await api<D>('/api/control/grants',{persona,instruction:'作者主动创建当前作品的外部 Python 临时授权',context:getContext(),model:controls.current?.model||cfg?.model||'codex-software',previous_session:session?.id},'POST');const nonce=await api<D>('/api/session');G({...row,nonce:nonce.request_token});}catch(e){E(String(e));}finally{B(false);}}
  const pending=session?.pending,output=chosen?(chosen.output??''):(session?.output??''),completed=(session?.steps||[]).find((v:D)=>v.tool==='start_text_task'&&v.status==='已完成'&&v.result?.id);

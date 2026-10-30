@@ -51,5 +51,7 @@
   "frontendResourcesMissing": "Frontend resources are missing. Extract the complete ZIP again.",
   "backendStartupFailed": "The local service failed to start. Check the application log.",
   "backendReadyTimeout": "Timed out waiting for the local service.",
-  "demoLogLocation": "Demonstration data / launcher.log"
+  "demoLogLocation": "Demonstration data / launcher.log",
+  "exitAlreadyPreparing": "Safe exit is already being prepared. Please wait.",
+  "exitCloseFailed": "The window close could not be prepared. Your edits remain available; retry later."
 }

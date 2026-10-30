@@ -1,4 +1,28 @@
-# Novel Studio · 2.24.19 Assistant Navigation Safety Preview
+# Novel Studio · 2.24.23 Verified Save Feedback Preview
+
+## Current public version: 2.24.23 Preview
+
+Includes the 2.24.20–2.24.23 selection-task cancellation, leave/exit and verified-save-feedback fixes. Download Setup, portable ZIP and SHA-256 checksums from [Release 2.24.23](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.23-preview). Older releases retained.
+
+**Preview / PARTIAL**: 47 isolated headless scenarios cover save/recovery/leave protection. Native GUI, physical Chinese IME, system DPI, voices, real cloud AI and prolonged use are not newly verified. A desktop-bridge double is not native window acceptance. See the exact commit Actions and Release for CI.
+
+Ambiguous receipts trigger one read-only verification, never automatic write replay. Recovery snapshots do not replace persistent backups.
+
+## 2.24.23
+
+Local Preview / PARTIAL. Manuscript receipts and recovery maintenance are separate. A failed recovery cleanup does not misreport a confirmed manuscript write. Ambiguous receipts use a bounded read-only verification without replaying writes; differing or unconfirmed versions retain input and navigation/exit guards, including undo to an old cache. Explicit manual recovery supports comparison without enabling automatic recovery. See the [2.24.23 guide](docs/workbench-experience/DELIVERY-2.24.23.md). Not automatically published or connected to shortcuts.
+
+## 2.24.22
+
+Local Preview / PARTIAL. Safe exit reuses existing save/recovery/preferences and the desktop bridge. Return to writing, close or Escape cancels preparation before handoff; late receipts cannot invoke closure. Real phases and retryable failures are shown, with a truthful non-cancellable state after native dispatch. Native preparation is guarded, idempotent, rechecks tasks after backups and recovers from close-worker preparation failure. See the [2.24.22 guide](docs/workbench-experience/DELIVERY-2.24.22.md). Not automatically published or installed into shortcuts.
+
+## 2.24.21
+
+Local Preview / PARTIAL. Pending Save-and-leave and Keep-recovery-and-leave operations now retain their own navigation owner. Continue editing, close and Escape cancel navigation immediately; late write receipts cannot revive it. Recheck the current content/page/scope before leaving. The dialog shows real write status, readable failures and explicit retry, with an explanation when recovery is off. See the [2.24.21 guide](docs/workbench-experience/DELIVERY-2.24.21.md). This local version is not automatically published; public downloads remain on [GitHub Releases](https://github.com/drunk13232/novel-studio/releases).
+
+## 2.24.20
+
+Local Preview / PARTIAL. Recheck selected-text source and scope during preparation, queued dispatch and retries. Existing assistant/Python bridges supply an ephemeral operation proof, and the existing backend Session rejects cancelled, expired or mismatched operations before creating a task. Accepted children retain existing ownership/cancellation; uncertain receipts direct authors to history without automatic replay. Chinese/English status and error copy is included. See the [2.24.20 guide](docs/workbench-experience/DELIVERY-2.24.20.md). Public downloads remain on [GitHub Releases](https://github.com/drunk13232/novel-studio/releases).
 
 ## 2.24.19
 
@@ -6,7 +30,7 @@
 
 Installer, portable ZIP and checksums: [2.24.19 Releases](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.19-preview).
 
-> **Preview / PARTIAL:** native GUI, physical IME/DPI, voice and new real-model acceptance remain unverified. Selected-text AI preparation and cancellation still have a known delayed-dispatch boundary: a candidate task can start after an assistant receipt times out or is cancelled. Check task history before retrying and avoid this route with paid models until the follow-up is delivered. Adoption still requires the existing author Diff approval. Window-local recovery is not a persistent backup.
+> **Published 2.24.19 boundaries and limitations (later local fixes are described above):** native GUI, physical IME/DPI, voice and new real-model acceptance remain unverified. Selected-text AI preparation and cancellation still have a known delayed-dispatch boundary: a candidate task can start after an assistant receipt times out or is cancelled. Check task history before retrying and avoid this route with paid models until the follow-up is delivered. Adoption still requires the existing author Diff approval. Window-local recovery is not a persistent backup.
 
 ## 2.24.18
 

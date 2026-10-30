@@ -1,5 +1,40 @@
 # Changelog / 更新记录
 
+## 2.24.23 — Verified Save Feedback Preview (2026-10-30, local)
+
+- Distinguish confirmed manuscript writes from recovery cleanup/update failures, preserving real saved counts and visible warnings.
+- Validate save receipts; ambiguous failures use one read-only verification, never an automatic write replay. Accept only the exact requested version and format.
+- Preserve newer input and recovery snapshots; unknown/conflicting saves stay protected through undo, navigation and safe exit.
+- Allow explicitly chosen manual recovery for comparison while automatic recovery remains off.
+- Statistics read-back handling invalidates existing views only; event format and honest net-count rules remain unchanged.
+- 47 isolated headless-browser flows passed, including LF/CRLF/BOM, empty/mixed input, uncertainty/undo, and previous leave/exit regressions. Controlled faults and desktop doubles are labelled; native GUI, physical IME/DPI, voice and cloud AI not newly verified. No new dependency, migration or permission.
+
+## 2.24.22 — Safe Exit Reliability Preview (2026-10-30, local)
+
+- Give exit preparation a scoped owner; cancellation, newer content or scope changes cannot silently continue into the desktop exit boundary.
+- Recheck actual saved/recovered input and preference completion. Show real phases, duplicate-submit protection, in-dialog errors and explicit retry.
+- Keep the desktop-handoff state visible until native disposal; do not offer a false cancellation after dispatch.
+- Guard native preparation, keep accepted closure idempotent and recheck owned tasks after exit backups. Restore retryability if the close worker cannot start.
+- Preserve the existing reply-worker join before window disposal.
+- 27 isolated headless-browser flows and 9 local launcher/readiness tests passed. Desktop boundaries/windows in those tests are controlled doubles; native GUI, physical IME/DPI, voice and real cloud AI are not newly verified. No new dependency or permission.
+
+## 2.24.21 — Author Navigation Reliability Preview (2026-10-30, local)
+
+- Fix cancelled Save-and-leave / Keep-recovery-and-leave navigation resuming after delayed write receipts.
+- Revalidate intent ownership, live document/page/load and input after asynchronous preparation. Preserve current input when cancelled, superseded or changed.
+- Show real pending-write state, prevent duplicate submissions and keep Continue editing / close / Escape available.
+- Surface write failures inside the leave dialog; explicit retries clear earlier errors. Explain disabled recovery-only navigation.
+- 31 unique isolated headless-browser flows passed; actual local save/recovery APIs and byte checks, no AI calls. Native GUI/physical IME/DPI remain unverified. No new dependencies, data format, migration or permissions.
+
+## 2.24.20 — Selected-Text Task Safety Preview (2026-10-30, local)
+
+- Validate live selected text, range, source revision, model/style and context at real dispatch, not only before asynchronous preparation.
+- Add bounded preparation cancellation and truthful waiting/submitted/uncertain-receipt feedback, including queue and auth/privacy-retry boundaries.
+- Reuse existing Session/token/project validation at candidate-task creation; reject cancelled, expired, mismatched and repeated operations.
+- Reuse existing owned-child task cancellation for assistant/Python entry points. Never persist the transient origin in candidates or model prompts.
+- Distinguish frontend failures from author refusals; current confirmed-execution cancellation remains authoritative after a completed planner turn.
+- Preserve canonical data, source/adoption guards and legacy manual requests. No added dependencies, Agent framework or database migration. Local Preview / PARTIAL; no native GUI or real-provider claim.
+
 ## 2.24.19 — Assistant Navigation Safety Preview (2026-10-30)
 
 - Recheck project, page, document load, newer navigation and unsaved input after delayed assistant-result lookups.

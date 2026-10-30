@@ -8,10 +8,13 @@ parser=argparse.ArgumentParser(description='Isolated public-demo Director UI fix
 parser.add_argument('--root',required=True,type=Path)
 parser.add_argument('--port',type=int,default=8917)
 parser.add_argument('--local-writer',action='store_true',help='Fixed local test response only; never a real AI')
+parser.add_argument('--selection-gated',action='store_true',help='Wait in the fixed MOCK adapter until the real TaskManager requests interrupt; bounded 30 seconds')
 parser.add_argument('--selection-writer',action='store_true',help='Fixed local selection JSON through the real TaskManager; never a real AI')
 parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-only mixed-newline chapter for selection checks')
 parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
+parser.add_argument('--trace-shutdown',action='store_true',help='Record isolated service close boundaries and thread stacks, never user request data')
 args=parser.parse_args();A=args.root.resolve()
+if args.selection_gated and not args.selection_writer:raise SystemExit('Gated selection requires the fixed local selection adapter')
 if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
 if not A.is_relative_to((ROOT/'desktop/build').resolve()) or A==(ROOT/'desktop/build').resolve():raise SystemExit('Fixture must use a dedicated directory below desktop/build')
 if not 1024<=args.port<=65535:raise SystemExit('Use an unprivileged loopback port')
@@ -27,7 +30,7 @@ if args.mixed_source:
 if args.revision_fixture:
  source=next((W/'projects').glob('novel_*'))/'chapters/chapter-2/draft.md'
  assert source.resolve().is_relative_to(W.resolve());source.write_bytes(('第2章 海边的试写\n\n甲段原文。\n'+''.join('中间保留文字第'+str(i)+'行。\n' for i in range(1,17))+'乙段原文。\n尾段保留。\n').encode('utf8'))
-os.environ.update(NOVEL_WORKSPACE=str(W),NOVEL_STUDIO_HOME=str(A/'app-data'),NOVEL_STUDIO_DATA=str(A/'app-data/workspaces'),NOVEL_PORT=str(args.port),NOVEL_DEMO='1')
+os.environ.update(NOVEL_WORKSPACE=str(W),NOVEL_STUDIO_HOME=str(A/'app-data'),NOVEL_STUDIO_DATA=str(A/'app-data/workspaces'),NOVEL_PORT=str(args.port),NOVEL_DEMO='1',CODEX_HOME=str(A/'empty-codex'))
 sys.path.insert(0,str(ROOT/'web/backend'));sys.path.insert(0,str(ROOT/'scripts'))
 from app.main import create_app
 from app.config import Settings
@@ -55,16 +58,21 @@ if args.local_writer:
   assert project==p and group=='cowrite';return LocalWriter()
  director_module.adapter=local_adapter
 if args.selection_writer:
+ import threading
  import app.creative.tasks as text_tasks
  class LocalSelectionWriter:
   role='WRITER';bound_ai_selection=True;request_controls={'fixture':True};selected_ai={'backend':'MOCK','provider_name':'CONTROLLED_LOCAL_SELECTION','model':'fixed-local-json'}
-  def close(self):pass
+  def __init__(self):self.closed=threading.Event()
+  def close(self):self.closed.set()
   interrupt=close
   def start_task(self,prompt,emit,**kw):
    payload=json.loads(prompt.split('\nINPUT:\n',1)[1]);text=payload['selected_text'];assert '甲段原文。' in text and '乙段原文。' in text
    candidate=text.replace('甲段原文。','甲段本地新候选。').replace('乙段原文。','乙段本地新候选。')
    result={'candidate':candidate,'advice':'CONTROLLED_LOCAL_SELECTION — fixed local response, not AI'}
    (A/'selection-calls.jsonl').open('a',encoding='utf8').write(json.dumps({'backend':'MOCK','selected_characters':len(text),'source':'isolated public fixture'})+'\n')
+   if args.selection_gated:
+    if self.closed.wait(30):return {'status':'interrupted','output':'','ai_metadata':self.selected_ai}
+    raise RuntimeError('CONTROLLED_LOCAL_SELECTION_GATE_TIMEOUT')
    return {'status':'completed','output':json.dumps(result,ensure_ascii=False),'ai_metadata':self.selected_ai}
  def selection_adapter(center,project,group,prompt,*other,**kw):
   assert project==p and group in {'polish','cowrite'};return LocalSelectionWriter()
@@ -88,7 +96,7 @@ if args.revision_fixture:
  text=normalized(doc);a=text.replace('甲段原文。','甲段候选 A。').replace('乙段原文。','乙段候选 A。');a=''.join(line+('\r\n' if i%2==0 else '\n') for i,line in enumerate(a.split('\n')[:-1]));b=text.replace('甲段原文。','甲段候选 B。').replace('乙段原文。','乙段候选 B。')
  record=app.state.creative_director.patch(p,record['id'],Patch(etag=app.state.creative_director.get(p,record['id'])['etag'],draft=a))
  staged=app.state.creative_director.stage(p,record['id'],Candidate(etag=record['etag']))['candidate'];staged['variants']=[{'label':'A','candidate':a},{'label':'B','candidate':b}];write(app.state.studio_tools.candidate_path(p,staged['id']),staged)
-(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture,'selection_writer':args.selection_writer}),encoding='utf-8')
+(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture,'selection_writer':args.selection_writer,'selection_gated':args.selection_gated}),encoding='utf-8')
 import threading
 from app.models.requests import TaskRequest,TaskOptions
 from app.tasks.manager import now as task_now
@@ -138,8 +146,40 @@ async def start_fixture():
 @app.post('/api/test-fixture-finish')
 def finish_fixture():fixture_gate.set();return {'released':True}
 import uvicorn
+# Optional diagnostic only: preserve the real lifespan and close behavior.
+if args.trace_shutdown:
+ import inspect,functools,faulthandler
+ trace_file=(A/'shutdown-threads.log').open('w',encoding='utf8')
+ def trace(label,event):
+  with (A/'shutdown-stages.jsonl').open('a',encoding='utf8') as out:out.write(json.dumps({'event':event,'service':label,'monotonic':time.monotonic()})+'\n')
+ def tracked(fn,label):
+  if inspect.iscoroutinefunction(fn):
+   @functools.wraps(fn)
+   async def invoke(*a,**kw):
+    trace(label,'start')
+    try:return await fn(*a,**kw)
+    finally:trace(label,'finish')
+  else:
+   @functools.wraps(fn)
+   def invoke(*a,**kw):
+    trace(label,'start')
+    try:return fn(*a,**kw)
+    finally:trace(label,'finish')
+  return invoke
+ from app.tasks.manager import TaskManager
+ TaskManager.close=tracked(TaskManager.close,'TaskManager.close')
+ seen=set()
+ for label,value in app.state._state.items():
+  if id(value) in seen or isinstance(value,TaskManager):continue
+  fn=getattr(value,'close',None)
+  if callable(fn) and hasattr(value,'__dict__'):seen.add(id(value));value.close=tracked(fn,label+'.close')
 (A/'server.pid').write_text(str(os.getpid()),'ascii')
 server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,log_level='warning'))
 @app.post('/api/test-fixture-exit')
-def fixture_exit():fixture_gate.set();server.should_exit=True;return {'closing':True}
-server.run()
+def fixture_exit():
+ fixture_gate.set()
+ if args.trace_shutdown:faulthandler.dump_traceback_later(12,file=trace_file)
+ server.should_exit=True;return {'closing':True}
+try:server.run()
+finally:
+ if args.trace_shutdown:faulthandler.cancel_dump_traceback_later();trace('server.run','returned');trace_file.close()

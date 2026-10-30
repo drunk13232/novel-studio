@@ -4,7 +4,7 @@ Manuscripts, Canon and State retain their existing authorities. No review engine
 """
 import json,re,threading,uuid
 from pathlib import Path
-from fastapi import APIRouter
+from fastapi import APIRouter,Request
 from pydantic import BaseModel,ConfigDict,Field,StrictInt
 from app.errors import ConsoleError
 from app.library.storage import safe,read,write,digest,now,checkpoint,database,write_guard
@@ -21,7 +21,11 @@ def utf16_slice(text,start,end):
 def utf16_index(text,index):return len(text[:index].encode('utf-16-le'))//2
 
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
+class FrontendOrigin(Strict):
+    session_id:str=Field(pattern=r'^[0-9a-f]{32}$')
+    token:str=Field(pattern=r'^[0-9a-f]{32}$')
 class SelectionRequest(Strict):
+    frontend_origin:FrontendOrigin|None=None
     project_id:str
     chapter_id:str
     path:str
@@ -193,7 +197,7 @@ class StudioTools:
         (capsule/'AGENTS.md').write_text(policy,encoding='utf8')
         prompt=policy+'\n现有小说写作 Skill：\n'+skill+'\n操作：'+operations[body.action]+'\nINPUT:\n'+json.dumps(payload,ensure_ascii=False)
         id=uuid.uuid4().hex
-        record={**body.model_dump(),'id':id,'status':'RUNNING','created_at':now(),'skill_sources':proof,'context_hash':packet.get('packet_sha256'),'requires_state_revalidation':True}
+        record={**body.model_dump(exclude={'frontend_origin'}),'id':id,'status':'RUNNING','created_at':now(),'skill_sources':proof,'context_hash':packet.get('packet_sha256'),'requires_state_revalidation':True}
         manager=self.manager(p);center=getattr(manager,'ai_center',None)
         group='dialogue' if body.action=='dialogue' else 'expand' if body.action=='expand' else 'review' if body.action in {'logic','voice'} else 'polish'
         if body.writing_context_id:group='cowrite'
@@ -438,7 +442,10 @@ class StudioTools:
 def studio_tool_routes(tools):
     router=APIRouter(prefix='/api/projects/{project}/studio-tools')
     @router.post('/selection')
-    async def selection(project:str,body:SelectionRequest):return tools.start(project,body)
+    async def selection(project:str,body:SelectionRequest,request:Request):
+        if body.frontend_origin:
+            return request.app.state.assistant.start_frontend_selection(project,body,tools.start)
+        return tools.start(project,body)
     @router.get('/candidates/{id}')
     def candidate(project:str,id:str):return tools.candidate(project,id)
     @router.get('/candidates/{id}/draft')

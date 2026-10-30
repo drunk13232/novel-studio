@@ -255,5 +255,16 @@
   "candidateTaskBusy": "当前选段任务仍在处理，请等待完成或先停止任务。",
   "candidateOpenBlocked": "当前候选有未保存输入。请先暂存，或通过关闭确认明确放弃后，再打开其他候选或开始新任务。",
   "candidateReadPending": "当前候选仍在读取或核对。请等待完成，或先关闭比较。",
-  "candidateOpenScopeChanged": "候选已不属于当前作品或章节，未载入。"
+  "candidateOpenScopeChanged": "候选已不属于当前作品或章节，未载入。",
+  "selectionPreparing": "正在核对选区任务…",
+  "selectionQueueWaiting": "正在等待提交选区任务…",
+  "selectionSubmitting": "已发送本机请求，等待任务回执…",
+  "selectionCancelPreparation": "取消准备",
+  "selectionPreparationCancelled": "选区任务准备已取消，尚未启动模型任务。",
+  "selectionPreparationChanged": "正文、选区、上下文或模型已变化，尚未启动模型任务。请检查当前范围后重新发起。",
+  "selectionReceiptUnclear": "尚未收到任务回执，任务可能已启动。请先查看任务历史，避免重复提交。",
+  "selectionRequestPending": "已有选区请求正在等待回执，请先处理该请求。",
+  "selectionPreparationTimedOut": "选区任务准备超时，未自动重试。请检查当前任务记录后重新发起。",
+  "selectionStopUnclear": "已收到实际任务回执，但停止请求未确认。请到任务记录核查当前状态。",
+  "selectionHistoryUnsaved": "任务已启动，但角色任务记录未能持久化；请先查看任务记录，不要重复发起。"
 }

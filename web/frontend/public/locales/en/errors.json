@@ -18,5 +18,9 @@
   "connectingLocalService": "Connecting to the local service",
   "localServiceConnectionFailed": "Unable to connect to the local service. Check that the application is still running, then try again. Your current edits have been preserved, but saving or execution has not been confirmed as successful.",
   "remoteDataSendingCanceled": "Sending data to the remote service has been canceled.",
-  "sessionValidationFailed": "Session validation failed. Please reopen the page."
+  "sessionValidationFailed": "Session validation failed. Please reopen the page.",
+  "LOCAL_RESPONSE_INVALID": "The local service response could not be read. Check task history before trying again.",
+  "FRONTEND_SELECTION_INACTIVE": "The owning assistant operation has stopped or expired. This request did not start a new task. Check existing task records first.",
+  "FRONTEND_SELECTION_SCOPE_CHANGED": "The selection, project or instruction no longer matches the original operation. Review it and explicitly start again.",
+  "FRONTEND_SELECTION_ALREADY_SUBMITTED": "This operation already submitted a task. Check its existing record before starting another."
 }

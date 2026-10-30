@@ -1,16 +1,18 @@
 {
-  "version": "2.24.19",
+  "version": "2.24.23",
   "release_date": "2026-10-30",
   "changes": [
-    "Recheck live project, page, chapter load, newer navigation and unsaved edits after assistant lookups, before replacing an editor.",
-    "Return actual file-load success or failure; failed or superseded reads stop subsequent candidate/director display.",
-    "Reuse live guards for existing character, entity, reference and report lookups.",
-    "Scope result-button errors to the latest request and project/persona; explicit retry clears its earlier error.",
-    "Retain existing Action Registry, author approval, source revisions, recovery and data isolation. No dependency, migration or permission expansion.",
-    "Local Preview / PARTIAL. Browser and executable-worker checks do not establish native GUI, physical IME/DPI, speech or real Codex/MCP acceptance. No automatic new GitHub release."
+    "Separate confirmed manuscript saves from recovery cleanup/update failures; ancillary recovery errors no longer masquerade as failed manuscript writes.",
+    "Validate returned path, content, revision, BOM and metadata before accepting a save receipt. On ambiguous transport, invalid JSON or server failure, perform one bounded read-only verification without replaying the write.",
+    "Advance the editor base only for an exact matching saved version; preserve newer input and flag differing/unknown disk results honestly.",
+    "Carry unconfirmed/conflicting save state through undo, save controls, navigation, unload and safe-exit guards instead of mistaking an old cache match for saved data.",
+    "Explicit manual recovery remains available for verification/merge even when automatic recovery is off; it does not enable automatic recovery or write Canon.",
+    "Older recovery acknowledgments no longer claim that newer input is recovered. Verified-readback statistics only invalidate existing views and never create save events.",
+    "47 unique isolated headless-browser scenarios passed: 18 receipt/format/safety flows, 12 leave-dialog regressions, 15 safe-exit regressions and 2 confirmed-save/cleanup-failure combinations. No model calls.",
+    "Local Preview / PARTIAL. Native GUI/physical IME/DPI/voice/real cloud AI not newly verified. No new dependencies, Agent, data format, migration or permission. No publication, shortcut or real-data-location change."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Assistant Navigation Safety Preview",
+  "edition": "Verified Save Feedback Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

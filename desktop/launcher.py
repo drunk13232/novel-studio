@@ -239,23 +239,33 @@ class SingleInstance:
 
 class Bridge:
     def __init__(self,app,config):
-        self._app=app;self._config=config;self._window=None;self._ready=False;self._allow_close=False;self._restart=None;self._selected=None;self._exit_thread=None
+        self._app=app;self._config=config;self._window=None;self._ready=False;self._allow_close=False;self._restart=None;self._selected=None;self._exit_thread=None;self._exit_guard=threading.Lock()
     def ready(self):self._ready=True
     def request_exit(self):
-        if self._app.state.active_tasks():return {'ok':False,'error':native('codexTasksActive')}
-        try:self._app.state.data_center.scheduled(exit=True)
-        except Exception as error:return {'ok':False,'error':native('backupIncomplete')+'\n'+str(error)}
-        self._allow_close=True
-        # pywebview must finish returning this JS-API reply before disposing the
-        # window. Its reply worker otherwise calls CLR against an already closed
-        # WebView, potentially during Python.NET interpreter shutdown.
-        caller=threading.current_thread()
-        def close_after_reply():
-            if caller is not threading.main_thread():caller.join()
-            self._window.destroy()
-        self._exit_thread=threading.Thread(target=close_after_reply,name='NovelStudioWindowClose',daemon=False)
-        self._exit_thread.start()
-        return {'ok':True}
+        if not self._exit_guard.acquire(blocking=False):
+            return {'ok':False,'error':native('exitAlreadyPreparing')}
+        try:
+            if self._allow_close:return {'ok':True}
+            if self._app.state.active_tasks():return {'ok':False,'error':native('codexTasksActive')}
+            try:self._app.state.data_center.scheduled(exit=True)
+            except Exception as error:return {'ok':False,'error':native('backupIncomplete')+'\n'+str(error)}
+            # Work may have started while an exit backup was being prepared.
+            if self._app.state.active_tasks():return {'ok':False,'error':native('codexTasksActive')}
+            self._allow_close=True
+            # Finish the actual JS-API reply worker before disposing its WebView.
+            caller=threading.current_thread()
+            def close_after_reply():
+                if caller is not threading.main_thread():caller.join()
+                self._window.destroy()
+            try:
+                self._exit_thread=threading.Thread(target=close_after_reply,name='NovelStudioWindowClose',daemon=False)
+                self._exit_thread.start()
+            except Exception:
+                self._allow_close=False;self._exit_thread=None
+                logging.exception('Owned desktop close worker could not start')
+                return {'ok':False,'error':native('exitCloseFailed')}
+            return {'ok':True}
+        finally:self._exit_guard.release()
     def open_project_folder(self,project):
         try:
             path=self._app.state.registry.workspace(project).root

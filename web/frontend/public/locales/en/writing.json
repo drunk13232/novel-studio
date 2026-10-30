@@ -255,5 +255,16 @@
   "candidateTaskBusy": "A selection task is still running. Wait for it to finish or stop it first.",
   "candidateOpenBlocked": "The current candidate has unsaved input. Save it, or explicitly discard it through the close confirmation before opening another candidate or starting a new task.",
   "candidateReadPending": "The current candidate is still loading or being checked. Wait for it to finish, or close the comparison first.",
-  "candidateOpenScopeChanged": "The candidate no longer belongs to this project or chapter and was not loaded."
+  "candidateOpenScopeChanged": "The candidate no longer belongs to this project or chapter and was not loaded.",
+  "selectionPreparing": "Checking the selected-text task…",
+  "selectionQueueWaiting": "Waiting to submit the selected-text task…",
+  "selectionSubmitting": "Local request sent; waiting for a task receipt…",
+  "selectionCancelPreparation": "Cancel preparation",
+  "selectionPreparationCancelled": "Preparation cancelled. No model task was started.",
+  "selectionPreparationChanged": "The manuscript, selection, context or model changed. No model task was started; review the current scope and start again.",
+  "selectionReceiptUnclear": "No task receipt yet; the task may have started. Check task history before submitting again.",
+  "selectionRequestPending": "A selected-text request is already waiting for a receipt. Resolve it first.",
+  "selectionPreparationTimedOut": "Selected-text preparation timed out without an automatic retry. Check the current task records before starting again.",
+  "selectionStopUnclear": "The real task receipt arrived, but its stop request is unconfirmed. Check the current task status in history.",
+  "selectionHistoryUnsaved": "The task started, but its character-owned history could not be persisted. Check the existing task before starting another."
 }

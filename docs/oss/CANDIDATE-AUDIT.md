@@ -1,5 +1,7 @@
-# Novel Studio 2.24.19 public source review
+# 2.24.23 public candidate audit
 
-Source is assembled from the previous hash-checked public allowlist and the completed immutable 2.24.19 developer snapshot, with only public release documentation and the allowlist helper updated. In-progress working-tree source is excluded. The public parent history is retained; private parent Git objects, manuscripts, credentials, local configuration and audit logs are excluded.
+Explicit reviewed-file update from the previous public snapshot and the completed immutable 2.24.23 developer ZIP. No parent Git history or live user data. Portable locator and owner-reviewed synthetic-name overrides retained.
 
-This snapshot requires privacy finding dispositions, unchanged third-party notices/provenance, binary checksum/source alignment, exact remote-tree verification and exact-commit hosted CI before publishing the draft release. Automated scans are not a universal absence-of-secrets proof. Final results are recorded in Release notes and a local publication receipt. Preview/PARTIAL, the selected-text delayed-dispatch boundary and window-local recovery limits remain disclosed.
+Added files are explicit save/leave/exit/selection regression drivers, desktop-exit tests and 2.24.20–2.24.23 notes. Functional code hashes match the sealed tested source. Source scans, Gitleaks, frozen code, license references, installer integrity and protected-work hashes are reviewed separately before publication. Unreviewed findings block publication. Prior scanner exceptions require identical fingerprints and unchanged source files.
+
+Exact-commit CI and server asset checks are recorded in the GitHub Release. This document is candidate evidence, not a security guarantee. Preview / PARTIAL: native GUI/IME/DPI/voice/real-cloud AI acceptance remains unverified. Private audits and global user configuration are excluded; user configuration is not modified or reverted.

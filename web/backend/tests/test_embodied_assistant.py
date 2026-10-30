@@ -57,3 +57,33 @@ def test_failed_frontend_wait_clears_pending_receipt():
     session.check=check
     with pytest.raises(ConsoleError):session.wait('frontend','set_theme',{'theme':'mist'})
     assert session.pending is None and session.response is None
+
+
+@pytest.mark.parametrize('kind,payload,expected',[
+    ('frontend',{'ok':False,'error':'CONTROLLED_PREFLIGHT_TIMEOUT'},'CONTROLLED_PREFLIGHT_TIMEOUT'),
+    ('confirm',{'ok':False,'error':'CONTROLLED_PREFLIGHT_TIMEOUT'},'用户拒绝'),
+    ('frontend',{'ok':True,'error':'CONTROLLED_FAKE_SUCCESS'},'用户拒绝'),
+    ('frontend',{'ok':False,'error':{'untrusted':'object'}},'用户拒绝'),
+])
+def test_unapproved_receipts_keep_failure_reason_without_granting_permission(kind,payload,expected):
+    from app.assistant.service import Session
+    session=Session.__new__(Session)
+    session.cv=threading.Condition();session.project='isolated';session.pending=None;session.response=None
+    session.timing=SimpleNamespace(mark=lambda *a,**k:None)
+    def deliver_failed_receipt():
+        if session.pending:session.response={'approved':False,'result':payload}
+    session.check=deliver_failed_receipt
+    with pytest.raises(ConsoleError,match=expected):session.wait(kind,'set_theme',{'theme':'mist'})
+    assert session.pending is None and session.response is None
+
+
+def test_live_confirmation_execution_cancellation_is_checked_after_planner_turn_ends():
+    import time
+    from app.assistant.service import Session
+    s=Session.__new__(Session)
+    s.ended=True;s.confirming=True;s.cancelled=False;s.deadline=time.monotonic()+10
+    s.task=SimpleNamespace(cancel_requested=False)
+    s.execution_task=SimpleNamespace(cancel_requested=True)
+    with pytest.raises(ConsoleError,match='助手已停止'):s.check()
+    s.execution_task.cancel_requested=False
+    s.check()  # A completed planner does not invalidate a live author-confirmed execution.
