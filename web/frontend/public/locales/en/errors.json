@@ -22,5 +22,8 @@
   "LOCAL_RESPONSE_INVALID": "The local service response could not be read. Check task history before trying again.",
   "FRONTEND_SELECTION_INACTIVE": "The owning assistant operation has stopped or expired. This request did not start a new task. Check existing task records first.",
   "FRONTEND_SELECTION_SCOPE_CHANGED": "The selection, project or instruction no longer matches the original operation. Review it and explicitly start again.",
-  "FRONTEND_SELECTION_ALREADY_SUBMITTED": "This operation already submitted a task. Check its existing record before starting another."
+  "FRONTEND_SELECTION_ALREADY_SUBMITTED": "This operation already submitted a task. Check its existing record before starting another.",
+  "RECOVERY_CHANGED": "The recovery copy changed. The newer copy was kept; reopen the chapter to inspect it.",
+  "RECOVERY_INVALID": "The recovery copy or its revision is invalid. The original file was kept; inspect it before retrying.",
+  "WORKSPACE_BUSY": "Another save or task is using this workspace. Current input is kept; wait for it to finish before retrying."
 }

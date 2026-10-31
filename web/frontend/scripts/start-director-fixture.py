@@ -14,6 +14,7 @@ parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-on
 parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
 parser.add_argument('--trace-shutdown',action='store_true',help='Record isolated service close boundaries and thread stacks, never user request data')
 parser.add_argument('--readback-delay-fixture',action='store_true',help='Controlled stalled read headers/body for save-receipt tests; no model or private data')
+parser.add_argument('--recovery-cleanup-fixture',action='store_true',help='Controlled public-demo cleanup timing and write lease; never enabled in production')
 args=parser.parse_args();A=args.root.resolve()
 if args.selection_gated and not args.selection_writer:raise SystemExit('Gated selection requires the fixed local selection adapter')
 if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
@@ -97,7 +98,7 @@ if args.revision_fixture:
  text=normalized(doc);a=text.replace('甲段原文。','甲段候选 A。').replace('乙段原文。','乙段候选 A。');a=''.join(line+('\r\n' if i%2==0 else '\n') for i,line in enumerate(a.split('\n')[:-1]));b=text.replace('甲段原文。','甲段候选 B。').replace('乙段原文。','乙段候选 B。')
  record=app.state.creative_director.patch(p,record['id'],Patch(etag=app.state.creative_director.get(p,record['id'])['etag'],draft=a))
  staged=app.state.creative_director.stage(p,record['id'],Candidate(etag=record['etag']))['candidate'];staged['variants']=[{'label':'A','candidate':a},{'label':'B','candidate':b}];write(app.state.studio_tools.candidate_path(p,staged['id']),staged)
-(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture,'selection_writer':args.selection_writer,'selection_gated':args.selection_gated}),encoding='utf-8')
+(A/'config.json').write_text(json.dumps({'url':'http://127.0.0.1:'+str(args.port),'project':p,'path':path,'candidate_id':r['result']['id'],'record_id':record['id'],'secondary_id':secondary['id'],'secondary_goal':secondary['goal'],'fixture_reports':fixture_reports,'fixture':'public-demo-only','recovery_cleanup_fixture':args.recovery_cleanup_fixture,'local_writer':args.local_writer,'mixed_source':args.mixed_source,'revision_fixture':args.revision_fixture,'selection_writer':args.selection_writer,'selection_gated':args.selection_gated}),encoding='utf-8')
 import threading
 from app.models.requests import TaskRequest,TaskOptions
 from app.tasks.manager import now as task_now
@@ -174,6 +175,32 @@ if args.readback_delay_fixture:
    await asyncio.sleep(.05)
   readback_events.append({'id':rid,'stage':stage,'event':'finished'})
   return Response(payload,media_type='application/json')
+if args.recovery_cleanup_fixture:
+ # Test-only delayed execution through the real authenticated loopback API.
+ import asyncio,httpx
+ from fastapi import Request
+ from fastapi.responses import JSONResponse
+ cleanup_calls=[]
+ @app.post('/api/test-fixture-hold-write')
+ async def hold_write(seconds:float=2,rid:str='busy'):
+  assert 0<=seconds<=5 and len(rid)<=60
+  cleanup_calls.append({'event':'write_started','id':rid})
+  await asyncio.sleep(seconds)
+  cleanup_calls.append({'event':'write_finished','id':rid});return {'done':True}
+ @app.get('/api/test-fixture-cleanup-events')
+ def cleanup_events():return {'events':cleanup_calls}
+ @app.get('/api/test-fixture-delayed-cleanup')
+ async def delayed_cleanup(request:Request,seconds:float=12.5):
+  assert 0<=seconds<=20
+  cleanup_calls.append({'event':'started','if_match':bool(request.headers.get('if-match'))})
+  await asyncio.sleep(seconds)
+  headers={'X-Novel-Request':request.headers['x-novel-request']}
+  if request.headers.get('if-match'):headers['If-Match']=request.headers['if-match']
+  async with httpx.AsyncClient(timeout=10,trust_env=False) as client:
+   response=await client.delete(f'http://127.0.0.1:{args.port}/api/projects/{p}/studio/recovery',params={'path':path},headers=headers)
+   value=response.json();cleanup_calls.append({'event':'finished','deleted':value.get('deleted') is True,'status':response.status_code})
+   return JSONResponse(value,status_code=response.status_code)
+
 import uvicorn
 # Optional diagnostic only: preserve the real lifespan and close behavior.
 if args.trace_shutdown:

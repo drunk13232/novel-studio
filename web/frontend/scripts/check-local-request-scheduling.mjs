@@ -89,5 +89,27 @@ const after=await previewProbe(current,false);
  }
  equal(d.trace.filter(x=>x.url===file).length,1);hold.resolve(response({path:body.path}));await save;
 }
+// Conditional recovery cleanup is the only newly cancellable queued mutation.
+const cleanup='/api/projects/fixture/studio/recovery?path=chapters%2Fstory%2Fdraft.txt',revision='a'.repeat(64);
+{
+ const d=driver(),{api}=await module(current),controller=new AbortController();
+ d.handlers.set(cleanup,options=>new Promise((resolve,reject)=>{options.signal.addEventListener('abort',()=>reject(new DOMException('Cancelled','AbortError')),{once:true});}));
+ const pending=api(cleanup,{},'DELETE',{signal:controller.signal,recoveryRevision:revision});await settle();
+ equal(d.trace.find(x=>x.url===cleanup).headers['If-Match'],'"'+revision+'"');equal(d.trace.find(x=>x.url===cleanup).headers['X-Novel-Request'],'local-test-token');controller.abort();await assert.rejects(pending,e=>e.name==='AbortError');checks++;
+ await api(file,body,'PUT');equal(d.trace.filter(x=>x.url===file).length,1);equal(d.trace.filter(x=>x.url===cleanup).length,1);equal(d.notices.length,0);
+}
+{
+ const d=driver(),{api}=await module(current),hold=deferred(),controller=new AbortController();let count=0;d.handlers.set(file,()=>++count===1?hold.promise:response({path:body.path}));
+ const first=api(file,body,'PUT');await settle();const pending=api(cleanup,{},'DELETE',{signal:controller.signal,recoveryRevision:revision});const second=api(file,body,'PUT');controller.abort();await assert.rejects(pending,e=>e.name==='AbortError');checks++;await settle();equal(count,1);equal(d.trace.filter(x=>x.url===cleanup).length,0);
+ hold.resolve(response({path:body.path}));await Promise.all([first,second]);equal(count,2);equal(d.trace.filter(x=>x.url===cleanup).length,0);
+}
+{
+ const d=driver(),{api}=await module(current);
+ for(const [route,method,expected] of [[file,'PUT',revision],[cleanup,'DELETE',undefined],[cleanup,'DELETE','bad"\r\nInjected: value'],['/api/projects/fixture/studio/recovery','DELETE',revision],[cleanup+'&path=other','DELETE',revision]]){
+  const n=d.trace.length;await assert.rejects(api(route,{},method,{signal:new AbortController().signal,recoveryRevision:expected}),e=>e.code==='CANCELLATION_NOT_SUPPORTED');checks++;equal(d.trace.length,n);
+ }
+ d.handlers.set(cleanup,()=>response({code:'RECOVERY_CHANGED',detail:'Fixture changed'},412));await assert.rejects(api(cleanup,{},'DELETE',{recoveryRevision:revision}),e=>e.code==='RECOVERY_CHANGED'&&e.httpStatus===412);checks++;equal(d.notices.length,0);
+}
+
 if(process.argv.includes('--baseline'))await writeFile(new URL('../../../docs/daily-writing-tools/private-checks/refinement/request-scheduling.json',import.meta.url),JSON.stringify({before,after,checks,environment:'LOCAL TRANSPORT ADAPTER; no real-time performance claim'},null,2));
 console.log(`${checks} LOCAL PASS shipping API scheduling/cancellation checks. Preview no longer blocks saves; write serialization and token/AI-control gates preserved. Local transport adapter only.`);

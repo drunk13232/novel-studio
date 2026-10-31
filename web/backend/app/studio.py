@@ -12,7 +12,7 @@ import threading
 import uuid
 from pathlib import Path
 from datetime import datetime, timezone
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 from app.version import release_info
 from app.errors import ConsoleError
@@ -545,20 +545,48 @@ def studio_routes(registry,planning,settings):
                 except (ConsoleError,KeyError,TypeError):continue
         return sorted(entries,key=lambda e:e['saved_at'],reverse=True)[:50]
 
+    def recovery_snapshot(project,path):
+        target=recovery_path(project,path)
+        try:raw=target.read_bytes()
+        except FileNotFoundError:return target,None,'missing'
+        try:value=json.loads(raw)
+        except (ValueError,UnicodeError):raise ConsoleError('恢复副本无法读取，已保留原文件，请检查后重试。',422,code='RECOVERY_INVALID')
+        if not isinstance(value,dict) or value.get('path')!=path or not isinstance(value.get('content'),str):
+            raise ConsoleError('恢复副本格式不完整，已保留原文件。',422,code='RECOVERY_INVALID')
+        return target,value,hashlib.sha256(raw).hexdigest()
+
     @router.get('/api/projects/{project}/studio/recovery')
-    def get_recovery(project:str,path:str):return read_json(recovery_path(project,path),None)
+    def get_recovery(project:str,path:str):
+        with lock:
+            _,value,revision=recovery_snapshot(project,path)
+            return {**value,'recovery_revision':revision} if value is not None else None
 
     @router.put('/api/projects/{project}/studio/recovery')
     def put_recovery(project:str,body:Recovery):
-        # Recovery never writes to manuscript files, even if an external writer
-        # has since changed the source. The base etag is retained for comparison.
-        with lock:atomic_json(recovery_path(project,body.path),{**body.model_dump(),'saved_at':datetime.now(timezone.utc).isoformat()})
-        return {'saved':True}
+        # The on-disk format is unchanged. The revision is a response-only receipt.
+        with lock:
+            target=recovery_path(project,body.path)
+            atomic_json(target,{**body.model_dump(),'saved_at':datetime.now(timezone.utc).isoformat()})
+            revision=hashlib.sha256(target.read_bytes()).hexdigest()
+        return {'saved':True,'recovery_revision':revision}
 
     @router.delete('/api/projects/{project}/studio/recovery')
-    def delete_recovery(project:str,path:str):
-        with lock:recovery_path(project,path).unlink(missing_ok=True)
-        return {'deleted':True}
+    def delete_recovery(project:str,path:str,if_match:str|None=Header(default=None,alias='If-Match')):
+        # Legacy explicit callers remain compatible; current automatic cleanup always supplies a strong precondition.
+        expected=None
+        if if_match is not None:
+            match=re.fullmatch(r'"([0-9a-f]{64}|missing)"',if_match)
+            if not match:raise ConsoleError('恢复副本版本校验无效，未执行清理。',422,code='RECOVERY_INVALID')
+            expected=match.group(1)
+        with lock:
+            target=recovery_path(project,path)
+            if expected is not None:
+                try:current=hashlib.sha256(target.read_bytes()).hexdigest()
+                except FileNotFoundError:current='missing'
+                if current!='missing' and current!=expected:
+                    raise ConsoleError('恢复副本已变化，较新副本已保留。请重新打开后查看。',412,code='RECOVERY_CHANGED')
+            target.unlink(missing_ok=True)
+        return {'deleted':True,'recovery_revision':'missing'}
     # Reuse the same business functions for controlled application actions.
     registry.studio_workspace=workspace
     registry.studio_draft=new_draft

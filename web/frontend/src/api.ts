@@ -11,13 +11,13 @@ export interface Status {title:string|null;genre:string|null;volume:number|null;
 let token='';
 let mutations:Promise<unknown>=Promise.resolve();
 /** beforeSend is synchronous and runs at actual dispatch, including queued/auth/preflight retries. */
-export type LocalRequestOptions={signal?:AbortSignal;beforeSend?:()=>void};
+export type LocalRequestOptions={signal?:AbortSignal;beforeSend?:()=>void;recoveryRevision?:string};
 export type LocalReadOptions=LocalRequestOptions;
 /** Ephemeral local operation proof. Never persist it or include it in model prompts. */
 export type FrontendOrigin={session_id:string;token:string};
 /** These authenticated local requests never edit manuscript or authoritative story data. */
 const independentLocalOperation=(url:string,method:string)=>method==='POST'&&(url==='/api/studio/codex/check'||/^\/api\/projects\/[^/?#]+\/(?:workbench\/replace\/search|experience\/focus-summary|book\/print-preview(?:\/[0-9a-f]{32}\/cancel)?|audio-export\/audio_[0-9a-f]{32}\/cancel)$/.test(url));
-async function request<T>(url:string,body:unknown,method:string,signal?:AbortSignal,beforeSend?:()=>void):Promise<T>{
+async function request<T>(url:string,body:unknown,method:string,signal?:AbortSignal,beforeSend?:()=>void,recoveryRevision?:string):Promise<T>{
   if(signal?.aborted)throw new DOMException('Request cancelled','AbortError');
   const mutation=method!=='GET';
   for(let attempt=0;attempt<2;attempt++){
@@ -25,6 +25,7 @@ async function request<T>(url:string,body:unknown,method:string,signal?:AbortSig
     const binary=body instanceof Blob,form=body instanceof FormData;
     const headers:Record<string,string>=mutation?{'X-Novel-Request':token}:{};
     if(body!==undefined&&!form)headers['Content-Type']=binary?'application/octet-stream':'application/json';
+    if(recoveryRevision!==undefined)headers['If-Match']='"'+recoveryRevision+'"';
     let response:Response;
     beforeSend?.(); // Outside the transport catch: preserve local validation errors.
     try{if(signal?.aborted)throw new DOMException('Request cancelled','AbortError');response=await fetch(url,{method,headers,signal,body:body===undefined?undefined:form||binary?body as BodyInit:JSON.stringify(body)});}catch(error){if(signal?.aborted||(error instanceof Error&&error.name==='AbortError'))throw new DOMException('Request cancelled','AbortError');throw Object.assign(new Error(t('errors:LOCAL_SERVICE_UNAVAILABLE')),{code:'LOCAL_SERVICE_UNAVAILABLE'});}
@@ -36,7 +37,7 @@ async function request<T>(url:string,body:unknown,method:string,signal?:AbortSig
         const n=value.ai_notice;
         if(!window.confirm(t('ai:remoteSendConfirmation',{provider:n.provider,model:n.model,host:n.host,categories:n.categories})+'\n'+(n.budget||[]).join('\n')))throw new Error(t('errors:REMOTE_SEND_CANCELLED'));
         await request('/api/ai/confirm',{token:n.token},'POST');
-        return request<T>(url,body,method,signal,beforeSend); // Preflight only: no upstream request has started.
+        return request<T>(url,body,method,signal,beforeSend,recoveryRevision); // Preflight only: no upstream request has started.
       }
       if(response.status===403&&(value.code==='SESSION_INVALID'||value.detail==='缺少本机会话请求校验')&&attempt===0){token='';continue;}
       const technical=typeof value.detail==='string'?value.detail:JSON.stringify(value.detail);
@@ -57,12 +58,26 @@ async function request<T>(url:string,body:unknown,method:string,signal?:AbortSig
 }
 export function api<T>(url:string,body?:unknown,method='GET',options:LocalRequestOptions={}):Promise<T>{
   const independent=method==='GET'||independentLocalOperation(url,method);
+  const conditionalCleanup=method==='DELETE'&&/^\/api\/projects\/[^/?#]+\/studio\/recovery\?[^#]+$/.test(url)&&typeof options.recoveryRevision==='string'&&/^(?:[0-9a-f]{64}|missing)$/.test(options.recoveryRevision)&&new URLSearchParams(url.split('?')[1]).getAll('path').length===1&&!!new URLSearchParams(url.split('?')[1]).get('path');
+  if(options.recoveryRevision!==undefined&&!conditionalCleanup)return Promise.reject(Object.assign(new Error(t('errors:REQUEST_REJECTED')),{code:'CANCELLATION_NOT_SUPPORTED'}));
   // Cancel a preview/read, never mislabel an already-submitted save or paid task as cancelled.
-  if(options.signal&&!independent)return Promise.reject(Object.assign(new Error(t('errors:REQUEST_REJECTED')),{code:'CANCELLATION_NOT_SUPPORTED'}));
+  if(options.signal&&!independent&&!conditionalCleanup)return Promise.reject(Object.assign(new Error(t('errors:REQUEST_REJECTED')),{code:'CANCELLATION_NOT_SUPPORTED'}));
   if(independent||url.endsWith('/cancel'))return request<T>(url,body,method,options.signal,options.beforeSend);
   // Preserve the existing backend mutation boundary, including preference saves.
   // Never retry etag conflicts or serialize GETs; tasks retain their own manager.
-  const enqueue=()=>{const result=mutations.catch(()=>{}).then(()=>request<T>(url,body,method,undefined,options.beforeSend));mutations=result.then(()=>undefined,()=>undefined);return result;};
+  const enqueue=()=>{
+    const result=mutations.catch(()=>{}).then(()=>request<T>(url,body,method,conditionalCleanup?options.signal:undefined,options.beforeSend,conditionalCleanup?options.recoveryRevision:undefined));
+    mutations=result.then(()=>undefined,()=>undefined);
+    // A queued cleanup can stop waiting, but never release or cancel an older write.
+    if(!conditionalCleanup||!options.signal)return result;
+    const signal=options.signal;
+    return new Promise<T>((resolve,reject)=>{
+      const aborted=()=>reject(new DOMException('Recovery cleanup wait cancelled','AbortError'));
+      signal.addEventListener('abort',aborted,{once:true});
+      result.then(value=>{signal.removeEventListener('abort',aborted);resolve(value);},error=>{signal.removeEventListener('abort',aborted);reject(error);});
+      if(signal.aborted)aborted();
+    });
+  };
   // Flush before joining the mutation queue: a queued request must not wait
   // for preference writes enqueued behind itself. Current generation stays frozen.
   if(method==='POST'&&/(?:\/tasks|\/sessions|\/reply|\/run|\/start|\/selection|\/control|\/creation\/context|\/assistant\/context)$/.test(url))return flushAIControlWrites().then(enqueue);

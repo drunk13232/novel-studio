@@ -1,27 +1,29 @@
-# Novel Studio 2.24.26 — Bounded Chapter Opening Preview
+# Novel Studio 2.24.27 — Recovery Integrity Preview
 
-Preview / PARTIAL. This update includes the completed 2.24.24–2.24.26 local improvements. Previous releases remain available.
+Preview / PARTIAL. A focused recovery and saving-safety update. Previous releases are retained.
 
 ## 中文
 
-- 保存成功后按实际正文保存事件刷新码字统计；不靠持续轮询，不将恢复副本计为正文增字。
-- 只读磁盘快照具有取消和明确的失败状态，仍走原有作者选择与修订保护流程。
-- 保存回执核对和章节读取具有明确等待边界。章节正文/恢复副本读取共用 10 秒时限，作者可以取消；取消或失败保留原有缓冲区与撤销/重做。
-- 工作区恢复先选最终目标。保留版 2.24.25 与新版本的两个实际对照场景中，正文/恢复 GET 从四次减少为两次；不据此宣称启动时间或内存改善比例。
-- 不自动重发正文保存，不跳过未完成的恢复检查，不扩大 Codex、文件或模型权限。
+- 新版自动清理恢复副本时核对实际存储版本；副本已经变化则返回 412 并保留，损坏副本明确报错，不静默删除。原有四字段格式不变，无需迁移。
+- 正文确认落盘与恢复副本维护分别显示。清理最多等待 10 秒，涵盖排队；未确认维护保留缓存与警告，不自动重发正文保存。
+- 晚到回执必须符合当前项目、章节、加载代次、文字与本地缓存归属，不能清掉较新的恢复内容或释放其他未完成写入。
+- 再次保存被拒绝时保留之前的未确认/冲突状态与离开保护；工作区忙碌不再被新误判为磁盘修订冲突。
+- 章节读取中隐藏旧恢复入口，并检查读写归属。放弃副本等待实际删除回执；副本已变化时先保留，再由作者重新读取和明确选择。
 
 ## English
 
-- Refresh writing statistics from actual successful manuscript-save events, without continuous polling or treating recovery snapshots as manuscript growth.
-- Cancellable read-only disk previews preserve the existing author-choice/revision flow.
-- Bounded save-receipt verification and cancellable chapter opening; paired chapter/recovery reads share a 10-second deadline. Failed/cancelled loads preserve existing text and undo/redo.
-- Workspace restoration resolves the final target first. Both measured same/alternate-target comparisons reduced content/recovery GETs from four to two; no startup-time or memory percentage is inferred.
-- No automatic manuscript-save replay, silent recovery bypass or wider Codex/file/model permissions.
+- Automatic cleanup compares the actual stored recovery-file version. Changed copies return 412 and stay intact; corrupt copies fail explicitly. Existing four-field storage needs no migration.
+- Confirmed manuscript saves and recovery maintenance have separate feedback. Cleanup has a ten-second queue-inclusive deadline; uncertain maintenance retains caches/warnings and never replays manuscript writes.
+- Late receipts must still own the current project, chapter, load generation, text and local cache; they cannot clear newer recovery input or release other pending writes.
+- Rejected retries preserve prior uncertainty/conflicts and navigation guards. Busy-workspace rejection no longer creates a new disk-revision conflict.
+- Recovery controls are hidden during chapter reads and guarded against concurrent reads/saves. Discard waits for a real receipt; changed copies remain pending for explicit reread/review.
 
-## Verification boundaries / 验证边界
+## Verification and limits / 验证与限制
 
-The completed local 2.24.26 delivery records 39 isolated headless cases, a production frontend build, source/frozen-code alignment, a real packaged bounded worker and isolated silent install/uninstall. They are separate gates, not native desktop acceptance. Native WebView2 clicks, physical Chinese IME, actual system DPI, voice, real cloud AI and prolonged-use acceptance were not newly performed. Existing build chunk warnings remain. Older isolated shutdown problems and pre-existing, candidate-external Codex config drift have not been attributed or claimed fixed. Recovery copies are not durable backups. In-progress recovery-integrity changes are intentionally outside this immutable release.
+Completed local-delivery evidence: 26 isolated headless cases (nine recovery flows plus 17 affected existing regressions), 15 real local API tests, 56 separately labelled local-transport assertions, production frontend build, semantic frozen/source alignment, a real packaged bounded worker and isolated silent install/uninstall. This publication rechecks the immutable artifacts and public source; these local results are reused evidence, not newly repeated native acceptance. No real AI call was made. Exact-commit CI is reported in this Release and Actions.
 
-## Install / 安装
+Native WebView2 interaction, physical Chinese IME, actual system DPI, voice, real cloud AI and prolonged-use acceptance are not newly verified. Existing build chunk warnings remain. An isolated Windows Proactor/service-shutdown issue and older candidate-external Codex config drift remain unresolved; no claim of a shutdown fix. Later shutdown diagnostic changes are excluded. The legacy explicit unconditional-delete API remains compatible; new automatic cleanup is version-bound. Cancelling a browser request does not prove a server write stopped. Recovery copies are not durable backups.
 
-Download the **Preview Setup.exe** for installation, or extract the **Windows Preview.zip** fully before running NovelStudio.exe. Keep existing writing data separate from the installation; select your existing data directory when upgrading. No Python/Node installation is required for packaged basic use. WebView2 and optional external AI/image/voice services keep their documented requirements. Windows may warn about the unsigned PyInstaller application; verify SHA-256 and its GitHub source, and do not disable security protection blindly. Both packages contain no personal writing, login credentials or private character models.
+## Installation / 安装
+
+Use **NovelStudio-2.24.27-Preview-Setup.exe** to install, or fully extract **NovelStudio-2.24.27-Windows-Preview.zip** before running NovelStudio.exe. Keep existing writing data separate and select the existing data directory when upgrading. Basic packaged use needs no Python/Node installation. WebView2 and optional external AI/image/voice services retain their documented requirements. An unsigned PyInstaller EXE may trigger security warnings: check SHA-256 and the trusted source; do not disable protection blindly. Private writing, credentials and private character models are excluded. Source is available in this repository; the private Developer ZIP is not a public asset.

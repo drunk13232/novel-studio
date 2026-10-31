@@ -1,5 +1,11 @@
 # Changelog / 更新记录
 
+## 2.24.27 — Recovery Integrity Preview (2026-10-31, local)
+
+Local Preview / PARTIAL. Cleanup compares the actual recovery-copy revision and late receipts only clear still-owned caches. Confirmed manuscript saves finish waiting for cleanup after ten seconds with a retained warning. Rejected retries retain prior uncertainty; busy workspaces do not create fake disk conflicts. Old recovery actions are hidden during chapter reads and remain available after cancellation. 26 current isolated headless cases, 15 real local API tests and 56 simulated transport assertions passed; no AI calls. See [2.24.27 notes](docs/workbench-experience/DELIVERY-2.24.27.md). No publication or shortcut update.
+
+本地 Preview / PARTIAL。恢复副本清理核对实际副本版本，迟到回执只处理自己仍拥有的缓存；正文已确认保存时，副本清理超过 10 秒会结束等待并保留明确提示。被拒绝的重试继续保护先前未确认状态，工作区忙碌不冒充新的磁盘版本冲突。章节读取期间收起旧恢复操作，取消后仍可检查并恢复。26 个本轮隔离 headless 场景、15 项真实本地 API 检查和 56 条模拟传输断言通过；没有 AI 调用。见 [2.24.27 说明](docs/workbench-experience/DELIVERY-2.24.27.md)。本轮不发布、不改快捷方式。
+
 ## 2.24.26 — Bounded Chapter Opening Preview (2026-10-30)
 
 Local Preview / PARTIAL. Cancellable chapter/recovery reads use a 10-second header/body deadline, retain existing content on failure and never bypass recovery or replay saves. Workspace restore resolves its target first; two measured scenarios reduced four reads to two, without claiming a matching startup-speed improvement. Thirty-nine isolated headless cases passed, including unsaved text, undo/redo, cancellation with an enabled writing ritual, save/format and snapshot regressions. See [2.24.26 notes](docs/workbench-experience/DELIVERY-2.24.26.md). No publication or shortcut update.

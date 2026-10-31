@@ -1,12 +1,18 @@
-# Novel Studio · 2.24.26 Bounded Chapter Opening Preview
+# Novel Studio · 2.24.27 Recovery Integrity Preview
 
-## Current public version: 2.24.26 Preview
+## Current public version: 2.24.27 Preview
 
-Includes 2.24.24–2.24.26 save-triggered statistics refresh, read-only disk snapshots, bounded save-receipt verification, cancellable chapter loading and deduplicated workspace restoration. [Release 2.24.26](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.26-preview) provides Setup, portable ZIP and SHA-256 checksums. Older releases are retained.
+Recovery integrity and safe saving: compare the actual stored recovery version before cleanup, separate confirmed manuscript saves from recovery maintenance, reject stale cleanup receipts, and guard recovery actions during chapter loading. [Release 2.24.27](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.27-preview) provides Setup, portable ZIP and SHA-256 checksums. Older releases remain available.
 
-**Preview / PARTIAL**: the completed local 2.24.26 delivery records 39 isolated headless cases; packaged worker and silent install/uninstall were checked separately. Native GUI, physical Chinese IME, system DPI, voices, real cloud AI and prolonged use are not newly verified. See Actions and the Release for exact-commit CI. In-progress recovery changes are excluded.
+**Preview / PARTIAL**: the completed local delivery records 26 isolated headless cases, 15 real local API tests and 56 separately labelled local-transport assertions. Packaged workers and silent install/uninstall are separate gates. Native GUI clicks, physical Chinese IME, system DPI, voice and real cloud AI are not newly verified. One isolated Windows service-shutdown problem remains under investigation, not claimed fixed. See Actions and the Release for exact-commit CI.
 
-Chapter and recovery reads share a 10-second deadline. Ambiguous save receipts cause read-only verification, never automatic manuscript-write replay. Recovery copies do not replace persistent backups.
+The existing four-field recovery format needs no migration; recovery copies do not replace independent backups. New automatic cleanup checks the version; the old explicit unconditional-delete endpoint remains compatible. Public source uses the sealed 2.24.27 snapshot and excludes later shutdown diagnostics. Historical local-delivery notes below retain their original verification scope.
+
+## 2.24.27
+
+Local Preview / PARTIAL. Cleanup compares the actual recovery-copy revision and late receipts only clear still-owned caches. Confirmed manuscript saves finish waiting for cleanup after ten seconds with a retained warning. Rejected retries retain prior uncertainty; busy workspaces do not create fake disk conflicts. Old recovery actions are hidden during chapter reads and remain available after cancellation. 26 current isolated headless cases, 15 real local API tests and 56 simulated transport assertions passed; no AI calls. See [2.24.27 notes](docs/workbench-experience/DELIVERY-2.24.27.md). No publication or shortcut update.
+
+The current public release is [2.24.26 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.26-preview). Local 2.24.27 is not published; both retain Preview verification boundaries.
 
 ## 2.24.26
 
@@ -20,7 +26,7 @@ Local Preview / PARTIAL. Successful author reload of a changed revision after an
 
 Local Preview / PARTIAL. Post-save read-only verification has a 10-second deadline covering headers and JSON body. Timeout stops the browser read, retains edits/unconfirmed state and never cancels or replays the submitted write. 18 isolated headless cases passed. See [2.24.24 notes](docs/workbench-experience/DELIVERY-2.24.24.md). Public release remains 2.24.23; no automatic publication or shortcut change.
 
-## Current public version: 2.24.23 Preview
+## Previous public version: 2.24.23 Preview
 
 Includes the 2.24.20–2.24.23 selection-task cancellation, leave/exit and verified-save-feedback fixes. Download Setup, portable ZIP and SHA-256 checksums from [Release 2.24.23](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.23-preview). Older releases retained.
 

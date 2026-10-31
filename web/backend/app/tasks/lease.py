@@ -19,7 +19,7 @@ def acquire(engine,name='codex-task.lock'):
         return stream
     except OSError as error:
         stream.close()
-        raise ConsoleError('另一窗口正在执行工作区任务，请等待其完成后重试。',409) from error
+        raise ConsoleError('工作区正有另一项保存或任务进行中，请等待结束后重试。',409,code='WORKSPACE_BUSY') from error
 
 
 def release(stream):

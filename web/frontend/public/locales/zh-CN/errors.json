@@ -22,5 +22,8 @@
   "LOCAL_RESPONSE_INVALID": "本机服务返回的数据无法读取。请检查任务记录后再试。",
   "FRONTEND_SELECTION_INACTIVE": "所属助手操作已停止或过期，此请求未启动新任务。请先检查已有任务记录。",
   "FRONTEND_SELECTION_SCOPE_CHANGED": "选区、作品或修改要求与原操作不一致。请重新检查并明确发起。",
-  "FRONTEND_SELECTION_ALREADY_SUBMITTED": "本次操作已经提交任务，请先查看已有记录，避免重复。"
+  "FRONTEND_SELECTION_ALREADY_SUBMITTED": "本次操作已经提交任务，请先查看已有记录，避免重复。",
+  "RECOVERY_CHANGED": "恢复副本已变化，较新副本已保留。请重新打开章节后查看。",
+  "RECOVERY_INVALID": "恢复副本或其版本校验不完整，已保留原文件，请检查后重试。",
+  "WORKSPACE_BUSY": "工作区正有另一项保存或任务进行中，当前输入保留。请等待结束后重试。"
 }

@@ -418,5 +418,7 @@
   "diskPreviewTimedOut": "Reading the disk version exceeded {{seconds}} seconds and has stopped. Your current edits are unchanged; retry when ready.",
   "cancelChapterOpen": "Cancel opening",
   "chapterOpenCancelled": "Chapter opening cancelled. Existing content has been kept.",
-  "chapterOpenTimedOut": "Reading the chapter or its recovery copy took longer than {{seconds}} seconds. Opening stopped and existing content was kept. Select the chapter again to retry."
+  "chapterOpenTimedOut": "Reading the chapter or its recovery copy took longer than {{seconds}} seconds. Opening stopped and existing content was kept. Select the chapter again to retry.",
+  "recoveryRevisionUnknown": "The recovery copy revision is not confirmed. No cleanup was sent; reopen the chapter to inspect it.",
+  "recoveryCleanupTimedOut": "Recovery cleanup took longer than {{seconds}} seconds and is unconfirmed. This operation did not clear the local recovery cache."
 }

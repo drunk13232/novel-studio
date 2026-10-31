@@ -418,5 +418,7 @@
   "diskPreviewTimedOut": "磁盘版本读取超过 {{seconds}} 秒，已停止此次读取。当前编辑未改变，可以稍后重试。",
   "cancelChapterOpen": "取消打开",
   "chapterOpenCancelled": "已取消打开章节，原有内容保留。",
-  "chapterOpenTimedOut": "读取正文或恢复副本超过 {{seconds}} 秒，本次打开已停止，原有内容保留。请重新选择章节重试。"
+  "chapterOpenTimedOut": "读取正文或恢复副本超过 {{seconds}} 秒，本次打开已停止，原有内容保留。请重新选择章节重试。",
+  "recoveryRevisionUnknown": "恢复副本版本尚未确认，未执行清理。请重新打开章节后查看。",
+  "recoveryCleanupTimedOut": "清理等待超过 {{seconds}} 秒，结果未确认；本轮未清除本地恢复缓存。"
 }
