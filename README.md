@@ -1,18 +1,18 @@
-# Novel Studio · 2.24.27 Recovery Integrity Preview
+# Novel Studio · 2.24.28 Shutdown Admission Preview
 
-## 当前公开版本：2.24.27 Preview
+## 2.24.28
 
-本次重点是恢复副本完整性与保存保护：清理副本前校验实际版本，正文保存与副本维护分别反馈，防止迟到回执清掉较新数据，并保护加载中的恢复操作。安装程序、便携 ZIP、SHA-256：[2.24.27 Release](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.27-preview)。旧版保留供回退。
+Preview / PARTIAL。关闭服务前停止主、项目、草稿与已有文献任务入口；排队任务不会在关闭后启动。单个中断或关闭失败不再跳过其他任务/服务，等待真实 runner 并保留错误。64 项不同的相关本地检查、两项真实回环保存/关闭场景及五项最终 headless 恢复场景通过。最后隔离服务退出仍出现 WinError 10054 和 30 秒 graceful-shutdown 超时，根因未确认；另一次浏览器首轮非成功响应未记录状态码，后续未重现。未宣称这些问题已修复。
 
-**Preview / PARTIAL**：已完成的本地交付包含 26 项隔离 headless 场景、15 项真实本地 API 测试和 56 条单列的本地传输断言；打包工作进程、静默安装/卸载另行核验。未新增原生窗口点击、实体中文输入法、系统 DPI、语音和真实云端 AI 验收。一项隔离 Windows 服务退出问题仍在调查，不宣称已修复。精确提交的 CI 以 Actions 与 Release 为准。
+当前发布：[2.24.28 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview)。安装包、便携包与校验值见 Release；旧版保留。
 
-恢复副本的四字段存储格式不变，无需迁移；恢复副本不替代独立备份。新版自动清理校验版本，旧版显式无条件删除接口保留兼容。本次公开源码来自已封存的 2.24.27，不包含后续退出诊断改动。下方历史本地交付记录保留其当时的验证边界。
+[Publication verification / 发布复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Native GUI, physical IME/DPI and real cloud AI are not newly verified.
 
 ## 2.24.27
 
 本地 Preview / PARTIAL。恢复副本清理核对实际副本版本，迟到回执只处理自己仍拥有的缓存；正文已确认保存时，副本清理超过 10 秒会结束等待并保留明确提示。被拒绝的重试继续保护先前未确认状态，工作区忙碌不冒充新的磁盘版本冲突。章节读取期间收起旧恢复操作，取消后仍可检查并恢复。26 个本轮隔离 headless 场景、15 项真实本地 API 检查和 56 条模拟传输断言通过；没有 AI 调用。见 [2.24.27 说明](docs/workbench-experience/DELIVERY-2.24.27.md)。本轮不发布、不改快捷方式。
 
-当前公开版本为 [2.24.26 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.26-preview)，本机 2.24.27 尚未公开。两者均保留 Preview 验证边界。
+2.24.27 后续已公开；各历史本地记录保留当时验证范围。
 
 ## 2.24.26
 

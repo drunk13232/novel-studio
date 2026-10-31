@@ -1,18 +1,18 @@
-# Novel Studio · 2.24.27 Recovery Integrity Preview
+# Novel Studio · 2.24.28 Shutdown Admission Preview
 
-## Current public version: 2.24.27 Preview
+## 2.24.28
 
-Recovery integrity and safe saving: compare the actual stored recovery version before cleanup, separate confirmed manuscript saves from recovery maintenance, reject stale cleanup receipts, and guard recovery actions during chapter loading. [Release 2.24.27](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.27-preview) provides Setup, portable ZIP and SHA-256 checksums. Older releases remain available.
+Preview / PARTIAL. Stop admission for main/project/draft/known-reference managers before service waits, prevent queued work from starting after closure, continue other owners after stop/close errors, drain real runners and preserve failures. 64 unique targeted local checks, two real loopback save/shutdown cases and five final headless recovery cases passed. Final isolated service exit still logged WinError 10054 and the existing 30-second graceful-shutdown timeout; root cause remains unresolved. One initial browser non-success response was not status-recorded and did not recur on follow-up. Neither issue is claimed fixed.
 
-**Preview / PARTIAL**: the completed local delivery records 26 isolated headless cases, 15 real local API tests and 56 separately labelled local-transport assertions. Packaged workers and silent install/uninstall are separate gates. Native GUI clicks, physical Chinese IME, system DPI, voice and real cloud AI are not newly verified. One isolated Windows service-shutdown problem remains under investigation, not claimed fixed. See Actions and the Release for exact-commit CI.
+Current release: [2.24.28 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview). Setup, portable ZIP and checksums are on the Release page; previous versions remain available.
 
-The existing four-field recovery format needs no migration; recovery copies do not replace independent backups. New automatic cleanup checks the version; the old explicit unconditional-delete endpoint remains compatible. Public source uses the sealed 2.24.27 snapshot and excludes later shutdown diagnostics. Historical local-delivery notes below retain their original verification scope.
+[Publication verification / 发布复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Native GUI, physical IME/DPI and real cloud AI are not newly verified.
 
 ## 2.24.27
 
 Local Preview / PARTIAL. Cleanup compares the actual recovery-copy revision and late receipts only clear still-owned caches. Confirmed manuscript saves finish waiting for cleanup after ten seconds with a retained warning. Rejected retries retain prior uncertainty; busy workspaces do not create fake disk conflicts. Old recovery actions are hidden during chapter reads and remain available after cancellation. 26 current isolated headless cases, 15 real local API tests and 56 simulated transport assertions passed; no AI calls. See [2.24.27 notes](docs/workbench-experience/DELIVERY-2.24.27.md). No publication or shortcut update.
 
-The current public release is [2.24.26 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.26-preview). Local 2.24.27 is not published; both retain Preview verification boundaries.
+2.24.27 was subsequently published; historical local records retain their original verification scope.
 
 ## 2.24.26
 

@@ -4,8 +4,9 @@ import sqlite3
 import time
 import secrets
 import os
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
+from inspect import isawaitable
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
@@ -53,14 +54,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     for id in registry.rows:changes.recover(id)
     managers={}
     draft_managers={}
+    stopping = False
 
     def project_manager(id):
+        if stopping:
+            raise ConsoleError('服务正在停止', 503)
         active=registry.workspace(id)
         if id not in managers:managers[id]=TaskManager(active,TaskRouter(active,settings.workspace,research=research),settings.workspace,manager._serial)
         managers[id].ai_center=ai_center
         return managers[id]
 
     def draft_manager(id):
+        if stopping:
+            raise ConsoleError('服务正在停止', 503)
         drafts.get(id)
         if id not in draft_managers:
             active=NovelWorkspace(drafts.path(id))
@@ -83,21 +89,62 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         finally:
             health['checking'] = False
 
+    def stop_task_admission():
+        nonlocal stopping
+        stopping = True
+        # Close every known owner's admission before any service/thread wait.
+        for owned in [manager, *managers.values(), *draft_managers.values(), *references.managers.values()]:
+            owned.stop_accepting()
+
     @asynccontextmanager
     async def lifespan(app):
-        images.start();data_center.start()
-        if hasattr(app.state,'automation'):app.state.automation.loop=asyncio.get_running_loop()
-        yield
-        await asyncio.to_thread(images.close)
-        await asyncio.to_thread(data_center.close)
-        await references.close()
-        if hasattr(app.state,'automation'):app.state.automation.close()
-        if hasattr(app.state,'assistant'):app.state.assistant.close()
-        if hasattr(app.state,"audio_export"):await asyncio.to_thread(app.state.audio_export.close)
-        if hasattr(app.state,"book_center"):app.state.book_center.prints.close()
-        await asyncio.to_thread(speech.close)
-        await manager.close()
-        for scoped in [*managers.values(),*draft_managers.values()]:await scoped.close()
+        errors = []
+
+        async def attempt_close(close, *args):
+            try:
+                result = close(*args)
+                if isawaitable(result):
+                    await result
+            except BaseException as error:
+                # Continue cleanup, but retain cancellation/errors for the caller.
+                errors.append(error)
+
+        async def close_scoped_managers():
+            # Resolve owners at exit: project/draft managers are created on demand.
+            for scoped in [*managers.values(), *draft_managers.values()]:
+                await attempt_close(scoped.close)
+
+        # Register before startup and reverse the existing shutdown order.
+        # Explicit grouping retains every failure, including nested async closers;
+        # relying only on implicit exception context can lose earlier failures.
+        async with AsyncExitStack() as cleanup:
+            cleanup.push_async_callback(attempt_close, close_scoped_managers)
+            cleanup.push_async_callback(attempt_close, manager.close)
+            cleanup.push_async_callback(attempt_close, asyncio.to_thread, speech.close)
+            if hasattr(app.state, 'book_center'):
+                cleanup.push_async_callback(attempt_close, app.state.book_center.prints.close)
+            if hasattr(app.state, 'audio_export'):
+                cleanup.push_async_callback(attempt_close, asyncio.to_thread, app.state.audio_export.close)
+            if hasattr(app.state, 'assistant'):
+                cleanup.push_async_callback(attempt_close, app.state.assistant.close)
+            if hasattr(app.state, 'automation'):
+                cleanup.push_async_callback(attempt_close, app.state.automation.close)
+            cleanup.push_async_callback(attempt_close, references.close)
+            cleanup.push_async_callback(attempt_close, asyncio.to_thread, data_center.close)
+            cleanup.push_async_callback(attempt_close, asyncio.to_thread, images.close)
+            cleanup.push_async_callback(attempt_close, stop_task_admission)
+            try:
+                images.start();data_center.start()
+                if hasattr(app.state, 'automation'):
+                    app.state.automation.loop = asyncio.get_running_loop()
+                yield
+            except BaseException as error:
+                errors.append(error)
+
+        if len(errors) == 1:
+            raise errors[0]
+        if errors:
+            raise BaseExceptionGroup('Novel Studio lifecycle cleanup failed', errors)
 
     app = FastAPI(title='Novel Studio', version=release_info()['version'], lifespan=lifespan)
     app.state.codex_health=health

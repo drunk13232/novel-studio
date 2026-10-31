@@ -1,5 +1,13 @@
 # Changelog / 更新记录
 
+## 2.24.28 — Shutdown Admission Preview (2026-10-31)
+
+Preview / PARTIAL. Stop admission for main/project/draft/known-reference managers before service waits, prevent queued work from starting after closure, continue other owners after stop/close errors, drain real runners and preserve failures. 64 unique targeted local checks, two real loopback save/shutdown cases and five final headless recovery cases passed. Final isolated service exit still logged WinError 10054 and the existing 30-second graceful-shutdown timeout; root cause remains unresolved. One initial browser non-success response was not status-recorded and did not recur on follow-up. Neither issue is claimed fixed.
+
+Preview / PARTIAL。关闭服务前停止主、项目、草稿与已有文献任务入口；排队任务不会在关闭后启动。单个中断或关闭失败不再跳过其他任务/服务，等待真实 runner 并保留错误。64 项不同的相关本地检查、两项真实回环保存/关闭场景及五项最终 headless 恢复场景通过。最后隔离服务退出仍出现 WinError 10054 和 30 秒 graceful-shutdown 超时，根因未确认；另一次浏览器首轮非成功响应未记录状态码，后续未重现。未宣称这些问题已修复。
+
+[Final verification / 最终复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Existing bundled delivery notes preserve the earlier build-time snapshot; this addendum corrects the subsequent exit observation.
+
 ## 2.24.27 — Recovery Integrity Preview (2026-10-31, local)
 
 Local Preview / PARTIAL. Cleanup compares the actual recovery-copy revision and late receipts only clear still-owned caches. Confirmed manuscript saves finish waiting for cleanup after ten seconds with a retained warning. Rejected retries retain prior uncertainty; busy workspaces do not create fake disk conflicts. Old recovery actions are hidden during chapter reads and remain available after cancellation. 26 current isolated headless cases, 15 real local API tests and 56 simulated transport assertions passed; no AI calls. See [2.24.27 notes](docs/workbench-experience/DELIVERY-2.24.27.md). No publication or shortcut update.

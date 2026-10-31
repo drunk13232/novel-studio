@@ -123,6 +123,8 @@ class TaskManager:
         return self.prepared(request,prompt,read_only,scope)
 
     def prepared(self, request, prompt, read_only, scope, output_schema=None, complete=None, target=None, *, execute=None, allow_web=False, provider=None, skill=None, adapter=None, ai_task=None, ai_model=None, application_actions=False, finished=None,orchestrator=False):
+        if self._closed:
+            raise ConsoleError('服务正在停止', 503)
         from app.tasks.writer import WRITER_TASKS
         if request.type in WRITER_TASKS and (adapter is None or adapter.role!='WRITER'):
             raise ConsoleError('Writer 任务必须经过安全包与独立执行环境',409)
@@ -156,6 +158,9 @@ class TaskManager:
         # queue; each domain write still uses the existing Action/file leases.
         async with (nullcontext() if orchestrator else self._serial):
             if task.status == 'CANCELLED':
+                return
+            if self._closed:
+                await self.cancel(task.id)
                 return
             loop = asyncio.get_running_loop()
             task.status = 'RUNNING'; task.started_at = now()
@@ -283,9 +288,36 @@ class TaskManager:
             except asyncio.TimeoutError:
                 yield ': heartbeat\n\n'
 
-    async def close(self) -> None:
+    def stop_accepting(self) -> None:
+        """Close admission immediately; close() still drains owned runners."""
         self._closed = True
-        for task in self.tasks.values():
-            if task.status not in TERMINAL:
+
+    async def close(self) -> None:
+        self.stop_accepting()
+        tasks = list(self.tasks.values())
+        errors = []
+        # Cancel queued work before yielding to active interrupts. Releasing an
+        # active task must not let queued work start while shutdown is draining.
+        ordered = [t for t in tasks if t.status == 'QUEUED'] + [t for t in tasks if t.status != 'QUEUED']
+        for task in ordered:
+            if task.status in TERMINAL:
+                continue
+            try:
                 await self.cancel(task.id)
-        await asyncio.gather(*(task.runner for task in self.tasks.values() if task.runner), return_exceptions=True)
+            except BaseException as error:
+                errors.append(error)
+                # Same task-owned fallback as an interrupt timeout; never close
+                # by process name or touch a different adapter/manager.
+                if task.adapter:
+                    try:
+                        await asyncio.to_thread(task.adapter.close)
+                    except BaseException as close_error:
+                        errors.append(close_error)
+
+        results = await asyncio.gather(*(t.runner for t in tasks if t.runner), return_exceptions=True)
+        errors.extend(result for result in results
+                      if isinstance(result, BaseException) and not isinstance(result, asyncio.CancelledError))
+        if len(errors) == 1:
+            raise errors[0]
+        if errors:
+            raise BaseExceptionGroup('Owned task shutdown failed', errors)

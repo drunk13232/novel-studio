@@ -1,16 +1,16 @@
 {
-  "version": "2.24.27",
+  "version": "2.24.28",
   "release_date": "2026-10-31",
   "changes": [
-    "Version-bound recovery cleanup uses the actual stored-copy SHA-256, rejects changed copies and preserves the existing four-field disk format. Old projects need no migration.",
-    "A ten-second cleanup deadline separates confirmed manuscript saves from unconfirmed backup maintenance. Late callbacks compare current project/path/load/content and local-cache identity; they cannot clear newer recovery data or replay manuscript writes.",
-    "Rejected retries retain earlier unconfirmed/conflicting save state, dirty/navigation guards and explicitly authorized manual recovery. WORKSPACE_BUSY is no longer newly mislabeled as a disk revision conflict.",
-    "Recovery actions are hidden during chapter reads and guarded against concurrent read/save ownership. Author discard waits for real receipt; changed copies stay pending until explicitly reread and reviewed.",
-    "26 current isolated headless cases passed (nine recovery flows and 17 affected existing regressions), 15 real local recovery-API tests and 56 local-transport adapter assertions. No AI requests.",
-    "Local Preview / PARTIAL: native desktop/physical IME/DPI/voice/cloud AI not newly verified; an isolated Windows Proactor service shutdown remains under investigation. No dependencies, schema migration, user-data move, global Codex edit, shortcut update, Git commit/push or publication. Public 2.24.26 remains unchanged."
+    "Register cleanup before startup; preserve existing order, continue remaining closers and explicitly retain errors/cancellation. Launcher reports actual backend shutdown failure.",
+    "Close known main/project/draft/reference task admission before service waits. Reject late project/draft factories and prepared work; queued runners cannot launch after admission closes.",
+    "Cancel queued tasks before active interruptions; an interrupt failure uses only its task-owned close fallback and no longer skips other owners. Drain actual runners and retain unexpected failures.",
+    "64 unique targeted local checks passed across two suites, plus three repeated final guard checks; MockTransport/local fixed workers are not remote AI. Two real loopback save/recovery/shutdown cases preserve exact bytes.",
+    "Preview/PARTIAL: original WinError 10054 remains unresolved; diagnostic same-config headless cases exited normally but do not prove native GUI. Native IME/DPI/real Codex/MCP/voice not newly verified.",
+    "Local delivery only; no dependency, format migration, permission expansion, user-data move, global Codex edit, shortcut update, commit/push or publication. Prior 2.24.27 artifacts retained."
   ],
   "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Recovery Integrity Preview",
+  "edition": "Shutdown Admission Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

@@ -433,7 +433,10 @@ def main():
             if record.get('pid')==os.getpid():(DATA/'instance.json').unlink()
         except (OSError,ValueError):pass
         instance.close()
-        logging.info('Novel Studio stopped cleanly')
+        if server and getattr(getattr(server, 'lifespan', None), 'shutdown_failed', False):
+            logging.error('Novel Studio stopped with backend cleanup errors; inspect the preceding lifecycle traceback')
+        else:
+            logging.info('Novel Studio stopped cleanly')
         if bridge and bridge._restart:
             command=[sys.executable]+([] if FROZEN else [str(Path(__file__).resolve())])+['--workspace',bridge._restart]
             subprocess.Popen(command,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)

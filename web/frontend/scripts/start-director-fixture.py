@@ -13,6 +13,7 @@ parser.add_argument('--selection-writer',action='store_true',help='Fixed local s
 parser.add_argument('--mixed-source',action='store_true',help='Synthetic read-only mixed-newline chapter for selection checks')
 parser.add_argument('--revision-fixture',action='store_true',help='Synthetic full-selection two-hunk variants; no AI call')
 parser.add_argument('--trace-shutdown',action='store_true',help='Record isolated service close boundaries and thread stacks, never user request data')
+parser.add_argument('--shutdown-timeout',type=float,help='Explicit fixture-only graceful timeout for comparison; use 30 to match the current desktop launcher')
 parser.add_argument('--readback-delay-fixture',action='store_true',help='Controlled stalled read headers/body for save-receipt tests; no model or private data')
 parser.add_argument('--recovery-cleanup-fixture',action='store_true',help='Controlled public-demo cleanup timing and write lease; never enabled in production')
 args=parser.parse_args();A=args.root.resolve()
@@ -20,6 +21,7 @@ if args.selection_gated and not args.selection_writer:raise SystemExit('Gated se
 if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
 if not A.is_relative_to((ROOT/'desktop/build').resolve()) or A==(ROOT/'desktop/build').resolve():raise SystemExit('Fixture must use a dedicated directory below desktop/build')
 if not 1024<=args.port<=65535:raise SystemExit('Use an unprivileged loopback port')
+if args.shutdown_timeout is not None and not 0<args.shutdown_timeout<=60:raise SystemExit('Use a bounded positive fixture shutdown timeout')
 W=A/'workspace'
 for child in [W,A/'app-data']:
  if child.is_symlink() or not child.resolve().is_relative_to(A):raise SystemExit('Fixture children must stay inside the owned directory')
@@ -204,10 +206,29 @@ if args.recovery_cleanup_fixture:
 import uvicorn
 # Optional diagnostic only: preserve the real lifespan and close behavior.
 if args.trace_shutdown:
- import inspect,functools,faulthandler
+ import inspect,functools,faulthandler,asyncio
  trace_file=(A/'shutdown-threads.log').open('w',encoding='utf8')
  def trace(label,event):
   with (A/'shutdown-stages.jsonl').open('a',encoding='utf8') as out:out.write(json.dumps({'event':event,'service':label,'monotonic':time.monotonic()})+'\n')
+ def async_snapshot(label):
+  # Only code locations and boolean lifecycle state; never frames/locals/headers/body.
+  def chain(coro):
+   rows=[];seen=set()
+   while coro is not None and id(coro) not in seen and len(rows)<24:
+    seen.add(id(coro));code=getattr(coro,'cr_code',None) or getattr(coro,'gi_code',None);frame=getattr(coro,'cr_frame',None) or getattr(coro,'gi_frame',None)
+    rows.append({'type':type(coro).__name__,'function':getattr(code,'co_qualname',None),'file':Path(code.co_filename).name if code else None,'line':frame.f_lineno if frame else None})
+    coro=getattr(coro,'cr_await',None) or getattr(coro,'gi_yieldfrom',None) or getattr(coro,'ag_await',None)
+   return rows
+  connections=[]
+  for conn in list(server.server_state.connections):
+   transport=getattr(conn,'transport',None);cycle=getattr(conn,'cycle',None)
+   connections.append({'protocol':type(conn).__name__,'transport_closing':transport.is_closing() if transport else None,'response_complete':getattr(cycle,'response_complete',None),'disconnected':getattr(cycle,'disconnected',None)})
+  tasks=[{'done':task.done(),'cancelled':task.cancelled(),'chain':chain(task.get_coro())} for task in asyncio.all_tasks()]
+  row={'event':label,'monotonic':time.monotonic(),'should_exit':server.should_exit,'effective_graceful_timeout':server.config.timeout_graceful_shutdown,'connections':connections,'server_task_count':len(server.server_state.tasks),'listeners':[{'active_transports':getattr(listener,'_active_count',None),'serving':listener.is_serving()} for listener in getattr(server,'servers',[])],'tasks':tasks}
+  with (A/'shutdown-async.jsonl').open('a',encoding='utf8') as out:out.write(json.dumps(row)+'\n')
+ def begin_async_trace():
+  loop=asyncio.get_running_loop();async_snapshot('exit_requested')
+  for seconds in [1,8]:loop.call_later(seconds,async_snapshot,'exit_wait_'+str(seconds))
  def tracked(fn,label):
   if inspect.iscoroutinefunction(fn):
    @functools.wraps(fn)
@@ -230,11 +251,14 @@ if args.trace_shutdown:
   fn=getattr(value,'close',None)
   if callable(fn) and hasattr(value,'__dict__'):seen.add(id(value));value.close=tracked(fn,label+'.close')
 (A/'server.pid').write_text(str(os.getpid()),'ascii')
-server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,log_level='warning'))
+server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,log_level='warning',timeout_graceful_shutdown=args.shutdown_timeout))
 @app.post('/api/test-fixture-exit')
 def fixture_exit():
  fixture_gate.set()
- if args.trace_shutdown:faulthandler.dump_traceback_later(12,file=trace_file)
+ if args.trace_shutdown:
+  import anyio
+  anyio.from_thread.run_sync(begin_async_trace)
+  faulthandler.dump_traceback_later(12,file=trace_file)
  server.should_exit=True;return {'closing':True}
 try:server.run()
 finally:
