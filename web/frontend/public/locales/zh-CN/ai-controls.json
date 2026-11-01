@@ -160,5 +160,8 @@
   "preflightApproved": "范围已获作者确认，执行前会再次校验。",
   "preflightNeedsApproval": "按当前任务的权限流程检查并确认资料范围。",
   "preflightPendingOnly": "这里只预览计划配置，不发送内容、不调用模型。实际模型、用量与参数以执行回执为准；费用授权沿用原流程。",
-  "preflightParameters": "本次参数覆写（未设置项保留模型默认）"
+  "preflightParameters": "本次参数覆写（未设置项保留模型默认）",
+  "configurationPending": "AI 配置尚未就绪，请等待载入或修正模型与参数后重试。",
+  "preflightFeatureScope": "此处是任务已选择的资料范围摘要；启动时仍会检查既有隐私与费用授权。",
+  "localReceipt": "本地确定性检查，未调用 AI 模型。"
 }

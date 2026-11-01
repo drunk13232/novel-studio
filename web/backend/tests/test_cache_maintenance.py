@@ -28,7 +28,7 @@ def test_cleanup_requires_frozen_confirmation_and_keeps_originals_and_new_files(
     with pytest.raises(ConsoleError):s.cleanup(Cleanup(preview_id=v['preview_id'],buckets=['npm'],confirm=True),'book')
 
 def test_stale_changed_or_foreign_previews_delete_nothing(caches):
-    s,root,_=caches;a=old(root/'desktop/build/a');b=old(root/'desktop/build/b');v=s.scan('book');b.write_text('changed')
+    s,root,_=caches;a=old(root/'desktop/build/NovelStudio/a');b=old(root/'desktop/build/NovelStudio/b');v=s.scan('book');b.write_text('changed')
     with pytest.raises(ConsoleError):s.cleanup(Cleanup(preview_id=v['preview_id'],buckets=['build'],confirm=True),'book')
     assert a.exists() and b.exists()
     with pytest.raises(ConsoleError):s.cleanup(Cleanup(preview_id=v['preview_id'],buckets=['build'],confirm=True),'')

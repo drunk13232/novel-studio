@@ -8,9 +8,11 @@ import shutil
 
 project=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser();parser.add_argument('--release-root',default=str(project/('release/v'+json.loads((project/'desktop/version.json').read_text('utf8'))['version'])))
-parser.add_argument('--preview',action='store_true');parser.add_argument('--output-name',default=None,help='New candidate ZIP filename, preserving previous candidates');args=parser.parse_args()
+parser.add_argument('--allow-external-release',action='store_true',help='Explicit version-named external build output; all input audits remain enabled')
+parser.add_argument('--archive-directory',help='Optional archive output directory; source remains the audited release tree');parser.add_argument('--preview',action='store_true');parser.add_argument('--output-name',default=None,help='New candidate ZIP filename, preserving previous candidates');args=parser.parse_args()
 root=Path(args.release_root).resolve()
-assert root.is_relative_to((project/'release').resolve())
+version=json.loads((project/'desktop/version.json').read_text('utf8'))['version']
+assert root.is_relative_to((project/'release').resolve()) or (args.allow_external_release and root.name in {'v'+version,'v'+version+'-companion'})
 source=root/'NovelStudio'
 assert (source/'NovelStudio.exe').is_file()
 import sys
@@ -50,8 +52,10 @@ manifest={'release':release,'files':{p.relative_to(source).as_posix():hashlib.sh
 paths=sorted(p for p in source.rglob('*') if p.is_file())
 filename=args.output_name or ('NovelStudio-Windows-Preview.zip' if args.preview else 'NovelStudio-Windows.zip')
 if Path(filename).name!=filename or not filename.endswith('.zip') or '\\' in filename or ':' in filename:raise SystemExit('Unsafe ZIP filename')
-target=root/filename
-if args.output_name and target.exists():raise SystemExit('Named candidate already exists; previous candidates are preserved')
+archive_directory=Path(args.archive_directory).resolve() if args.archive_directory else root
+archive_directory.mkdir(parents=True,exist_ok=True)
+target=archive_directory/filename
+if (args.output_name or args.archive_directory) and target.exists():raise SystemExit('Named candidate already exists; previous candidates are preserved')
 with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in paths:z.write(p,Path('NovelStudio')/p.relative_to(source))
 with zipfile.ZipFile(target) as z:assert z.testzip() is None

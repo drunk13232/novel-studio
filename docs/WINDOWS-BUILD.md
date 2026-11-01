@@ -26,3 +26,15 @@ A standard per-user installation wizard is also available; see [desktop/INSTALLE
 ## Public installer candidate
 
 Build from a clean extracted public source snapshot, never the private parent Git history. Use a verified official NSIS 3.13 compiler with `desktop/build_installer.py --makensis <path>/makensis.exe`; omit `--data-default` for public builds. The default is the current user's LocalAppData folder. The Windows payload includes root LICENSE, NOTICE, COPYRIGHT and third-party notices. Keep Preview status and record native GUI, IME, cloud AI and hosted CI gates separately.
+
+
+### Optional archive output directory (2.24.30)
+
+When the source drive has little free space, `desktop/build.ps1` accepts an absolute `-ArchiveDirectory`. The audited EXE tree still stays under `release/v<version>/NovelStudio`; only the Windows and Developer ZIPs are written to the chosen directory. Existing archive files are refused at the optional destination. Input allowlists, privacy scans and CRC checks are unchanged. This does not move user data or install anything.
+
+
+### External local build output (2.24.31)
+
+`-OutputDirectory` may explicitly select a new absolute directory whose final name matches the version edition (for example `v2.24.31`). This is useful when the source drive cannot hold another runtime tree. Existing output runtimes are refused. The builder passes an explicit external-release option to the same archive tools; all source/runtime allowlists, privacy checks and CRC checks remain enabled. No user workspace or data is moved.
+
+`-WorkDirectory` may additionally point to a new or empty absolute temporary build directory when the source disk is low. The default stays `desktop/build`; a populated external directory is refused. This changes only temporary build artifacts and does not move application data.

@@ -105,5 +105,10 @@
   "compareLatest": "读取最新记录进行比较",
   "latestRecord": "最新已保存记录",
   "compareWarning": "你的输入仍保留在上方。请检查他处修改，再明确选择新基线；保存时仍会重新校验版本。",
-  "useLatestBaseline": "保留我的编辑，采用此最新基线"
+  "useLatestBaseline": "保留我的编辑，采用此最新基线",
+  "cacheProtected": "正文、历史、备份、旧版发行包和验证记录不属于此处的缓存。构建缓存仅包含可重新生成的 PyInstaller 文件。",
+  "cleanupSelected": "本次选择：",
+  "logicalBytesOnly": "逻辑文件大小，不等于实际释放的磁盘空间",
+  "cleanupRescan": "结果不明或文件变化时请重新扫描；不会自动重试删除。",
+  "cleanupExpired": "预览已过期，请重新扫描。"
 }

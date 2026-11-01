@@ -1,16 +1,16 @@
 {
-  "version": "2.24.28",
-  "release_date": "2026-10-31",
+  "version": "2.24.31",
+  "release_date": "2026-11-01",
   "changes": [
-    "Register cleanup before startup; preserve existing order, continue remaining closers and explicitly retain errors/cancellation. Launcher reports actual backend shutdown failure.",
-    "Close known main/project/draft/reference task admission before service waits. Reject late project/draft factories and prepared work; queued runners cannot launch after admission closes.",
-    "Cancel queued tasks before active interruptions; an interrupt failure uses only its task-owned close fallback and no longer skips other owners. Drain actual runners and retain unexpected failures.",
-    "64 unique targeted local checks passed across two suites, plus three repeated final guard checks; MockTransport/local fixed workers are not remote AI. Two real loopback save/recovery/shutdown cases preserve exact bytes.",
-    "Preview/PARTIAL: original WinError 10054 remains unresolved; diagnostic same-config headless cases exited normally but do not prove native GUI. Native IME/DPI/real Codex/MCP/voice not newly verified.",
-    "Local delivery only; no dependency, format migration, permission expansion, user-data move, global Codex edit, shortcut update, commit/push or publication. Prior 2.24.27 artifacts retained."
+    "Show six evidence-based operation stages and saved model roles; keep primary task controls ahead of optional diagnostics.",
+    "Preview the exact quoted/paragraph rework range with surrounding text, line and occurrence labels, and existing editor location.",
+    "Allow authors to reject pending or approved rework without calling a writer or changing manuscript text.",
+    "Retry only the task-acceptance review after review failure; reuse compact installed-method guidance and retain the candidate.",
+    "Record actual reviewer model receipts and explicit active operation types; report saving is distinct from author adoption.",
+    "Preview: this round uses isolated local/browser checks; remote provider and native keyboard/IME/DPI checks are not implied."
   ],
-  "runtime_validation": "Preview / PARTIAL: see the current delivery evidence; headless browser, local checks, real Codex/MCP and packaged workers are separate gates. No native GUI/IME/DPI acceptance is claimed.",
-  "edition": "Shutdown Admission Preview",
+  "runtime_validation": "Preview / PARTIAL: this round focuses on isolated operator/UI checks. Prior real Codex evidence is historical; new remote AI or native interaction is not claimed. See delivery evidence.",
+  "edition": "Director Usability Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

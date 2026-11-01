@@ -8,6 +8,7 @@ import shutil
 import sqlite3
 import stat
 import threading
+import time
 import uuid
 import zipfile
 from datetime import datetime,timezone
@@ -187,7 +188,7 @@ class DataCenter:
             return {'restored':True,'files':len(pending),'scope':scope,'references_preserved':True,'application_state':restored}
 
     def __init__(self,registry,settings_path):
-        self.registry=registry;self.settings_path=settings_path;self.stop=threading.Event();self.thread=None;self.lease=None
+        self.registry=registry;self.settings_path=settings_path;self.stop=threading.Event();self.thread=None;self.lease=None;self.cleanup_lock=threading.RLock();self.cleanup_previews={}
     def root(self,p):return self.registry.workspace(p).root
     def config(self):return read(self.settings_path,{'directory':str(self.registry.engine.parent/'NovelStudio Backups'),'schedule':'OFF','on_exit':False,'retain_backups':20,'revision_retention':'ALL'})
     def configure(self,value):
@@ -431,27 +432,68 @@ class DataCenter:
         else:raise ConsoleError('无效回收站操作',422)
         if folder.resolve().parent!=safe(root,'trash').resolve():raise ConsoleError('回收路径越界',403)
         shutil.rmtree(folder);return {'ok':True}
-    def cleanup(self,p,execute=False,confirm=''):
-        root=self.root(p);rows=[];cutoff=datetime.now(timezone.utc).timestamp()-7*86400
-        for rel,f in files(root):
-            if rel.startswith('assets/thumbnails/') or rel.startswith('art/tmp/') and f.stat().st_mtime<cutoff:rows.append({'path':rel,'size':f.stat().st_size})
-        duplicates=[]
-        if self.config().get('revision_retention')=='DEDUP_PREVIEW':
-            seen=set()
-            for row in revisions(root):
-                key=(row['path'],row['sha256'])
-                if key in seen and row['source']=='PRE_WRITE' and not row['note']:
-                    revision_content(root,row['id']) # Verify before allowing deletion of a duplicate.
-                    duplicates.append(row['id']);folder=safe(root,'history/revisions/'+row['id'])
-                    rows.extend({'path':f.relative_to(root).as_posix(),'size':safe(root,f.relative_to(root).as_posix()).stat().st_size} for f in folder.iterdir() if f.is_file())
-                seen.add(key)
-        if execute:
-            if confirm!='清理可重建缓存':raise ConsoleError('请先预览并确认缓存清理',409)
-            for r in rows:safe(root,r['path']).unlink()
-            for id in duplicates:
-                folder=safe(root,'history/revisions/'+id)
-                if folder.exists() and not any(folder.iterdir()):folder.rmdir()
-        return {'files':rows,'bytes':sum(r['size'] for r in rows),'cleaned':execute}
+    def cleanup(self,p,execute=False,confirm='',preview_id='',confirm_history=False):
+        """Legacy project cleanup, now bound to an expiring immutable preview.
+
+        History deduplication remains opt-in and requires separate author consent.
+        New/changed files can never be swept into an earlier confirmation.
+        """
+        root=self.root(p)
+        with self.cleanup_lock,write_guard(root):
+            self.cleanup_previews={k:v for k,v in self.cleanup_previews.items() if time.monotonic()-v['at']<900}
+            if execute:
+                snapshot=self.cleanup_previews.get(preview_id) if isinstance(preview_id,str) and re.fullmatch(r'[a-f0-9]{32}',preview_id) else None
+                if confirm!='清理可重建缓存' or not snapshot or snapshot['project']!=p:
+                    raise ConsoleError('清理预览无效或已过期，请重新预览并确认',409)
+                if snapshot['history'] and not confirm_history:
+                    raise ConsoleError('本次包含重复历史版本，必须另行明确确认；尚未删除文件',409)
+                # Validate every confirmed file before any destructive operation.
+                for row in snapshot['files']:
+                    try:st=safe(root,row['path']).stat()
+                    except OSError:raise ConsoleError('预览文件已变化，请重新预览；尚未删除文件',409) from None
+                    if st.st_size!=row['size'] or st.st_mtime_ns!=row['mtime_ns']:
+                        raise ConsoleError('预览文件已变化，请重新预览；尚未删除文件',409)
+                self.cleanup_previews.pop(preview_id,None)
+                deleted=[];skipped=[]
+                for row in snapshot['files']:
+                    try:
+                        f=safe(root,row['path']);st=f.stat()
+                        if st.st_size!=row['size'] or st.st_mtime_ns!=row['mtime_ns']:skipped.append(row['path']);continue
+                        f.unlink();deleted.append(row)
+                    except OSError:skipped.append(row['path'])
+                for id in snapshot['duplicates']:
+                    folder=safe(root,'history/revisions/'+id)
+                    if folder.exists() and not any(folder.iterdir()):folder.rmdir()
+                return {'files':[{k:v for k,v in row.items() if k!='mtime_ns'} for row in deleted],
+                        'bytes':sum(row['size'] for row in deleted),'cleaned':True,'skipped':skipped,
+                        'deleted_files':len(deleted),'reclaimed_bytes':None}
+            rows=[];cutoff=time.time()-7*86400;truncated=False
+            for directory in ('assets/thumbnails','art/tmp'):
+                for _,f in files(safe(root,directory)):
+                    st=f.stat()
+                    if directory=='art/tmp' and st.st_mtime>=cutoff:continue
+                    rows.append({'path':f.relative_to(root).as_posix(),'size':st.st_size,'mtime_ns':st.st_mtime_ns,'kind':'cache'})
+                    if len(rows)>=20000:truncated=True;break
+                if truncated:break
+            duplicates=[]
+            if not truncated and self.config().get('revision_retention')=='DEDUP_PREVIEW':
+                seen=set()
+                for row in revisions(root):
+                    key=(row['path'],row['sha256'])
+                    if key in seen and row['source']=='PRE_WRITE' and not row['note']:
+                        revision_content(root,row['id'])
+                        group=[]
+                        for f in safe(root,'history/revisions/'+row['id']).iterdir():
+                            if f.is_file():
+                                f=safe(root,f.relative_to(root).as_posix());st=f.stat()
+                                group.append({'path':f.relative_to(root).as_posix(),'size':st.st_size,'mtime_ns':st.st_mtime_ns,'kind':'duplicate_history'})
+                        if len(rows)+len(group)>20000:truncated=True;break
+                        duplicates.append(row['id']);rows.extend(group)
+                    seen.add(key)
+            token=uuid.uuid4().hex
+            self.cleanup_previews[token]={'at':time.monotonic(),'project':p,'files':rows,'duplicates':duplicates,'history':len(duplicates)}
+            return {'preview_id':token,'expires_seconds':900,'files':[{k:v for k,v in row.items() if k!='mtime_ns'} for row in rows],
+                    'bytes':sum(row['size'] for row in rows),'cleaned':False,'history_files':len(duplicates),'truncated':truncated}
     def export(self,p,kind,format):
         root=self.root(p);selected=[]
         if kind=='book':

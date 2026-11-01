@@ -160,5 +160,8 @@
   "preflightApproved": "Author-approved scope; checked again before execution.",
   "preflightNeedsApproval": "Review and approve source scope through this task’s permission flow.",
   "preflightPendingOnly": "This preview sends no content and calls no model. Execution receipts show actual model, usage and parameters; existing cost approval remains in force.",
-  "preflightParameters": "Request overrides (unset values retain model defaults)"
+  "preflightParameters": "Request overrides (unset values retain model defaults)",
+  "configurationPending": "AI configuration is not ready. Wait for it to load or correct the model and parameters.",
+  "preflightFeatureScope": "Summary of the sources selected for this task. Existing privacy and cost authorization is checked at execution.",
+  "localReceipt": "Local deterministic check; no AI model was called."
 }

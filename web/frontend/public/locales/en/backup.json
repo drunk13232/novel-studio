@@ -101,5 +101,11 @@
   "latestBackup": "Latest backup",
   "index": "Index",
   "connected": "Connected",
-  "imageService": "Image service"
+  "imageService": "Image service",
+  "protectedStorageNotice": "Preview before selecting cleanup. Version history and backups are shown separately and are never deleted automatically as ordinary cache.",
+  "projectCleanupAdvanced": "Advanced: project temporary files and duplicate history preview",
+  "confirmDuplicateHistory": "I separately confirm permanent deletion of {{count}} duplicate history records without notes.",
+  "previewFileCountSeparator": "previewed files · ",
+  "projectPreviewValidity": "Previews expire after 15 minutes. Preview again after changes or an uncertain result; deletion is never retried automatically.",
+  "projectCleanupReceipt": "Actually deleted {{count}} files; skipped {{skipped}}."
 }

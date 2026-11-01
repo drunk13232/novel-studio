@@ -210,5 +210,5 @@ def library_routes(registry,settings,drafts=None):
     @router.post('/projects/{p}/data/trash/{id}/{action}')
     def trash_action(p:str,id:str,action:str,body:dict):return data.trash_action(p,id,action,body.get('confirm',''))
     @router.post('/projects/{p}/data/cleanup')
-    def cleanup(p:str,body:dict):return data.cleanup(p,body.get('execute') is True,body.get('confirm',''))
+    def cleanup(p:str,body:dict):return data.cleanup(p,body.get('execute') is True,body.get('confirm',''),body.get('preview_id',''),body.get('confirm_history') is True)
     return router,images,data

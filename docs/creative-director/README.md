@@ -1,3 +1,34 @@
+# 2.24.31 — 更直观的指挥台
+
+- 主区上方显示真实操作阶段与已保存的模型分工。点击阶段只切换查看区域，不会启动模型。
+- 主要调度按钮前置；目标、预算、重复片段等检查收在可展开的诊断区。
+- 复核失败时点“重试复核，不重复写作”。这会占用一次现有调用预算，仅复核当前候选。
+- 返工先选原文证据与引用/段落范围。预览高亮为实际将提交的范围，周围文字只供核对；可按行号与第几处区分重复原文，并定位候选选区。
+- “确认范围与要求”只固定方案；“开始定向返工”才请求模型。“放弃此返工，保留候选”不调用模型，也不影响正文。
+- 流程显示的是保存、执行和作者决定状态；报告已保存不等于文学质量通过，也不等于采用正文。
+
+完整文学评审、模型设置、候选历史及 Diff 保留原入口。新界面接入简中/英文和现有主题；没有新增框架或 AI 权限。参见 [本轮说明](DELIVERY-2.24.31.md)。
+
+---
+
+# Codex director + DeepSeek/API writer — 2.24.30 Preview
+
+This uses the existing Director, ReviewCenter, Writer context, Providers, TaskManager and candidate/Diff services. No new agent runtime or credentials system is introduced.
+
+1. In **Settings → AI interfaces**, add DeepSeek from the official preset, set your key, and fetch or enter a concrete model ID. Keys remain in the existing secure credential storage. No provider is created or called automatically.
+2. Open the existing creative Director from a chapter. Approve its Writer-safe context, choose **Use Codex director + DeepSeek writer**, then select the concrete writer model and Codex model/effort.
+3. Let Codex prepare the task. Edit the plan and checks, then explicitly run. The optional post-generation review checks the candidate using the same Codex selection.
+4. In **Results → Review → targeted rework**, select verified evidence and quote/paragraph scope. Ask Codex to propose a positive instruction, inspect the exact target and uncertainty, and edit it if needed.
+5. Approve that frozen scope/instruction, then select **Start targeted rework**. Only the target is replaced in the retained candidate. Raw review reports are not sent to the Writer.
+6. Change requirements through the existing author-intervention controls; pause after the current stage, interrupt the current request, or manually take over the candidate. Source changes, replaced reports or edited candidate text invalidate old feedback.
+7. Use the existing Diff/adoption workflow separately. This loop never commits Canon, State, Knowledge or formal manuscript content.
+
+Planning, writing, review and rework share the existing task call/time/size limits. Each rework consumes another planning request and writer request; a second review is another request. Review failure retains the written candidate. No automatic retries, paid requests, model substitution or provider fallback occur.
+
+Model availability, supported parameters, pricing and context sizes come from configured metadata. UNKNOWN is retained where unverified. The official DeepSeek path is not called until the user configures and triggers it. See [delivery evidence](DELIVERY-2.24.30.md).
+
+---
+
 # AI Creative Director — 2.24.2 Flexible Director Preview
 
 This extends the existing editor, WritingAssist, TaskManager, Providers and ReviewCenter. It is not a new agent runtime or a second data authority.

@@ -226,7 +226,17 @@ class AuthorWorkbench:
     def chapter_work(self,p,path):
         doc=self.tools.doc(p,path);cid,number,card=self.tools.chapter(p,path);card=card or {}
         shelf=self.entries(p)
-        active=lambda rows:[{k:x.get(k) for k in ['id','text','status','priority','source','severity','annotation_id','exact','start','revision']} for x in rows if x.get('path')==path and not x.get('trashed') and x.get('status') not in {'DONE','IGNORED','ARCHIVED'}]
+        def active(rows):
+            result=[];body=normalized(doc).encode('utf-16-le')
+            for x in rows:
+                if x.get('path')!=path or x.get('trashed') or x.get('status') in {'DONE','IGNORED','ARCHIVED'}:continue
+                item={k:x.get(k) for k in ['id','text','status','priority','source','severity','annotation_id','exact','start','revision']}
+                start=x.get('start');exact=x.get('exact') or '';end=start+len(exact.encode('utf-16-le'))//2 if isinstance(start,int) else None
+                try:located=bool(exact and x.get('revision')==doc['etag'] and isinstance(start,int) and start>=0 and end*2<=len(body) and body[start*2:end*2].decode('utf-16-le')==exact)
+                except UnicodeError:located=False
+                item.update(end=end,located=located)
+                result.append(item)
+            return result
         candidates=[]
         for file in self.tools.local(p,'candidates').glob('*.json'):
             row=read(file)
@@ -234,9 +244,10 @@ class AuthorWorkbench:
             draft=row.get('author_draft') or {}
             candidates.append({'id':row['id'],'status':row['status'],'instruction':row.get('instruction') or row.get('advice',''),'created_at':row.get('created_at',''),'source_current':row.get('document_revision')==doc['etag'],'draft_saved_at':max((v.get('updated_at','') for v in draft.get('variants',{}).values()),default='')})
         candidates.sort(key=lambda x:x['draft_saved_at'] or x['created_at'],reverse=True)
+        todos=active(shelf.get('todos',[]));revision_tasks=active(shelf.get('revision_tasks',[]))
         # Existing explicit anchors are evidence; mentions and plans are not committed facts.
         anchors=self.knowledge.anchors(p,path)
-        return {'project_id':p,'path':path,'revision':doc['etag'],'chapter_id':cid,'number':number,'plan':{'goal':card.get('purpose') or card.get('goal') or card.get('summary') or '', 'pov':card.get('pov',{}),'location':card.get('location'),'characters':card.get('characters',[]),'planning_only':True},'todos':active(shelf.get('todos',[]))[:60],'revisions':active(shelf.get('revision_tasks',[]))[:60],'candidates':candidates[:30],'candidate_total':len(candidates),'anchors':anchors[:30],'anchor_total':len(anchors),'counts':{'todos':len(active(shelf.get('todos',[]))),'revisions':len(active(shelf.get('revision_tasks',[])))} }
+        return {'project_id':p,'path':path,'revision':doc['etag'],'chapter_id':cid,'number':number,'plan':{'goal':card.get('purpose') or card.get('goal') or card.get('summary') or '', 'pov':card.get('pov',{}),'location':card.get('location'),'characters':card.get('characters',[]),'planning_only':True},'todos':todos[:60],'revisions':revision_tasks[:60],'candidates':candidates[:30],'candidate_total':len(candidates),'anchors':anchors[:30],'anchor_total':len(anchors),'counts':{'todos':len(todos),'revisions':len(revision_tasks)} }
     def import_preview(self,p,blob,name):
         ws=self.tools.writable(p)
         if len(blob)>8*1024*1024:raise ConsoleError('旧稿单次最多 8 MiB',413)

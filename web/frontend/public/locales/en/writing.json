@@ -266,5 +266,13 @@
   "selectionRequestPending": "A selected-text request is already waiting for a receipt. Resolve it first.",
   "selectionPreparationTimedOut": "Selected-text preparation timed out without an automatic retry. Check the current task records before starting again.",
   "selectionStopUnclear": "The real task receipt arrived, but its stop request is unconfirmed. Check the current task status in history.",
-  "selectionHistoryUnsaved": "The task started, but its character-owned history could not be persisted. Check the existing task before starting another."
+  "selectionHistoryUnsaved": "The task started, but its character-owned history could not be persisted. Check the existing task before starting another.",
+  "chapterNextAction": "Continue work on this chapter",
+  "chapterPendingSummary": "To-dos {{todos}} · Revisions {{revisions}} · Candidates awaiting a decision {{candidates}}",
+  "handleChapterItem": "Handle this item",
+  "authorEntry": "Author note",
+  "chapterNothingPending": "No pending items in this chapter. Add a to-do, start a review or keep writing.",
+  "chapterStatus_OPEN": "Open",
+  "chapterStatus_IN_PROGRESS": "In progress",
+  "selectionReviewContext": "Review sources first (no AI call)"
 }

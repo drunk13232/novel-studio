@@ -16,6 +16,7 @@ from app.ai.models import Parameters
 from app.ai.controls import RequestControls,merge
 from .tasks import adapter,metadata
 from .director_skills import catalog,load
+from .director_feedback import FeedbackRequest,FeedbackApproval,FeedbackRejection,ReworkBrief,target as feedback_target,basis as feedback_basis,state as feedback_state
 from .director_delivery import SceneIntent,DeliveryUpdate,task_delivery,recovery,failure,checkpoint,project_delivery,update_delivery,review_validity
 
 class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
@@ -57,6 +58,8 @@ class Plan(Strict):
         if len(ids)!=len(set(ids)):raise ValueError('步骤 ID 不可重复 / Duplicate step IDs')
         return self
 class Create(Strict):
+    collaboration:Literal['flexible','codex_api']='flexible'
+    auto_review:bool=False
     request_controls:RequestControls|None=None
     commander_controls:RequestControls|None=None
     path:str=Field(min_length=1,max_length=300)
@@ -75,6 +78,8 @@ class Create(Strict):
     scene_id:str|None=Field(default=None,pattern=r'^scene_[0-9a-f]{32}$')
     scene_option:int=Field(default=0,ge=0,le=2)
 class Patch(Strict):
+    collaboration:Literal['flexible','codex_api']|None=None
+    auto_review:bool|None=None
     etag:str
     request_controls:RequestControls|None=None
     commander_controls:RequestControls|None=None
@@ -100,6 +105,7 @@ class Control(Strict):
     etag:str
     action:Literal['plan','run','pause','interrupt','terminate']
     auto_continue:bool=False
+    review_after:bool|None=None
     confirm_plan:bool=False
     continue_important:bool=False
 class Rewrite(Strict):
@@ -127,7 +133,7 @@ class Director:
             if previous.get('review_id')==row['review_id']:
                 basis=('draft','goal','plan','interventions','context_id','context_hash','path','revision','target')
                 if previous.get('review_stale') or any(previous.get(k)!=row.get(k) for k in basis):row['review_stale']=True
-        for key in ('etag','delivery','recovery','review_validity'):row.pop(key,None)
+        for key in ('etag','delivery','recovery','review_validity','feedback_state'):row.pop(key,None)
         row['updated_at']=now();write(self.path(p,row['id']),row)
     def get(self,p,id):
         with self.lock:
@@ -140,7 +146,7 @@ class Director:
                     if is_review and task and row.get('review_accounted')!=task.id:
                         elapsed=max(0,(datetime.fromisoformat(task.finished_at)-datetime.fromisoformat(task.started_at)).total_seconds()) if task.started_at else 0
                         row['seconds_used']+=elapsed;row['review_accounted']=task.id
-                        row['usage'].append({'backend':'codex','provider':'Codex 定向复核','model':'CURRENT_LOGIN_MODEL','input_tokens':None,'output_tokens':None,'cost':None,'currency':row['limits']['currency'],'seconds':round(elapsed,3)})
+                        meta=metadata(task.adapter) if task.adapter else {};row['usage'].append({'backend':meta.get('backend','UNKNOWN'),'provider':meta.get('provider_name','UNKNOWN'),'model':meta.get('observed_model') or meta.get('model','UNKNOWN'),'input_tokens':None,'output_tokens':None,'cost':None,'currency':row['limits']['currency'],'seconds':round(elapsed,3),'phase':'REVIEW','receipt':{k:copy.deepcopy(meta[k]) for k in ['backend','provider_id','provider_name','model','observed_model','reasoning_effort','effective_parameters','context'] if k in meta}})
                     status='TERMINATED' if row['status']=='TERMINATED' else 'PAUSED' if row['status']=='CANCELLING' else 'REVIEW_READY' if is_review and task and task.status=='SUCCEEDED' else 'INTERRUPTED'
                     if not task and not is_review and status!='TERMINATED':
                         partial=row.get('partial','')
@@ -152,6 +158,12 @@ class Director:
                         row['failure']={'code':'APPLICATION_RESTARTED','next_action':'REVIEW_LIMITS','automatic_retry':False,'provider_fallback':False}
                         row['timing_unknown']=True;row['epoch']+=1
                     row.update(status=status,phase='定向复核报告已保存，供作者决定' if status=='REVIEW_READY' else '本地断点已恢复；先确认预算，再发起新请求',active_task=None,pause_requested=True)
+                    if is_review and task:
+                        row['review_failed']=task.status!='SUCCEEDED'
+                        if task.status=='FAILED':
+                            row.update(status='FAILED',phase='候选已保留，复核未完成；可单独重试复核')
+                            row['failure']={**failure(task.error or '复核失败'),'phase':'REVIEW'}
+                        elif task.status=='SUCCEEDED':row.update(failure=None,last_error=None,review_failed=False)
                     if task and task.error:row['last_error']=task.error
                     self.put(p,row)
             for i,step in enumerate(row['plan']['steps']):
@@ -167,6 +179,7 @@ class Director:
                 try:report=read(self.reviews.path(p,row['review_id']))
                 except (ConsoleError,OSError):pass # A failed optional report read must not hide retained prose.
             row['review_validity']=review_validity(row,report)
+            row['feedback_state']=feedback_state(row,text_hash(json.dumps(report,sort_keys=True,ensure_ascii=False)) if report else '')
             if row['review_validity']['status']=='HISTORICAL':row['review_stale']=True
             row['delivery']=task_delivery(row,candidate);row['recovery']=recovery(row)
             return row
@@ -190,6 +203,12 @@ class Director:
             if path and v['path']!=path:continue
             rows.append({k:v.get(k) for k in ['id','goal','path','mode','status','phase','updated_at','executor','active_task']})
         return sorted(rows,key=lambda v:v['updated_at'],reverse=True)[:80]
+    def validate_collaboration(self,p,row):
+        if row.get('collaboration')!='codex_api':return
+        commander=row.get('commander','codex')
+        if commander!='codex' and not commander.startswith('codex::'):raise ConsoleError('此协作模式的总导演必须使用现有 Codex 登录',422)
+        refs=[row['executor']]+[step['executor'] for step in row.get('plan',{}).get('steps',[]) if step.get('executor')]
+        if any(self.center.choose(p,'cowrite',ref)[0] is None for ref in refs):raise ConsoleError('请选择已配置的 API 写作模型，例如 DeepSeek；不会自动切换服务商',422)
     def model_ref(self,p,group,ref):
         effective=self.center.controls_for(p,group,model=ref).model
         provider,model=self.center.choose(p,group,effective)
@@ -208,13 +227,14 @@ class Director:
             scene={'id':b.scene_id,'option':b.scene_option,'value':prior['result']['options'][b.scene_option]};self.safe(ctx,scene)
         skills,proof=load(self.tools.registry.engine,b.skills)
         row={'id':uid('director'),'project_id':p,'path':b.path,'revision':b.revision,'context_id':b.context_id,'context_hash':ctx['context_hash'],
-             'goal':b.goal,'goal_han':b.goal_han,'mode':b.mode,'executor':b.executor,'commander':b.commander,'scene_reference':scene,'skills':b.skills,'skill_proof':proof,'status':'READY' if b.mode=='quick' else 'DRAFT',
+             'goal':b.goal,'goal_han':b.goal_han,'mode':b.mode,'collaboration':b.collaboration,'auto_review':b.auto_review,'executor':b.executor,'commander':b.commander,'scene_reference':scene,'skills':b.skills,'skill_proof':proof,'status':'READY' if b.mode=='quick' else 'DRAFT',
              'phase':'等待作者指令','target':{'start':b.start,'end':b.end,'quote':b.quote},'limits':b.limits.model_dump(),'calls':0,'seconds_used':0,
              'usage':[],'draft':'','partial':'','plan':{'summary':b.goal if len(b.goal)<=1500 else b.goal[:1499]+'…','steps':[Step(title='执行作者要求',instruction=b.goal).model_dump()],'questions':[],'methods':[],'method_application':[]},
              'completed':[],'interventions':[],'versions':[],'plan_versions':[],'epoch':0,'active_task':None,'pause_requested':False,'pending_notice':None,'last_error':None,'rewrite':None,'created_at':now(),'updated_at':now()}
         row['controls_version']=2
         if b.request_controls is not None:row['request_controls']=b.request_controls.model_dump()
         if b.commander_controls is not None:row['commander_controls']=b.commander_controls.model_dump()
+        self.validate_collaboration(p,row)
         self.put(p,row);return self.get(p,row['id'])
     def patch(self,p,id,b):
         self.tools.writable(p)
@@ -251,6 +271,7 @@ class Director:
             instruction=updates.pop('instruction',None)
             if (b.request_controls is not None or b.commander_controls is not None) and row.get('controls_version',1)<2:
                 row['commander_controls']=copy.deepcopy(row.get('request_controls'));row['controls_version']=2
+            self.validate_collaboration(p,{**row,**updates})
             row.update(updates)
             if b.draft is not None:
                 from .writing_contract import observations
@@ -343,6 +364,8 @@ class Director:
         self.tools.writable(p)
         with self.lock:
             row=self.get(p,id)
+            if b.review_after is None:b.review_after=bool(row.get('auto_review'))
+            if b.review_after and (row.get('commander','codex')!='codex' and not row.get('commander','').startswith('codex::')):raise ConsoleError('自动复核须使用已登录的 Codex 总导演',422)
             if row['status']=='TERMINATED':raise ConsoleError('任务已经终止',409)
             if b.step_index is not None:
                 if b.action!='run' or row.get('rewrite') or b.step_index>=len(row['plan']['steps']):raise ConsoleError('此操作不接受指定步骤 / Invalid selected step',422)
@@ -365,6 +388,9 @@ class Director:
                 self.put(p,row)
             else:
                 if row.get('active_task'):raise ConsoleError('当前请求尚未结束，请等待取消回执',409)
+                self.validate_collaboration(p,row)
+                if row.get('rewrite') and utf16_slice(row['draft'],row['rewrite']['start'],row['rewrite']['end'])!=row['rewrite']['quote']:raise ConsoleError('返工范围已变化，请重新选择或生成任务',409)
+                if row.get('rewrite_source') and row.get('rewrite') and (not row['feedback_state']['valid'] or row['rewrite_source'].get('proposal_id')!=row.get('feedback_proposal',{}).get('id')):raise ConsoleError('返工依据已变化，请重新复核并生成任务',409)
                 ctx=self.context(p,row,locked=True);self.safe(ctx,{'goal':row['goal'],'plan':row['plan'],'draft':row['draft'],'directions':row['interventions']})
                 if row.get('timing_unknown'):raise ConsoleError('进程重启前的请求耗时无法完整确认，请先检查并保存本任务预算，再手动继续',409)
                 if row.get('goal_han') and row['goal_han']>row['limits']['output_characters']:raise ConsoleError('本次目标汉字数超过候选字符上限，请按场景拆分或由作者调整任务上限',422)
@@ -389,24 +415,32 @@ class Director:
             current=self.get(p,id)
             current.update(status='TERMINATED' if b.action=='terminate' else 'CANCELLING' if task_id else 'PAUSED',phase='整项任务已终止；正在收尾当前请求' if b.action=='terminate' else '已请求中断，等待真实结束回执；上游仍可能计费')
             self.put(p,current);return self.get(p,id)
-    def start(self,p,row,b,ctx,first_executor=None):
-        row['failure']=None
+    def start(self,p,row,b,ctx,first_executor=None,feedback=None):
+        row['failure']=None;row['review_failed']=False
         row.update(epoch=row['epoch']+1,status='PLANNING' if b.action=='plan' else 'GENERATING',phase='Codex 正在制定任务书' if b.action=='plan' else '执行模型正在生成',pause_requested=False,last_error=None,pending_notice=None)
-        epoch=row['epoch'];id=row['id'];self.put(p,row);task=None
+        epoch=row['epoch'];id=row['id']
+        row['active_operation']='REWORK_PLAN' if feedback else 'PLAN' if b.action=='plan' else 'REWRITE' if row.get('rewrite') else 'WRITE'
+        if feedback:row['phase']='Codex 正在生成定向返工任务'
+        self.put(p,row);task=None
         def live():
             current=self.get(p,id)
             if current['epoch']!=epoch:raise InterruptedError('本次请求已被新指令或取消取代')
             return current
-        def perform(a,prompt,emit,cancelled,output_schema=None,planning=False,step_index=None):
-            with self.lock:
-                current=live();remaining=current['limits']['seconds']-current['seconds_used']
-                if remaining<1 or current['calls']>=current['limits']['max_calls']:raise ConsoleError('已达到时间或调用轮次上限',409)
-                current['calls']+=1;self.put(p,current);task.adapter=a
-            if cancelled():raise InterruptedError('任务已取消')
+        def perform(a,prompt,emit,cancelled,output_schema=None,planning=False,step_index=None,phase=None):
+            prose=not planning and phase is None
+            try:
+                with self.lock:
+                    current=live();remaining=current['limits']['seconds']-current['seconds_used']
+                    if cancelled():raise InterruptedError('任务已取消')
+                    if remaining<1 or current['calls']>=current['limits']['max_calls']:raise ConsoleError('已达到时间或调用轮次上限',409)
+                    current['calls']+=1;self.put(p,current);task.adapter=a
+                if cancelled():raise InterruptedError('任务已取消')
+            except BaseException:
+                a.close();raise
             begin=time.monotonic();first_response=None;first_output=None;expired=threading.Event()
             def timeout():expired.set();a.close()
             requested_timeout=getattr(getattr(a,'request_controls',None),'parameters',{}).get('timeout')
-            timer=threading.Timer(min(remaining,90 if planning else max(5,requested_timeout or getattr(getattr(a,'params',None),'timeout',120))),timeout);timer.daemon=True;timer.start()
+            timer=threading.Timer(min(remaining,min(90,requested_timeout or 90) if planning else max(5,requested_timeout or getattr(getattr(a,'params',None),'timeout',120))),timeout);timer.daemon=True;timer.start()
             last_flush=0.;buffer='';usage={'backend':metadata(a).get('backend','codex'),'provider':metadata(a).get('provider_name','Codex'),'model':metadata(a).get('model','UNKNOWN'),'input_tokens':None,'output_tokens':None,'cost':None,'currency':current['limits']['currency']}
             if hasattr(a,'record'):
                 original_record=a.record
@@ -422,7 +456,7 @@ class Director:
                 with self.lock:
                     current=live()
                     if cancelled():return
-                    if not planning and kind in {'llm_delta','message'}:
+                    if prose and kind in {'llm_delta','message'}:
                         delta=(data or {}).get('delta',text);available=max(0,current['limits']['output_characters']-len(current['draft'])-len(buffer));piece=delta[:available];buffer+=piece
                         self.buffers[(p,id,epoch)]=buffer
                         if len(piece)<len(delta):a.close();raise ConsoleError('候选达到本机字符上限，已保留上限内的内容',413)
@@ -435,20 +469,44 @@ class Director:
                 if expired.is_set():raise ConsoleError('此阶段超时，草稿已保留；上游执行与费用需核对后再手动重试',504)
                 if result['status']!='completed':raise ConsoleError(result.get('error') or '请求已停止，已收到的草稿保留',409)
                 output=result.get('output') or buffer
-                if not planning and not output.strip():raise ConsoleError('模型回合已结束但未返回正文，未标记本步骤完成；请检查结果后手动继续',422)
+                if prose and not output.strip():raise ConsoleError('模型回合已结束但未返回正文，未标记本步骤完成；请检查结果后手动继续',422)
                 return output
+            except Exception as exc:
+                if expired.is_set():raise ConsoleError('此阶段超时，草稿已保留；上游执行与费用需核对后再手动重试',504) from exc
+                raise
             finally:
-                timer.cancel();a.close();meta=metadata(a);usage['receipt']={k:copy.deepcopy(meta[k]) for k in ('backend','provider_id','provider_name','model','request_model','observed_model','reasoning_effort','effective_parameters','context','context_receipt','usage') if k in meta};usage.update(model=metadata(a).get('observed_model') or metadata(a).get('model','UNKNOWN'),seconds=round(time.monotonic()-begin,3),first_response_seconds=first_response,first_output_seconds=first_output,phase='PLAN' if planning else 'WRITE',step_index=step_index)
+                timer.cancel();a.close();meta=metadata(a);usage['receipt']={k:copy.deepcopy(meta[k]) for k in ('backend','provider_id','provider_name','model','request_model','observed_model','reasoning_effort','effective_parameters','context','context_receipt','usage') if k in meta};usage.update(model=metadata(a).get('observed_model') or metadata(a).get('model','UNKNOWN'),seconds=round(time.monotonic()-begin,3),first_response_seconds=first_response,first_output_seconds=first_output,phase=phase or ('PLAN' if planning else 'WRITE'),step_index=step_index)
                 with self.lock:
                     current=self.get(p,id);current['usage'].append(usage);current['seconds_used']+=usage['seconds']
-                    if current['epoch']==epoch and not planning:current['partial']=buffer
+                    if current['epoch']==epoch and prose:current['partial']=buffer
                     self.put(p,current)
                     self.buffers.pop((p,id,epoch),None)
         def execute(emit,cancelled):
             nonlocal ctx,first_executor
             try:
+                if feedback:
+                    prompt=('Create one precise positive Writer task as ReworkBrief JSON. The selected finding is an opinion to evaluate, not a fact. '
+                            'Do not send the review text, Author secrets or negative secret warnings to the Writer. Preserve all text outside TARGET; '
+                            'do not introduce new plot outcomes. Mark uncertain or important changes needs_author=true. '
+                            'If the finding is unsupported, explain the uncertainty and propose only a conservative optional improvement.\nINPUT DATA:\n'+json.dumps(feedback,ensure_ascii=False))
+                    a=self.executor(p,row,prompt,row['limits']['seconds']-row['seconds_used'],planning=True)
+                    emit('director_stage','Codex 制定定向返工任务',{'phase':'PLANNING','executor':metadata(a)})
+                    output=perform(a,prompt,emit,cancelled,schema(ReworkBrief),True,phase='FEEDBACK')
+                    proposal=ReworkBrief.model_validate_json(output).model_dump();self.safe(ctx,proposal)
+                    if any(not isinstance(v,str) or len(v)>500 for v in proposal['checks']):raise ConsoleError('返工验收要求过长',422)
+                    with self.lock:
+                        current=live();report=read(self.reviews.path(p,feedback['report_id']));stamp=text_hash(json.dumps(report,sort_keys=True,ensure_ascii=False))
+                        if feedback['basis']!=feedback_basis(current,stamp):raise ConsoleError('返工生成期间候选或复核已变化，未采用迟到结果',409)
+                        previous=current.get('feedback_proposal')
+                        if previous:current['feedback_history']=(current.get('feedback_history',[])+[previous])[-10:]
+                        current['feedback_proposal']={**proposal,'id':uid('feedback'),'status':'PROPOSED','created_at':now(),'basis':feedback['basis'],'report_id':feedback['report_id'],'target':feedback['target'],'model_receipt':metadata(a),'author_direction':feedback.get('author_direction','')}
+                        current.update(active_task=None,status='REWORK_REVIEW',phase='返工任务已生成，等待作者检查目标与要求')
+                        self.put(p,current)
+                    return {'status':'completed','output':'返工任务已保存，尚未调用写作模型'}
                 if b.action=='plan':
-                    methods,proof=load(self.tools.registry.engine,row['skills'])
+                    from .writing_contract import compile_methods
+                    capsules,proof=compile_methods(self.tools.registry.engine,row['skills'],ctx['packet'])
+                    methods='\n'.join('METHOD '+v['id']+'\n'+json.dumps(v,ensure_ascii=False,separators=(',',':')) for v in capsules)
                     settings=self.center.settings();choices=[{'ref':'codex','name':'Codex 当前登录'}]+[{'ref':v.provider_id+'::'+m.id,'name':v.display_name+' / '+(m.display_name or m.id),'capabilities':m.capabilities} for v in settings.providers if v.enabled for m in v.available_models][:39]
                     if not any(v['ref']==row['executor'] for v in choices):choices.append({'ref':row['executor'],'name':row['executor']})
                     prompt=('Act as a bounded scene director. Use the supplied actual professional methods to create an editable task brief, not prose. '
@@ -459,6 +517,11 @@ class Director:
                     a=self.executor(p,row,prompt,row['limits']['seconds']-row['seconds_used'],planning=True);output=perform(a,prompt,emit,cancelled,schema(Plan),True);plan=Plan.model_validate_json(output).model_dump();self.safe(ctx,plan)
                     if not set(plan['methods']).issubset(set(row['skills'])) or (row['skills'] and not plan['methods']) or len(plan['method_application'])<len(plan['methods']):raise ConsoleError('任务书未说明已加载专业方法的实际应用，请检查后手动重试',422)
                     if plan['recommended_executor'] and plan['recommended_executor'] not in {v['ref'] for v in choices}:raise ConsoleError('任务书推荐了未配置的模型，未切换执行者',422)
+                    if row.get('collaboration')=='codex_api':
+                        prior={v.get('step_id'):v for v in row['plan']['steps'] if v.get('step_id')}
+                        for step in plan['steps']:
+                            chosen=prior.get(step.get('step_id'),{});step['executor']=chosen.get('executor');step['request_controls']=copy.deepcopy(chosen.get('request_controls'))
+
                     if row['mode']=='director' and len(plan['steps'])!=1:raise ConsoleError('导演模式每次只安排一个场景，请改为深度模式或缩小目标',422)
                     with self.lock:
                         current=live();current['plan_versions']=(current['plan_versions']+[{'at':now(),'plan':current['plan']}])[-20:];current.update(plan=plan,skill_proof=proof,completed=[],status='PLAN_REVIEW',phase='任务书已生成，等待作者检查',active_task=None);self.put(p,current)
@@ -478,6 +541,8 @@ class Director:
                         current=live();current['versions']=(current['versions']+[{'at':now(),'draft':current['draft'],'reason':'before_model_append'}])[-20:]
                         if rewrite:
                             rr=current['rewrite'];text=current['draft'];a16=text.encode('utf-16-le');current['draft']=a16[:rr['start']*2].decode('utf-16-le')+output+a16[rr['end']*2:].decode('utf-16-le');current['rewrite']=None
+                            if current.get('rewrite_source') and current.get('feedback_proposal',{}).get('id')==current['rewrite_source'].get('proposal_id'):current['feedback_proposal'].update(status='APPLIED',applied_at=now(),result_sha256=text_hash(current['draft']))
+                            current.pop('rewrite_source',None)
                         else:current['draft']+=output;current['completed'].append(index)
                         from .writing_contract import observations
                         current['quality_observations']=observations(current['draft'],ctx['packet'])
@@ -486,6 +551,25 @@ class Director:
                         if rewrite or not b.auto_continue or current['pause_requested']:break
                         next_step=next((s for i,s in enumerate(current['plan']['steps']) if s['enabled'] and i not in current['completed']),None)
                         if next_step and next_step['needs_author'] and not b.continue_important:break
+                if b.review_after:
+                    with self.lock:
+                        current=live()
+                        should_review=not current['pause_requested'] and bool(current['draft'].strip()) and not cancelled()
+                        if should_review:
+                            if current['calls']>=current['limits']['max_calls'] or current['limits']['seconds']-current['seconds_used']<30:raise ConsoleError('写作已保留，剩余预算不足以复核；请检查后手动复核',409)
+                            current.update(status='REVIEWING',active_operation='REVIEW',phase='Codex 正在复核当前候选')
+                            staged=self.tools.stage_replacement(p,current['path'],current['revision'],current['target']['start'],current['target']['end'],current['target']['quote'],current['draft'],{'kind':'creative-director','record_id':id},allow_insert=True,limit=32000)
+                            current['candidate_id']=staged['id'];self.put(p,current)
+                    if should_review:
+                        from .reviews import Start
+                        prepared=self.reviews.prepare(p,Start(path=current['path'],candidate_id=staged['id'],writer_context_id=current['context_id'],mode='character',criteria=['核对作者任务目标（不扩展为全书审核）：'+current['goal'][:1500], '检查当前计划的验收点：'+json.dumps([v.get('checks',[]) for v in current.get('plan',{}).get('steps',[]) if v.get('enabled',True)],ensure_ascii=False)[:3000], '区分可验证冲突与文学建议；仅引用当前候选的真实原文；不要编造缺失事实。'],model=current.get('commander','codex'),ai_controls=current.get('commander_controls'),timeout_seconds=min(300,max(30,int(current['limits']['seconds']-current['seconds_used'])))),method_keys=['review','character','continuity'])
+                        emit('director_stage','Codex 复核候选（不采用正文）',{'phase':'REVIEWING','executor':metadata(prepared['adapter'])})
+                        output=perform(prepared['adapter'],prepared['prompt'],emit,cancelled,prepared['schema'],phase='REVIEW')
+                        with self.lock:
+                            current=live();report=prepared['complete'](output)
+                            current.update(review_id=report['id'],review_stale=False,status='REVIEW_READY',phase='Codex 复核已保存，请检查证据并选择是否返工',active_task=None,active_step=None)
+                            current['review_history']=(current.get('review_history',[])+[report['id']])[-20:];self.put(p,current)
+                        return {'status':'completed','output':'候选与复核报告已保存，未修改正式正文'}
                 with self.lock:
                     current=live();current.update(status='CANDIDATE' if all(not s['enabled'] or i in current['completed'] for i,s in enumerate(current['plan']['steps'])) else 'PAUSED',phase='候选已保存，等待作者决定',active_task=None,active_step=None);self.put(p,current)
                 return {'status':'completed','output':'候选草稿已保存；未修改正式正文'}
@@ -494,7 +578,8 @@ class Director:
                     current=self.get(p,id)
                     if current['epoch']==epoch:
                         if current['partial'] and not current['rewrite']:current['draft']+=current['partial'];current['partial']=''
-                        current['failure']=failure(error);current['resume_checkpoint']=checkpoint(current,current.get('active_step'),current['failure']['code'])
+                        current['review_failed']=current['status']=='REVIEWING'
+                        current['failure']={**failure(error),'phase':'REVIEW' if current['review_failed'] else 'FEEDBACK' if feedback else 'PLAN' if b.action=='plan' else 'WRITE'};current['resume_checkpoint']=checkpoint(current,current.get('active_step'),current['failure']['code'])
                         current.update(status='PAUSED' if isinstance(error,InterruptedError) or cancelled() else 'FAILED',active_task=None,last_error=str(error)[:1000],phase='草稿已保留，等待作者处理',active_step=None,pending_notice=getattr(error,'ai_notice',None));self.put(p,current)
                 return {'status':'interrupted' if cancelled() else 'failed','error':str(error)[:1000],'output':''}
         req=TaskRequest(type='custom_prompt',prompt='AI 创作指挥台：'+('任务书' if b.action=='plan' else '执行候选'),options=TaskOptions(read_only=True,resume=False,timeout_seconds=row['limits']['seconds']))
@@ -509,7 +594,49 @@ class Director:
             row=self.checked(p,id,b.etag)
             if row.get('active_task'):raise ConsoleError('先停止当前请求再选择局部重写',409)
             if b.end<=b.start or utf16_slice(row['draft'],b.start,b.end)!=b.quote:raise ConsoleError('候选选区已改变',409)
-            ctx=self.context(p,row,locked=True);self.safe(ctx,b.model_dump());row['rewrite']=b.model_dump(exclude={'etag'});row['status']='READY';self.put(p,row);return self.get(p,id)
+            ctx=self.context(p,row,locked=True);self.safe(ctx,b.model_dump());row['rewrite']=b.model_dump(exclude={'etag'});row.pop('rewrite_source',None);row['status']='READY';self.put(p,row);return self.get(p,id)
+    def feedback(self,p,id,b):
+        self.tools.writable(p)
+        with self.lock:
+            row=self.checked(p,id,b.etag)
+            if row.get('active_task'):raise ConsoleError('先等待或停止当前请求，再生成返工任务',409)
+            if row.get('timing_unknown') or row['calls']>=row['limits']['max_calls'] or row['limits']['seconds']-row['seconds_used']<30:raise ConsoleError('请先检查本任务时间和调用预算',409)
+            commander=row.get('commander','codex')
+            if commander!='codex' and not commander.startswith('codex::'):raise ConsoleError('定向返工任务须由现有 Codex 登录生成',422)
+            report=read(self.reviews.path(p,b.report_id));selection=feedback_target(row,report,b)
+            candidate=self.tools.candidate(p,report['source_candidate'])
+            if candidate['status']!='PROPOSED' or candidate['candidate']!=row['draft']:raise ConsoleError('复核对应候选已经变化，请重新复核',409)
+            ctx=self.context(p,row,locked=True);self.safe(ctx,selection)
+            stamp=text_hash(json.dumps(report,sort_keys=True,ensure_ascii=False))
+            data={'report_id':b.report_id,'basis':feedback_basis(row,stamp),'target':{k:selection[k] for k in ['start','end','quote','scope']},'selected_finding':selection['finding'],'verified_evidence':selection['evidence_quote'],'author_direction':b.direction,'author_goal':row['goal'],'candidate':row['draft'],'WriterView':ctx['packet']}
+            return self.start(p,row,Control(etag=row['etag'],action='plan'),ctx,feedback=data)
+    def approve_feedback(self,p,id,b):
+        self.tools.writable(p)
+        with self.lock:
+            row=self.checked(p,id,b.etag);proposal=row.get('feedback_proposal')
+            if row.get('active_task') or not proposal or proposal['id']!=b.proposal_id or not row['feedback_state']['valid']:raise ConsoleError('返工任务已过期或当前仍在执行，请刷新',409)
+            if proposal['needs_author'] and not b.confirm_important:raise ConsoleError('本返工含需要作者决定的内容，请明确确认或保留原文',409)
+            ctx=self.context(p,row,locked=True);target=proposal['target']
+            if utf16_slice(row['draft'],target['start'],target['end'])!=target['quote']:raise ConsoleError('返工选段已经变化',409)
+            instruction=b.instruction if b.instruction is not None else proposal['instruction']
+            text=instruction+('\n验收要点：'+'；'.join(proposal['checks']) if proposal['checks'] else '')
+            if len(text)>2500:raise ConsoleError('返工要求与验收点合计超过 2500 字符，请缩短',422)
+            self.safe(ctx,{'instruction':text,'target':target})
+            if proposal.get('status')=='APPROVED' and row.get('rewrite',{}).get('instruction')==text:return row
+            row['rewrite']={k:target[k] for k in ['start','end','quote']};row['rewrite']['instruction']=text
+            proposal.update(status='APPROVED',approved_at=now(),author_instruction=instruction)
+            row.update(rewrite_source={'proposal_id':proposal['id']},status='READY',epoch=row['epoch']+1,phase='作者已确认定向返工，等待明确开始；其他文字保留')
+            self.put(p,row);return self.get(p,id)
+    def reject_feedback(self,p,id,b):
+        self.tools.writable(p)
+        with self.lock:
+            row=self.checked(p,id,b.etag);proposal=row.get('feedback_proposal')
+            if row.get('active_task') or not proposal or proposal['id']!=b.proposal_id or proposal['status'] in {'APPLIED','REJECTED'}:raise ConsoleError('返工任务已变化或正在执行，请刷新',409)
+            if (row.get('rewrite_source') or {}).get('proposal_id')==proposal['id']:
+                row.update(rewrite=None);row.pop('rewrite_source',None)
+            proposal.update(status='REJECTED',rejected_at=now())
+            row.update(status='REVIEW_READY' if row['review_validity']['status']=='MATCHES_CANDIDATE' else 'CANDIDATE',epoch=row['epoch']+1,phase='作者已放弃此返工；候选与原文保留')
+            self.put(p,row);return self.get(p,id)
     def fork(self,p,id,b):
         self.tools.writable(p)
         with self.lock:
@@ -517,7 +644,7 @@ class Director:
             if source['etag']!=b.etag or source.get('active_task'):raise ConsoleError('先保存并停止当前任务，再复制固定版本 / Stop and save before copying',409)
             row=copy.deepcopy(source);row.pop('etag',None)
             row.update(id=uid('director'),goal=b.goal or source['goal'],created_at=now(),calls=0,seconds_used=0,usage=[],epoch=0,active_task=None,active_step=None,pause_requested=False,last_error=None,pending_notice=None,partial='',rewrite=None,versions=[],plan_versions=[],interventions=copy.deepcopy(source.get('interventions',[])),analysis_notes=[],status='READY',phase='作者复制的独立尝试；尚未调用模型')
-            for key in ('candidate_id','review_id','review_task_id','review_accounted','execution_receipts','quality_observations'):row.pop(key,None)
+            for key in ('candidate_id','review_id','review_task_id','review_accounted','execution_receipts','quality_observations','feedback_proposal','feedback_history','rewrite_source','review_history'):row.pop(key,None)
             if not b.keep_draft:row.update(draft='',completed=[])
             row['forked_from']={'id':id,'etag':source['etag'],'draft_sha256':text_hash(source['draft']),'kept_draft':b.keep_draft}
             self.put(p,row);return self.get(p,row['id'])
@@ -575,15 +702,24 @@ class Director:
         from .reviews import Start
         with self.lock:
             row=self.checked(p,id,b.etag)
+            if row.get('collaboration')=='codex_api':b.model=row.get('commander','codex')
             if row.get('active_task'):raise ConsoleError('先停止生成，再评审固定候选',409)
-            if row['calls']>=row['limits']['max_calls'] or row['limits']['seconds']-row['seconds_used']<30:raise ConsoleError('本任务已达到调用或时间限制',409)
+            if row.get('timing_unknown') or row['calls']>=row['limits']['max_calls'] or row['limits']['seconds']-row['seconds_used']<30:raise ConsoleError('请先检查本任务调用与时间预算；未知耗时不能自动视为有剩余额度',409)
             staged=self.stage(p,id,Candidate(etag=row['etag']));candidate=staged['candidate']
-            task=self.reviews.start(p,Start(path=row['path'],candidate_id=candidate['id'],writer_context_id=row['context_id'],mode=b.mode,model=b.model,timeout_seconds=min(300,int(row['limits']['seconds']-row['seconds_used'])),criteria=['只针对候选文本和已授权 Writer View 检查，缺失信息标 UNKNOWN；保留作者声音。','核查疑似新过去、持久关系变化、场景边界与动作后果。没有检索证据不等于情节绝对错误；给出引用、合理解释与待作者确认事项。',json.dumps({'goal':row['goal'],'steps':row['plan']['steps'],'directions':row['interventions'][-4:]},ensure_ascii=False)]))
-            current=self.get(p,id);current['calls']+=1;current['review_id']=task['review_id'];current['review_stale']=False;current['review_task_id']=task['id'];current.update(active_task=task['id'],status='REVIEWING',phase='现有文学评审正在定向复核候选');self.put(p,current)
+            task=self.reviews.start(p,Start(path=row['path'],candidate_id=candidate['id'],writer_context_id=row['context_id'],mode=b.mode,model=b.model,ai_controls=row.get('commander_controls') if row.get('collaboration')=='codex_api' else None,timeout_seconds=min(300,int(row['limits']['seconds']-row['seconds_used'])),criteria=['只针对候选文本和已授权 Writer View 检查，缺失信息标 UNKNOWN；保留作者声音。','核查疑似新过去、持久关系变化、场景边界与动作后果。没有检索证据不等于情节绝对错误；给出引用、合理解释与待作者确认事项。',json.dumps({'goal':row['goal'],'steps':row['plan']['steps'],'directions':row['interventions'][-4:]},ensure_ascii=False)]),method_keys=['review','character','continuity'] if row.get('collaboration')=='codex_api' else None)
+            current=self.get(p,id)
+            if current.get('review_id'):current['review_history']=(current.get('review_history',[])+[{'id':current['review_id'],'at':now()}])[-20:]
+            current.update(failure=None,last_error=None,review_failed=False);current['calls']+=1;current['review_id']=task['review_id'];current['review_stale']=False;current['review_task_id']=task['id'];current.update(active_task=task['id'],status='REVIEWING',active_operation='REVIEW',phase='现有文学评审正在定向复核候选');self.put(p,current)
             return {**self.get(p,id),'task':task}
 
 def routes(service):
     r=APIRouter(prefix='/api/projects/{p}/creative-director')
+    @r.post('/{id}/feedback')
+    async def feedback(p:str,id:str,b:FeedbackRequest):return service.feedback(p,id,b)
+    @r.post('/{id}/feedback/reject')
+    def reject_feedback(p:str,id:str,b:FeedbackRejection):return service.reject_feedback(p,id,b)
+    @r.post('/{id}/feedback/approve')
+    def approve_feedback(p:str,id:str,b:FeedbackApproval):return service.approve_feedback(p,id,b)
     @r.get('/skills')
     def skills(p:str):service.tools.writable(p);return {'skills':catalog(service.tools.registry.engine)}
     @r.get('')

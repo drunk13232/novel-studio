@@ -1,12 +1,24 @@
-# Novel Studio · 2.24.28 Shutdown Admission Preview
+# Novel Studio · 2.24.31 Director Usability Preview
+
+当前公开更新将 2.24.29–2.24.31 合并交付为 **Preview / PARTIAL**。下载请见 [2.24.31 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.31-preview)。下方各版说明保留最初本地交付时的验证边界；本次发布不代表新增远端 AI、中文输入法或 DPI 验收。
+
+## 2.24.31
+
+指挥台实用性 Preview：真实流程可视化、主要按钮前置、精确返工范围与上下文、明确放弃、只重试复核。报告保存不等于文学质量或正文采用。见[本轮交付边界](docs/creative-director/DELIVERY-2.24.31.md)。
+
+## 2.24.30
+
+可选使用现有 Codex 登录担任总导演，指定 API 的具体模型写作；生成候选后复用文学评审，按真实证据制定返工任务。作者可修改要求、确认固定范围后明确开始返工；调用与时间共享现有任务上限，不自动采用正文或 Canon。DeepSeek 官方调用待用户配置后验证；实际验收边界见[本版交付说明](docs/creative-director/DELIVERY-2.24.30.md)。
+
+## 2.24.29
+
+本地 Preview / PARTIAL。选区协写与文学评审提交本次固定的 AI 参数，指挥台等待两套配置就绪；本章工作直接衔接待办、修订、候选与有效证据。数据中心复用明确的缓存预览，历史重复项需要单独确认。相关本地检查已通过；远端 AI 与原生 GUI／中文输入法／DPI 不冒充本轮已验证。见 [交付证据](docs/workbench-experience/DELIVERY-2.24.29.md)。本版仅本地交付，不更新快捷方式或公开 GitHub。
 
 ## 2.24.28
 
-Preview / PARTIAL。关闭服务前停止主、项目、草稿与已有文献任务入口；排队任务不会在关闭后启动。单个中断或关闭失败不再跳过其他任务/服务，等待真实 runner 并保留错误。64 项不同的相关本地检查、两项真实回环保存/关闭场景及五项最终 headless 恢复场景通过。最后隔离服务退出仍出现 WinError 10054 和 30 秒 graceful-shutdown 超时，根因未确认；另一次浏览器首轮非成功响应未记录状态码，后续未重现。未宣称这些问题已修复。
+本地 Preview / PARTIAL。关闭服务前先关闭任务入口，阻止迟到与排队任务在关闭后启动；单个中断/关闭失败不再跳过其他任务或服务，等待真实执行回执并完整保留错误。64 项不同的相关本地检查和两项真实回环保存/关闭检查通过；原 WinError 10054 仍未重现，未宣称修复。见 [2.24.28 说明](docs/workbench-experience/DELIVERY-2.24.28.md)。本版不自动发布或更新快捷方式。
 
-当前发布：[2.24.28 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview)。安装包、便携包与校验值见 Release；旧版保留。
-
-[Publication verification / 发布复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Native GUI, physical IME/DPI and real cloud AI are not newly verified.
+2.24.28 后续已发布为 [Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview)。以下保留各历史交付当时的验证边界。
 
 ## 2.24.27
 

@@ -13,7 +13,7 @@ export function choices(s:D){return (s.providers||[]).filter((p:D)=>p.enabled).f
 export function OptionList({settings,codexOnly=false}:{settings:D;codexOnly?:boolean}){
  useUiTranslation(["ai","creative","writing"]);
 return <><CodexModelOptions settings={settings}/>{!codexOnly&&choices(settings).map((m:D)=><option key={m.id} value={m.id}>{m.label}</option>)}</>;}
-export function AIModelPicker({value,onChange,task='polish',project,busy=false,onReady,requestScope}:{value:string;onChange:(s:string)=>void;task?:string;project?:string;busy?:boolean;onReady?:(ready:boolean)=>void;requestScope?:import('./ai-controls').AIRequestScope}){
+export function AIModelPicker({value,onChange,task='polish',project,busy=false,onReady,requestScope}:{value:string;onChange:(s:string)=>void;task?:string;project?:string;busy?:boolean;onReady?:(ready:boolean,value?:Record<string,any>)=>void;requestScope?:import('./ai-controls').AIRequestScope}){
  return <AIControls project={project} task={task} model={value} onModelChange={onChange} busy={busy} onReady={onReady} requestScope={requestScope}/>;
 }
 export function LLMWritingPanel({project,text}:{project:string|null;text:string}){

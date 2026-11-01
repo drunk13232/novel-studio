@@ -266,5 +266,13 @@
   "selectionRequestPending": "已有选区请求正在等待回执，请先处理该请求。",
   "selectionPreparationTimedOut": "选区任务准备超时，未自动重试。请检查当前任务记录后重新发起。",
   "selectionStopUnclear": "已收到实际任务回执，但停止请求未确认。请到任务记录核查当前状态。",
-  "selectionHistoryUnsaved": "任务已启动，但角色任务记录未能持久化；请先查看任务记录，不要重复发起。"
+  "selectionHistoryUnsaved": "任务已启动，但角色任务记录未能持久化；请先查看任务记录，不要重复发起。",
+  "chapterNextAction": "接着处理本章",
+  "chapterPendingSummary": "待办 {{todos}} · 修订 {{revisions}} · 待决定候选 {{candidates}}",
+  "handleChapterItem": "处理此项",
+  "authorEntry": "作者记录",
+  "chapterNothingPending": "本章暂时没有待处理记录。可添加待办、发起评审或继续写作。",
+  "chapterStatus_OPEN": "待处理",
+  "chapterStatus_IN_PROGRESS": "处理中",
+  "selectionReviewContext": "先检查参考（不会调用 AI）"
 }

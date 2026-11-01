@@ -7,6 +7,8 @@ import argparse
 parser=argparse.ArgumentParser(description='Isolated public-demo Director UI fixture; never use personal data')
 parser.add_argument('--root',required=True,type=Path)
 parser.add_argument('--port',type=int,default=8917)
+parser.add_argument('--utility-fixture',action='store_true',help='Collaboration UI only: duplicated evidence and one controlled review failure')
+parser.add_argument('--collaboration-fixture',action='store_true',help='Fixed local planner/reviewer/writer; synthetic verified feedback only, not AI')
 parser.add_argument('--local-writer',action='store_true',help='Fixed local test response only; never a real AI')
 parser.add_argument('--selection-gated',action='store_true',help='Wait in the fixed MOCK adapter until the real TaskManager requests interrupt; bounded 30 seconds')
 parser.add_argument('--selection-writer',action='store_true',help='Fixed local selection JSON through the real TaskManager; never a real AI')
@@ -17,6 +19,7 @@ parser.add_argument('--shutdown-timeout',type=float,help='Explicit fixture-only 
 parser.add_argument('--readback-delay-fixture',action='store_true',help='Controlled stalled read headers/body for save-receipt tests; no model or private data')
 parser.add_argument('--recovery-cleanup-fixture',action='store_true',help='Controlled public-demo cleanup timing and write lease; never enabled in production')
 args=parser.parse_args();A=args.root.resolve()
+if args.utility_fixture and not args.collaboration_fixture:raise SystemExit('Utility fixture requires collaboration fixture')
 if args.selection_gated and not args.selection_writer:raise SystemExit('Gated selection requires the fixed local selection adapter')
 if args.revision_fixture and args.mixed_source:raise SystemExit('Use one synthetic source fixture at a time')
 if not A.is_relative_to((ROOT/'desktop/build').resolve()) or A==(ROOT/'desktop/build').resolve():raise SystemExit('Fixture must use a dedicated directory below desktop/build')
@@ -46,10 +49,43 @@ path='chapters/chapter-2/draft.md';doc=app.state.studio_tools.doc(p,path)
 s=Session(app.state.assistant,Start(instruction='LOCAL_SERVICE_TEST: 保存可查看的正文候选，不调用模型',context=Context(project=p,page='write',path=path)),AssistantSettings(mode='draft',manuscript=True,save_conversation=True));s.manager=app.state.assistant.manager(p);s.model=SimpleNamespace(id='LOCAL_SERVICE_TEST',capabilities={'tools':True});s.provider=SimpleNamespace(provider_id='local-action',display_name='LOCAL_SERVICE_TEST');s.ai_metadata={'backend':'local-service','remote_model_called':False}
 r=s.call('stage_chapter_draft',{'number':2,'revision':doc['etag'],'content':'第2章 海边的试写\n\n这是一份独立演示候选，用来验证保存、重开和继续写作。\n\n所有测试文字均为临时示例，不是用户的作品。','note':'LOCAL_SERVICE_TEST'});assert r['ok'],r
 from app.creative.writing import ContextChoice,Approval
-from app.creative.director import Create,Patch
+from app.creative.director import Create,Patch,Limits
 from app.creative.director_delivery import checkpoint
 ctx=app.state.writing_assist.preview(p,ContextChoice(path=path,revision=doc['etag']))
 app.state.writing_assist.approve(p,ctx['id'],Approval(context_hash=ctx['context_hash'],confirm=True))
+if args.collaboration_fixture:
+ from app.ai.models import Provider,Model
+ from app.creative.director import Plan,Step
+ import app.creative.director as director_module
+ import app.creative.reviews as review_module
+ app.state.creative_director.center.put(Provider(provider_id='fixture-writer',display_name='MOCK local API writer',base_url='http://127.0.0.1:12345/v1',available_models=[Model(id='writer',chat_token_parameter='max_tokens')]))
+ review_failed_once=False
+ class CollaborationAdapter:
+  role='WRITER';selected_ai={'backend':'MOCK','provider_name':'CONTROLLED_LOCAL_COLLABORATION','model':'fixed-test-only'}
+  def close(self):pass
+  interrupt=close
+  bound_ai_selection=True
+  request_controls=SimpleNamespace(parameters={})
+  def __init__(self,phase):self.phase=phase
+  def start_task(self,prompt,emit,**kw):
+   global review_failed_once
+   with (A/'model-calls.jsonl').open('a',encoding='utf8') as f:f.write(json.dumps({'phase':self.phase,'backend':'MOCK'})+'\n')
+   if args.utility_fixture and self.phase=='REVIEW' and not review_failed_once:
+    review_failed_once=True;raise RuntimeError('CONTROLLED_MOCK_REVIEW_FAILURE')
+   time.sleep(.15)
+   if self.phase=='REVIEW':value={'verdict':'WARN','summary':'MOCK review, not AI','issues':[{'severity':'minor','message':'MOCK suggestion','evidence':['需要修改的中段。','更明确的新中段。'],'priority':'SUGGESTION','confidence':'HIGH'}]}
+   elif self.phase=='PLAN':
+    value={'title':'MOCK 调整中段','instruction':'用明确动作推进当前回应，保留事件结果。','checks':['保留范围外原文'],'needs_author':True,'uncertainty':'MOCK opinion, author decides'} if 'ReworkBrief JSON' in prompt else Plan(summary='MOCK one scene',steps=[Step(title='MOCK scene',instruction='完成当前场景。')],methods=['context','scene','character'],method_application=['按过滤知识','使用场景行动','保持人物差异']).model_dump()
+   else:
+    text='更明确的新中段。' if 'selected_text_to_replace' in prompt else '前段保留😀。\n需要修改的中段。\n后段保留。'
+    if args.utility_fixture and 'selected_text_to_replace' not in prompt:text+='\n需要修改的中段。'
+    for v in text:emit('llm_delta',v,{'delta':v})
+    return {'status':'completed','output':text}
+   return {'status':'completed','output':json.dumps(value,ensure_ascii=False)}
+ _control_prompt=app.state.creative_director.center.control_prompt
+ app.state.creative_director.center.control_prompt=lambda a,prompt,*other,**kw:prompt if isinstance(a,CollaborationAdapter) else _control_prompt(a,prompt,*other,**kw)
+ director_module.adapter=lambda center,project,group,prompt,*other,**kw:CollaborationAdapter('PLAN' if group=='scene_design' else 'WRITE')
+ review_module.adapter=lambda *a,**kw:CollaborationAdapter('REVIEW')
 if args.local_writer:
  import app.creative.director as director_module
  class LocalWriter:
@@ -82,7 +118,7 @@ if args.selection_writer:
   assert project==p and group in {'polish','cowrite'};return LocalSelectionWriter()
  text_tasks.adapter=selection_adapter
 target={'start':0,'end':utf16_index(normalized(doc),len(normalized(doc))),'quote':normalized(doc)} if args.revision_fixture else {}
-record=app.state.creative_director.create(p,Create(**target,path=path,revision=doc['etag'],context_id=ctx['id'],goal='LOCAL_SERVICE_TEST: open a saved task only; no model is called',executor='codex',commander='codex',mode='quick',goal_han=3000))
+record=app.state.creative_director.create(p,Create(**target,path=path,revision=doc['etag'],context_id=ctx['id'],goal='LOCAL_SERVICE_TEST: open a saved task only; no model is called',executor='fixture-writer::writer' if args.collaboration_fixture else 'codex',commander='codex',mode='director' if args.collaboration_fixture else 'quick',collaboration='codex_api' if args.collaboration_fixture else 'flexible',auto_review=args.collaboration_fixture,limits=Limits(max_calls=12 if args.utility_fixture else 6),goal_han=3000))
 record=app.state.creative_director.patch(p,record['id'],Patch(etag=record['etag'],draft='她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。\n\n她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。她把信纸折好，放在窗边。门外的人没有马上回答，她先把杯子移开，给对方留下坐下的位置。'))
 record.update(status='FAILED',failure={'code':'TIMEOUT','automatic_retry':False},last_error='LOCAL_SERVICE_TEST: timeout after retained output')
 record['resume_checkpoint']=checkpoint(record,0,'TIMEOUT');app.state.creative_director.put(p,record)
@@ -251,7 +287,8 @@ if args.trace_shutdown:
   fn=getattr(value,'close',None)
   if callable(fn) and hasattr(value,'__dict__'):seen.add(id(value));value.close=tracked(fn,label+'.close')
 (A/'server.pid').write_text(str(os.getpid()),'ascii')
-server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,log_level='warning',timeout_graceful_shutdown=args.shutdown_timeout))
+from app.server_loop import new_event_loop
+server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,log_level='warning',timeout_graceful_shutdown=args.shutdown_timeout,loop=new_event_loop))
 @app.post('/api/test-fixture-exit')
 def fixture_exit():
  fixture_gate.set()

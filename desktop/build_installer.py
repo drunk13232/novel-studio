@@ -33,9 +33,12 @@ def main():
     parser.add_argument('--makensis',required=True,type=Path)
     parser.add_argument('--data-default',type=Path)
     parser.add_argument('--output-name')
+    parser.add_argument('--release-root',type=Path,help='Explicit version-named release directory; default remains release/vVERSION')
     args=parser.parse_args()
     version=json.loads((ROOT/'desktop/version.json').read_text(encoding='utf-8'))['version']
-    release=(ROOT/'release'/('v'+version)).resolve();app=release/'NovelStudio'
+    if args.release_root and (not args.release_root.is_absolute() or args.release_root.is_symlink() or args.release_root.name!='v'+version):
+        raise ValueError('Use an absolute non-symlink version-named release directory')
+    release=(args.release_root or ROOT/'release'/('v'+version)).resolve();app=release/'NovelStudio'
     manifest=json.loads((app/'RELEASE-MANIFEST.json').read_text(encoding='utf-8'))
     if manifest['release']['version']!=version:raise ValueError('Release mismatch')
     files=[]

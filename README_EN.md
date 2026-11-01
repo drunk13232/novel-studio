@@ -1,12 +1,24 @@
-# Novel Studio · 2.24.28 Shutdown Admission Preview
+# Novel Studio · 2.24.31 Director Usability Preview
+
+This public update bundles 2.24.29–2.24.31 as **Preview / PARTIAL**. Download [2.24.31 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.31-preview). Historical entries retain their original local-delivery boundaries; publication does not imply new remote-AI, native IME or DPI acceptance.
+
+## 2.24.31
+
+Director usability Preview: visible operation stages, exact rework scope/context, explicit rejection, and review-only retry. Report persistence never means literary quality or manuscript adoption. See [delivery boundaries](docs/creative-director/DELIVERY-2.24.31.md).
+
+## 2.24.30
+
+Opt-in Codex-login director + concrete API writer, shared task limits, candidate review and evidence-bound rework proposals. Authors edit and approve the exact range before explicitly starting rework. No automatic manuscript or Canon adoption. Official DeepSeek calls await user configuration; see the [current delivery](docs/creative-director/DELIVERY-2.24.30.md) for actual verification boundaries.
+
+## 2.24.29
+
+Local Preview / PARTIAL. Shared AI controls now submit frozen request snapshots in selection co-writing and literary review; Director waits for both model configurations. Chapter work links existing to-dos, revisions, candidates and verified evidence. Data Center reuses explicit cache previews and separately protects history. Targeted local checks pass; remote AI and native GUI/IME/DPI acceptance remain unverified. See [delivery evidence](docs/workbench-experience/DELIVERY-2.24.29.md). This version is local only; no shortcut update or GitHub publication.
 
 ## 2.24.28
 
-Preview / PARTIAL. Stop admission for main/project/draft/known-reference managers before service waits, prevent queued work from starting after closure, continue other owners after stop/close errors, drain real runners and preserve failures. 64 unique targeted local checks, two real loopback save/shutdown cases and five final headless recovery cases passed. Final isolated service exit still logged WinError 10054 and the existing 30-second graceful-shutdown timeout; root cause remains unresolved. One initial browser non-success response was not status-recorded and did not recur on follow-up. Neither issue is claimed fixed.
+Local Preview / PARTIAL. Close task admission before service waits, reject late/queued execution, continue other owners after stop/close failures, drain actual runners and preserve errors. 64 unique targeted local checks and two actual loopback save/shutdown checks passed; the original WinError 10054 remains unresolved, not claimed fixed. See [2.24.28 notes](docs/workbench-experience/DELIVERY-2.24.28.md). No automatic publication or shortcut update.
 
-Current release: [2.24.28 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview). Setup, portable ZIP and checksums are on the Release page; previous versions remain available.
-
-[Publication verification / 发布复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Native GUI, physical IME/DPI and real cloud AI are not newly verified.
+Version 2.24.28 was subsequently published as a [Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.28-preview). Historical entries retain their original verification boundaries.
 
 ## 2.24.27
 

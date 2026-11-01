@@ -105,5 +105,10 @@
   "compareLatest": "Load latest record for comparison",
   "latestRecord": "Latest saved record",
   "compareWarning": "Your edits remain above. Check concurrent changes before explicitly choosing a new baseline; saving still revalidates the revision.",
-  "useLatestBaseline": "Keep my edits and use this latest baseline"
+  "useLatestBaseline": "Keep my edits and use this latest baseline",
+  "cacheProtected": "Manuscripts, history, backups, older releases and verification records are excluded. Build cache covers only regenerable PyInstaller files.",
+  "cleanupSelected": "Selected:",
+  "logicalBytesOnly": "Logical file size, not measured disk space reclaimed",
+  "cleanupRescan": "Rescan after an uncertain result or changed files; deletion is never retried automatically.",
+  "cleanupExpired": "This preview expired. Scan again."
 }

@@ -36,7 +36,7 @@ class CacheMaintenance:
             if self.busy():raise ConsoleError('正在构建或维护缓存，请稍后再试',409)
             cutoff=time.time()-48*3600;files=[];summary=[];truncated=False
             for key,base in self.bases(project).items():
-                size=0;count=0;skipped=0;stack=[base] if base.exists() else []
+                size=0;count=0;skipped=0;stack=([base/name for name in ('NovelStudio','pyinstaller-cache') if (base/name).is_dir()] if key=='build' else [base]) if base.exists() else []
                 while stack:
                     directory=self.guarded(stack.pop(),base)
                     try:

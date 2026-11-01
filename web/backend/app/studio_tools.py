@@ -9,6 +9,7 @@ from pydantic import BaseModel,ConfigDict,Field,StrictInt
 from app.errors import ConsoleError
 from app.library.storage import safe,read,write,digest,now,checkpoint,database,write_guard
 from app.models.requests import TaskRequest,TaskOptions
+from app.ai.controls import RequestControls
 from app.codex.adapter import CodexAdapter
 from app.tasks.router import core_workflow
 
@@ -25,6 +26,7 @@ class FrontendOrigin(Strict):
     session_id:str=Field(pattern=r'^[0-9a-f]{32}$')
     token:str=Field(pattern=r'^[0-9a-f]{32}$')
 class SelectionRequest(Strict):
+    ai_controls:RequestControls|None=None
     frontend_origin:FrontendOrigin|None=None
     project_id:str
     chapter_id:str
@@ -202,7 +204,7 @@ class StudioTools:
         group='dialogue' if body.action=='dialogue' else 'expand' if body.action=='expand' else 'review' if body.action in {'logic','voice'} else 'polish'
         if body.writing_context_id:group='cowrite'
         from app.creative.tasks import adapter as text_adapter
-        selected_adapter=text_adapter(center,p,group,prompt,body.ai_model,role='WRITER') if center else None
+        selected_adapter=text_adapter(center,p,group,prompt,body.ai_model,role='WRITER',controls=body.ai_controls) if center else None
         write(self.candidate_path(p,id),record)
         def complete(output):
             v=json.loads(output);assert_no_hidden(v,hidden)

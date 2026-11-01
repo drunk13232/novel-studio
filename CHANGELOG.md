@@ -1,12 +1,39 @@
 # Changelog / 更新记录
 
-## 2.24.28 — Shutdown Admission Preview (2026-10-31)
+## 2.24.31 — Director Usability Preview (2026-11-01)
 
-Preview / PARTIAL. Stop admission for main/project/draft/known-reference managers before service waits, prevent queued work from starting after closure, continue other owners after stop/close errors, drain real runners and preserve failures. 64 unique targeted local checks, two real loopback save/shutdown cases and five final headless recovery cases passed. Final isolated service exit still logged WinError 10054 and the existing 30-second graceful-shutdown timeout; root cause remains unresolved. One initial browser non-success response was not status-recorded and did not recur on follow-up. Neither issue is claimed fixed.
+- Put truthful workflow stages, saved role choices and task controls before optional diagnostic detail.
+- Show the exact rework target with nearby context, line/occurrence labels and existing candidate-editor location.
+- Add explicit candidate-only rejection; approving or rejecting never starts a writer automatically.
+- Retry only a failed task review using existing compact methods, without generating prose again; retain the candidate and actual reviewer receipt.
+- Keep scope/version/permission gates. No new dependency, agent runtime or data migration.
+- Add explicit version-named external build output for low-disk environments; existing runtime/source audits remain enforced.
 
-Preview / PARTIAL。关闭服务前停止主、项目、草稿与已有文献任务入口；排队任务不会在关闭后启动。单个中断或关闭失败不再跳过其他任务/服务，等待真实 runner 并保留错误。64 项不同的相关本地检查、两项真实回环保存/关闭场景及五项最终 headless 恢复场景通过。最后隔离服务退出仍出现 WinError 10054 和 30 秒 graceful-shutdown 超时，根因未确认；另一次浏览器首轮非成功响应未记录状态码，后续未重现。未宣称这些问题已修复。
 
-[Final verification / 最终复核](docs/workbench-experience/DELIVERY-2.24.28-PUBLICATION.md). Existing bundled delivery notes preserve the earlier build-time snapshot; this addendum corrects the subsequent exit observation.
+## 2.24.30 — Codex Writer Collaboration Preview (2026-11-01)
+
+- Add an opt-in role profile over the existing Director: current Codex login plans/reviews, and the explicitly selected API model writes.
+- Reuse ReviewCenter for post-generation candidate checks, including author goals and plan acceptance points.
+- Generate an evidence-bound, revision-bound positive rework proposal. Author edits and confirmation precede a separate explicit writer request.
+- Keep raw Checker reports out of Writer input; preserve non-target text, author intervention, pause/cancel/takeover and candidate history.
+- Reuse existing compact method capsules for planning and honor the selected planning timeout; preserve budget gates and truthful timeout classification.
+- No new framework or dependency. Official DeepSeek verification awaits local user configuration. See the delivery note for measured evidence and remaining boundaries.
+
+
+## 2.24.29 — Daily Workflow Preview (2026-10-31, local)
+
+- Freeze resolved AI request controls in selection co-writing and literary review; gate Director creation until both required configurations are ready. Local proofreading remains available without an AI configuration.
+- Reuse the chapter notebook/candidate workflow with direct pending-work actions and current-revision evidence checks.
+- Reuse explicit cache maintenance in Data Center. Confirm selected logical sizes, expire previews, reject changed/foreign/replayed legacy cleanup plans, and require separate duplicate-history consent. Old releases and verification records are excluded from ordinary build cleanup.
+- Apply the narrowly scoped Windows loopback transport cleanup adapter. Controlled real-socket faults and the actual local MCP SDK stdio protocol pass; the original naturally occurring reset is not claimed deterministically reproduced.
+- Local Preview only. No GitHub publication or shortcut update. Remote AI and native GUI/IME/DPI remain separate unverified gates; see current delivery evidence.
+
+
+## 2.24.28 — Shutdown Admission Preview (2026-10-31, local)
+
+Local Preview / PARTIAL. Close task admission before service waits, reject late/queued execution, continue other owners after stop/close failures, drain actual runners and preserve errors. 64 unique targeted local checks and two actual loopback save/shutdown checks passed; the original WinError 10054 remains unresolved, not claimed fixed. See [2.24.28 notes](docs/workbench-experience/DELIVERY-2.24.28.md). No automatic publication or shortcut update.
+
+本地 Preview / PARTIAL。关闭服务前先关闭任务入口，阻止迟到与排队任务在关闭后启动；单个中断/关闭失败不再跳过其他任务或服务，等待真实执行回执并完整保留错误。64 项不同的相关本地检查和两项真实回环保存/关闭检查通过；原 WinError 10054 仍未重现，未宣称修复。见 [2.24.28 说明](docs/workbench-experience/DELIVERY-2.24.28.md)。本版不自动发布或更新快捷方式。
 
 ## 2.24.27 — Recovery Integrity Preview (2026-10-31, local)
 

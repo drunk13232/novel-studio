@@ -1,4 +1,4 @@
-﻿param([string]$VersionDirectory = '', [switch]$Preview, [ValidateSet('', 'companion')][string]$ReleaseSuffix = '')
+param([string]$VersionDirectory = '', [string]$ArchiveDirectory = '', [string]$OutputDirectory = '', [string]$WorkDirectory = '', [switch]$Preview, [ValidateSet('', 'companion')][string]$ReleaseSuffix = '')
 $ErrorActionPreference = 'Stop'
 $taskCacheLock=Join-Path $PSScriptRoot '.cache-operation.lock'
 $taskCacheHandle=[IO.File]::Open($taskCacheLock,[IO.FileMode]::CreateNew,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
@@ -10,14 +10,26 @@ if ($VersionDirectory -ne ('v' + $taskVersion.version)) { throw 'Release directo
 if ($VersionDirectory -notmatch '^v[0-9]+\.[0-9]+(?:\.[0-9]+)?$') { throw 'Invalid version directory' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $taskEditionDirectory = if ($ReleaseSuffix) { $VersionDirectory + '-' + $ReleaseSuffix } else { $VersionDirectory }
-$taskRelease = [IO.Path]::GetFullPath((Join-Path $taskRoot "release\$taskEditionDirectory"))
-if (-not $taskRelease.StartsWith($taskRoot + [IO.Path]::DirectorySeparatorChar)) { throw 'Invalid release path' }
+if ($OutputDirectory) {
+ if (-not [IO.Path]::IsPathRooted($OutputDirectory)) { throw 'OutputDirectory must be absolute' }
+ $taskRelease=[IO.Path]::GetFullPath($OutputDirectory)
+ if ((Split-Path -Leaf $taskRelease) -ne $taskEditionDirectory) { throw 'OutputDirectory leaf must match the version edition' }
+} else {
+ $taskRelease = [IO.Path]::GetFullPath((Join-Path $taskRoot "release\$taskEditionDirectory"))
+ if (-not $taskRelease.StartsWith($taskRoot + [IO.Path]::DirectorySeparatorChar)) { throw 'Invalid release path' }
+}
 $taskPython = Join-Path $taskRoot 'web\backend\.venv\Scripts\python.exe'
-$taskBuildTemp = Join-Path $taskRoot 'desktop\build\temp'
+$taskWorkRoot=Join-Path $taskRoot 'desktop\build'
+if ($WorkDirectory) {
+ if (-not [IO.Path]::IsPathRooted($WorkDirectory)) { throw 'WorkDirectory must be absolute' }
+ $taskWorkRoot=[IO.Path]::GetFullPath($WorkDirectory)
+ if ((Test-Path -LiteralPath $taskWorkRoot) -and (Get-ChildItem -LiteralPath $taskWorkRoot -Force | Select-Object -First 1)) { throw 'External WorkDirectory must be new or empty' }
+}
+$taskBuildTemp = Join-Path $taskWorkRoot 'temp'
 New-Item -ItemType Directory -Force -Path $taskBuildTemp | Out-Null
 $env:TEMP=$taskBuildTemp; $env:TMP=$taskBuildTemp
 $env:npm_config_cache=Join-Path $taskRoot 'web\.build-cache\npm'
-$env:PYINSTALLER_CONFIG_DIR=Join-Path $taskRoot 'desktop\build\pyinstaller-cache'
+$env:PYINSTALLER_CONFIG_DIR=Join-Path $taskWorkRoot 'pyinstaller-cache'
 if (Test-Path -LiteralPath (Join-Path $taskRelease 'NovelStudio')) { throw 'Release already exists; build to a new directory to preserve old releases.' }
 if ($Preview) { $env:NOVEL_PREVIEW_BUILD = '1' } else { Remove-Item Env:NOVEL_PREVIEW_BUILD -ErrorAction SilentlyContinue }
 & $taskPython (Join-Path $PSScriptRoot 'fetch_python_runtime.py')
@@ -26,7 +38,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Python WASI runtime integrity failed' }
 if ($LASTEXITCODE -ne 0) { throw 'License collection failed' }
 Push-Location (Join-Path $taskRoot 'web\frontend')
 try { & npm.cmd run build; if ($LASTEXITCODE -ne 0) { throw 'Frontend build failed' } } finally { Pop-Location }
-& $taskPython -m PyInstaller --clean --noconfirm --distpath $taskRelease --workpath (Join-Path $taskRoot 'desktop\build') (Join-Path $PSScriptRoot 'NovelStudio.spec')
+& $taskPython -m PyInstaller --clean --noconfirm --distpath $taskRelease --workpath $taskWorkRoot (Join-Path $PSScriptRoot 'NovelStudio.spec')
 if ($LASTEXITCODE -ne 0) { throw 'Desktop build failed' }
 foreach ($taskNotice in @('LICENSE','NOTICE','COPYRIGHT','THIRD_PARTY_NOTICES.md')) {
  Copy-Item -LiteralPath (Join-Path $taskRoot $taskNotice) -Destination (Join-Path $taskRelease ('NovelStudio\' + $taskNotice))
@@ -70,14 +82,24 @@ Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\daily-reliability\DELIVERY.md'
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\world-first\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORLD-FIRST.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\world-first\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORLD-FIRST-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\CREATIVE-DIRECTOR.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\DELIVERY-2.24.30.md') -Destination (Join-Path $taskRelease 'NovelStudio\CODEX-WRITER-DELIVERY.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\DELIVERY-2.24.31.md') -Destination (Join-Path $taskRelease 'NovelStudio\DIRECTOR-USABILITY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\creative-director\DELIVERY-2.24.2.md') -Destination (Join-Path $taskRelease 'NovelStudio\DIRECTOR-CONSOLE-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-EXPERIENCE.md')
-Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.28.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
-if ($Preview) { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease --preview } else { & $taskPython (Join-Path $PSScriptRoot 'package_zip.py') --release-root $taskRelease }
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.29.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
+$taskArchiveArgs=@('--release-root',$taskRelease)
+if ($OutputDirectory) { $taskArchiveArgs+='--allow-external-release' }
+if ($ArchiveDirectory) {
+ if (-not [IO.Path]::IsPathRooted($ArchiveDirectory)) { throw 'ArchiveDirectory must be an absolute path' }
+ $taskArchiveArgs+=@('--archive-directory',[IO.Path]::GetFullPath($ArchiveDirectory))
+}
+$taskZipArgs=@($taskArchiveArgs)
+if ($Preview) { $taskZipArgs+='--preview' }
+& $taskPython (Join-Path $PSScriptRoot 'package_zip.py') @taskZipArgs
 if ($LASTEXITCODE -ne 0) { throw 'Release audit/ZIP failed' }
-& $taskPython (Join-Path $PSScriptRoot 'package_source.py') --release-root $taskRelease
+& $taskPython (Join-Path $PSScriptRoot 'package_source.py') @taskArchiveArgs
 if ($LASTEXITCODE -ne 0) { throw 'Developer source package failed' }
 
 
