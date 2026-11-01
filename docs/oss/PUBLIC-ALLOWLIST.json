@@ -4776,8 +4776,8 @@
     },
     {
       "path": "docs/creative-director/DELIVERY-2.24.31-PUBLICATION.md",
-      "sha256": "c09998a853f5f770177a5b06166ad3627499b544ba3dc967ba6b1772560697c9",
-      "bytes": 1394
+      "sha256": "3279cf7e223a0dc90593afa6be5233c31cd8eaf1625559b040a408e2019ea812",
+      "bytes": 1870
     },
     {
       "path": "docs/creative-director/DELIVERY-2.24.31.md",
@@ -9566,8 +9566,8 @@
     },
     {
       "path": "web/backend/tests/test_daily_workflow.py",
-      "sha256": "4cf05f86030ecc3cd9a4b4479032337b5b9ab0509ccc667ddc4913140951d163",
-      "bytes": 6199
+      "sha256": "15c19ccfc82d828974e35210e3e342c0501ad585f7833f316475e22faa9a38b3",
+      "bytes": 6691
     },
     {
       "path": "web/backend/tests/test_daily_writing_tools_api.py",

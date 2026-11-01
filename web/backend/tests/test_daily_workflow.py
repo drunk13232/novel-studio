@@ -61,6 +61,13 @@ def test_selection_passes_explicit_controls_to_existing_adapter_without_model_ca
     _,app,p=local;tools=app.state.studio_tools;doc=tools.doc(p,'chapters/story/draft.txt');body=normalized(doc);cid,_,_=tools.chapter(p,doc['path']);seen={}
     def adapter(*args,**kwargs):seen.update(kwargs);return SimpleNamespace(metadata={'backend':'MOCK','model':'codex::isolated'})
     monkeypatch.setattr('app.creative.tasks.adapter',adapter)
+    # This unit test verifies parameter routing, not optional installed Skill integration.
+    # Keep it independent of the maintainer's user-level resources; no real AI runs.
+    def resources(engine,provider,references=()):
+        assert provider=='novel'
+        assert references==['style-fidelity.md','cognition-layers-and-language.md']
+        return 'ISOLATED TEST GUIDANCE - NOT A REAL INSTALLED SKILL',[]
+    monkeypatch.setattr('app.integrations.stack.resources',resources)
     manager=tools.manager(p)
     monkeypatch.setattr(manager,'prepared',lambda *args,**kwargs:SimpleNamespace(id='mock-prepared-no-worker',public=lambda:{'id':'mock-prepared-no-worker','status':'QUEUED'}))
     request=SelectionRequest(project_id=p,chapter_id=cid,path=doc['path'],document_revision=doc['etag'],originalHash=text_hash(body),start=0,end=utf16_index(body,len(body)),selected_text=body,style='none',ai_model='codex::isolated',ai_controls={'model':'codex::isolated','parameters':{'reasoning_effort':'high'},'context':{'budget':16000}})

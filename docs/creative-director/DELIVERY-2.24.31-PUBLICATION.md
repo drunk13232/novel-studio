@@ -7,3 +7,7 @@ Verification remains Preview / PARTIAL: 66 distinct scoped backend checks, local
 The retained portable ZIP is unchanged. The current-version installer is compiled from its verified release manifest, excludes personal launch helpers and uses the generic user-data default. An explicitly named external release directory is accepted by the existing installer builder; all payload hash/path checks still apply. Installation UI and full installation are separate from application startup evidence.
 
 The public source's application code is checked against the retained development snapshot. Existing licenses, legal notices and font provenance remain in place. CI and Release asset digests are verified for the exact public commit. Local audit files and real-data hash inventories are excluded.
+
+## Independent CI correction
+
+The first public CI passed 836 tests and the frontend build but exposed one parameter-routing unit test coupled to a maintainer-installed optional novel-writing Skill. That unit now uses explicitly synthetic guidance; it still asserts the exact selected model, effort and context controls without any model call. No application behavior or CI selection was changed. Real installed-Skill integration retains its separate acceptance boundary.
