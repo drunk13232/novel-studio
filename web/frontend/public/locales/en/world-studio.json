@@ -197,5 +197,7 @@
   "starterGenerate": "Generate world settings",
   "starterBoundedHint": "Generate one world overview to edit and adopt. Switch to detailed design later for countries, places or institutions.",
   "status_SUCCEEDED": "Completed",
-  "status_QUEUED": "Queued"
+  "status_QUEUED": "Queued",
+  "organization": "Data organizer",
+  "type_table": "Typed table"
 }

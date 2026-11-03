@@ -1,4 +1,16 @@
-# Novel Studio · 2.24.31 Director Usability Preview
+# Novel Studio · 2.25.2 Data Organization Usability Preview
+
+**Preview / PARTIAL.** This update adds data organization and usability improvements: a unified save/review bar, one category or record editor at a time, independently scrolling history, clearer source selection and on-demand AI controls. Existing confirmation and pending-entry rules remain. See [usage](docs/data-organization/README.md). Windows installer and portable downloads are in [Releases](https://github.com/drunk13232/novel-studio/releases). Native IME, DPI and third-party AI remain subject to the documented verification boundaries.
+
+## 2.25.1 Data Organization Quality Preview
+
+Local quality repair: protects unsaved JSON, separates unknown values from missing entities, deduplicates references and clears obsolete retry errors. Adds structure-only reuse, searchable/paged history, source filtering and editable details. Existing storage and author confirmation remain. See [usage and boundaries](docs/data-organization/README.md). No automatic publication.
+
+## 2.25.0 AI Data Organization Preview
+
+Local development **Preview**: open World Settings → AI Worldbuilding Studio → Data Organization. Ask the selected AI to propose categories/fields, edit typed numeric tables and explicitly create pending records. Comparison views read live original fields. No automatic manuscript, Canon, State or canonical-character changes. See [Data Organization](docs/data-organization/README.md) for storage, boundaries and usage. This round does not publish 2.25.0.
+
+## Previous public version: 2.24.31
 
 This public update bundles 2.24.29–2.24.31 as **Preview / PARTIAL**. Download [2.24.31 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.31-preview). Historical entries retain their original local-delivery boundaries; publication does not imply new remote-AI, native IME or DPI acceptance.
 

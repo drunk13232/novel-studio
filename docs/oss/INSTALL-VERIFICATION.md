@@ -1,3 +1,11 @@
+# 2.25.2 Preview publication verification
+
+The new public source is exported from the reviewed Allowlist; the private Developer ZIP is not a public asset. Local 2.25.2 evidence covers 37 scoped backend checks and 26 real headless-browser scenarios, plus packaged Windows window/API/startup/clean-exit verification. It does not mean a fresh standalone dependency installation or the entire suite was rerun locally for this publication.
+
+The exact public commit must be checked by the existing Windows CI: isolated Python/npm dependencies, pip check, the documented backend suite and TypeScript/Vite production build. Consult Actions for actual counts and completion; historical passing runs are not evidence for this commit. An installer is built from the verified immutable payload and independently checked using isolated silent NOINTEGRATION install/uninstall. Native installer GUI, physical IME/DPI, external Skills/voices and cloud AI are separate gates.
+
+## Historical procedure and evidence
+
 # Independent install verification — 2.24.9 Preview
 
 The source ZIP and artifact-side VERIFICATION.json identify the precise candidate and current execution results. Do not use the older 2.22.2/2.23.x installation records as passing evidence for this candidate.

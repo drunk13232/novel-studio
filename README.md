@@ -1,4 +1,16 @@
-# Novel Studio · 2.24.31 Director Usability Preview
+# Novel Studio · 2.25.2 Data Organization Usability Preview
+
+**Preview / PARTIAL。** 本次更新资料整理功能与操作界面：集中保存和预览、按分类/资料逐项编辑、历史独立滚动、来源选择提示与按需 AI 设置。沿用既有确认和待审流程。见 [使用说明](docs/data-organization/README.md)。Windows 安装程序和便携包请见 [Releases](https://github.com/drunk13232/novel-studio/releases)。原生输入法、DPI 与第三方 AI 仍按实际验证边界标注。
+
+## 2.25.1 Data Organization Quality Preview
+
+本地质量修复版：修复未保存 JSON、对比表缺失提示、重复引用和失败重试状态；新增仅复制结构、历史搜索分页、来源筛选与可编辑补充说明。沿用既有资料格式与作者确认，不自动改正文或 Canon。见 [使用与边界](docs/data-organization/README.md)。本轮不自动公开发布。
+
+## 2.25.0 AI Data Organization Preview
+
+本地开发版 **Preview**：新增“世界设定 → AI 世界创作工作台 → 资料整理”。可让所选 AI 设计分类与字段，手动编辑数值表，预览后保存待审资料；对比表实时读取原字段。不会自动修改正文、Canon、State 或正式人物。使用方法、数据格式与验证边界见 [AI 资料整理](docs/data-organization/README.md)。本轮没有公开发布 2.25.0。
+
+## 上一个公开版本：2.24.31
 
 当前公开更新将 2.24.29–2.24.31 合并交付为 **Preview / PARTIAL**。下载请见 [2.24.31 Preview](https://github.com/drunk13232/novel-studio/releases/tag/v2.24.31-preview)。下方各版说明保留最初本地交付时的验证边界；本次发布不代表新增远端 AI、中文输入法或 DPI 验收。
 

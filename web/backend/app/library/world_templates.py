@@ -64,7 +64,10 @@ def check_template(c):
             if len(json.dumps(v,ensure_ascii=False))>30000:raise ConsoleError('字段定义过大',413)
             if v.get('minimum') is not None and v.get('maximum') is not None and v['minimum']>v['maximum']:raise ConsoleError('字段最小值不能大于最大值',422)
             if set(v.get('visible_when',{}))-ids:raise ConsoleError('显示条件必须引用同组已有字段',422)
-            if v['type']!='group' and v.get('children'):raise ConsoleError('只有字段组可以包含子字段',422)
+            if v['type'] not in {'group','table'} and v.get('children'):raise ConsoleError('只有字段组或表格可以包含子字段',422)
+            if v['type']=='table':
+                if not 1<=len(v.get('children',[]))<=16:raise ConsoleError('表格需要 1–16 列',422)
+                if any(c['type'] not in {'text','longtext','number','quantity','date','calendar','select','boolean','entity','entities'} for c in v['children']):raise ConsoleError('表格列仅支持有限的标量、单位和引用类型，不允许嵌套表格',422)
             visit(v.get('children',[]),depth+1)
     visit(c['fields'])
     Draft202012Validator.check_schema(value_schema(c))
@@ -78,6 +81,10 @@ def field_schema(f):
         if t=='multiselect':s['items']['enum']=f['options']
     elif t=='quantity':s.update(type='object',properties={'value':{'type':'number'},'unit':{'type':'string','minLength':1,'maxLength':80}},required=['value','unit'],additionalProperties=False)
     elif t=='group':s.update(value_schema({'fields':f.get('children',[])},root=False))
+    elif t=='table':
+        cells=value_schema({'fields':f.get('children',[])},root=False)
+        cells['properties']={k:{'anyOf':[v,{'type':'null'}]} for k,v in cells['properties'].items()}
+        s.update(type='array',maxItems=200,items=cells)
     elif t=='evidence':s.update(type='object',properties={k:{'type':'string','maxLength':4000} for k in ['path','revision','quote']},required=['path','revision','quote'],additionalProperties=False)
     else:
         s.update(type='string',maxLength=20000)
@@ -105,6 +112,8 @@ def validate_values(c,values,formal=False):
         if missing:raise ConsoleError('正式采用前请填写必填字段：'+'、'.join(missing),422)
         for f in c['fields']:
             if f['type']=='group' and values.get(f['id']):validate_values({'fields':f.get('children',[])},values[f['id']],True)
+            if f['type']=='table' and values.get(f['id']):
+                for cells in values[f['id']]:validate_values({'fields':f.get('children',[])},cells,True)
 
 def ai_template(c):
     c=json.loads(json.dumps(c))
@@ -122,5 +131,5 @@ def compatible(old,new):
     for f in old['fields']:
         n=by_id.get(f['id'])
         if not n or n['type']!=f['type'] or set(f.get('options',[]))-set(n.get('options',[])):return False
-        if f['type']=='group' and not compatible({'fields':f.get('children',[])},{'fields':n.get('children',[])}):return False
+        if f['type'] in {'group','table'} and not compatible({'fields':f.get('children',[])},{'fields':n.get('children',[])}):return False
     return True

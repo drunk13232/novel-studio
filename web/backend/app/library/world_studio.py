@@ -388,6 +388,24 @@ class WorldStudio:
                 elif src['id'].startswith('note:'):row.update(target_type='reference',target_id=src['document_id'],source_scope=src['source_scope'],location=src.get('location',{}),quote=src['text'],basis='REFERENCE_NOT_CANON')
                 else:row.update(target_type='entity',target_id=src['id'])
                 if row not in rows:rows.append(row)
+        for marker in e.get('source_references',[]):
+            if not marker.get('organization_plan') or not hasattr(self,'data_organization'):continue
+            try:plan=self.data_organization.get(p,marker['organization_plan'])
+            except ConsoleError:
+                rows.append({'basis':'UNKNOWN','name':'资料整理方案不可用','current':'MISSING'});continue
+            for f in e.get('source_references',[]):
+                if not f.get('source_id'):continue
+                src=next((x for x in plan['sources'] if x['id']==f['source_id']),None)
+                if not src:continue
+                current='CURRENT'
+                if src['kind']!='input':
+                    try:
+                        from .data_organization import Source
+                        current='CURRENT' if self.data_organization.source(p,Source(kind=src['kind'],id=src['id']))['revision']==src['revision'] else 'STALE'
+                    except ConsoleError:current='MISSING'
+                row={'basis':f.get('basis','AI_PROPOSED'),'name':src['name'],'id':src['id'],'revision':src['revision'],'current':current,'quote':f.get('quote',''),'organization_plan':plan['id']}
+                if src['kind'] in {'entity','character'}:row.update(target_type=src['kind'],target_id=src['id'])
+                rows.append(row)
         if hasattr(self,'world_model'):rows.extend(self.world_model.evidence(p,id)['sources'])
         return {'source':e['source'],'references':e.get('source_references',[]),'sources':rows,'note':'AI 标签和创作提案仍需作者判断；引用匹配只证明原文存在。'}
 

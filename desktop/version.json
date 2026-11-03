@@ -1,16 +1,16 @@
 {
-  "version": "2.24.31",
-  "release_date": "2026-11-01",
+  "version": "2.25.2",
+  "release_date": "2026-11-03",
   "changes": [
-    "Show six evidence-based operation stages and saved model roles; keep primary task controls ahead of optional diagnostics.",
-    "Preview the exact quoted/paragraph rework range with surrounding text, line and occurrence labels, and existing editor location.",
-    "Allow authors to reject pending or approved rework without calling a writer or changing manuscript text.",
-    "Retry only the task-acceptance review after review failure; reuse compact installed-method guidance and retain the candidate.",
-    "Record actual reviewer model receipts and explicit active operation types; report saving is distinct from author adoption.",
-    "Preview: this round uses isolated local/browser checks; remote provider and native keyboard/IME/DPI checks are not implied."
+    "Guide preparation, proposal editing, review and live use with clear workflow status.",
+    "Keep save, discard, preview and save-then-preview together in a persistent command bar.",
+    "Edit one selected category or draft record at a time without losing unsaved values.",
+    "Scroll and clear history search independently; expose source counts, selected-source removal and local goal examples.",
+    "Initialize AI model controls only after explicit expansion, retaining controls while switching editors.",
+    "Preserve existing revision-bound confirmation, pending authority, backup formats and all previous features."
   ],
-  "runtime_validation": "Preview / PARTIAL: this round focuses on isolated operator/UI checks. Prior real Codex evidence is historical; new remote AI or native interaction is not claimed. See delivery evidence.",
-  "edition": "Director Usability Preview",
+  "runtime_validation": "Preview: scoped local/browser and packaged startup checks are recorded separately. No new remote-AI, native IME or DPI acceptance is implied.",
+  "edition": "Data Organization Usability Preview",
   "features": [
     "Character assistants, Python SDK and Codex MCP reuse one typed Action Registry and existing domain services.",
     "On-demand Python Control uses genuine CPython WASI in a bounded owned subprocess, without host project mounts, network or shell.",

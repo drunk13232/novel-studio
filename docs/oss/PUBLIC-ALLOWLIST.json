@@ -1,11 +1,11 @@
 {
-  "version": "2.24.31 Preview",
+  "version": "2.25.2 Preview",
   "license": "Apache-2.0",
   "copyright": "Copyright 2026 drunk13232",
   "intended_repository": "drunk13232/novel-studio",
   "history_included": false,
   "publication_ready": false,
-  "source": "retained 2.24.31 developer snapshot, scoped source directories, latest reviewed public inventory and publication-only docs; no parent Git history",
+  "source": "current retained developer manifest + scoped application/tests/helpers + reviewed public docs and notices; no Git history",
   "public_overrides": "Only portable locator and owner-approved synthetic test names; original tests/business data unchanged. Upstream terms remain; no private Git history is exported.",
   "files": [
     {
@@ -350,8 +350,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "43428d8acd6a688d3d816b3778aaedece318de40420876ba92b61a2bddc08b21",
-      "bytes": 63803
+      "sha256": "8687bab7a390fc9576df1a15f8519e85db5ba34e4b252aece4544e4be396d7ce",
+      "bytes": 66358
     },
     {
       "path": "CONTRIBUTING.md",
@@ -385,13 +385,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "9c533fb9836080fec7eb7fcfa31bd074ab777f9b44a088bead2b97f7b8ecd2cd",
-      "bytes": 26245
+      "sha256": "ffa21d4a5061de6a710b068bf7e6aa4d75da18a3d21f8eabe07adfb0a4e5eb58",
+      "bytes": 27622
     },
     {
       "path": "README_EN.md",
-      "sha256": "40b9df4e6dc3a92d0644e4da545cf6412743daf8cd8131be8d3f3baf4d79a2f2",
-      "bytes": 27567
+      "sha256": "41d8fdae2ff673b7caecc95aed76bc3a6b52fc3ab5539e23711cc9207c867cb7",
+      "bytes": 29098
     },
     {
       "path": "SECURITY.md",
@@ -425,8 +425,8 @@
     },
     {
       "path": "desktop/build.ps1",
-      "sha256": "79d01a2d2ffc6ff4e018788f5b6b201047b328a317640bc7a45d66e5720db9c5",
-      "bytes": 11500
+      "sha256": "a9e7db2005ed0dff515f1e5029ee0613ea2aa784138d735eae80a3c511528254",
+      "bytes": 11657
     },
     {
       "path": "desktop/build_installer.py",
@@ -501,8 +501,8 @@
     },
     {
       "path": "desktop/package_source.py",
-      "sha256": "c7849a449f23cc0539470de3a1c3d5fc863f5ff66cba8c7c455110d5fd754317",
-      "bytes": 22051
+      "sha256": "83f35ba1e38fce55f1e0fe89e29aeade8808e01f7533e30f2c959451d06799e1",
+      "bytes": 22468
     },
     {
       "path": "desktop/package_zip.py",
@@ -4666,8 +4666,8 @@
     },
     {
       "path": "desktop/version.json",
-      "sha256": "cde79837757b051b56a6d9ac43daaba90d05996c1488c82abc0e6e2a6f9471cf",
-      "bytes": 2207
+      "sha256": "245f20fee81e5ec4a4e3ea86726562f952e534b24689531cb9cc2e072cf244ad",
+      "bytes": 2029
     },
     {
       "path": "docs/AI.md",
@@ -4875,6 +4875,31 @@
       "bytes": 4659
     },
     {
+      "path": "docs/data-organization/DELIVERY-2.25.0.md",
+      "sha256": "57059cda21a5310969db094fb0f81ac37a366d67e939df7ec9f270fb6cd4c847",
+      "bytes": 3559
+    },
+    {
+      "path": "docs/data-organization/DELIVERY-2.25.1.md",
+      "sha256": "f5698d1093c4b121830b7d5bcc3f8f34f6af3f126456561cea1192ab84dbff13",
+      "bytes": 2709
+    },
+    {
+      "path": "docs/data-organization/DELIVERY-2.25.2.md",
+      "sha256": "1c43b0ec1fc444adde8994b3c79ce1973e61442639576043123bb0600ac822e2",
+      "bytes": 1837
+    },
+    {
+      "path": "docs/data-organization/PUBLIC-SOURCE-REVIEW.md",
+      "sha256": "4866aa892fc3c1bf4b69107f4b1595b1646c849ee6f3b9fe0bf573f0ee724ca1",
+      "bytes": 1223
+    },
+    {
+      "path": "docs/data-organization/README.md",
+      "sha256": "62ef7b649e21236364b0d2a1f3d066c6ad2d016c054d802f948bb8662502eef7",
+      "bytes": 8970
+    },
+    {
       "path": "docs/evaluation/DESIGN.md",
       "sha256": "413831903652c7c1831b33e79e3b3b892d9e2c86cb25c725fc3ea93c87043c77",
       "bytes": 1875
@@ -5026,8 +5051,8 @@
     },
     {
       "path": "docs/oss/INSTALL-VERIFICATION.md",
-      "sha256": "cbb8aa2641cdf54d92d762a6b9349ab87ba304c02bcbe98d34c9cecd2277df37",
-      "bytes": 3406
+      "sha256": "1372df377e5414826b521229a195b3e7bddf8ba21a11eb723b78883db71dd195",
+      "bytes": 4412
     },
     {
       "path": "docs/oss/PREPUBLICATION.md",
@@ -5041,8 +5066,8 @@
     },
     {
       "path": "docs/oss/RELEASE-NOTES.md",
-      "sha256": "7615845ed7978e3e7358293be8d03416dcb7a8470e6c702617975cec82fa8905",
-      "bytes": 2796
+      "sha256": "114587d84d56995afed6059d2a33677fc051f404d9b3cc3a8a8b2d9e861c4cde",
+      "bytes": 3868
     },
     {
       "path": "docs/oss/RELEASE-PAGE-NOTES.md",
@@ -9106,8 +9131,8 @@
     },
     {
       "path": "web/backend/app/library/bible.py",
-      "sha256": "5500c8dea3f91d3e304a31218d66219e70d9d8c1dc9a7faad46b17c1ce2214a2",
-      "bytes": 23433
+      "sha256": "551c6f32e8845ca1ee287c2f2ed33d44f35d48c3a5117ee3cb70668d3d32fe47",
+      "bytes": 24217
     },
     {
       "path": "web/backend/app/library/comfy.py",
@@ -9123,6 +9148,11 @@
       "path": "web/backend/app/library/data.py",
       "sha256": "1456d90c611ab84ef241057b001cd195593efc34a08f9185289696e574a22bc6",
       "bytes": 44839
+    },
+    {
+      "path": "web/backend/app/library/data_organization.py",
+      "sha256": "999a05e5c659a3eae1b230638e45e6dcd0a202285e4038d68d517aa91619916b",
+      "bytes": 29182
     },
     {
       "path": "web/backend/app/library/document_formats.py",
@@ -9166,13 +9196,13 @@
     },
     {
       "path": "web/backend/app/library/world_studio.py",
-      "sha256": "b64c049ec5d3a86e1c55ca218bcf663ed9dca13ec7594f9f46eda850791d3539",
-      "bytes": 35292
+      "sha256": "26c37bba6e76756fb94d7f155e0aa21d092c04ff272271871036ecb4aa5a11be",
+      "bytes": 36636
     },
     {
       "path": "web/backend/app/library/world_templates.py",
-      "sha256": "3465bc6e4fefdcce4f021505b8e98ddab8b84ef38357ab71a23b6c2d8978ed81",
-      "bytes": 9243
+      "sha256": "0c110d54300986f55829336447fff94ddae117bf46a3672c35be12e78cd562b5",
+      "bytes": 10238
     },
     {
       "path": "web/backend/app/live2d.py",
@@ -9186,8 +9216,8 @@
     },
     {
       "path": "web/backend/app/main.py",
-      "sha256": "44ffe1a2c0a5d4fcb2109fffe485d95f78af602666fa543af258bf45b5610277",
-      "bytes": 44724
+      "sha256": "79dc7186df9840984b9eb126ef9f7f2dd3252d550c0d8112308a09da5bfac30e",
+      "bytes": 45026
     },
     {
       "path": "web/backend/app/models/__init__.py",
@@ -9575,6 +9605,21 @@
       "bytes": 9670
     },
     {
+      "path": "web/backend/tests/test_data_organization.py",
+      "sha256": "f57a1bb449f13ccafdbf3a2f9018549cac09a384f1985e85433cd82436176c7a",
+      "bytes": 13558
+    },
+    {
+      "path": "web/backend/tests/test_data_organization_backup.py",
+      "sha256": "68b6967e7fd33f47629e05fb83639b78889897e6ed78170df6aa40e8932de811",
+      "bytes": 2417
+    },
+    {
+      "path": "web/backend/tests/test_data_organization_quality.py",
+      "sha256": "79992d9135b813caffbda6f608c87dca3acf6d4d565c9e643238f4f094f333dd",
+      "bytes": 7415
+    },
+    {
       "path": "web/backend/tests/test_desktop_exit.py",
       "sha256": "31d3107135426e6187bcf4ba7350b95f2f755c1a5440d7b0decbe6f6dd22ad89",
       "bytes": 4452
@@ -9807,13 +9852,13 @@
     },
     {
       "path": "web/frontend/package-lock.json",
-      "sha256": "5c690f5d917317c456a53bb3e52a50167b80d5c2c136c5f1bfa38eaa6ecba1a7",
-      "bytes": 339218
+      "sha256": "a2227fd024b3f2a8ed174d782cd33d0b499076d3008efdbc369b5d4a823da92d",
+      "bytes": 339216
     },
     {
       "path": "web/frontend/package.json",
-      "sha256": "a9073e8431742de0393749bd5f290217b71ca6e439b78c4f4ef0c1e63206ba24",
-      "bytes": 2086
+      "sha256": "c30e889c4f51f0a3c398851e65687d2aca7979fa5479c6eaf39aadedbda15615",
+      "bytes": 2085
     },
     {
       "path": "web/frontend/public/companion/README.txt",
@@ -10401,6 +10446,11 @@
       "bytes": 14378
     },
     {
+      "path": "web/frontend/public/locales/en/data-organization.json",
+      "sha256": "6dc359d63251adda7a320d626ea4f41bd02cfde8ac75ba179502bb958ed3e451",
+      "bytes": 9872
+    },
+    {
       "path": "web/frontend/public/locales/en/desktop.json",
       "sha256": "c028c1ddbfda72ec8e12f3f0423e5bbb49d3345121d56c164e9956cb12849488",
       "bytes": 4560
@@ -10572,8 +10622,8 @@
     },
     {
       "path": "web/frontend/public/locales/en/world-studio.json",
-      "sha256": "294c06fba7bc03c71b7dbdf9d8935cd656718e8461b2484459f279bea785e647",
-      "bytes": 10542
+      "sha256": "7c6a0c8843b72831e903e34e93ae1a6048e18c86f6386cb9f6d337c6ff3f2064",
+      "bytes": 10611
     },
     {
       "path": "web/frontend/public/locales/en/world.json",
@@ -13861,6 +13911,11 @@
       "bytes": 13310
     },
     {
+      "path": "web/frontend/public/locales/zh-CN/data-organization.json",
+      "sha256": "623b92fe5462936db418fa428e2fb365ce7d5e4c233c991d7a6d2a07473f794a",
+      "bytes": 9500
+    },
+    {
       "path": "web/frontend/public/locales/zh-CN/desktop.json",
       "sha256": "95994a01cf36b0f18ad16a9db9640b4cd47f0272648812997639841327870a9d",
       "bytes": 4166
@@ -14032,8 +14087,8 @@
     },
     {
       "path": "web/frontend/public/locales/zh-CN/world-studio.json",
-      "sha256": "cf33960024ce5c20df063cab8fc379d615789f35b7edaf8e7f6efff8a5bfb16d",
-      "bytes": 10201
+      "sha256": "7e2367142f4345863e0cdf54f270dbdcfae8bca736450eea52a6ce643440063d",
+      "bytes": 10281
     },
     {
       "path": "web/frontend/public/locales/zh-CN/world.json",
@@ -14512,6 +14567,26 @@
       "bytes": 3250
     },
     {
+      "path": "web/frontend/scripts/check-organization-data.mjs",
+      "sha256": "a0fadf096370f924abd0ca52d84831e97ab688b535e312fb80d00e8b1e4ece86",
+      "bytes": 1511
+    },
+    {
+      "path": "web/frontend/scripts/check-organization-quality.mjs",
+      "sha256": "d90cb74e7087f29882c35ba3c38cb2812fb68211ba66949237b62452f80dcec7",
+      "bytes": 9023
+    },
+    {
+      "path": "web/frontend/scripts/check-organization-ui.mjs",
+      "sha256": "ed54c9eed5f50653c477e6370ecdc55efc7c9243dbb9a88ba82ccc3a47c8b8ba",
+      "bytes": 8178
+    },
+    {
+      "path": "web/frontend/scripts/check-organization-usability.mjs",
+      "sha256": "a43163b006537dad04cb1ac1f131b9d0cec906d4ed9a263d05b26d0a8cb32c36",
+      "bytes": 9825
+    },
+    {
       "path": "web/frontend/scripts/check-planning-live.mjs",
       "sha256": "bcfa738152713e4a2f46b1bbfdd8b43be6112c7ed820cc8003898a92bb33cb83",
       "bytes": 7250
@@ -14675,6 +14750,11 @@
       "path": "web/frontend/scripts/start-director-fixture.py",
       "sha256": "be78a6a85151654193384f9521ed43f08f067e52381f11f72831c037f552cf81",
       "bytes": 25719
+    },
+    {
+      "path": "web/frontend/scripts/start-organization-fixture.py",
+      "sha256": "adb97da63f71a3e014a6fa4d622b43c620dff4f1f470257957ee4c5fb58e122e",
+      "bytes": 1445
     },
     {
       "path": "web/frontend/src/ai-center.css",
@@ -14977,6 +15057,16 @@
       "bytes": 18422
     },
     {
+      "path": "web/frontend/src/data-organization.css",
+      "sha256": "9263707fca7053be6c5fbb8714cc44ad46284734cc54a94bf01c384934f1c450",
+      "bytes": 14102
+    },
+    {
+      "path": "web/frontend/src/data-organization.tsx",
+      "sha256": "4ec6b5841306028e10167083726ff537c3c0df765c4f2aceb534a54b28b3265f",
+      "bytes": 33141
+    },
+    {
       "path": "web/frontend/src/desk-reference.tsx",
       "sha256": "e97f76366475a3ae536caa31f6bac5f0146670cec5249f1e6c20d96d316237b2",
       "bytes": 5901
@@ -15252,6 +15342,11 @@
       "bytes": 892
     },
     {
+      "path": "web/frontend/src/organization-data.ts",
+      "sha256": "e46b5c1e13d8835d3e6c78e05ce818ac7005b1bdeaba258c5b5a0304c2d0f471",
+      "bytes": 1529
+    },
+    {
       "path": "web/frontend/src/planning-center.css",
       "sha256": "5b40258bf728e8323549665c6611c8a2c7f2fae758c24389beaf1be2c2dd868c",
       "bytes": 3198
@@ -15335,6 +15430,11 @@
       "path": "web/frontend/src/python-control.tsx",
       "sha256": "4e7bdc80d647792bb39966cfe269fe0c197f5210a39bd0d7df4e920ce0e40284",
       "bytes": 20915
+    },
+    {
+      "path": "web/frontend/src/quantity-field.tsx",
+      "sha256": "70946d41564a982346e98ac200af904e6f4790f0a559aff59d002ec28a1187b7",
+      "bytes": 953
     },
     {
       "path": "web/frontend/src/quick-writing.tsx",
@@ -15558,8 +15658,13 @@
     },
     {
       "path": "web/frontend/src/world-bible.tsx",
-      "sha256": "691313717adb4d3e7820bf607f15f9cc62080b1a334970b1cdc8105b36bd0bbd",
-      "bytes": 21383
+      "sha256": "c1d9c6c42a797d5a453c04419fc3516fc83247d31f6c4089aa6804c30dcfbcbd",
+      "bytes": 21903
+    },
+    {
+      "path": "web/frontend/src/world-data-table.tsx",
+      "sha256": "582dfd072e3b7e34f0fe40f555398c7bd10313402f7f8aeedf6b404e2c77dc94",
+      "bytes": 2201
     },
     {
       "path": "web/frontend/src/world-logic-enhanced.tsx",
@@ -15613,8 +15718,8 @@
     },
     {
       "path": "web/frontend/src/world-studio.tsx",
-      "sha256": "90015bc3d3fb6bf57912311774b2be2b16dbae00409ddcf4ba689680a21797db",
-      "bytes": 30525
+      "sha256": "5d6e8929b3abeff57a11836bc8dfc070e0507833cac9fbbb9507132e7211d3db",
+      "bytes": 31684
     },
     {
       "path": "web/frontend/src/writing-action-tools.tsx",

@@ -89,6 +89,7 @@ Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\README.md') -
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\custom-workflows\DELIVERY.md') -Destination (Join-Path $taskRelease 'NovelStudio\MY-WORKFLOWS-DELIVERY.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-EXPERIENCE.md')
 Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\workbench-experience\DELIVERY-2.24.29.md') -Destination (Join-Path $taskRelease 'NovelStudio\WORKBENCH-VERIFICATION.md')
+Copy-Item -LiteralPath (Join-Path $taskRoot 'docs\data-organization\README.md') -Destination (Join-Path $taskRelease 'NovelStudio\AI-DATA-ORGANIZATION.md')
 $taskArchiveArgs=@('--release-root',$taskRelease)
 if ($OutputDirectory) { $taskArchiveArgs+='--allow-external-release' }
 if ($ArchiveDirectory) {

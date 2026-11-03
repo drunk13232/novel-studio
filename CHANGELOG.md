@@ -1,5 +1,33 @@
 # Changelog / 更新记录
 
+## 2.25.2 — Data Organization Usability Preview (2026-11-03, local)
+
+- Guide the workflow with steps, saved/unsaved states and a persistent save/discard/review bar.
+- Save and preview in one explicit action; applying still requires a fresh revision-bound author confirmation.
+- Switch between individual category and record editors without discarding pending input.
+- Improve independent history scrolling, search reset, source chips, empty states and local goal shortcuts.
+- Initialize model controls only on expansion; preserve configured controls within the open proposal.
+- Fix an inherited nested scroll container that prevented the command bar from staying visible.
+- Chinese/English, responsive/RTL and reduced-motion styling use existing themes. No dependency, domain service or storage migration.
+
+## 2.25.1 — Data Organization Quality Preview (2026-11-03, local)
+
+- Invalidate pending confirmation when raw JSON changes, preserve invalid input and guard local navigation, refresh and saves.
+- Separate missing entities from unknown sort values; compare/export each stable entity ID once, including old repeated-reference receipts.
+- Clear current failure state on retry, success and explicit manual revision without deleting historical tasks.
+- Reuse only categories/fields/views into a new revision-bound plan; choose new sources/goal and grant AI consent separately.
+- Add history search/pagination, source filtering and editable supplemental descriptions. No dependency or data migration.
+
+## 2.25.0 — AI Data Organization Preview (2026-11-03, local)
+
+- Add an editable, explicitly reviewed organization proposal within the existing Worldbuilding Studio.
+- Extend existing Bible templates with typed tables (16 scalar columns / 200 rows), tri-state booleans and continuous numeric input.
+- Preserve author input, source quotes, AI suggestions and unknowns as distinct provenance; no inference that source matching validates a derived number.
+- Preview destination and create pending reference entries with stable IDs, optimistic revisions and repeat-confirmation protection.
+- Keep comparison views live, preserve existing entity references and support local CSV/JSON export with formula-injection protection.
+- Reuse scoped AI controls, context preview, task cancellation, template/version services and real Data Center restore-as-new.
+- No new dependencies, database migration, automatic Canon/State/manuscript adoption or public release. Browser, local, real-AI and native startup evidence are separate.
+
 ## 2.24.31 — Director Usability Preview (2026-11-01)
 
 - Put truthful workflow stages, saved role choices and task controls before optional diagnostic detail.

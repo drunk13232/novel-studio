@@ -197,5 +197,7 @@
   "starterGenerate": "AI 生成世界观",
   "starterBoundedHint": "先生成一份世界概览，由你修改和采用。以后需要国家、地点或更细的制度时，再切换详细设计。",
   "status_SUCCEEDED": "已完成",
-  "status_QUEUED": "等待开始"
+  "status_QUEUED": "等待开始",
+  "organization": "资料整理",
+  "type_table": "表格（多行数据）"
 }

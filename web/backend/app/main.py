@@ -235,6 +235,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from app.library.world_studio import WorldStudio,routes as world_studio_routes
     world_studio=WorldStudio(registry,ai_center,project_manager,writing_assist,world_logic)
     app.state.world_studio=world_studio;writing_assist.world_studio=world_studio;app.include_router(world_studio_routes(world_studio))
+    from app.library.data_organization import DataOrganization,routes as organization_routes
+    data_organization=DataOrganization(world_studio);world_studio.data_organization=data_organization;app.state.data_organization=data_organization;app.include_router(organization_routes(data_organization))
     from app.library.world_model import WorldModel,routes as world_model_routes
     world_model=WorldModel(world_studio,knowledge,references)
     app.state.world_model=world_model;world_studio.world_model=world_model

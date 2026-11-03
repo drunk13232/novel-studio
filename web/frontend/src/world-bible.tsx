@@ -3,7 +3,7 @@ import {worldCategoryLabel,worldFieldLabel} from './world-metadata';
 import {t as translateUI,useUiTranslation} from './i18n';
 import {EntityReferences,type EntityTarget} from './knowledge-center';
 import {LiteraryArt} from './literary-art';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {api,Content} from './api';
 import {base,Data,ErrorNote,Empty,HistoryPanel,Relations,useRemote,saveJSON,unsavedMessage,imageUrl} from './library-shared';
 import {Gallery} from './asset-gallery';
@@ -15,9 +15,16 @@ export function WorldBible({onMap,onLogic,onKnowledge,compact=false,project,onDi
  useUiTranslation(["common","navigation","world","characters","world-studio"]);
 
  const [moreCategories,setMoreCategories]=useState(!compact);
+ const handledInitialEntity=useRef<string|null>(null);
  const [studioOpen,setStudioOpen]=useState(!initialEntity),[fieldMode,setFieldMode]=useState('primary');
  const r=useRemote<Data>(base(project)+'/bible',{entities:[],categories:[],targets:[],relations:[],legacy:[]});const [editing,setEditing]=useState(false);const [category,setCategory]=useState(''),[query,setQuery]=useState(''),[entity,setEntity]=useState<Data|null>(null),[dirty,setDirty]=useState(false),[tab,setTab]=useState('资料'),[legacy,setLegacy]=useState<Content|null>(null),[template,setTemplate]=useState<Data|null>(null),[images,setImages]=useState<Data[]>([]),[books,setBooks]=useState<Data[]>([]),[targetProject,setTargetProject]=useState('');
- useEffect(()=>{if(initialEntity){const e=r.value.entities.find((x:Data)=>x.id===initialEntity);if(e&&!dirty){setStudioOpen(false);setEntity(structuredClone(e));setEditing(false);setLegacy(null);setTab('资料');}}},[initialEntity,r.value.entities]);
+ useEffect(()=>{
+  if(!initialEntity){handledInitialEntity.current=null;return;}
+  const e=r.value.entities.find((x:Data)=>x.id===initialEntity);if(!e||dirty)return;
+  if(handledInitialEntity.current!==initialEntity){handledInitialEntity.current=initialEntity;setStudioOpen(false);setEntity(structuredClone(e));setEditing(false);setLegacy(null);setTab('资料');return;}
+  // Refresh the current read-only detail only forward, never navigate or replace fresh local saves with an older list response.
+  if(!studioOpen&&!editing&&entity?.id===initialEntity&&e.version>entity.version)setEntity(structuredClone(e));
+ },[initialEntity,r.value.entities,dirty,studioOpen,editing,entity?.id,entity?.version]);
  useEffect(()=>{if(entity?.id&&!dirty)onEntityViewed?.(entity.id);},[entity?.id]);
  useEffect(()=>{onDirty(dirty||!!template);return()=>onDirty(false);},[dirty,template]);
  useEffect(()=>{void api<Data>(base(project)+'/assets').then(v=>setImages(v.assets)).catch(e=>r.setError(String(e)));void api<Data>('/api/studio/library').then(v=>setBooks(v.projects)).catch(()=>{});},[project]);

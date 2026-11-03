@@ -9,7 +9,7 @@ class Strict(BaseModel):model_config=ConfigDict(extra='forbid')
 class CustomField(Strict):
     id:str=Field(pattern=r'^[a-z][a-z0-9_]{0,63}$')
     name:str=Field(min_length=1,max_length=100)
-    type:Literal['text','longtext','number','date','select','multiselect','boolean','image','entity','tags','quantity','calendar','list','group','rule','evidence','entities']='text'
+    type:Literal['text','longtext','number','date','select','multiselect','boolean','image','entity','tags','quantity','calendar','list','group','rule','evidence','entities','table']='text'
     options:list[str]=Field(default_factory=list,max_length=100)
     help:str=Field(default='',max_length=1200)
     group:str=Field(default='基本信息',max_length=80)
@@ -203,6 +203,8 @@ class Bible:
                 v=values.get(f['id'])
                 if v in (None,'',[]):continue
                 if f['type']=='group':check_references(f.get('children',[]),v)
+                if f['type']=='table':
+                    for cells in v:check_references(f.get('children',[]),cells)
                 if f['type'] in {'entity','entities'}:
                     if targets is None:targets=self.targets(project)
                     for id in v if f['type']=='entities' else [v]:
@@ -260,6 +262,8 @@ class Bible:
                 for f in fields:
                     value=values.get(f['id']);key=prefix+f['id']
                     if f['type']=='group' and isinstance(value,dict):yield from links(f.get('children',[]),value,key+'.')
+                    if f['type']=='table' and isinstance(value,list):
+                        for i,cells in enumerate(value):yield from links(f.get('children',[]),cells,key+'.'+str(i)+'.')
                     for target in value if f['type']=='entities' and isinstance(value,list) else [value] if f['type']=='entity' else []:
                         if target in targets:yield key,f['name'],target
             selected=e.get('template_snapshot') or categories.get(e['category'],{})
@@ -283,7 +287,13 @@ class Bible:
         self.category(target,category);row.update(id='',category=category['id'],status='DRAFT',canon_level='REFERENCE',locked_fields=[],template_snapshot=None,template_version=0,parent_id='',writer_view='',writer_public=False,writer_known_by=[],source_references=[])
         for period in row.get('periods',[]):period.update(confirmed=False,writer_view='',source_references=[])
         row.pop('etag');dropped=[]
-        for f in category['fields']:
-            if f['type'] in {'entity','image'} and row['fields'].get(f['id']):dropped.append(f['id']);row['fields'].pop(f['id'])
+        def drop_references(fields,values,prefix=''):
+            for f in fields:
+                v=values.get(f['id']);key=prefix+f['id']
+                if f['type'] in {'entity','entities','image','evidence'} and v not in (None,'',[]):dropped.append(key);values.pop(f['id'])
+                elif f['type']=='group' and isinstance(v,dict):drop_references(f.get('children',[]),v,key+'.')
+                elif f['type']=='table' and isinstance(v,list):
+                    for i,cells in enumerate(v):drop_references(f.get('children',[]),cells,key+'.'+str(i)+'.')
+        drop_references(category['fields'],row['fields'])
         saved=self.save(target,row)
         return {'entity':saved,'id_map':{old:saved['id']},'unmapped_fields':dropped,'note':'仅复制选定实体；未选定的外部关系和图片引用已清空，不共享文件。'}
